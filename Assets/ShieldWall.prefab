@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23245189148785808}
   - component: {fileID: 65814208986473946}
   m_Layer: 0
-  m_Name: SheildWall
+  m_Name: ShieldWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

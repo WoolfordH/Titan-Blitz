@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public struct Controls
 {
@@ -22,7 +23,8 @@ public struct Controls
 }
 
 [RequireComponent(typeof(Rigidbody))]
-public class CharacterHandler: MonoBehaviour {
+public class CharacterHandler: NetworkBehaviour
+{
 
 	public Controls controls;
 	public float speed = 350f;
@@ -62,83 +64,103 @@ public class CharacterHandler: MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
-
-		cam = GetComponentInChildren<Camera> ();
+	void Start ()
+    {
+        
+        //intitialise variables
+		//cam = GetComponentInChildren<Camera> ();
 		rb = GetComponent<Rigidbody> ();
 
-
-		//initialise controls
-		controls.forward = KeyCode.W;
-		controls.back = KeyCode.S;
-		controls.left = KeyCode.A;
-		controls.right = KeyCode.D;
-
-		controls.jump = KeyCode.Space;
-		controls.sprint = KeyCode.LeftShift;
-
-		controls.primaryAtk = KeyCode.Mouse0;
-		controls.secondaryAtk = KeyCode.Mouse1;
-		controls.ult = KeyCode.LeftAlt;
-
-		controls.Ability1 = KeyCode.Alpha1;
-		controls.Ability2 = KeyCode.Alpha2;
+        initLookSpeed = lookSpeed;
+        if (cam)
+            initFOV = cam.fieldOfView;
 
 
-		Cursor.lockState = CursorLockMode.Locked;
+        if (hasAuthority) //if this is the character of this client
+        {
+            //enable the camera 
+            cam.gameObject.SetActive(true);
 
 
-		initLookSpeed = lookSpeed;
+            //initialise controls
+            controls.forward = KeyCode.W;
+            controls.back = KeyCode.S;
+            controls.left = KeyCode.A;
+            controls.right = KeyCode.D;
 
-		if(cam)
-		initFOV = cam.fieldOfView;
+            controls.jump = KeyCode.Space;
+            controls.sprint = KeyCode.LeftShift;
+
+            controls.primaryAtk = KeyCode.Mouse0;
+            controls.secondaryAtk = KeyCode.Mouse1;
+            controls.ult = KeyCode.LeftAlt;
+
+            controls.Ability1 = KeyCode.Alpha1;
+            controls.Ability2 = KeyCode.Alpha2;
+
+
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 	}
 
 	// Update is called once per frame
-	void Update () {
-		RaycastHit hit;
-
-		grounded = Physics.SphereCast (transform.position + new Vector3(0f,(mainCollider.radius-.1f) + .1f,0f), mainCollider.radius-.1f, Vector3.down, out hit, .15f, GameHandler.current.groundLayer);
-
-		rb.useGravity = !grounded;
-
-		surfaceRotation = Quaternion.identity;
-
-		if (grounded)
-		{
-			if (Vector3.Angle (transform.up, hit.normal) <= climbAngleMax)
-			{
-				surfaceRotation = Quaternion.FromToRotation (transform.up, hit.normal);
-			} 
-
-		}
+	void Update ()
+    {
+        if (hasAuthority) //if this character belongs to this client
+        {
+            //the server does not have authority during start so make a post start call to start
+            if (isServer)
+                if (cam.gameObject.activeInHierarchy == false)//if start has been called the camera will be on - could cause bugs later 
+                {
+                    Start();
+                }
 
 
+            //this following may be useful to know on other clients
 
-		CheckPowerups ();
+            RaycastHit hit;
 
-		//movement
-		ProcessMovement ();
+            grounded = Physics.SphereCast(transform.position + new Vector3(0f, (mainCollider.radius - .1f) + .1f, 0f), mainCollider.radius - .1f, Vector3.down, out hit, .15f, GameHandler.current.groundLayer);
+
+            rb.useGravity = !grounded;
+
+            surfaceRotation = Quaternion.identity;
+
+            if (grounded)
+            {
+                if (Vector3.Angle(transform.up, hit.normal) <= climbAngleMax)
+                {
+                    surfaceRotation = Quaternion.FromToRotation(transform.up, hit.normal);
+                }
+
+            }
 
 
 
-		//unlock cursor
-		if (Input.GetKeyDown (KeyCode.Escape))
-		{
-			paused = !paused;
+            CheckPowerups();
 
-			if (paused)
-			{
-				Cursor.lockState = CursorLockMode.None;
-				lookSpeed = 0f;
-			}
-			else
-			{
-				Cursor.lockState = CursorLockMode.Locked;
-				lookSpeed = initLookSpeed;
-			}
-		}
+            //movement
+            ProcessMovement();
 
+
+
+            //unlock cursor
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                paused = !paused;
+
+                if (paused)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    lookSpeed = 0f;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    lookSpeed = initLookSpeed;
+                }
+            }
+        }
 	}
 
 	void ProcessMovement()
@@ -268,7 +290,7 @@ public class CharacterHandler: MonoBehaviour {
 
 
 
-	Quaternion ClampRotationAroundXAxis(Quaternion q)
+	private Quaternion ClampRotationAroundXAxis(Quaternion q)
 	{
 		q.x /= q.w;
 		q.y /= q.w;
@@ -284,7 +306,7 @@ public class CharacterHandler: MonoBehaviour {
 		return q;
 	}
 
-	Vector3 GetInput()
+	private Vector3 GetInput()
 	{
 		Vector3 movement = Vector3.zero;
 
@@ -315,7 +337,7 @@ public class CharacterHandler: MonoBehaviour {
 		return movement;
 	}
 
-	void CheckPowerups()
+	private void CheckPowerups()
 	{
 		List<int> toRemove = new List<int> ();
 
@@ -340,13 +362,13 @@ public class CharacterHandler: MonoBehaviour {
 	}
 
 
-	void FOVUp()
+	private void FOVUp()
 	{
 		cam.fieldOfView += 10f;
 		FOVbumped = true;
 	}
 
-	void ResetFOV()
+	private void ResetFOV()
 	{
 		cam.fieldOfView = initFOV;
 		FOVbumped = false;
@@ -390,25 +412,43 @@ public class CharacterHandler: MonoBehaviour {
 	//    }
 	//}
 
-	void OnTriggerEnter(Collider other)
+	public void OnTriggerEnter(Collider other)
 	{
-		if (other.GetComponent<Powerup>())
-		{
-			Powerup powerup = other.GetComponent<Powerup> ();
+        if (other.GetComponent<Powerup>())
+        {
+            if (hasAuthority)
+            {
+            
+                Powerup powerup = other.GetComponent<Powerup>();
 
-			//check if powerup type is already in effect
-			if (powerups.Exists (x=>x.powerupType.ToString() == powerup.powerupType.ToString ()))
-			{
-				//if effect is already in use, just add to timer
-				powerups.Find(x=>x.powerupType.ToString() == powerup.powerupType.ToString ()).timer += powerup.timer;
-			}
-			else
-			{
-				//if powerup is not in effect, start effect
-				powerups.Add(powerup);
-			}
+                //check if powerup type is already in effect
+                if (powerups.Exists(x => x.powerupType.ToString() == powerup.powerupType.ToString()))
+                {
+                    //if effect is already in use, just add to timer
+                    powerups.Find(x => x.powerupType.ToString() == powerup.powerupType.ToString()).timer += powerup.timer;
+                }
+                else
+                {
+                    //if powerup is not in effect, start effect
+                    powerups.Add(powerup);
+                }
 
-			Destroy (other.gameObject);
-		}
+                
+                 
+            }
+            //Should be in the authority group with a server destroy
+            Destroy(other.gameObject);
+        }
 	}
+
+    [ClientRpc]
+    public void RpcSetTeam(int teamNum)
+    {
+        if (teamNum == 1)
+            tag = "Team1";
+        else
+            tag = "Team2";
+
+        Log.current.LogData("Team " + teamNum.ToString());
+    }
 }
