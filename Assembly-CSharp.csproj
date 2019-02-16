@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{8E15CE72-86A6-4F8A-8B0E-61D9F4D2ECD1}</ProjectGuid>
+    <ProjectGuid>{C4272992-C1EA-A351-C1AB-3BC9C3E6F2F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -64,17 +64,24 @@
      <Compile Include="Assets\Scripts\Drone.cs" />
      <Compile Include="Assets\Scripts\GameHandler.cs" />
      <Compile Include="Assets\Scripts\Powerups\Powerup.cs" />
- <Reference Include="UnityEditor.StandardEvents">
- <HintPath>I:/GoogleDrive/GroupProject/GroupProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>I:/GoogleDrive/GroupProject/GroupProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
- </Reference>
+     <Compile Include="Assets\Scripts_\CaptureTheFlagMode.cs" />
+     <Compile Include="Assets\Scripts_\CharacterController.cs" />
+     <Compile Include="Assets\Scripts_\Flag.cs" />
+     <Compile Include="Assets\Scripts_\FlagStand.cs" />
+     <Compile Include="Assets\Scripts_\GameManager.cs" />
+     <Compile Include="Assets\Scripts_\Log.cs" />
+     <Compile Include="Assets\Scripts_\PlayerConnection.cs" />
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>I:/GoogleDrive/GroupProject/GroupProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>I:/My Documents/Titan-Blitz/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>I:/GoogleDrive/GroupProject/GroupProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>I:/My Documents/Titan-Blitz/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TextMeshPro.Editor">
+ <HintPath>I:/My Documents/Titan-Blitz/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.StandardEvents">
+ <HintPath>I:/My Documents/Titan-Blitz/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>I:/Program Files/2018.1.9f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -307,7 +314,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{3EC700B9-E46E-4EB7-4B1A-97E3E1B405C7}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{BAB3FE8A-3DA5-EDA9-A358-2D728384A888}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -52,6 +52,8 @@ public class CharacterHandler: NetworkBehaviour
 	public float minLookHeight = -60f;
 	public float maxLookHeight = 60f;
 
+	public Transform headPos;
+
 	public bool grounded;
 
 	public bool frozen = false;
@@ -76,7 +78,7 @@ public class CharacterHandler: NetworkBehaviour
             initFOV = cam.fieldOfView;
 
 
-        if (hasAuthority) //if this is the character of this client
+		if (tag != "Dummy" && hasAuthority) //if this is the character of this client
         {
             //enable the camera 
             cam.gameObject.SetActive(true);
@@ -106,7 +108,7 @@ public class CharacterHandler: NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (hasAuthority) //if this character belongs to this client
+		if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
         {
             //the server does not have authority during start so make a post start call to start
             if (isServer)
@@ -114,6 +116,8 @@ public class CharacterHandler: NetworkBehaviour
                 {
                     Start();
                 }
+
+
 
 
             //this following may be useful to know on other clients
