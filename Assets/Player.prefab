@@ -957,8 +957,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1401623294033274}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.713, y: 2.497, z: -0.961}
-  m_LocalScale: {x: 1, y: 0.0666149, z: 1}
+  m_LocalPosition: {x: 1, y: 2.4, z: -1.3}
+  m_LocalScale: {x: 1, y: 0.06, z: 1}
   m_Children:
   - {fileID: 4580583139903906}
   m_Father: {fileID: 4064333493737416}
@@ -1533,6 +1533,7 @@ MonoBehaviour:
   rotationSpeed: 3
   owner: {fileID: 114930757354223022}
   maxDistFromOwner: 2
+  desiredPosition: {x: 1, y: 2.4, z: -1.3}
 --- !u!114 &114112496604453384
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,9 +8,12 @@ public class Drone : MonoBehaviour {
 	public int damage;
 	public float viewRadius;
 	public float rotationSpeed = .1f;
+	public float movementSpeed = 2f;
 	public Character owner;
 	public float maxDistFromOwner;
 	Vector3 dirToTarget;
+
+	public Vector3 desiredPosition;
 
 
 	// Use this for initialization
@@ -65,13 +68,21 @@ public class Drone : MonoBehaviour {
 		}
 
 		transform.rotation = Quaternion.RotateTowards (transform.rotation, Quaternion.LookRotation (Vector3.ProjectOnPlane(target - transform.position, Vector3.up)), (rotationSpeed * 100) * Time.deltaTime);
+
 		Vector3 newPos = new Vector3 (transform.position.x, target.y, transform.position.z);
 
 		//if the new position is not too far from the owner, move to aim at enemy
-		if(Vector3.Distance(newPos, owner.transform.position) <= maxDistFromOwner) //clips through geometry!!!
-		{
-			transform.position = newPos;
-		}
+		//if (Vector3.Distance (newPos, owner.transform.position) <= maxDistFromOwner)
+		//{
+			//Move Drone as close to desired location as possible
+		//	MoveToDesiredLocation (newPos.y);
+		//} 
+		//else
+		//{
+
+			//Move Drone as close to desired location as possible
+			MoveToDesiredLocation (owner.transform.TransformPoint (desiredPosition).y);
+		//}
 	}
 
 	void Fire()
@@ -103,5 +114,33 @@ public class Drone : MonoBehaviour {
 
 		return closestIndex;
 	}
+
+
+	void MoveToDesiredLocation(float altitude)
+	{
+		RaycastHit hit;
+		Vector3 targetPosition = Vector3.zero;
+		Vector3 desiredWorldPos = owner.transform.TransformPoint (desiredPosition);
+		desiredWorldPos = new Vector3 (desiredWorldPos.x, altitude, desiredWorldPos.y);
+
+		//raycast between desired location and owner
+		if (Physics.Raycast (owner.handler.headPos.position, desiredWorldPos - owner.handler.headPos.position, out hit, (desiredWorldPos - owner.handler.headPos.position).magnitude))
+		{
+			//if it doesnt hit the owner or this
+			if (hit.collider.transform.root != owner.transform.root && hit.collider.transform.root != transform.root)
+			{
+				//target position becomes equal to 80% of the vector to the hit point
+				targetPosition = ((hit.point - owner.handler.headPos.position) * .8f) + owner.handler.headPos.position;
+			}
+		}
+		else
+		{
+			targetPosition = desiredWorldPos;
+		}
+
+
+		transform.position = Vector3.Lerp(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+	}
+		
 		
 }
