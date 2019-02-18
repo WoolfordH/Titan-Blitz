@@ -37,6 +37,7 @@ public class CharacterHandler: NetworkBehaviour
 	public Rigidbody rb;
 	public CapsuleCollider mainCollider;
 
+    //this is a translation which makes vectors relative to the surface 
 	Quaternion surfaceRotation;
 
 
@@ -68,16 +69,18 @@ public class CharacterHandler: NetworkBehaviour
     {
         
         //intitialise variables
-		//cam = GetComponentInChildren<Camera> ();
+        if(!cam)
+		    cam = GetComponentInChildren<Camera> ();
 		rb = GetComponent<Rigidbody> ();
 
         initLookSpeed = lookSpeed;
         if (cam)
             initFOV = cam.fieldOfView;
-
+        
 
         if (hasAuthority) //if this is the character of this client
         {
+            Log.current.LogData("Start Character Handler");
             //enable the camera 
             cam.gameObject.SetActive(true);
 
@@ -115,9 +118,8 @@ public class CharacterHandler: NetworkBehaviour
                     Start();
                 }
 
-
-            //this following may be useful to know on other clients
-
+            //Grounded calculations
+            //This may be useful to know on other clients            
             RaycastHit hit;
 
             grounded = Physics.SphereCast(transform.position + new Vector3(0f, (mainCollider.radius - .1f) + .1f, 0f), mainCollider.radius - .1f, Vector3.down, out hit, .15f, GameHandler.current.groundLayer);
@@ -165,6 +167,8 @@ public class CharacterHandler: NetworkBehaviour
 
 	void ProcessMovement()
 	{
+        //animation things here - probably some state management would be helpful
+
 
 		momentumVel = rb.velocity; //save current velocity
 
@@ -264,7 +268,7 @@ public class CharacterHandler: NetworkBehaviour
 
 	}
 
-
+    //locks character movement and camera
 	public void Freeze(bool a_freezeLook = true)
 	{
 		if (tag != "Dummy")
@@ -306,6 +310,7 @@ public class CharacterHandler: NetworkBehaviour
 		return q;
 	}
 
+    //returns the combined directional input
 	private Vector3 GetInput()
 	{
 		Vector3 movement = Vector3.zero;
@@ -433,15 +438,16 @@ public class CharacterHandler: NetworkBehaviour
                     powerups.Add(powerup);
                 }
 
-                
-                 
+                //destroy the object on all clients
+                NetworkServer.Destroy(other.gameObject);
+                //This can cause an error if 2 clients do this at the same time 
             }
-            //Should be in the authority group with a server destroy
-            Destroy(other.gameObject);
         }
 	}
 
+    
     [ClientRpc]
+    //assigns the character a team - should inform more things
     public void RpcSetTeam(int teamNum)
     {
         if (teamNum == 1)

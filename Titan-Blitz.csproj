@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2018.1.9f2</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -323,14 +325,14 @@
     <Compile Include="Assets\Scripts\DestroyParticle.cs" />
     <Compile Include="Assets\Scripts\Drone.cs" />
     <Compile Include="Assets\Scripts\GameHandler.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Networking\Log.cs" />
+    <Compile Include="Assets\Scripts\Networking\PlayerConnection.cs" />
     <Compile Include="Assets\Scripts\Powerups\Powerup.cs" />
-    <Compile Include="Assets\Scripts_\CaptureTheFlagMode.cs" />
-    <Compile Include="Assets\Scripts_\CharacterController.cs" />
-    <Compile Include="Assets\Scripts_\Flag.cs" />
-    <Compile Include="Assets\Scripts_\FlagStand.cs" />
-    <Compile Include="Assets\Scripts_\GameManager.cs" />
-    <Compile Include="Assets\Scripts_\Log.cs" />
-    <Compile Include="Assets\Scripts_\PlayerConnection.cs" />
+    <Compile Include="Assets\Unused\CaptureTheFlagMode.cs" />
+    <Compile Include="Assets\Unused\_CharacterController.cs" />
+    <Compile Include="Assets\Unused\Flag.cs" />
+    <Compile Include="Assets\Unused\FlagStand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />

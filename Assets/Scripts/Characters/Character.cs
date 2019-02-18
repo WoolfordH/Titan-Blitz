@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public struct DAMAGE
 {
@@ -81,8 +82,8 @@ public struct Ability
 }
 
 [RequireComponent(typeof(CharacterHandler))]
-public abstract class Character : MonoBehaviour {
-
+public abstract class Character : NetworkBehaviour
+{
 	public int id = 0;
 	public int team = 0;
 
@@ -122,7 +123,8 @@ public abstract class Character : MonoBehaviour {
 
 
 	// Use this for initialization
-	protected virtual void Start () {
+	protected virtual void Start ()
+    {
 		handler = GetComponent<CharacterHandler> ();
 
 		//AVATAR INIT
@@ -155,15 +157,17 @@ public abstract class Character : MonoBehaviour {
 			}
 		}
 
-		avatarCam.Render ();
+        if (hasAuthority)
+        {
+            avatarCam.Render();
 
 
-		if (!handler.frozen)
-		{
-			HandleAttacks ();
-		}
-		HandleCooldowns ();
-
+            if (!handler.frozen)
+            {
+                HandleAttacks();
+            }
+            HandleCooldowns();
+        }
 
 
 		if (handler.cam && tag != "Dummy")
