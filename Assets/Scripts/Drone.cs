@@ -11,21 +11,51 @@ public class Drone : MonoBehaviour {
 	public float movementSpeed = 2f;
 	public Character owner;
 	public float maxDistFromOwner;
-	Vector3 dirToTarget;
+	public float fireDelay = 1f;
+	float timer = 0f;
+	bool hasTarget = false;
+	bool readyToFire = false;
 
 	public Vector3 desiredPosition;
 
 
 	// Use this for initialization
 	void Start () {
-		dirToTarget = muzzle.forward;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		Vector3 target = transform.position + owner.transform.forward;
-	
+		CheckForTarget ();
+		UpdateTimer ();
+
+		if (hasTarget)
+		{
+			if (readyToFire)
+			{
+				Fire ();
+			}
+		}
+	}
+		
+
+	void UpdateTimer()
+	{
+		if (timer <= 0f)
+		{
+			readyToFire = true;
+		}
+		else
+		{
+			readyToFire = false;
+			timer -= Time.deltaTime;
+		}
+	}
+
+	void CheckForTarget()
+	{
+		Vector3 target = owner.transform.TransformPoint(desiredPosition) + owner.transform.forward;
+
 		//check if any enemy players are within radius and look at them if they are
 		List<Collider> cols = new List<Collider>(Physics.OverlapSphere (transform.position, viewRadius, GameHandler.current.playerLayer));
 		if (cols.Exists(x=> x.GetComponentInParent<Character>().team != owner.team))
@@ -35,7 +65,7 @@ public class Drone : MonoBehaviour {
 			//loop through colliders
 			foreach (Collider col in cols)
 			{
-				
+
 				//if collider is on enemy team
 				if (col.GetComponentInParent<Character> ().team != owner.team)
 				{
@@ -64,35 +94,36 @@ public class Drone : MonoBehaviour {
 			{
 				//Get closest enemy
 				target = positions [GetClosest (positions.ToArray ())];
+				hasTarget = true;
+			}
+			else
+			{
+				hasTarget = false;
 			}
 		}
 
 		transform.rotation = Quaternion.RotateTowards (transform.rotation, Quaternion.LookRotation (Vector3.ProjectOnPlane(target - transform.position, Vector3.up)), (rotationSpeed * 100) * Time.deltaTime);
 
 		Vector3 newPos = new Vector3 (transform.position.x, target.y, transform.position.z);
+		Debug.DrawLine (transform.position, newPos, Color.green);
 
-		//if the new position is not too far from the owner, move to aim at enemy
-		//if (Vector3.Distance (newPos, owner.transform.position) <= maxDistFromOwner)
-		//{
-			//Move Drone as close to desired location as possible
-		//	MoveToDesiredLocation (newPos.y);
-		//} 
-		//else
-		//{
-
-			//Move Drone as close to desired location as possible
-			MoveToDesiredLocation (owner.transform.TransformPoint (desiredPosition).y);
-		//}
+		//Move Drone as close to desired location as possible
+		MoveToDesiredLocation (target.y);
 	}
 
 	void Fire()
 	{
+
+		Debug.Log ("Drone Fired!");
+
 		//raycast from muzzle and hit first thing found
 		RaycastHit hit;
 		if (Physics.Raycast (muzzle.position, transform.forward, out hit))
 		{
 			hit.collider.gameObject.SendMessageUpwards ("Hit", new HitData(damage, hit.point, hit.normal), SendMessageOptions.DontRequireReceiver);
 		}
+
+		timer = fireDelay;
 	}
 
 
@@ -121,7 +152,7 @@ public class Drone : MonoBehaviour {
 		RaycastHit hit;
 		Vector3 targetPosition = Vector3.zero;
 		Vector3 desiredWorldPos = owner.transform.TransformPoint (desiredPosition);
-		desiredWorldPos = new Vector3 (desiredWorldPos.x, altitude, desiredWorldPos.y);
+		desiredWorldPos = new Vector3 (desiredWorldPos.x, altitude, desiredWorldPos.z);
 
 		//raycast between desired location and owner
 		if (Physics.Raycast (owner.handler.headPos.position, desiredWorldPos - owner.handler.headPos.position, out hit, (desiredWorldPos - owner.handler.headPos.position).magnitude))
