@@ -53,6 +53,8 @@ public class CharacterHandler: NetworkBehaviour
 	public float minLookHeight = -60f;
 	public float maxLookHeight = 60f;
 
+	public Transform headPos;
+
 	public bool grounded;
 
 	public bool frozen = false;
@@ -78,7 +80,7 @@ public class CharacterHandler: NetworkBehaviour
             initFOV = cam.fieldOfView;
         
 
-        if (hasAuthority) //if this is the character of this client
+		if (tag != "Dummy" && hasAuthority) //if this is the character of this client
         {
             Log.current.LogData("Start Character Handler");
             //enable the camera 
@@ -109,7 +111,7 @@ public class CharacterHandler: NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (hasAuthority) //if this character belongs to this client
+		if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
         {
             //the server does not have authority during start so make a post start call to start
             if (isServer)
@@ -118,8 +120,6 @@ public class CharacterHandler: NetworkBehaviour
                     Start();
                 }
 
-            //Grounded calculations
-            //This may be useful to know on other clients            
             RaycastHit hit;
 
             grounded = Physics.SphereCast(transform.position + new Vector3(0f, (mainCollider.radius - .1f) + .1f, 0f), mainCollider.radius - .1f, Vector3.down, out hit, .15f, GameHandler.current.groundLayer);
