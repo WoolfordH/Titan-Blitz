@@ -17,8 +17,13 @@ public class GameManager : NetworkBehaviour
     //public NetworkManager network;
     //public NetworkServer server;
 
+    public GameObject lobbyUI;
+
+    public GameObject[] characterPrefabs;
+
     private PlayerConnection[] connections = new PlayerConnection[0];
-    public GameObject[] players = new GameObject[0];
+    private int[] characterChoices = new int[0];
+    private GameObject[] players = new GameObject[0];
     public GameObject lobbyCam;
 
     public Vector3 team1SpawnPoint;
@@ -46,70 +51,83 @@ public class GameManager : NetworkBehaviour
             //wait in lobby until 
             if (gameState == GameState.lobby)
             {
-                if(Input.GetKeyDown(KeyCode.Return))
-                {
-                    StartGame();
-                }
+                
             }
         }
 	}
 
+    public void StartGame()
+    {
+        CmdStartGame();
+    }
+
     //only the server will call this
     //this is called to transition from lobby to gameplay
-    private void StartGame()
+    [Command]
+    private void CmdStartGame()
     {
-        //Choose teams
-        //initialise players
-        Log.current.LogData(connections.Length.ToString());
-        for(int i =0;i<connections.Length;i++)//PlayerConnection connection in connections)
+        //check game can be started
+        if (gameState == GameState.lobby)
         {
-            PlayerConnection connection = connections[i];
+            //Choose teams
+            //initialise players
+            Log.current.LogData(connections.Length.ToString());
+            for (int i = 0; i < connections.Length; i++)//PlayerConnection connection in connections)
+            {
+                PlayerConnection connection = connections[i];
+                //put on teams - should be added to a player struct so its settable 
+                if ((i % 2) == 0)
+                {
+                    //team 1
+                    Vector3 spawnPos = team1SpawnPoint;
+                    connection.CmdSpawnPlayer(1, spawnPos, characterPrefabs[characterChoices[i]]); //should pass a spawn position - split to spawn and initialise 
+                }
+                else
+                {
+                    //team 2
+                    Vector3 spawnPos = team2SpawnPoint;
+                    connection.CmdSpawnPlayer(2, spawnPos, characterPrefabs[characterChoices[i]]); //should pass a spawn position - split to spawn and initialise 
+                }
 
-            if((i % 2) == 0)
-            {
-                //team 1
-                Vector3 spawnPos = team1SpawnPoint;
-                connection.CmdSpawnPlayer(1,spawnPos); //should pass a spawn position - split to spawn and initialise 
+                //Disable the main camera  
+                RpcDisableMainCamera();
             }
-            else
-            {
-                //team 2
-                Vector3 spawnPos = team2SpawnPoint;
-                connection.CmdSpawnPlayer(2,spawnPos); //should pass a spawn position - split to spawn and initialise 
-            }
-            
-            //Disable the main camera  
-            RpcDisableMainCamera();
+            //Start 
+
+            gameState = GameState.playing;
         }
-        //Start 
-
-        gameState = GameState.playing;
     }
 
-    private void CreateServer()
-    {
-       ////network 
-       //Network.ip
-       // NetworkServer.Listen(,);
-       // NetworkClient.
-    }
+    //private void CreateServer()
+    //{
+    //   ////network 
+    //   //Network.ip
+    //   // NetworkServer.Listen(,);
+    //   // NetworkClient.
+    //}
 
-    public void AddNewconnection(GameObject connection)
+    public int AddNewconnection(GameObject connection)
     {
-        PlayerConnection[] temp = new PlayerConnection[connections.Length + 1];
+        //increase the size of the arrays and in the new value 
+        PlayerConnection[] tempConnects = new PlayerConnection[connections.Length + 1];
+        int[] tempChoices = new int[characterChoices.Length + 1];
 
         for (int i = 0; i < connections.Length; i++)
         {
-            temp[i] = connections[i];
+            tempConnects[i] = connections[i];
+            tempChoices[i] = characterChoices[i];
         }
-        temp[temp.Length - 1] = connection.GetComponent<PlayerConnection>();
+        tempConnects[tempConnects.Length - 1] = connection.GetComponent<PlayerConnection>();
+        tempChoices[tempChoices.Length - 1] = 1; //1 is the default choice
 
-        connections = temp;
+        connections = tempConnects;
+        characterChoices = tempChoices;
 
         Debug.Log("Current connections " + connections.Length);
+
+        return connections.Length-1;
     }
 
-    /////////////commands\\\\\\\\\\\\\
     [Command]
     public void CmdAddNewPlayer(GameObject player)
     {
@@ -124,11 +142,33 @@ public class GameManager : NetworkBehaviour
         players = temp;
     }
 
-     
-    //////RPC\\\\\\\\
     [ClientRpc]
     private void RpcDisableMainCamera()
     {
         lobbyCam.SetActive(false);
+        lobbyUI.SetActive(false);
     }
+
+
+//////Buttons
+    
+    public void ChooseCharacter(int characterChoice)
+    {
+        CmdChooseCharacter(characterChoice, PlayerConnection.connectionID);
+    }
+    
+    [Command]   //tells server the choice
+    private void CmdChooseCharacter(int characterChoice, int connectionNum)
+    {
+        characterChoices[connectionNum] = characterChoice;
+        RpcChooseCharacter(characterChoice, connectionNum);
+    }
+    
+    [ClientRpc] //tells other clients so they can visualise the choice
+    private void RpcChooseCharacter(int characterChoice, int connectionNum)
+    {
+        Log.current.LogData("Player " + connectionNum.ToString() + " chose character " + characterChoice.ToString());
+        //update ui
+    }
+
 }

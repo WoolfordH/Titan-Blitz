@@ -5,7 +5,9 @@ using UnityEngine.Networking;
 
 public class PlayerConnection : NetworkBehaviour
 {
-    public GameObject playerPrefab;
+    //the identity of this client
+    public static int connectionID;
+    //the prefab for the player object
 
 	// Use this for initialization
 	void Start ()
@@ -32,7 +34,7 @@ public class PlayerConnection : NetworkBehaviour
     //Command scripts - these are only run on the server
 
     [Command]
-    public void CmdSpawnPlayer(int teamNum, Vector3 spawnPos)
+    public void CmdSpawnPlayer(int teamNum, Vector3 spawnPos, GameObject playerPrefab)
     {
         //spawns to server
         GameObject player = Instantiate(playerPrefab,spawnPos,Quaternion.identity);
@@ -46,6 +48,6 @@ public class PlayerConnection : NetworkBehaviour
     [Command]
     private void CmdAddToGameManager()
     {
-        GameManager.current.AddNewconnection(this.gameObject);
+        connectionID = GameManager.current.AddNewconnection(this.gameObject);
     }
 }

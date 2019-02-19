@@ -34,7 +34,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1729244058884516}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -52,7 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e634c8d4f6d97344d9416d8d4251ba4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
+  lobbyUI: {fileID: 0}
+  characterPrefabs:
+  - {fileID: 1717819089651994, guid: 1e8b0d48b42634a40a4a150748e07316, type: 2}
+  - {fileID: 1397254270310452, guid: 4f112954584cd2f4bacfc96de26848ab, type: 2}
+  - {fileID: 1397254270310452, guid: 4f112954584cd2f4bacfc96de26848ab, type: 2}
+  - {fileID: 1397254270310452, guid: 4f112954584cd2f4bacfc96de26848ab, type: 2}
   lobbyCam: {fileID: 0}
   team1SpawnPoint: {x: -217.36, y: 11.18, z: 18.37}
   team2SpawnPoint: {x: -205.11, y: 11.18, z: 23.13}
@@ -86,5 +91,5 @@ MonoBehaviour:
     i13: 155
     i14: 11
     i15: 253
-  m_ServerOnly: 0
+  m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
