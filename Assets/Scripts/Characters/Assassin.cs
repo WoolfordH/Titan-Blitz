@@ -19,7 +19,7 @@ public class Assassin : Character {
 		abilities [1] = new Ability ("N/A", 0f);
 		abilities [2] = new Ability ("Ability 1", 0f);
 		abilities [3] = new Ability ("Ability 2", 0f);
-		abilities [4] = new Ability ("Ultimate", 0f);
+		abilities [4] = new Ability ("Sonar", 0f);
 
 	}
 
@@ -73,6 +73,8 @@ public class Assassin : Character {
 
 	public override void Ultimate()
 	{
+
+
 		//set cooldown
 		abilities[4].StartTimer();
 	}
