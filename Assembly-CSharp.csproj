@@ -56,21 +56,29 @@
      <Compile Include="Assets\Scripts\Characters\Assassin.cs" />
      <Compile Include="Assets\Scripts\Characters\Character.cs" />
      <Compile Include="Assets\Scripts\Characters\CharacterHandler.cs" />
+     <Compile Include="Assets\Scripts\Characters\Drone.cs" />
      <Compile Include="Assets\Scripts\Characters\Fighter.cs" />
      <Compile Include="Assets\Scripts\Characters\Grabber.cs" />
      <Compile Include="Assets\Scripts\Characters\Tank.cs" />
      <Compile Include="Assets\Scripts\DeathSphere.cs" />
      <Compile Include="Assets\Scripts\DestroyParticle.cs" />
-     <Compile Include="Assets\Scripts\Drone.cs" />
      <Compile Include="Assets\Scripts\GameHandler.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\GlowShaderScripts\GlowStandardGUI.cs" />
+     <Compile Include="Assets\Scripts\Networking\Log.cs" />
+     <Compile Include="Assets\Scripts\Networking\PlayerConnection.cs" />
      <Compile Include="Assets\Scripts\Powerups\Powerup.cs" />
-     <Compile Include="Assets\Scripts_\CaptureTheFlagMode.cs" />
-     <Compile Include="Assets\Scripts_\CharacterController.cs" />
-     <Compile Include="Assets\Scripts_\Flag.cs" />
-     <Compile Include="Assets\Scripts_\FlagStand.cs" />
-     <Compile Include="Assets\Scripts_\GameManager.cs" />
-     <Compile Include="Assets\Scripts_\Log.cs" />
-     <Compile Include="Assets\Scripts_\PlayerConnection.cs" />
+     <Compile Include="Assets\Unused\_CharacterController.cs" />
+     <Compile Include="Assets\Unused\CaptureTheFlagMode.cs" />
+     <Compile Include="Assets\Unused\Flag.cs" />
+     <Compile Include="Assets\Unused\FlagStand.cs" />
+     <Compile Include="Assets\XRay Demo Assets\Scripts\XRayReplacement.cs" />
+     <None Include="Assets\Scripts\GlowShaderScripts\GlowStandard.shader" />
+     <None Include="Assets\XRay Demo Assets\Shaders\XRay-ColoredOutline.shader" />
+     <None Include="Assets\Scripts\GlowShaderScripts\GlowReplacement.shader" />
+     <None Include="Assets\Scripts\GlowShaderScripts\Glow.shader" />
+     <None Include="Assets\XRay Demo Assets\Shaders\Normal-Diffuse-XRay-Replaceable.shader" />
+     <None Include="Assets\XRay Demo Assets\Shaders\Normal-Diffuse-Stencil-Write.shader" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>I:/My Documents/Titan-Blitz/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
