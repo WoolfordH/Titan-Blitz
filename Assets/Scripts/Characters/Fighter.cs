@@ -71,4 +71,9 @@ public class Fighter : Character {
 		//set cooldown
 		abilities[4].StartTimer();
 	}
+
+	public override void OnAbilityExpired (int index)
+	{
+		
+	}
 }

@@ -53,6 +53,7 @@
 			{
 				// colour is equal to world space normal
 				float nDotV = 1 - dot(i.normal, i.viewDir) * 1.5;
+				nDotV = clamp(nDotV, 0.0, 1.0);
 				float4 col = nDotV * _GlowColour;
 
 				return col;

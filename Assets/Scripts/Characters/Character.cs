@@ -157,7 +157,7 @@ public abstract class Character : NetworkBehaviour
 			}
 		}
 
-        if (hasAuthority)
+		if (tag != "Dummy" && hasAuthority)
         {
             avatarCam.Render();
 
@@ -230,6 +230,11 @@ public abstract class Character : NetworkBehaviour
 			{
 				abilities [i].timer = 0f;
 			}
+
+			if (abilities [i].isDurationElapsed ())
+			{
+				OnAbilityExpired (i);
+			}
 		}
 	}
 
@@ -296,4 +301,6 @@ public abstract class Character : NetworkBehaviour
 	public abstract void Ability2 ();
 
 	public abstract void Ultimate ();
+
+	public abstract void OnAbilityExpired (int index);
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Assassin : Character {
 
+	public GameObject XRayCam;
+
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
@@ -19,7 +21,7 @@ public class Assassin : Character {
 		abilities [1] = new Ability ("N/A", 0f);
 		abilities [2] = new Ability ("Ability 1", 0f);
 		abilities [3] = new Ability ("Ability 2", 0f);
-		abilities [4] = new Ability ("Sonar", 0f);
+		abilities [4] = new Ability ("Sonar", 30f, 20f);
 
 	}
 
@@ -73,9 +75,20 @@ public class Assassin : Character {
 
 	public override void Ultimate()
 	{
-
+		XRayCam.SetActive (true);
 
 		//set cooldown
 		abilities[4].StartTimer();
+	}
+
+
+	public override void OnAbilityExpired (int index)
+	{
+		switch (index)
+		{
+		case 4: //turn off the xray cam
+			XRayCam.SetActive (false);
+			break;
+		}
 	}
 }
