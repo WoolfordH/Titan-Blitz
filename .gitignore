@@ -4,4 +4,6 @@ Packages/
 *.cache
 *.csproj
 Build/
+Build/Mono/
 obj/
+Build/Build_Data/
