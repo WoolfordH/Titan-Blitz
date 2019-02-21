@@ -922,7 +922,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397254270310452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -209.43, y: 11.148424, z: 14.3}
+  m_LocalPosition: {x: -209.91, y: 11.148424, z: 10.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4455730131660612}
@@ -1057,7 +1057,7 @@ Camera:
   m_GameObject: {fileID: 1644127229790864}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -2412,7 +2412,8 @@ MonoBehaviour:
   armour: 100
   primaryRange: 0
   secondaryRange: 0
-  XRayCam: {fileID: 1644127229790864}
+  XRayEffect: {fileID: 114973376818774398}
+  XRayFadeSpeed: 1
 --- !u!114 &114969973799122666
 MonoBehaviour:
   m_ObjectHideFlags: 1

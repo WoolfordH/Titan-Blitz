@@ -48,11 +48,19 @@
 				float4 col = tex2D(_MainTex, i.uv);
 				float4 glowCol = tex2D(_GlowTex, i.uv);
 
-				// saturate the image based on amount val
-				col.rgb = float3(col.r, clamp(lerp(col.r, col.g, 1-amount), 0, 1), clamp(lerp(col.r, col.b, 1-amount), 0, 1));
+				//get the highest colour value from the main colour
+				float colourVal = max(max(col.r, col.g), max(col.b, 0));
 
-				//add glowRT
-				col.rgb = float3(clamp(lerp(col.r, glowCol.r, glowCol.r), 0, 1), clamp(lerp(col.g, glowCol.g, glowCol.g), 0, 1), clamp(lerp(col.b,glowCol.b, glowCol.b), 0, 1));
+				// saturate the image based on the inverse of amount val
+				col.rgb = float3(clamp(lerp(colourVal, col.r, 1-amount), 0, 1), clamp(lerp(colourVal, col.g, 1-amount), 0, 1), clamp(lerp(colourVal, col.b, 1-amount), 0, 1));
+
+				//get the highest colour value from the glow colour
+				colourVal = max(max(glowCol.r, glowCol.g), max(glowCol.b, 0));
+
+				colourVal = min(colourVal, amount);
+
+				//lerp between the original image and the glow image based on how colourful the current pixel is
+				col.rgb = float3(clamp(lerp(col.r, glowCol.r, colourVal), 0, 1), clamp(lerp(col.g, glowCol.g, colourVal), 0, 1), clamp(lerp(col.b,glowCol.b, colourVal), 0, 1));
 
 				return col;
 			}

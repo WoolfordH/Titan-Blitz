@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Assassin : Character {
 
-	public GameObject XRayCam;
+	public MainCamXRayEffect XRayEffect;
+	public float XRayFadeSpeed = 1f;
+	float timer;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -21,7 +23,7 @@ public class Assassin : Character {
 		abilities [1] = new Ability ("N/A", 0f);
 		abilities [2] = new Ability ("Ability 1", 0f);
 		abilities [3] = new Ability ("Ability 2", 0f);
-		abilities [4] = new Ability ("Sonar", 30f, 20f);
+		abilities [4] = new Ability ("Sonar", 10f, 5f);
 
 	}
 
@@ -75,7 +77,7 @@ public class Assassin : Character {
 
 	public override void Ultimate()
 	{
-		XRayCam.SetActive (true);
+		StartCoroutine (FadeXRay(true));
 
 		//set cooldown
 		abilities[4].StartTimer();
@@ -87,8 +89,38 @@ public class Assassin : Character {
 		switch (index)
 		{
 		case 4: //turn off the xray cam
-			XRayCam.SetActive (false);
+			StartCoroutine (FadeXRay(false));
 			break;
+		}
+	}
+
+
+
+	IEnumerator FadeXRay(bool fadeIn)
+	{
+		if (fadeIn)
+		{
+			timer = 0;
+
+			while (timer <= 1)
+			{
+				XRayEffect.effectAmount = timer;
+				timer += XRayFadeSpeed * Time.deltaTime;
+
+				yield return new WaitForEndOfFrame();
+			}
+		}
+		else
+		{
+			timer = 1;
+
+			while (timer >= 0)
+			{
+				XRayEffect.effectAmount = timer;
+				timer -= XRayFadeSpeed * Time.deltaTime;
+
+				yield return new WaitForEndOfFrame();
+			}
 		}
 	}
 }

@@ -52,7 +52,7 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				// colour is equal to world space normal
-				float nDotV = 1 - dot(i.normal, i.viewDir) * 1.5;
+				float nDotV = 1 - dot(i.normal, i.viewDir) * 1;
 				nDotV = clamp(nDotV, 0.0, 1.0);
 				float4 col = nDotV * _GlowColour;
 

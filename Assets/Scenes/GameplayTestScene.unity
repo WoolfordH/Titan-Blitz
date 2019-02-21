@@ -20970,7 +20970,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4064333493737416, guid: ad8791482ced3d14c985d26112675470, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -209.43
+      value: -209.91
       objectReference: {fileID: 0}
     - target: {fileID: 4064333493737416, guid: ad8791482ced3d14c985d26112675470, type: 2}
       propertyPath: m_LocalPosition.y
@@ -20978,7 +20978,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4064333493737416, guid: ad8791482ced3d14c985d26112675470, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 14.3
+      value: 10.87
       objectReference: {fileID: 0}
     - target: {fileID: 4064333493737416, guid: ad8791482ced3d14c985d26112675470, type: 2}
       propertyPath: m_LocalRotation.x
@@ -21000,16 +21000,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114930757354223022, guid: ad8791482ced3d14c985d26112675470,
-        type: 2}
-      propertyPath: allies.Array.data[0]
-      value: 
-      objectReference: {fileID: 1417027181}
-    - target: {fileID: 114930757354223022, guid: ad8791482ced3d14c985d26112675470,
-        type: 2}
-      propertyPath: allies.Array.data[1]
-      value: 
-      objectReference: {fileID: 714467705}
     - target: {fileID: 114526534432461620, guid: ad8791482ced3d14c985d26112675470,
         type: 2}
       propertyPath: allies.Array.data[0]
@@ -21020,18 +21010,20 @@ Prefab:
       propertyPath: allies.Array.data[1]
       value: 
       objectReference: {fileID: 714467705}
-    - target: {fileID: 20283499554224830, guid: ad8791482ced3d14c985d26112675470,
+    - target: {fileID: 114930757354223022, guid: ad8791482ced3d14c985d26112675470,
         type: 2}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4977634476682800, guid: ad8791482ced3d14c985d26112675470, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -1.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 4977634476682800, guid: ad8791482ced3d14c985d26112675470, type: 2}
+      propertyPath: allies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1417027181}
+    - target: {fileID: 114930757354223022, guid: ad8791482ced3d14c985d26112675470,
+        type: 2}
+      propertyPath: allies.Array.data[1]
+      value: 
+      objectReference: {fileID: 714467705}
+    - target: {fileID: 224004297090707482, guid: ad8791482ced3d14c985d26112675470,
+        type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114973376818774398, guid: ad8791482ced3d14c985d26112675470,
         type: 2}

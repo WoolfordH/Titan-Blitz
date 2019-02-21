@@ -49,6 +49,7 @@ public struct Ability
 	public float cooldown;
 	public float duration; //must always be less than cooldown
 	public float timer;
+	public bool active;
 
 	public Ability(string n, float cool)
 	{
@@ -56,6 +57,7 @@ public struct Ability
 		cooldown = cool;
 		duration = 0f;
 		timer = 0f;
+		active = false;
 	}
 
 	public Ability(string n, float cool, float dur)
@@ -64,11 +66,13 @@ public struct Ability
 		cooldown = cool;
 		duration = dur;
 		timer = 0f;
+		active = false;
 	}
 
 	public void StartTimer()
 	{
 		timer = cooldown;
+		SetActive (true);
 	}
 
 	public bool isDurationElapsed()
@@ -78,6 +82,11 @@ public struct Ability
 			return true;
 		}
 		return false;
+	}
+
+	public void SetActive(bool a_active)
+	{
+		active = a_active;
 	}
 }
 
@@ -145,6 +154,7 @@ public abstract class Character : NetworkBehaviour
 
 			//ult starts uncharged
 			abilities[4].StartTimer();
+			abilities [4].SetActive (false);
 
 
 			if (tag != "Dummy")
@@ -231,8 +241,9 @@ public abstract class Character : NetworkBehaviour
 				abilities [i].timer = 0f;
 			}
 
-			if (abilities [i].isDurationElapsed ())
+			if (abilities [i].isDurationElapsed () && abilities[i].active)
 			{
+				abilities [i].SetActive (false);
 				OnAbilityExpired (i);
 			}
 		}
