@@ -14,6 +14,7 @@ public class GameHandler : MonoBehaviour {
 	public LayerMask playerLayer;
 
 	public GameObject bloodSpurt;
+    public GameObject projectile;
 
 
 	// Use this for initialization

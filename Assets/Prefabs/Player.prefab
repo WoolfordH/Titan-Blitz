@@ -1075,7 +1075,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 3fba128e96decd7458b1db82ba52bb65, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -1320,6 +1320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glowShader: {fileID: 4800000, guid: 6b319a5a57cfd8948bc742941f89e821, type: 3}
+  mainCam: {fileID: 114973376818774398}
 --- !u!114 &114057029999508536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2453,7 +2454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageEffect: {fileID: 2100000, guid: 62eba5188786c614a910d1f24c0f5daf, type: 2}
-  glowRT: {fileID: 8400000, guid: 3fba128e96decd7458b1db82ba52bb65, type: 2}
+  glowRT: {fileID: 0}
   effectAmount: 0
 --- !u!124 &124687655060528038
 Behaviour:

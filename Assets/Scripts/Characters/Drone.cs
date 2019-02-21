@@ -116,12 +116,15 @@ public class Drone : MonoBehaviour {
 
 		Debug.Log ("Drone Fired!");
 
-		//raycast from muzzle and hit first thing found
-		RaycastHit hit;
-		if (Physics.Raycast (muzzle.position, transform.forward, out hit))
-		{
-			hit.collider.gameObject.SendMessageUpwards ("Hit", new HitData(damage, hit.point, hit.normal), SendMessageOptions.DontRequireReceiver);
-		}
+        //raycast from muzzle and hit first thing found
+
+        //RaycastHit hit;
+        //if (Physics.Raycast (muzzle.position, transform.forward, out hit))
+        //{
+        //	hit.collider.gameObject.SendMessageUpwards ("Hit", new HitData(damage, hit.point, hit.normal), SendMessageOptions.DontRequireReceiver);
+        //}
+
+        Instantiate(GameHandler.current.projectile, muzzle.position, muzzle.rotation);
 
 		timer = fireDelay;
 	}

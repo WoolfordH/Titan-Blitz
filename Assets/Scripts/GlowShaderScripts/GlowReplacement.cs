@@ -6,16 +6,16 @@ using UnityEngine;
 public class GlowReplacement : MonoBehaviour
 {
 	public Shader glowShader;
-	//public MainCamXRayEffect mainCam;
-	//RenderTexture rt;
+	public MainCamXRayEffect mainCam;
+	RenderTexture rt;
 
 	void OnEnable()
 	{
-		//rt = new RenderTexture(GetComponent<Camera>().pixelWidth, GetComponent<Camera>().pixelHeight, 16);
-		//GetComponent<Camera> ().targetTexture = rt;
+		rt = new RenderTexture(Screen.width, Screen.height, 16);
+		GetComponent<Camera> ().targetTexture = rt;
 
 		GetComponent<Camera>().SetReplacementShader(glowShader, "XRay");
-		//mainCam.glowRT = rt;
+		mainCam.glowRT = rt;
 	}
 
 }
