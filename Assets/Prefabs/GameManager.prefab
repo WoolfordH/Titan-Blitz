@@ -54,10 +54,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyUI: {fileID: 0}
   characterPrefabs:
-  - {fileID: 1717819089651994, guid: 1e8b0d48b42634a40a4a150748e07316, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1736500218235190, guid: 1e8b0d48b42634a40a4a150748e07316, type: 2}
+  - {fileID: 1397254270310452, guid: ad8791482ced3d14c985d26112675470, type: 2}
+  - {fileID: 1397254270310452, guid: ad8791482ced3d14c985d26112675470, type: 2}
+  - {fileID: 1397254270310452, guid: ad8791482ced3d14c985d26112675470, type: 2}
   lobbyCam: {fileID: 0}
   team1SpawnPoint: {x: -217.36, y: 11.18, z: 18.37}
   team2SpawnPoint: {x: -205.11, y: 11.18, z: 23.13}

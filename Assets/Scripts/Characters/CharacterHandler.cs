@@ -65,6 +65,8 @@ public class CharacterHandler: NetworkBehaviour
 	//temporary
 	bool paused = false;
 
+    private bool startedWithauthority = false;
+
 
 	// Use this for initialization
 	void Start ()
@@ -105,7 +107,9 @@ public class CharacterHandler: NetworkBehaviour
 
 
             Cursor.lockState = CursorLockMode.Locked;
-        }
+
+            startedWithauthority = true;
+        }        
 	}
 
 	// Update is called once per frame
@@ -113,12 +117,10 @@ public class CharacterHandler: NetworkBehaviour
     {
 		if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
         {
-            //the server does not have authority during start so make a post start call to start
-            if (isServer)
-                if (cam.gameObject.activeInHierarchy == false)//if start has been called the camera will be on - could cause bugs later 
-                {
-                    Start();
-                }
+            //If has authority and was not started with authority call start again - this fixes a bug on the server
+            if (!startedWithauthority)
+                Start();
+                   
 
             RaycastHit hit;
 
