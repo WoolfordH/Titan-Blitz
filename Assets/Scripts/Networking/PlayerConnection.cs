@@ -37,12 +37,15 @@ public class PlayerConnection : NetworkBehaviour
     public void CmdSpawnPlayer(int teamNum, Vector3 spawnPos, GameObject playerPrefab)
     {
         //spawns to server
-        GameObject player = Instantiate(playerPrefab,spawnPos,Quaternion.identity);
+        GameObject player = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
 
-        
         //passes to all clients 
-        NetworkServer.SpawnWithClientAuthority(player,connectionToClient);
-        player.GetComponent<CharacterHandler>().RpcSetTeam(teamNum);
+        NetworkServer.SpawnWithClientAuthority(player, GetComponent<NetworkIdentity>().clientAuthorityOwner);
+        //NetworkServer.Spawn(player);
+        if (player.GetComponent<CharacterHandler>())
+        {
+            player.GetComponent<CharacterHandler>().RpcSetTeam(teamNum);
+        }
     }
 
     [Command]

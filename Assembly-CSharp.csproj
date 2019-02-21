@@ -79,7 +79,10 @@
     <Compile Include="Assets\Scripts\Networking\Log.cs" />
     <Compile Include="Assets\Scripts\Networking\PlayerConnection.cs" />
     <Compile Include="Assets\Scripts\Powerups\Powerup.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scripts\Projectile.cs" />
+=======
+>>>>>>> 51e720e9971f1445377a0f15d0c408ec21c5df57
     <Compile Include="Assets\Unused\_CharacterController.cs" />
     <Compile Include="Assets\Unused\CaptureTheFlagMode.cs" />
     <Compile Include="Assets\Unused\Flag.cs" />
@@ -89,6 +92,7 @@
     <None Include="Assets\Scripts\GlowShaderScripts\Glow.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\XRayImageEffect.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
+<<<<<<< HEAD
       <HintPath>T:/Documents/GitHub/Titan-Blitz/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
@@ -99,6 +103,18 @@
     </Reference>
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>T:/Documents/GitHub/Titan-Blitz/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+=======
+      <HintPath>T:/S1503019/Titan-Blitz/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>T:/S1503019/Titan-Blitz/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>T:/S1503019/Titan-Blitz/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.StandardEvents">
+      <HintPath>T:/S1503019/Titan-Blitz/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+>>>>>>> 51e720e9971f1445377a0f15d0c408ec21c5df57
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -299,10 +315,17 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
+<<<<<<< HEAD
       <HintPath>C:/Users/s1501083/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/s1501083/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+=======
+      <HintPath>C:/Users/s1503019/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StandardEvents">
+      <HintPath>C:/Users/s1503019/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+>>>>>>> 51e720e9971f1445377a0f15d0c408ec21c5df57
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
