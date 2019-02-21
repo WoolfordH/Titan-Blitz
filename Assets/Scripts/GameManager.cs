@@ -191,7 +191,7 @@ public class GameManager : NetworkBehaviour
         CmdChooseTeam(teamNum, PlayerConnection.connectionID);
     }
 
-    [Command]
+    [Command] //tells server the choice
     private void CmdChooseTeam(int teamNum, int connectionNum)
     {
         players[connectionNum].team = teamNum;

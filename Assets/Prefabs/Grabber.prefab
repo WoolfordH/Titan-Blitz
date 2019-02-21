@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 135968724404947518}
   - component: {fileID: 114176860209315310}
   - component: {fileID: 54185017755102614}
+  - component: {fileID: 114876397690686912}
+  - component: {fileID: 114834957014336626}
   m_Layer: 0
   m_Name: Grabber
   m_TagString: Untagged
@@ -117,6 +119,59 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   grappleType: 0
+--- !u!114 &114834957014336626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587647187849730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114876397690686912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587647187849730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 238
+    i1: 227
+    i2: 131
+    i3: 156
+    i4: 203
+    i5: 236
+    i6: 89
+    i7: 36
+    i8: 203
+    i9: 160
+    i10: 85
+    i11: 86
+    i12: 248
+    i13: 21
+    i14: 31
+    i15: 56
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!135 &135968724404947518
 SphereCollider:
   m_ObjectHideFlags: 1

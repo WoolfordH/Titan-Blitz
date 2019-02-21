@@ -1,10 +1,7 @@
-
 Library/
-
 Temp/
 Packages/
 *.cache
 *.csproj
-*.csproj
-Assembly-CSharp-firstpass.csproj
-*.csproj
+Build/
+obj/

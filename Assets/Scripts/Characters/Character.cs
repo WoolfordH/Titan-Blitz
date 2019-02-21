@@ -134,6 +134,7 @@ public abstract class Character : NetworkBehaviour
 	// Use this for initialization
 	protected virtual void Start ()
     {
+        
 		handler = GetComponent<CharacterHandler> ();
 
 		//AVATAR INIT
@@ -151,23 +152,25 @@ public abstract class Character : NetworkBehaviour
 		{
 			start = false;
 
+            if (hasAuthority)
+            {
+                //ult starts uncharged
+                abilities[4].StartTimer();
+                abilities[4].SetActive(false);
 
-			//ult starts uncharged
-			abilities[4].StartTimer();
-			abilities [4].SetActive (false);
 
+                if (tag != "Dummy")
+                {
 
-			if (tag != "Dummy")
-			{
+                    //ally1Avatar.texture = allies[0].avatarRT;
+                    //ally2Avatar.texture = allies[1].avatarRT;
 
-				ally1Avatar.texture = allies [0].avatarRT;
-				ally2Avatar.texture = allies [1].avatarRT;
-
-				UpdateUI ();
-			}
+                    UpdateUI();
+                }
+            }
 		}
 
-		if (tag != "Dummy" && hasAuthority)
+		if (hasAuthority && tag != "Dummy")
         {
             avatarCam.Render();
 
@@ -180,7 +183,7 @@ public abstract class Character : NetworkBehaviour
         }
 
 
-		if (handler.cam && tag != "Dummy")
+		if (handler.cam && tag != "Dummy" && hasAuthority)
 		{
 			//update clock UI
 			int minutes = (int)GameHandler.current.timeRemaining / 60;
@@ -251,32 +254,61 @@ public abstract class Character : NetworkBehaviour
 
 	public virtual void Hit(DAMAGE dmg)
 	{
-		if (enabled)
-		{
-			if (dmg.armourPiercing)
-			{
-				health -= dmg.damage;
-			}
-			else
-			{
-				if (armour > 0)
-				{
-					armour -= dmg.damage;
-				}
-				else
-				{
-					health -= dmg.damage;
-				}
-			}
-
-			if (health <= 0)
-			{
-				Die ();
-			}
-		}
+        CmdHit(dmg);
 	}
 
-	public virtual void Hit(HitData hit)
+    [Command]
+    protected virtual void CmdHit(DAMAGE dmg)
+    {
+        if (enabled)
+        {
+            if (dmg.armourPiercing)
+            {
+                health -= dmg.damage;
+            }
+            else
+            {
+                if (armour > 0)
+                {
+                    armour -= dmg.damage;
+                }
+                else
+                {
+                    health -= dmg.damage;
+                }
+            }
+
+
+
+            if (health <= 0)
+            {
+                Die();
+            }
+            else
+            {
+                RpcUpdateHealth(armour,health);
+            }
+        }
+    }
+
+    [ClientRpc]
+    protected virtual void RpcUpdateHealth(int a_armour, int a_health)
+    {
+        armour = a_armour;
+        health = a_health;
+
+        //team ui update
+
+        //enemy ui update
+
+        if(hasAuthority)
+        {
+            //update self ui
+        }
+    }
+
+
+    public virtual void Hit(HitData hit)
 	{
 		Instantiate(GameHandler.current.bloodSpurt, hit.hitPoint, Quaternion.LookRotation(hit.hitNormal));
 		Hit (hit.damage);

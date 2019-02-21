@@ -7,6 +7,7 @@ public class PlayerConnection : NetworkBehaviour
 {
     //the identity of this client
     public static int connectionID;
+    public static NetworkConnection clientIdentity;
     //the prefab for the player object
 
 	// Use this for initialization
@@ -16,6 +17,7 @@ public class PlayerConnection : NetworkBehaviour
         //check if this belongs to this client
 		if(isLocalPlayer)
         {
+            clientIdentity = GetComponent<NetworkIdentity>().clientAuthorityOwner;
             Debug.Log("Added connection");
             CmdAddToGameManager();
         }
