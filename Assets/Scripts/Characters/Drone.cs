@@ -124,7 +124,9 @@ public class Drone : MonoBehaviour {
         //	hit.collider.gameObject.SendMessageUpwards ("Hit", new HitData(damage, hit.point, hit.normal), SendMessageOptions.DontRequireReceiver);
         //}
 
-        Instantiate(GameHandler.current.projectile, muzzle.position, muzzle.rotation);
+		Projectile proj = Instantiate(GameHandler.current.projectile, muzzle.position, muzzle.rotation).GetComponent<Projectile>();
+		proj.owners.Add(this.transform);
+		proj.owners.Add(owner.transform);
 
 		timer = fireDelay;
 	}

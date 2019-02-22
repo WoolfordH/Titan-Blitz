@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    public float speed = 1f;
+	public List<Transform> owners = new List<Transform> ();
+	public float speed = 1f;
+	public ParticleSystem hitEffect;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +19,26 @@ public class Projectile : MonoBehaviour {
 
         if (!GetComponent<ParticleSystem>().isPlaying)
         {
-            Destroy(gameObject);
+			Disipate();
         }
+	}
+
+	void Disipate()
+	{
+		speed = 0f;
+		Destroy(gameObject, hitEffect.main.duration);
+		hitEffect.Play ();
+	}
+
+
+
+	void OnCollisionEnter(Collision other)
+	{
+		Debug.Log (other.gameObject.name);
+
+		if (!owners.Exists(x=>x.root == other.transform.root)) //if it hits a collider that is not in the list of owners, disipate
+		{
+			Disipate ();
+		}
 	}
 }
