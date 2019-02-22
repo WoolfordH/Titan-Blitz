@@ -56,12 +56,13 @@ public class Drone : MonoBehaviour {
 	{
 		Vector3 target = owner.transform.TransformPoint(desiredPosition) + owner.transform.forward;
 
-		//check if any enemy players are within radius and look at them if they are
-		List<Collider> cols = new List<Collider>(Physics.OverlapSphere (transform.position, viewRadius, GameHandler.current.playerLayer));
+        List<Vector3> positions = new List<Vector3>();
+
+        //check if any enemy players are within radius and look at them if they are
+        List<Collider> cols = new List<Collider>(Physics.OverlapSphere (transform.position, viewRadius, GameHandler.current.playerLayer));
 		if (cols.Exists(x=> x.GetComponentInParent<Character>().team != owner.team))
 		{
-			List<Vector3> positions = new List<Vector3>();
-
+			
 			//loop through colliders
 			foreach (Collider col in cols)
 			{
@@ -90,19 +91,20 @@ public class Drone : MonoBehaviour {
 				}
 			}
 
-			if (positions.Count > 0)
-			{
-				//Get closest enemy
-				target = positions [GetClosest (positions.ToArray ())];
-				hasTarget = true;
-			}
-			else
-			{
-				hasTarget = false;
-			}
 		}
 
-		transform.rotation = Quaternion.RotateTowards (transform.rotation, Quaternion.LookRotation (Vector3.ProjectOnPlane(target - transform.position, Vector3.up)), (rotationSpeed * 100) * Time.deltaTime);
+        if (positions.Count > 0)
+        {
+            //Get closest enemy
+            target = positions[GetClosest(positions.ToArray())];
+            hasTarget = true;
+        }
+        else
+        {
+            hasTarget = false;
+        }
+
+        transform.rotation = Quaternion.RotateTowards (transform.rotation, Quaternion.LookRotation (Vector3.ProjectOnPlane(target - transform.position, Vector3.up)), (rotationSpeed * 100) * Time.deltaTime);
 
 		Vector3 newPos = new Vector3 (transform.position.x, target.y, transform.position.z);
 		Debug.DrawLine (transform.position, newPos, Color.green);
@@ -114,7 +116,7 @@ public class Drone : MonoBehaviour {
 	void Fire()
 	{
 
-		Debug.Log ("Drone Fired!");
+		//Debug.Log ("Drone Fired!");
 
         //raycast from muzzle and hit first thing found
 
