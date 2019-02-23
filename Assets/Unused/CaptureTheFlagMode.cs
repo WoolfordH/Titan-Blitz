@@ -8,8 +8,8 @@ public class CaptureTheFlagMode : NetworkBehaviour
 {
     private bool team1Flag = true; //false if held by enemy team
     private bool team2Flag = true;
-    private int team1Captures = 0;
-    private int team2Captures = 0;
+    //private int team1Captures = 0;
+    //private int team2Captures = 0;
 
     public GameObject team1FlagObject;
     public GameObject team2FlagObject;
@@ -40,8 +40,8 @@ public class CaptureTheFlagMode : NetworkBehaviour
 
     private void ResetGame()
     {
-        team1Captures = 0;
-        team2Captures = 0;
+        //team1Captures = 0;
+        //team2Captures = 0;
         if(team1Flag == false)
         {
             //Reset the object

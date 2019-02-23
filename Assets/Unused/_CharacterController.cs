@@ -199,7 +199,7 @@ public class CharacterController : NetworkBehaviour
         else
             tag = "Team2";
 
-        Log.current.LogData("Team " + teamNum.ToString());
+        ServerLog.current.LogData("Team " + teamNum.ToString());
     }
 
 }

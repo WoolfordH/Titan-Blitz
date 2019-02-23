@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Log : MonoBehaviour
+public class ServerLog : MonoBehaviour
 {
-    public static Log current;
+    public static ServerLog current;
     public GameObject log;
     public Text text;
 

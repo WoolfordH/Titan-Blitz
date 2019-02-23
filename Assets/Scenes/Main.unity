@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1900,6 +1900,8 @@ GameObject:
   - component: {fileID: 124896816}
   - component: {fileID: 124896815}
   - component: {fileID: 124896814}
+  - component: {fileID: 124896818}
+  - component: {fileID: 124896819}
   m_Layer: 5
   m_Name: Lobby Screen
   m_TagString: Untagged
@@ -1989,6 +1991,49 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &124896818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 124896813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6a88cfa4f9eb345856593391b685c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &124896819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 124896813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1 &129667158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,7 +2620,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091037482}
+      - m_Target: {fileID: 124896818}
         m_MethodName: ChooseTeam
         m_Mode: 3
         m_Arguments:
@@ -2808,6 +2853,27 @@ MonoBehaviour:
     i15: 97
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &170307383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 170307378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!1 &175371384
 GameObject:
   m_ObjectHideFlags: 0
@@ -8450,8 +8516,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091037482}
-        m_MethodName: ChooseTeam
+      - m_Target: {fileID: 124896818}
+        m_MethodName: ChooseCharacter
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8461,8 +8527,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1091037482}
-        m_MethodName: ChooseCharacter
+      - m_Target: {fileID: 124896818}
+        m_MethodName: ChooseTeam
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13192,7 +13258,7 @@ Prefab:
     - target: {fileID: 114181150466856566, guid: b496171e0a1876d49ae404a377a82ccf,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.size
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4187537201472616, guid: b496171e0a1876d49ae404a377a82ccf, type: 2}
       propertyPath: m_LocalPosition.x
@@ -13273,6 +13339,24 @@ Prefab:
       propertyPath: m_SpawnPrefabs.Array.data[2]
       value: 
       objectReference: {fileID: 1587647187849730, guid: eee3839ccbec5924cba05556f8151f38,
+        type: 2}
+    - target: {fileID: 114181150466856566, guid: b496171e0a1876d49ae404a377a82ccf,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 1397254270310452, guid: 33641c5a63183814ab95f857872fd566,
+        type: 2}
+    - target: {fileID: 114181150466856566, guid: b496171e0a1876d49ae404a377a82ccf,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 1397254270310452, guid: 3c1dd8c320fb5bc45945aa6ab780a9c2,
+        type: 2}
+    - target: {fileID: 114181150466856566, guid: b496171e0a1876d49ae404a377a82ccf,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 1397254270310452, guid: 36b28708ea5a93e42a812f9265499e19,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b496171e0a1876d49ae404a377a82ccf, type: 2}
@@ -16203,6 +16287,27 @@ MonoBehaviour:
     i15: 97
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &921310064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 921310059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!1 &929454905
 GameObject:
   m_ObjectHideFlags: 0
@@ -18536,7 +18641,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091037482}
+      - m_Target: {fileID: 124896818}
         m_MethodName: ChooseCharacter
         m_Mode: 3
         m_Arguments:
@@ -19465,12 +19570,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1090632696}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1091037482 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114531921889799730, guid: a7150d253ee080c459825f093e9b0bfd,
-    type: 2}
-  m_PrefabInternal: {fileID: 621690239}
-  m_Script: {fileID: 11500000, guid: e634c8d4f6d97344d9416d8d4251ba4c, type: 3}
 --- !u!1 &1092169507
 GameObject:
   m_ObjectHideFlags: 0
@@ -19887,7 +19986,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091037482}
+      - m_Target: {fileID: 124896818}
         m_MethodName: ChooseTeam
         m_Mode: 3
         m_Arguments:
@@ -30661,7 +30760,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091037482}
+      - m_Target: {fileID: 124896818}
         m_MethodName: ChooseCharacter
         m_Mode: 3
         m_Arguments:
@@ -31324,7 +31423,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091037482}
+      - m_Target: {fileID: 124896818}
         m_MethodName: ChooseCharacter
         m_Mode: 3
         m_Arguments:
@@ -34099,7 +34198,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1091037482}
+      - m_Target: {fileID: 124896818}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:

@@ -64,47 +64,43 @@ public class GameManager : NetworkBehaviour
         }
 	}
 
-    public void StartGame()
-    {
-        CmdStartGame();
-    }
-
-    //only the server will call this
     //this is called to transition from lobby to gameplay
     [Command]
-    private void CmdStartGame()
+    public void CmdStartGame()
     {
         //check game can be started
         if (gameState == GameState.lobby)
         {
             //Choose teams
             //initialise players
-            Log.current.LogData(players.Length.ToString());
+            ServerLog.current.LogData("Starting game with " + players.Length.ToString() + " players");
             for (int i = 0; i < players.Length; i++)//PlayerConnection connection in connections)
             {
                 PlayerConnection connection = players[i].connection;
-                //put on teams - should be added to a player struct so its settable 
-                //if ((i % 2) == 0)
-                //{
-                //    //team 1
-                //    Vector3 spawnPos = team1SpawnPoint;
-                //    connection.CmdSpawnPlayer(1, spawnPos, characterPrefabs[players[i].characterChoice]); 
-                //}
-                //else
-                //{
-                //    //team 2
-                //    Vector3 spawnPos = team2SpawnPoint;
-                //    connection.CmdSpawnPlayer(2, spawnPos, characterPrefabs[characterChoices[i]]);  
-                //}
+
                 int team = players[i].team;
+                Vector3 spawnPos;
+                if(team == 1)
+                {
+                    spawnPos = team1SpawnPoint;
+                }
+                else if(team == 2)
+                {
+                    spawnPos = team2SpawnPoint;
+                }
+                else //team 0 
+                {
+                    spawnPos = lobbyCam.transform.position;
+                }
 
-                connection.CmdSpawnPlayer(team, (team == 1)?team1SpawnPoint:team2SpawnPoint, characterPrefabs[players[i].characterChoice]);
+                connection.SpawnPlayer(team, spawnPos, characterPrefabs[players[i].characterChoice]);
 
-                //Disable the main camera  
-                RpcDisableMainCamera();
 
             }
             //Start 
+
+            //Disable the main camera  
+            RpcDisableMainCamera();
 
             gameState = GameState.playing;
         }
@@ -120,6 +116,7 @@ public class GameManager : NetworkBehaviour
 
     public int AddNewconnection(GameObject connection)
     {
+        ServerLog.current.LogData("Adding connection to server");
         //duplicate the array
         PlayerData[] tempPlayers = new PlayerData[players.Length + 1];
 
@@ -130,11 +127,11 @@ public class GameManager : NetworkBehaviour
         //add another entry
         tempPlayers[tempPlayers.Length - 1].connection = connection.GetComponent<PlayerConnection>();
         tempPlayers[tempPlayers.Length - 1].characterChoice = 1; //1 is the default choice
-        tempPlayers[tempPlayers.Length - 1].team = 0; //this should automatically assign a team 
-
+        tempPlayers[tempPlayers.Length - 1].team = 1; //this should automatically assign a team 
+        //overwrite current player data
         players = tempPlayers;
 
-        Debug.Log("Current connections " + players.Length);
+        ServerLog.current.LogData(players.Length.ToString() + " players connected");
 
         return players.Length-1;
     }
@@ -158,6 +155,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RpcDisableMainCamera()
     {
+        ServerLog.current.LogData("Disabling lobby cam");
         lobbyCam.SetActive(false);
         lobbyUI.SetActive(false);
     }
@@ -165,43 +163,31 @@ public class GameManager : NetworkBehaviour
 
 //////Buttons
     
-    public void ChooseCharacter(int characterChoice)
-    {
-        CmdChooseCharacter(characterChoice, PlayerConnection.connectionID);
-    }
-    
-    [Command]   //tells server the choice
-    private void CmdChooseCharacter(int characterChoice, int connectionNum)
+    [Command] 
+    public void CmdChooseCharacter(int characterChoice, int connectionNum)
     {
         players[connectionNum].characterChoice = characterChoice;
         RpcChooseCharacter(characterChoice, connectionNum);
     }
-    
+
     [ClientRpc] //tells other clients so they can visualise the choice
     private void RpcChooseCharacter(int characterChoice, int connectionNum)
     {
-        Log.current.LogData("Player " + connectionNum.ToString() + " chose character " + characterChoice.ToString());
+        ServerLog.current.LogData("Player " + connectionNum.ToString() + " chose character " + characterChoice.ToString());
         //update ui
     }
 
-
-
-    public void ChooseTeam(int teamNum)
+    [Command]
+    public void CmdChooseTeam(int teamChoice, int connectionNum)
     {
-        CmdChooseTeam(teamNum, PlayerConnection.connectionID);
-    }
-
-    [Command] //tells server the choice
-    private void CmdChooseTeam(int teamNum, int connectionNum)
-    {
-        players[connectionNum].team = teamNum;
-        RpcChooseTeam(teamNum, connectionNum);
+        players[connectionNum].team  = teamChoice;
+        RpcChooseTeam(teamChoice, connectionNum);
     }
 
     [ClientRpc] //tells other clients so they can visualise the choice
     private void RpcChooseTeam(int teamNum, int connectionNum)
     {
-        Log.current.LogData("Player " + connectionNum.ToString() + " chose team " + teamNum.ToString());
+        ServerLog.current.LogData("Player " + connectionNum.ToString() + " chose team " + teamNum.ToString());
         //update ui
     }
 }

@@ -71,7 +71,7 @@ public class CharacterHandler: NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        
+        ServerLog.current.LogData("Starting player " + ((hasAuthority && tag != "Dummy") ? "with " : "without ") + "authority");
         //intitialise variables
         if(!cam)
 		    cam = GetComponentInChildren<Camera> ();
@@ -84,7 +84,7 @@ public class CharacterHandler: NetworkBehaviour
 
 		if (tag != "Dummy" && hasAuthority) //if this is the character of this client
         {
-            Log.current.LogData("Start Character Handler");
+            ServerLog.current.LogData("Start Character Handler");
             //enable the camera 
             cam.gameObject.SetActive(true);
 
@@ -457,6 +457,6 @@ public class CharacterHandler: NetworkBehaviour
         else
             tag = "Team2";
 
-        Log.current.LogData("Team " + teamNum.ToString());
+        ServerLog.current.LogData("Team " + teamNum.ToString());
     }
 }

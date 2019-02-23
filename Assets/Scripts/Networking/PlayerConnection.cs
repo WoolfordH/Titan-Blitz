@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerConnection : NetworkBehaviour
 {
-    //the identity of this client
+    //the number assigned to this client
     public static int connectionID;
     public static NetworkConnection clientIdentity;
+    public static PlayerConnection current;
     //the prefab for the player object
 
 	// Use this for initialization
@@ -15,16 +17,17 @@ public class PlayerConnection : NetworkBehaviour
     {
         //this object is created on every client 
         //check if this belongs to this client
-		if(isLocalPlayer)
+		if(hasAuthority)
         {
+            ServerLog.current.LogData("Start own connection");
             clientIdentity = GetComponent<NetworkIdentity>().clientAuthorityOwner;
-            Debug.Log("Added connection");
+            current = this;
             CmdAddToGameManager();
         }
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
 		if(isLocalPlayer)
         {
@@ -35,9 +38,10 @@ public class PlayerConnection : NetworkBehaviour
 
     //Command scripts - these are only run on the server
 
-    [Command]
-    public void CmdSpawnPlayer(int teamNum, Vector3 spawnPos, GameObject playerPrefab)
+    //spawns this players game object 
+    public void SpawnPlayer(int teamNum, Vector3 spawnPos, GameObject playerPrefab)
     {
+        ServerLog.current.LogData("Spawning Player");
         //spawns to server
         GameObject player = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
 
@@ -50,9 +54,34 @@ public class PlayerConnection : NetworkBehaviour
         }
     }
 
+    //Registers this connection to the game manager
     [Command]
     private void CmdAddToGameManager()
     {
         connectionID = GameManager.current.AddNewconnection(this.gameObject);
+    }
+
+
+    //lobby buttons
+    [Command]
+    public void CmdChooseCharacter(int characterChoice, int connectionNum)
+    {
+        ServerLog.current.LogData("Chse char stp 2");
+
+        GameManager.current.CmdChooseCharacter(characterChoice, connectionNum);
+    }
+
+    [Command]
+    public void CmdChooseTeam(int teamChoice, int connectionNum)
+    {
+        ServerLog.current.LogData("Chse char stp 2");
+
+        GameManager.current.CmdChooseTeam(teamChoice, connectionNum);
+    }
+
+    [Command]
+    public void CmdStartGame()
+    {
+        GameManager.current.CmdStartGame();
     }
 }

@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 114421026857857180}
   - component: {fileID: 114080045701872102}
   m_Layer: 10
-  m_Name: Player
+  m_Name: Fighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -584,7 +584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1592894723313026
 GameObject:
   m_ObjectHideFlags: 1
@@ -1820,22 +1820,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 173
-    i1: 135
-    i2: 145
-    i3: 72
-    i4: 44
-    i5: 237
-    i6: 61
-    i7: 20
-    i8: 201
-    i9: 133
-    i10: 210
-    i11: 97
-    i12: 18
-    i13: 103
-    i14: 84
-    i15: 112
+    i0: 60
+    i1: 29
+    i2: 216
+    i3: 195
+    i4: 32
+    i5: 251
+    i6: 91
+    i7: 196
+    i8: 89
+    i9: 69
+    i10: 170
+    i11: 106
+    i12: 183
+    i13: 128
+    i14: 169
+    i15: 194
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114429121479734164
@@ -2000,7 +2000,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397254270310452}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a5ff76db3929184099997d1099c9c68, type: 3}
   m_Name: 
