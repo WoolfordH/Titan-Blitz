@@ -58,7 +58,7 @@ public class PlayerConnection : NetworkBehaviour
     [Command]
     private void CmdAddToGameManager()
     {
-        connectionID = GameManager.current.AddNewconnection(this.gameObject);
+        connectionID = GameManager.current.CmdAddNewconnection(this.gameObject);
     }
 
 
@@ -66,16 +66,12 @@ public class PlayerConnection : NetworkBehaviour
     [Command]
     public void CmdChooseCharacter(int characterChoice, int connectionNum)
     {
-        ServerLog.current.LogData("Chse char stp 2");
-
         GameManager.current.CmdChooseCharacter(characterChoice, connectionNum);
     }
 
     [Command]
     public void CmdChooseTeam(int teamChoice, int connectionNum)
     {
-        ServerLog.current.LogData("Chse char stp 2");
-
         GameManager.current.CmdChooseTeam(teamChoice, connectionNum);
     }
 
@@ -83,5 +79,10 @@ public class PlayerConnection : NetworkBehaviour
     public void CmdStartGame()
     {
         GameManager.current.CmdStartGame();
+    }
+
+    private void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        ServerLog.current.LogData("Disconnected from server");
     }
 }

@@ -21,19 +21,17 @@ public class LobbyMenu : MonoBehaviour
 
     public void ChooseCharacter(int characterChoice)
     {
-        ServerLog.current.LogData("Choose char step 1");
         PlayerConnection.current.CmdChooseCharacter(characterChoice, PlayerConnection.connectionID);
     }
 
     public void ChooseTeam(int teamChoice)
     {
-        ServerLog.current.LogData("Choose team step 1");
         PlayerConnection.current.CmdChooseTeam(teamChoice, PlayerConnection.connectionID);
     }
 
     public void StartGame()
     {
-        ServerLog.current.LogData("Start game");
+        ServerLog.current.LogData("Start game button");
         PlayerConnection.current.CmdStartGame();
     }
 }

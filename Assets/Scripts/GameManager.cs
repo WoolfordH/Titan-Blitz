@@ -113,8 +113,8 @@ public class GameManager : NetworkBehaviour
     //   // NetworkServer.Listen(,);
     //   // NetworkClient.
     //}
-
-    public int AddNewconnection(GameObject connection)
+    [Command]
+    public int CmdAddNewconnection(GameObject connection)
     {
         ServerLog.current.LogData("Adding connection to server");
         //duplicate the array
@@ -132,6 +132,12 @@ public class GameManager : NetworkBehaviour
         players = tempPlayers;
 
         ServerLog.current.LogData(players.Length.ToString() + " players connected");
+
+        if(gameState == GameState.playing)
+        {
+            throw new NotImplementedException("Player connected mid game no handler implemented");
+        }
+
 
         return players.Length-1;
     }
@@ -189,5 +195,10 @@ public class GameManager : NetworkBehaviour
     {
         ServerLog.current.LogData("Player " + connectionNum.ToString() + " chose team " + teamNum.ToString());
         //update ui
+    }
+
+    private void OnPlayerDisconnected(NetworkPlayer player)
+    {
+        ServerLog.current.LogData("A player has been disconnected");
     }
 }
