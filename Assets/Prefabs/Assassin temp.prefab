@@ -393,10 +393,10 @@ GameObject:
   - component: {fileID: 114930757354223022}
   - component: {fileID: 114526534432461620}
   - component: {fileID: 54613891414203008}
+  - component: {fileID: 114849385975982048}
   - component: {fileID: 114421026857857180}
-  - component: {fileID: 114080045701872102}
   m_Layer: 10
-  m_Name: Tank
+  m_Name: Assassin temp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1375,27 +1375,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114080045701872102
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1397254270310452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114080267876701156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1820,22 +1799,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 54
-    i1: 178
-    i2: 135
-    i3: 8
-    i4: 234
-    i5: 90
-    i6: 147
-    i7: 228
+    i0: 109
+    i1: 55
+    i2: 231
+    i3: 135
+    i4: 19
+    i5: 114
+    i6: 219
+    i7: 4
     i8: 42
-    i9: 129
-    i10: 47
-    i11: 146
-    i12: 101
-    i13: 73
-    i14: 158
-    i15: 25
+    i9: 86
+    i10: 152
+    i11: 94
+    i12: 172
+    i13: 53
+    i14: 186
+    i15: 63
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114429121479734164
@@ -2000,7 +1979,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397254270310452}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a5ff76db3929184099997d1099c9c68, type: 3}
   m_Name: 
@@ -2297,6 +2276,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114849385975982048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397254270310452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114869571361017460
 MonoBehaviour:
   m_ObjectHideFlags: 1

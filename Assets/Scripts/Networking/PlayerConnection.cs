@@ -58,7 +58,8 @@ public class PlayerConnection : NetworkBehaviour
     [Command]
     private void CmdAddToGameManager()
     {
-        connectionID = GameManager.current.CmdAddNewconnection(this.gameObject);
+        //connectionID = GameManager.current.CmdAddNewconnection(this.gameObject);
+        GameManager.current.CmdAddNewconnection(this.gameObject);
     }
 
 

@@ -114,7 +114,7 @@ public class GameManager : NetworkBehaviour
     //   // NetworkClient.
     //}
     [Command]
-    public int CmdAddNewconnection(GameObject connection)
+    public void CmdAddNewconnection(GameObject connection)
     {
         ServerLog.current.LogData("Adding connection to server");
         //duplicate the array
@@ -139,7 +139,7 @@ public class GameManager : NetworkBehaviour
         }
 
 
-        return players.Length-1;
+        //return players.Length-1;
     }
 
     [Command]

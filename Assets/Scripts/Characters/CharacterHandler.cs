@@ -113,7 +113,7 @@ public class CharacterHandler: NetworkBehaviour
 	}
 
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
 		if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
         {

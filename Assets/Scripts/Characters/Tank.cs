@@ -85,7 +85,7 @@ public class Tank : Character {
 		GameObject grabber = Instantiate(grabberPrefab, handler.cam.transform.position, handler.cam.transform.rotation);
         grabber.GetComponent<Grabber>().Init(this, grabberMaxDist, handler.cam.transform.forward, grabberSpeed, handler.rb.velocity);
 
-        NetworkServer.SpawnWithClientAuthority(grabber, PlayerConnection.clientIdentity);
+        NetworkServer.SpawnWithClientAuthority(grabber, connectionToServer);
 
         
 
