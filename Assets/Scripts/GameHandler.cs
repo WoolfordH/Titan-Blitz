@@ -15,6 +15,9 @@ public class GameHandler : MonoBehaviour {
 
 	public GameObject bloodSpurt;
     public GameObject projectile;
+	public GameObject damageIndicator;
+
+	public Camera playerCam;
 
 
 	// Use this for initialization

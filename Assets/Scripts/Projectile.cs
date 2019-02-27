@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour {
 	public ParticleSystem[] hitEffects;
     bool playing = false;
     bool destroying = false;
+	public DAMAGE dmg;
 
 	// Use this for initialization
 	void Start () {
@@ -28,11 +29,11 @@ public class Projectile : MonoBehaviour {
         if (!GetComponent<ParticleSystem>().isPlaying && playing)
         {
             playing = false;
-			Disipate();
+			Dissipate();
         }
 	}
 
-	void Disipate()
+	void Dissipate()
 	{
         if (!destroying)
         {
@@ -56,11 +57,11 @@ public class Projectile : MonoBehaviour {
 
         if (other.gameObject.tag != "Projectile")
         {
-            if (!owners.Exists(x => x.root == other.transform.root)) //if it hits a collider that is not in the list of owners, disipate
+            if (!owners.Exists(x => x.root == other.transform.root)) //if it hits a collider that is not in the list of owners, dissipate
             {
                 Vector3 startPos = transform.position - (transform.forward * 1.3f);
 
-                Debug.DrawRay(startPos, (transform.forward * 1.3f), Color.blue);
+                //Debug.DrawRay(startPos, (transform.forward * 1.3f), Color.blue);
 
                 List<RaycastHit> hits = new List<RaycastHit>(Physics.RaycastAll(startPos, transform.forward, 3f));
 
@@ -69,11 +70,13 @@ public class Projectile : MonoBehaviour {
                     if (hits.Exists(x=>x.collider == other))
                     {
                         Debug.Log("Projectile Realigned");
-                        transform.position = hits[hits.FindIndex(x => x.collider == other)].point;
+						int index = hits.FindIndex (x => x.collider == other);
+                        transform.position = hits[index].point;
+						other.gameObject.SendMessageUpwards ("Hit", new HitData(dmg, hits[index].point, hits[index].normal), SendMessageOptions.DontRequireReceiver);
                     }
                 }
-
-                Disipate();
+					
+                Dissipate();
             }
         }
 	}

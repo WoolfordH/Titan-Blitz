@@ -129,6 +129,7 @@ public class Drone : MonoBehaviour {
 		Projectile proj = Instantiate(GameHandler.current.projectile, muzzle.position, muzzle.rotation).GetComponent<Projectile>();
 		proj.owners.Add(this.transform);
 		proj.owners.Add(owner.transform);
+		proj.dmg = new DAMAGE (damage);
 
 		timer = fireDelay;
 	}

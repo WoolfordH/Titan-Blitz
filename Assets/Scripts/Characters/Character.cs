@@ -279,7 +279,6 @@ public abstract class Character : NetworkBehaviour
             }
 
 
-
             if (health <= 0)
             {
                 Die();
@@ -311,6 +310,9 @@ public abstract class Character : NetworkBehaviour
     public virtual void Hit(HitData hit)
 	{
 		Instantiate(GameHandler.current.bloodSpurt, hit.hitPoint, Quaternion.LookRotation(hit.hitNormal));
+		GameObject indicator = Instantiate (GameHandler.current.damageIndicator, hit.hitPoint, Quaternion.LookRotation (hit.hitNormal));
+		indicator.GetComponentInChildren<Billboard> ().cam = GameHandler.current.playerCam;
+		indicator.GetComponentInChildren<Text>().text = hit.damage.damage.ToString();
 		Hit (hit.damage);
 	}
 
