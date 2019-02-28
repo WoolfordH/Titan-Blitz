@@ -10,6 +10,7 @@ public class PlayerConnection : NetworkBehaviour
     public static int connectionID;
     public static NetworkConnection clientIdentity;
     public static PlayerConnection current;
+    public static GameObject localPlayer;
     //the prefab for the player object
 
 	// Use this for initialization

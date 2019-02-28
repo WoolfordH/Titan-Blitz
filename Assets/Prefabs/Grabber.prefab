@@ -119,6 +119,7 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   grappleType: 0
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114834957014336626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,7 +172,7 @@ MonoBehaviour:
     i14: 31
     i15: 56
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!135 &135968724404947518
 SphereCollider:
   m_ObjectHideFlags: 1

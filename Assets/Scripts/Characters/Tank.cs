@@ -83,13 +83,13 @@ public class Tank : Character {
 		//Debug.Log (grabberSpeed);
 
 		GameObject grabber = Instantiate(grabberPrefab, handler.cam.transform.position, handler.cam.transform.rotation);
+        //grabber.GetComponent<Grabber>().Init(this, grabberMaxDist, handler.cam.transform.forward, grabberSpeed, handler.rb.velocity);
+
+        NetworkServer.Spawn(grabber);//, connectionToServer);
         grabber.GetComponent<Grabber>().Init(this, grabberMaxDist, handler.cam.transform.forward, grabberSpeed, handler.rb.velocity);
 
-        NetworkServer.SpawnWithClientAuthority(grabber, connectionToServer);
 
-        
-
-		Debug.Log (abilities [2].name + " was Used!");
+        Debug.Log (abilities [2].name + " was Used!");
 
 		//set cooldown
 		abilities[2].StartTimer();

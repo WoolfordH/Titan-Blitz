@@ -5,11 +5,19 @@ using UnityEngine;
 public class Billboard : MonoBehaviour {
 
 	public Camera cam;
-	
-	// Update is called once per frame
-	void LateUpdate () 
+
+    private void Start()
+    {
+        cam = PlayerConnection.localPlayer.GetComponent<CharacterHandler>().cam;
+    }
+
+    // Update is called once per frame
+    void LateUpdate () 
 	{
-		transform.LookAt (transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);	
+        if (cam)
+        {
+            transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
+        }
 	}
 		
 }

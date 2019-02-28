@@ -19,7 +19,7 @@ public class Grabber : NetworkBehaviour {
 
 	public GrappleType grappleType;
 
-	Vector3 initPos;
+	public Vector3 initPos;
 	Rigidbody rb;
 	bool returning = false;
 
