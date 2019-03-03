@@ -65,24 +65,28 @@ public class CharacterHandler: NetworkBehaviour
 	//temporary
 	bool paused = false;
 
-    private bool startedWithauthority = false;
+    private bool started = false;
 
 
 	// Use this for initialization
 	void Start ()
     {
+
+	}
+
+    private void Initiate()
+    {
         ServerLog.current.LogData("Starting player " + ((hasAuthority && tag != "Dummy") ? "with " : "without ") + "authority");
         //intitialise variables
-        if(!cam)
-		    cam = GetComponentInChildren<Camera> ();
-		rb = GetComponent<Rigidbody> ();
+        if (!cam)
+            cam = GetComponentInChildren<Camera>();
+        rb = GetComponent<Rigidbody>();
 
         initLookSpeed = lookSpeed;
         if (cam)
             initFOV = cam.fieldOfView;
-        
 
-		if (tag != "Dummy" && hasAuthority) //if this is the character of this client
+        if (tag != "Dummy" && hasAuthority) //if this is the character of this client
         {
             ServerLog.current.LogData("Start Character Handler");
             //enable the camera 
@@ -106,20 +110,24 @@ public class CharacterHandler: NetworkBehaviour
             controls.Ability2 = KeyCode.Alpha2;
 
 
-            Cursor.lockState = CursorLockMode.Locked;
-
-            startedWithauthority = true;
-        }        
-	}
+            Cursor.lockState = CursorLockMode.Locked;            
+        }
+        else
+        {
+            this.rb.useGravity = false;
+        }
+        started = true;
+    }
 
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-		if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
+        if (!started)
+            Initiate();
+        if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
         {
             //If has authority and was not started with authority call start again - this fixes a bug on the server
-            if (!startedWithauthority)
-                Start();
+            
                    
 
             RaycastHit hit;

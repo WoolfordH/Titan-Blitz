@@ -26,6 +26,7 @@ public class Grabber : NetworkBehaviour {
 
 	Character otherChar;
 	Transform otherRoot;
+    Vector3 previousPosition;
 
 	public void Init (Character a_owner, float a_maxDist, Vector3 a_dir, float a_speed, Vector3 initVelocity) 
 	{
@@ -55,6 +56,12 @@ public class Grabber : NetworkBehaviour {
                     //make sure to always get back to owner
                     Vector3 dirBack = (owner.handler.cam.transform.position - transform.position).normalized;
                     rb.velocity = dirBack * speed * Time.deltaTime;
+                    if(otherRoot)//if holding another player
+                    {
+                        //move the player root by the amount the grabber has moved
+                        otherRoot.transform.position += (this.transform.position - previousPosition);
+                        previousPosition = this.transform.position;
+                    }
                 }
                 else if (grappleType == GrappleType.Grapple)
                 {
@@ -84,6 +91,7 @@ public class Grabber : NetworkBehaviour {
                         {
                             otherChar.handler.Unfreeze(); //let go of other char
                             otherRoot.parent = null;
+                            otherRoot.GetComponentInChildren<Network_Transform>().CmdRemoveServerControl(); //give the player back control of their position
                         }
                     }
                     else if (grappleType == GrappleType.Grapple)
@@ -149,8 +157,10 @@ public class Grabber : NetworkBehaviour {
                             //bring the hit character back with us
                             otherChar = other.gameObject.GetComponentInParent<Character>();
                             otherChar.handler.Freeze(false); //freeze other character
-                            otherRoot = otherChar.transform.root;
-                            otherRoot.SetParent(this.transform);
+                            otherRoot = otherChar.transform.root; //hold reference to the root of the player
+                            previousPosition = this.transform.position; //set to position when the player was grabbed
+                            otherRoot.GetComponentInChildren<Network_Transform>().CmdTakeServerControl(); //give the server control over the players position
+                            //otherRoot.SetParent(this.transform);
                         }
                     }
 
@@ -166,6 +176,7 @@ public class Grabber : NetworkBehaviour {
                             {
                                 otherChar.handler.Unfreeze(); //let go of other char
                                 otherRoot.parent = null;
+                                otherRoot.GetComponentInChildren<Network_Transform>().CmdRemoveServerControl(); //give the player back control of their position
                             }
 
                             NetworkServer.Destroy(transform.root.gameObject);
@@ -173,7 +184,7 @@ public class Grabber : NetworkBehaviour {
                     }
                 }
             }
-            else
+            else //if hit owner
             {
                 if (returning)
                 {
@@ -183,6 +194,7 @@ public class Grabber : NetworkBehaviour {
                         {
                             otherChar.handler.Unfreeze(); //let go of other char
                             otherRoot.parent = null;
+                            otherRoot.GetComponentInChildren<Network_Transform>().CmdRemoveServerControl(); //give the player back control of their position
                         }
                     }
                     else if (grappleType == GrappleType.Grapple)

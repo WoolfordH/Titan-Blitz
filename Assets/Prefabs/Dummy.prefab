@@ -1390,7 +1390,7 @@ MonoBehaviour:
   climbAngleMax: 45
   jumpForce: 5
   jumpVelMod: 0.01
-  rb: {fileID: 0}
+  rb: {fileID: 54639691184738556}
   mainCollider: {fileID: 136700399817371662}
   lookSpeed: 2
   cam: {fileID: 20284124293510144}

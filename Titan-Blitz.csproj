@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2018.1.9f2</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -315,7 +313,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\LobbyMenu.cs" />
+    <Compile Include="Assets\Scripts\Billboard.cs" />
     <Compile Include="Assets\Scripts\Characters\Assassin.cs" />
     <Compile Include="Assets\Scripts\Characters\Character.cs" />
     <Compile Include="Assets\Scripts\Characters\CharacterHandler.cs" />
@@ -324,14 +322,17 @@
     <Compile Include="Assets\Scripts\Characters\Grabber.cs" />
     <Compile Include="Assets\Scripts\Characters\Tank.cs" />
     <Compile Include="Assets\Scripts\DeathSphere.cs" />
+    <Compile Include="Assets\Scripts\DestroyObject.cs" />
     <Compile Include="Assets\Scripts\DestroyParticle.cs" />
     <Compile Include="Assets\Scripts\ExtendedFlycam.cs" />
     <Compile Include="Assets\Scripts\GameHandler.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GlowShaderScripts\GlowReplacement.cs" />
     <Compile Include="Assets\Scripts\GlowShaderScripts\MainCamXRayEffect.cs" />
-    <Compile Include="Assets\Scripts\Networking\ServerLog.cs" />
+    <Compile Include="Assets\Scripts\LobbyMenu.cs" />
+    <Compile Include="Assets\Scripts\Networking\Network_Transform.cs" />
     <Compile Include="Assets\Scripts\Networking\PlayerConnection.cs" />
+    <Compile Include="Assets\Scripts\Networking\ServerLog.cs" />
     <Compile Include="Assets\Scripts\Powerups\Powerup.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Unused\_CharacterController.cs" />
@@ -340,6 +341,7 @@
     <Compile Include="Assets\Unused\FlagStand.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Materials\Shaders\UIOverlay.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\Glow.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowReplacement.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowStandard.shader" />
