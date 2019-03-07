@@ -321,6 +321,8 @@
     <Compile Include="Assets\Scripts\Characters\Fighter.cs" />
     <Compile Include="Assets\Scripts\Characters\Grabber.cs" />
     <Compile Include="Assets\Scripts\Characters\Tank.cs" />
+    <Compile Include="Assets\Scripts\ControlPoint.cs" />
+    <Compile Include="Assets\Scripts\CTPManager.cs" />
     <Compile Include="Assets\Scripts\DeathSphere.cs" />
     <Compile Include="Assets\Scripts\DestroyObject.cs" />
     <Compile Include="Assets\Scripts\DestroyParticle.cs" />
