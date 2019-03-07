@@ -99,6 +99,8 @@ public class GameManager : NetworkBehaviour
             }
             //Start 
 
+            CTPManager.current.CmdStartGame();
+
             //Disable the main camera  
             RpcDisableMainCamera();
 

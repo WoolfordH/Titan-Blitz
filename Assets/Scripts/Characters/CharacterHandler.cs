@@ -25,7 +25,7 @@ public struct Controls
 [RequireComponent(typeof(Rigidbody))]
 public class CharacterHandler: NetworkBehaviour
 {
-
+    //movement variables
 	public Controls controls;
 	public float speed = 350f;
 	public float sprintMultiplier = 2f;
@@ -49,18 +49,23 @@ public class CharacterHandler: NetworkBehaviour
 	float initFOV;
 	bool FOVbumped = false;
 
-	public Camera cam;
 	public float minLookHeight = -60f;
 	public float maxLookHeight = 60f;
 
-	public Transform headPos;
+	
 
 	public bool grounded;
 
 	public bool frozen = false;
 	public bool freezeLook = false;
 
-	public List<Powerup> powerups = new List<Powerup>();
+    public Camera cam;
+    public Transform headPos;
+    public List<Powerup> powerups = new List<Powerup>();
+
+    private int teamNum = 0;
+
+
 
 	//temporary
 	bool paused = false;
@@ -458,13 +463,15 @@ public class CharacterHandler: NetworkBehaviour
     
     [ClientRpc]
     //assigns the character a team - should inform more things
-    public void RpcSetTeam(int teamNum)
+    public void RpcSetTeam(int a_teamNum)
     {
-        if (teamNum == 1)
-            tag = "Team1";
-        else
-            tag = "Team2";
+        teamNum = a_teamNum;
 
         ServerLog.current.LogData("Team " + teamNum.ToString());
+    }
+
+    public int GetTeam()
+    {
+        return teamNum;
     }
 }

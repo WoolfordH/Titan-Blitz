@@ -94,7 +94,7 @@ public struct Ability
 public abstract class Character : NetworkBehaviour
 {
 	public int id = 0;
-	public int team = 0;
+//	public int team = 0;
 
 	public Character[] allies;
 

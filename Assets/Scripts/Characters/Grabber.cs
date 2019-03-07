@@ -152,7 +152,8 @@ public class Grabber : NetworkBehaviour {
                     if (grappleType == GrappleType.Grab)
                     {
                         //if its a player, bring them with you
-                        if (other.gameObject.GetComponentInParent<Character>())
+                        if (other.gameObject.GetComponentInParent<Character>() && //if is player
+                            (other.gameObject.GetComponentInParent<Character>().handler.GetTeam() != owner.handler.GetTeam())) //and not on same team
                         {
                             //bring the hit character back with us
                             otherChar = other.gameObject.GetComponentInParent<Character>();

@@ -80,11 +80,13 @@ public class CTPManager : NetworkBehaviour
                     //centre point only cap-able by team 2
                     team2Point.Activate();
                     centrePoint.Deactivate();
+                    state = CTPManagerState.team1Advantage;
                 }
                 else //team 2
                 {
                     centrePoint.Deactivate();
                     team1Point.Activate();
+                    state = CTPManagerState.team2Advantage;
                 }
             }
         }
@@ -100,6 +102,7 @@ public class CTPManager : NetworkBehaviour
                 //team2 push back
                 team2Point.Deactivate();
                 centrePoint.Activate();
+                state = CTPManagerState.neutral;
             }
             else
             {
@@ -118,6 +121,7 @@ public class CTPManager : NetworkBehaviour
                 //team1 push back
                 team2Point.Deactivate();
                 centrePoint.Activate();
+                state = CTPManagerState.neutral;
             }
             else
             {
