@@ -21,8 +21,8 @@ public class ControlPoint : NetworkBehaviour
     private int pointIdentity;
     private ControlPointState controlState = ControlPointState.inactive;
     private float capturePercent = 0; //positive for team 1, negative for team 2
-    private float captureRate;
-    private float additionalPlayerMultiplier;
+    public float captureRate;
+    public float additionalPlayerMultiplier;
     //gameobject or something for the capture animation stuff
 
     public Collider pointCollider;
@@ -111,8 +111,10 @@ public class ControlPoint : NetworkBehaviour
     public void Activate()
     {
         //enable collider
-        pointCollider.enabled = true;
         capturePercent = 0;
+        playersOnPointCount = 0;
+        playersOnPoint = new GameObject[playersOnPoint.Length];
+        pointCollider.enabled = true;
         controlState = ControlPointState.active;
     }
 
@@ -143,20 +145,23 @@ public class ControlPoint : NetworkBehaviour
         CharacterHandler character = other.GetComponentInParent<CharacterHandler>();
         if (character) //if it has a character handle - is a player
         {
-            if (FindPlayerInArray(character.gameObject) != -1)
+            if (FindPlayerInArray(character.gameObject) == -1) //if the player is not already in the list
             {
-                if (true)//team 1
+                if (character.GetTeam() == 1)//team 1
                 {
                     playersOnPoint[playersOnPointCount] = character.gameObject;
                     playersOnPointCount++;
                     teamOnPointDifference++;
-                    //add to colliding players
-                    //count++
-                    //difference++/--
+                }
+                else if(character.GetTeam() == 2)
+                {
+                    playersOnPoint[playersOnPointCount] = character.gameObject;
+                    playersOnPointCount++;
+                    teamOnPointDifference--;
                 }
                 else
                 {
-
+                    //team 0
                 }
             }
         }
@@ -165,16 +170,31 @@ public class ControlPoint : NetworkBehaviour
     [Server]
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponentInParent<CharacterHandler>()) //if it has a character handle - is a player
+        CharacterHandler character = other.GetComponentInParent<CharacterHandler>();
+        if (character) //if it has a character handle - is a player
         {
-            if (true)//team 1
+            int index = FindPlayerInArray(character.gameObject);
+            if (index != -1)//player was in array
             {
+                //remove from array
+                for(int i = index;i<playersOnPointCount-1;i++)
+                {
+                    playersOnPoint[i] = playersOnPoint[i + 1];
+                }
+                if(character.GetTeam() == 1)//is team 1
+                {
+                    teamOnPointDifference--;
+                }
+                else if(character.GetTeam() == 2)
+                {
+                    teamOnPointDifference++;
+                }
+
+                playersOnPointCount--;
+
 
             }
-            else
-            {
 
-            }
         }
     }
 }
