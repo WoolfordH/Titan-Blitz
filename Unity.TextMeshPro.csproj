@@ -389,6 +389,7 @@
     <Compile Include="Packages\com.unity.textmeshpro\Scripts\Runtime\TMPro_UGUI_Private.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Materials\Shaders\UIOverlay.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\Glow.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowReplacement.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowStandard.shader" />

@@ -83,6 +83,13 @@ public class PlayerConnection : NetworkBehaviour
         GameManager.current.CmdStartGame();
     }
 
+    [ClientRpc]
+    public void RpcAssignID(int ID)
+    {
+        if(isLocalPlayer)
+            connectionID = ID;
+    }
+
     private void OnDisconnectedFromServer(NetworkDisconnection info)
     {
         ServerLog.current.LogData("Disconnected from server");

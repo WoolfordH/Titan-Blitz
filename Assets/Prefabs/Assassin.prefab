@@ -391,10 +391,9 @@ GameObject:
   - component: {fileID: 4064333493737416}
   - component: {fileID: 114014361426618524}
   - component: {fileID: 114930757354223022}
-  - component: {fileID: 114526534432461620}
   - component: {fileID: 54613891414203008}
+  - component: {fileID: 114849385975982048}
   - component: {fileID: 114421026857857180}
-  - component: {fileID: 114080045701872102}
   m_Layer: 10
   m_Name: Assassin
   m_TagString: Untagged
@@ -1270,7 +1269,7 @@ MonoBehaviour:
   climbAngleMax: 45
   jumpForce: 5
   jumpVelMod: 0.01
-  rb: {fileID: 0}
+  rb: {fileID: 54613891414203008}
   mainCollider: {fileID: 136490649429355242}
   lookSpeed: 2
   cam: {fileID: 20989169904720518}
@@ -1375,27 +1374,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114080045701872102
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1397254270310452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114080267876701156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1820,22 +1798,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 51
-    i1: 100
-    i2: 28
-    i3: 90
-    i4: 99
-    i5: 24
-    i6: 56
-    i7: 20
-    i8: 171
-    i9: 149
-    i10: 248
-    i11: 87
-    i12: 135
-    i13: 47
-    i14: 213
-    i15: 102
+    i0: 109
+    i1: 55
+    i2: 231
+    i3: 135
+    i4: 19
+    i5: 114
+    i6: 219
+    i7: 4
+    i8: 42
+    i9: 86
+    i10: 152
+    i11: 94
+    i12: 172
+    i13: 53
+    i14: 186
+    i15: 63
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114429121479734164
@@ -1994,48 +1972,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114526534432461620
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1397254270310452}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5ff76db3929184099997d1099c9c68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  team: 0
-  allies:
-  - {fileID: 0}
-  - {fileID: 0}
-  handler: {fileID: 114014361426618524}
-  hitMarker: {fileID: 1053323330491502}
-  timerLbl: {fileID: 114429121479734164}
-  healthBar: {fileID: 114080267876701156}
-  armourBar: {fileID: 114400947656875602}
-  ultBar: {fileID: 114124244411340188}
-  ammoLbl: {fileID: 114712368542153606}
-  abl1Icon: {fileID: 114881197231864914}
-  abl2Icon: {fileID: 114085243899920238}
-  ally1Avatar: {fileID: 114240580076586870}
-  ally2Avatar: {fileID: 114483981758126374}
-  avatarRT: {fileID: 0}
-  avatarCam: {fileID: 20156669381042250}
-  maxHealth: 100
-  health: 100
-  maxArmour: 100
-  armour: 100
-  primaryRange: 0
-  secondaryRange: 0
-  grabberPrefab: {fileID: 1587647187849730, guid: eee3839ccbec5924cba05556f8151f38,
-    type: 2}
-  grabberMaxDist: 30
-  grabberSpeed: 2
-  shieldPrefab: {fileID: 1951781798440540, guid: 23130655f149c924193c240a7c42fce7,
-    type: 2}
-  shieldPosition: {x: 0, y: 1.3, z: 1.8}
 --- !u!114 &114544885968733544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2297,6 +2233,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114849385975982048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397254270310452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverControl: 0
+  testcontrol: 0
 --- !u!114 &114869571361017460
 MonoBehaviour:
   m_ObjectHideFlags: 1

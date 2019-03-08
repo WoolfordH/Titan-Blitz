@@ -25,7 +25,7 @@ public struct Controls
 [RequireComponent(typeof(Rigidbody))]
 public class CharacterHandler: NetworkBehaviour
 {
-
+    //movement variables
 	public Controls controls;
 	public float speed = 350f;
 	public float sprintMultiplier = 2f;
@@ -49,40 +49,49 @@ public class CharacterHandler: NetworkBehaviour
 	float initFOV;
 	bool FOVbumped = false;
 
-	public Camera cam;
 	public float minLookHeight = -60f;
 	public float maxLookHeight = 60f;
 
-	public Transform headPos;
+	
 
 	public bool grounded;
 
 	public bool frozen = false;
 	public bool freezeLook = false;
 
-	public List<Powerup> powerups = new List<Powerup>();
+    public Camera cam;
+    public Transform headPos;
+    public List<Powerup> powerups = new List<Powerup>();
+
+    private int teamNum = 0;
+
+
 
 	//temporary
 	bool paused = false;
 
-    private bool startedWithauthority = false;
+    private bool started = false;
 
 
 	// Use this for initialization
 	void Start ()
     {
+
+	}
+
+    private void Initiate()
+    {
         ServerLog.current.LogData("Starting player " + ((hasAuthority && tag != "Dummy") ? "with " : "without ") + "authority");
         //intitialise variables
-        if(!cam)
-		    cam = GetComponentInChildren<Camera> ();
-		rb = GetComponent<Rigidbody> ();
+        if (!cam)
+            cam = GetComponentInChildren<Camera>();
+        rb = GetComponent<Rigidbody>();
 
         initLookSpeed = lookSpeed;
         if (cam)
             initFOV = cam.fieldOfView;
-        
 
-		if (tag != "Dummy" && hasAuthority) //if this is the character of this client
+        if (tag != "Dummy" && hasAuthority) //if this is the character of this client
         {
             ServerLog.current.LogData("Start Character Handler");
             //enable the camera 
@@ -106,20 +115,24 @@ public class CharacterHandler: NetworkBehaviour
             controls.Ability2 = KeyCode.Alpha2;
 
 
-            Cursor.lockState = CursorLockMode.Locked;
-
-            startedWithauthority = true;
-        }        
-	}
+            Cursor.lockState = CursorLockMode.Locked;            
+        }
+        else
+        {
+            this.rb.useGravity = false;
+        }
+        started = true;
+    }
 
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-		if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
+        if (!started)
+            Initiate();
+        if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
         {
             //If has authority and was not started with authority call start again - this fixes a bug on the server
-            if (!startedWithauthority)
-                Start();
+            
                    
 
             RaycastHit hit;
@@ -450,13 +463,15 @@ public class CharacterHandler: NetworkBehaviour
     
     [ClientRpc]
     //assigns the character a team - should inform more things
-    public void RpcSetTeam(int teamNum)
+    public void RpcSetTeam(int a_teamNum)
     {
-        if (teamNum == 1)
-            tag = "Team1";
-        else
-            tag = "Team2";
+        teamNum = a_teamNum;
 
         ServerLog.current.LogData("Team " + teamNum.ToString());
+    }
+
+    public int GetTeam()
+    {
+        return teamNum;
     }
 }

@@ -99,6 +99,8 @@ public class GameManager : NetworkBehaviour
             }
             //Start 
 
+            CTPManager.current.CmdStartGame();
+
             //Disable the main camera  
             RpcDisableMainCamera();
 
@@ -128,6 +130,7 @@ public class GameManager : NetworkBehaviour
         tempPlayers[tempPlayers.Length - 1].connection = connection.GetComponent<PlayerConnection>();
         tempPlayers[tempPlayers.Length - 1].characterChoice = 1; //1 is the default choice
         tempPlayers[tempPlayers.Length - 1].team = 1; //this should automatically assign a team 
+
         //overwrite current player data
         players = tempPlayers;
 
@@ -138,7 +141,7 @@ public class GameManager : NetworkBehaviour
             throw new NotImplementedException("Player connected mid game no handler implemented");
         }
 
-
+        connection.GetComponent<PlayerConnection>().RpcAssignID(players.Length - 1);
         //return players.Length-1;
     }
 

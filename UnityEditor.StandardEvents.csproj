@@ -345,6 +345,7 @@
     <Compile Include="Packages\com.unity.standardevents\Editor\Importer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Materials\Shaders\UIOverlay.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\Glow.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowReplacement.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowStandard.shader" />

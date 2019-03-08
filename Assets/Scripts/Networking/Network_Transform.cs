@@ -18,15 +18,18 @@ public class Network_Transform : NetworkBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if ((hasAuthority && !serverControl) ||(isServer && serverControl))
+        if ((hasAuthority && !serverControl) || (isServer && serverControl))
         {
             if (true)//moved enough or other checks
             {
+                //ServerLog.current.LogData("Sending Position");
                 CmdUpdatePosition(transform.position);
                 CmdUpdateRotation(transform.rotation);
             }
         }
 
+
+        //debugging thing, allows server control to be given through inspector
         if(testcontrol != testtest)
         {
             if(testcontrol)
@@ -52,11 +55,10 @@ public class Network_Transform : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdatePosition(Vector3 position)
     {
-        ServerLog.current.LogData("update position call");
         //if (!((!(hasAuthority && !serverControl)) || (!(isServer && serverControl))))
         if(!((hasAuthority && !serverControl) || (isServer && serverControl)))
         {
-            ServerLog.current.LogData("updated position");
+            //ServerLog.current.LogData("Receiving position");
             transform.position = position;
         }
     }
@@ -70,8 +72,11 @@ public class Network_Transform : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdateRotation(Quaternion rotation)
     {
-        if (!hasAuthority)
+        if (!((hasAuthority && !serverControl) || (isServer && serverControl)))
+        {
+            //ServerLog.current.LogData("Receiving position");
             transform.rotation = rotation;
+        }
     }
 
 

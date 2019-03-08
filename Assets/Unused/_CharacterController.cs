@@ -19,7 +19,7 @@ using UnityEngine.Networking;
 //	public KeyCode ult;
 //}
 
-public class CharacterController : NetworkBehaviour
+public class _CharacterController : NetworkBehaviour
 {
     public GameObject bulletPrefab;
     public GameObject tip;

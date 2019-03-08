@@ -351,6 +351,7 @@
     <Compile Include="Assets\Standard Assets\Effects\ImageEffects\Scripts\Vortex.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Materials\Shaders\UIOverlay.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\Glow.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowReplacement.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowStandard.shader" />

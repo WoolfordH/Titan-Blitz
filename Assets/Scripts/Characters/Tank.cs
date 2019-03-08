@@ -77,16 +77,13 @@ public class Tank : Character {
 
 
 
-	public override void Ability1()
+	public override void Ability1() 
 	{
-		//grab
-		//Debug.Log (grabberSpeed);
+        //////Grabber\\\\\\
 
-		GameObject grabber = Instantiate(grabberPrefab, handler.cam.transform.position, handler.cam.transform.rotation);
-        //grabber.GetComponent<Grabber>().Init(this, grabberMaxDist, handler.cam.transform.forward, grabberSpeed, handler.rb.velocity);
+        //Debug.Log (grabberSpeed);
 
-        NetworkServer.Spawn(grabber);//, connectionToServer);
-        grabber.GetComponent<Grabber>().Init(this, grabberMaxDist, handler.cam.transform.forward, grabberSpeed, handler.rb.velocity);
+        CmdSpawnGrabber(handler.cam.transform.forward, handler.rb.velocity);
 
 
         Debug.Log (abilities [2].name + " was Used!");
@@ -94,6 +91,16 @@ public class Tank : Character {
 		//set cooldown
 		abilities[2].StartTimer();
 	}
+
+    [Command]
+    private void CmdSpawnGrabber(Vector3 forward, Vector3 initVel)
+    {
+        GameObject grabber = Instantiate(grabberPrefab, handler.cam.transform.position, handler.cam.transform.rotation);
+        
+
+        NetworkServer.Spawn(grabber);//, connectionToServer);
+        grabber.GetComponent<Grabber>().Init(this, grabberMaxDist, forward, grabberSpeed, initVel);
+    }
 
 	public override void Ability2()
 	{

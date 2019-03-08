@@ -60,7 +60,7 @@ public class Drone : MonoBehaviour {
 
         //check if any enemy players are within radius and look at them if they are
         List<Collider> cols = new List<Collider>(Physics.OverlapSphere (transform.position, viewRadius, GameHandler.current.playerLayer));
-		if (cols.Exists(x=> x.GetComponentInParent<Character>().team != owner.team))
+		if (cols.Exists(x=> x.GetComponentInParent<CharacterHandler>().GetTeam() != owner.handler.GetTeam()))
 		{
 			
 			//loop through colliders
@@ -68,7 +68,7 @@ public class Drone : MonoBehaviour {
 			{
 
 				//if collider is on enemy team
-				if (col.GetComponentInParent<Character> ().team != owner.team)
+				if (col.GetComponentInParent<CharacterHandler>().GetTeam() != owner.handler.GetTeam())
 				{
 					Vector3 pos = col.GetComponentInParent<Character> ().handler.headPos.position;
 
