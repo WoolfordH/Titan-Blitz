@@ -8,7 +8,8 @@ public class Billboard : MonoBehaviour {
 
     private void Start()
     {
-        cam = PlayerConnection.localPlayer.GetComponent<CharacterHandler>().cam;
+		//HARRY: ENABLE FOR NETWORKING
+        //cam = PlayerConnection.localPlayer.GetComponent<CharacterHandler>().cam;
     }
 
     // Update is called once per frame
