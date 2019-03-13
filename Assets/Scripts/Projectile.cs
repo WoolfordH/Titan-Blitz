@@ -72,7 +72,7 @@ public class Projectile : MonoBehaviour {
                         Debug.Log("Projectile Realigned");
 						int index = hits.FindIndex (x => x.collider == other);
                         transform.position = hits[index].point;
-						other.gameObject.SendMessageUpwards ("Hit", new HitData(dmg, hits[index].point, hits[index].normal), SendMessageOptions.DontRequireReceiver);
+						other.gameObject.SendMessageUpwards ("Hit", new HitData(dmg, hits[index].point, hits[index].normal,-1), SendMessageOptions.DontRequireReceiver);//needs changing
                     }
                 }
 					

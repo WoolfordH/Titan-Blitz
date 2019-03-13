@@ -97,6 +97,8 @@ public class CharacterHandler: NetworkBehaviour
             //enable the camera 
             cam.gameObject.SetActive(true);
 
+            //pass the local controller this object
+            PlayerConnection.current.playerObject = this.gameObject;
 
             //initialise controls
             controls.forward = KeyCode.W;
@@ -119,7 +121,7 @@ public class CharacterHandler: NetworkBehaviour
         }
         else
         {
-            this.rb.useGravity = false;
+            this.rb.isKinematic = true;
         }
         started = true;
     }

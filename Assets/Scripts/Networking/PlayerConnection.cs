@@ -6,12 +6,16 @@ using UnityEngine.Networking;
 
 public class PlayerConnection : NetworkBehaviour
 {
-    //the number assigned to this client
-    public static int connectionID;
-    public static NetworkConnection clientIdentity;
     public static PlayerConnection current;
-    public static GameObject localPlayer;
-    //the prefab for the player object
+
+    //the number assigned to this client
+    public int connectionID;
+    public NetworkConnection clientIdentity;
+
+    public GameObject playerObject;
+
+    private float respawnTimer = 0;
+    private bool waitingRespawn = false;
 
 	// Use this for initialization
 	void Start ()
@@ -32,7 +36,15 @@ public class PlayerConnection : NetworkBehaviour
     {
 		if(isLocalPlayer)
         {
-
+            if(waitingRespawn)//if the respawn timer is active
+            {
+                respawnTimer -= Time.deltaTime;
+                if(respawnTimer<0)
+                {
+                    CmdRespawn();
+                    waitingRespawn = false;
+                }
+            }
         }
 	}
 
@@ -40,7 +52,7 @@ public class PlayerConnection : NetworkBehaviour
     //Command scripts - these are only run on the server
 
     //spawns this players game object 
-    public void SpawnPlayer(int teamNum, Vector3 spawnPos, GameObject playerPrefab)
+    public GameObject SpawnPlayer(int teamNum, Vector3 spawnPos, GameObject playerPrefab)
     {
         ServerLog.current.LogData("Spawning Player");
         //spawns to server
@@ -48,11 +60,21 @@ public class PlayerConnection : NetworkBehaviour
 
         //passes to all clients 
         NetworkServer.SpawnWithClientAuthority(player, GetComponent<NetworkIdentity>().clientAuthorityOwner);
-        //NetworkServer.Spawn(player);
+
+        playerObject = player;
+
         if (player.GetComponent<CharacterHandler>())
         {
             player.GetComponent<CharacterHandler>().RpcSetTeam(teamNum);
         }
+
+        return player;
+    }
+
+    public void StartRespawnTimer()
+    {
+        respawnTimer = GameManager.current.GetSpawnTime();
+        waitingRespawn = true;
     }
 
     //Registers this connection to the game manager
@@ -63,6 +85,26 @@ public class PlayerConnection : NetworkBehaviour
         GameManager.current.CmdAddNewconnection(this.gameObject);
     }
 
+    
+
+    [Command]
+    private void CmdRespawn()
+    {
+        this.playerObject.GetComponent<Character>().RpcRespawn();
+    }
+
+
+    [ClientRpc]
+    public void RpcAssignID(int ID)
+    {
+        if (isLocalPlayer)
+            connectionID = ID;
+    }
+
+    private void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        ServerLog.current.LogData("Disconnected from server");
+    }
 
     //lobby buttons
     [Command]
@@ -81,17 +123,5 @@ public class PlayerConnection : NetworkBehaviour
     public void CmdStartGame()
     {
         GameManager.current.CmdStartGame();
-    }
-
-    [ClientRpc]
-    public void RpcAssignID(int ID)
-    {
-        if(isLocalPlayer)
-            connectionID = ID;
-    }
-
-    private void OnDisconnectedFromServer(NetworkDisconnection info)
-    {
-        ServerLog.current.LogData("Disconnected from server");
     }
 }

@@ -64,7 +64,7 @@ public class Tank : Character {
 
 		if (Physics.SphereCast (handler.cam.transform.position, 1f, handler.cam.transform.forward, out hit, primaryRange))
 		{
-			hit.collider.gameObject.SendMessageUpwards ("Hit", new HitData((int)(primaryDmg.damage * dmgMod), hit.point, hit.normal), SendMessageOptions.DontRequireReceiver);
+			hit.collider.gameObject.SendMessageUpwards ("Hit", new HitData((int)(primaryDmg.damage * dmgMod), hit.point, hit.normal, PlayerConnection.current.connectionID), SendMessageOptions.DontRequireReceiver);
 		}
 
 

@@ -921,7 +921,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397254270310452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -209.91, y: 11.148424, z: 10.87}
+  m_LocalPosition: {x: -209.05591, y: 11.148423, z: 20.161804}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4455730131660612}
@@ -1272,13 +1272,13 @@ MonoBehaviour:
   rb: {fileID: 54613891414203008}
   mainCollider: {fileID: 136490649429355242}
   lookSpeed: 2
-  cam: {fileID: 20989169904720518}
   minLookHeight: -60
   maxLookHeight: 60
-  headPos: {fileID: 4455730131660612}
   grounded: 0
   frozen: 0
   freezeLook: 0
+  cam: {fileID: 20989169904720518}
+  headPos: {fileID: 4455730131660612}
   powerups: []
 --- !u!114 &114024050997693282
 MonoBehaviour:
@@ -2333,13 +2333,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397254270310452}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f4ef18db74f2674390d5ff52eabcc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  team: 0
   allies:
   - {fileID: 0}
   - {fileID: 0}

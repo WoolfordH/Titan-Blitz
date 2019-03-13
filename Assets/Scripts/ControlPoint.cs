@@ -31,6 +31,9 @@ public class ControlPoint : NetworkBehaviour
     private int playersOnPointCount = 0;
     private int teamOnPointDifference = 0; //positive for team 1, negative for team 2
 
+    //visualisation 
+    public Material mat;
+
     // Use this for initialization
     void Start ()
     {
@@ -42,6 +45,7 @@ public class ControlPoint : NetworkBehaviour
         {
             throw new Exception("No collider assigned to control point");
         }
+        //Material mat = this.GetComponent<Material>();
     }
 
     public void Initialise(int pointID)
@@ -72,7 +76,41 @@ public class ControlPoint : NetworkBehaviour
                 }
             }
         }
-	}
+        Visualise();
+    }
+
+    private void Visualise()
+    {
+        if (controlState == ControlPointState.active)
+        {
+            if (PlayerConnection.current.playerObject.GetComponent<CharacterHandler>().GetTeam() == 1)
+            {
+                if (capturePercent > 0)
+                {
+                    mat.color = new Color(0, Mathf.Abs(capturePercent) * 0.01f, 0, 0.33f); //green
+                }
+                else
+                {
+                    mat.color = new Color(Mathf.Abs(capturePercent) * 0.01f, 0, 0, 0.33f); //red
+                }
+            }
+            else
+            {
+                if (capturePercent < 0)
+                {
+                    mat.color = new Color(0, Mathf.Abs(capturePercent) * 0.01f, 0, 0.33f); //green
+                }
+                else
+                {
+                    mat.color = new Color(Mathf.Abs(capturePercent) * 0.01f, 0, 0, 0.33f); //red
+                }
+            }
+        }
+        else
+        {
+            mat.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        }
+    }
 
     private void CaptureChange()
     {

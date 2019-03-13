@@ -27,20 +27,23 @@ public struct HitData
 	public DAMAGE damage;
 	public Vector3 hitPoint;
 	public Vector3 hitNormal;
+    public int senderID;
 
-	public HitData(DAMAGE dmg, Vector3 point, Vector3 normal)
+	public HitData(DAMAGE dmg, Vector3 point, Vector3 normal, int sender)// = -1)
 	{
 		damage = dmg;
 		hitPoint = point;
 		hitNormal = normal;
+        senderID = sender;
 	}
 
-	public HitData(int dmg, Vector3 point, Vector3 normal)
+	public HitData(int dmg, Vector3 point, Vector3 normal, int sender)// = -1)
 	{
 		damage = new DAMAGE(dmg);
 		hitPoint = point;
 		hitNormal = normal;
-	}
+        senderID = sender;
+    }
 }
 
 public struct Ability
@@ -117,6 +120,8 @@ public abstract class Character : NetworkBehaviour
 
 	public int maxHealth;
 	public int health;
+
+    private int lastDamageRecievedFrom = -1;
 
 	public int maxArmour;
 	public int armour;
@@ -278,7 +283,6 @@ public abstract class Character : NetworkBehaviour
                 }
             }
 
-
             if (health <= 0)
             {
                 Die();
@@ -309,18 +313,73 @@ public abstract class Character : NetworkBehaviour
 
     public virtual void Hit(HitData hit)
 	{
-		Instantiate(GameHandler.current.bloodSpurt, hit.hitPoint, Quaternion.LookRotation(hit.hitNormal));
-		GameObject indicator = Instantiate (GameHandler.current.damageIndicator, hit.hitPoint, Quaternion.LookRotation (hit.hitNormal));
-		indicator.GetComponentInChildren<Billboard> ().cam = GameHandler.current.playerCam;
-		indicator.GetComponentInChildren<Text>().text = hit.damage.damage.ToString();
-		Hit (hit.damage);
+        if (GameManager.current.GetPlayerObject(hit.senderID).GetComponentInChildren<CharacterHandler>().GetTeam() != this.handler.GetTeam())
+        {
+            GameObject bloodSpurt = Instantiate(GameHandler.current.bloodSpurt, hit.hitPoint, Quaternion.LookRotation(hit.hitNormal));
+            NetworkServer.Spawn(bloodSpurt);
+
+            if (isServer) //hit should only be called from the server - this is a 
+            {
+                //RpcTellHit(hit.hitPoint, hit.hitNormal, hit.damage.damage);
+                GameManager.current.GetPlayerObject(hit.senderID).GetComponentInChildren<Character>().RpcTellHit(hit.hitPoint, hit.hitNormal, hit.damage.damage);
+            }
+            lastDamageRecievedFrom = hit.senderID;
+            Hit(hit.damage);
+        }
 	}
+
+    [ClientRpc]
+    public void RpcTellHit(Vector3 hitPoint, Vector3 hitNormal,int damage)
+    {
+        if (hasAuthority)//if this is the clients player 
+        {
+            GameObject indicator = Instantiate(GameHandler.current.damageIndicator, hitPoint, Quaternion.LookRotation(hitNormal));
+            indicator.GetComponentInChildren<Billboard>().cam = GameHandler.current.playerCam;
+            indicator.GetComponentInChildren<Text>().text = damage.ToString();
+        }
+    }
+
 
 	public virtual void Die()
 	{
 		//Die
 		Debug.Log(GetType() + " Died!");
+
+
+        RpcDie();
+        //rpc kill - simple disable, if authority enable lobby cam
+        //playerconnection.SetRespawn
 	}
+
+    [ClientRpc]
+    private void RpcDie()
+    {
+        this.gameObject.SetActive(false);
+        if(hasAuthority)//if local player
+        {
+            PlayerConnection.current.StartRespawnTimer();
+            handler.cam.gameObject.SetActive(false);
+            GameManager.current.lobbyCam.SetActive(true);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcRespawn()
+    {
+        handler.rb.velocity = Vector3.zero;
+        health = maxHealth;
+        armour = maxArmour;
+        
+        
+        //reset everything
+        this.gameObject.SetActive(true);
+        if (hasAuthority)//if local player
+        {
+            transform.position = GameManager.current.GetSpawnPos(handler.GetTeam());
+            handler.cam.gameObject.SetActive(true);
+            GameManager.current.lobbyCam.SetActive(false);
+        }
+    }
 
 	protected IEnumerator HitMarkerFlash()
 	{

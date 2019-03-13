@@ -920,7 +920,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397254270310452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -209.91, y: 11.148424, z: 10.87}
+  m_LocalPosition: {x: -209.53125, y: 11.148424, z: 21.92699}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4455730131660612}
@@ -1134,7 +1134,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 48f0b2d1cb03fa449bea4e91393388f8, type: 2}
+  - {fileID: 2100000, guid: 340b4773d983867498847e8d79866049, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1271,13 +1271,13 @@ MonoBehaviour:
   rb: {fileID: 54613891414203008}
   mainCollider: {fileID: 136490649429355242}
   lookSpeed: 2
-  cam: {fileID: 20989169904720518}
   minLookHeight: -60
   maxLookHeight: 60
-  headPos: {fileID: 4455730131660612}
   grounded: 0
   frozen: 0
   freezeLook: 0
+  cam: {fileID: 20989169904720518}
+  headPos: {fileID: 4455730131660612}
   powerups: []
 --- !u!114 &114024050997693282
 MonoBehaviour:

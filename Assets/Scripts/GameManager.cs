@@ -37,6 +37,8 @@ public class GameManager : NetworkBehaviour
     public Vector3 team1SpawnPoint;
     public Vector3 team2SpawnPoint;
 
+    public float respawnTime = 5.0f;
+
     private GameState gameState = GameState.lobby;
 
     private void Awake()
@@ -93,13 +95,15 @@ public class GameManager : NetworkBehaviour
                     spawnPos = lobbyCam.transform.position;
                 }
 
-                connection.SpawnPlayer(team, spawnPos, characterPrefabs[players[i].characterChoice]);
+                players[i].playerObject = connection.SpawnPlayer(team, spawnPos, characterPrefabs[players[i].characterChoice]);
 
 
             }
             //Start 
-
-            CTPManager.current.CmdStartGame();
+            if (CTPManager.current)
+            {
+                CTPManager.current.CmdStartGame();
+            }
 
             //Disable the main camera  
             RpcDisableMainCamera();
@@ -145,21 +149,21 @@ public class GameManager : NetworkBehaviour
         //return players.Length-1;
     }
 
-    [Command]
-    public void CmdAddNewPlayer(GameObject player)
-    {
-        //duplicate the array
-        PlayerData[] tempPlayers = new PlayerData[players.Length + 1];
-
-        for (int i = 0; i < players.Length; i++)
-        {
-            tempPlayers[i] = players[i];
-        }
-        //add new entry
-        tempPlayers[tempPlayers.Length - 1].playerObject = player;
-
-        players = tempPlayers;
-    }
+    //[Command]
+    //public void CmdAddNewPlayer(GameObject player)
+    //{
+    //    //duplicate the array
+    //    PlayerData[] tempPlayers = new PlayerData[players.Length + 1];
+    //
+    //    for (int i = 0; i < players.Length; i++)
+    //    {
+    //        tempPlayers[i] = players[i];
+    //    }
+    //    //add new entry
+    //    tempPlayers[tempPlayers.Length - 1].playerObject = player;
+    //
+    //    players = tempPlayers;
+    //}
 
     [ClientRpc]
     private void RpcDisableMainCamera()
@@ -167,6 +171,48 @@ public class GameManager : NetworkBehaviour
         ServerLog.current.LogData("Disabling lobby cam");
         lobbyCam.SetActive(false);
         lobbyUI.SetActive(false);
+    }
+
+    [Command]
+    public void CmdAddPlayerObject(GameObject player, int connectionID)
+    {
+        players[connectionID].playerObject = player;
+    }
+
+    [Server] //this can only be called on the server as only the server knows about other players - this should be fixed
+    public GameObject GetPlayerObject(int playerID)
+    {
+        return players[playerID].playerObject;
+    }
+
+    public Vector3 GetSpawnPos(int teamNum)
+    {
+        Vector3 returnVector;
+
+        if(teamNum == 1)
+        {
+            returnVector = team1SpawnPoint;
+        }
+        else if(teamNum == 2)
+        {
+            returnVector = team2SpawnPoint;
+        }
+        else
+        {
+            //spectator
+            returnVector = Vector3.zero;
+        }
+
+
+
+        return returnVector;
+    }
+
+    public float GetSpawnTime()
+    {
+        //possibly some things to scale spawn time
+
+        return respawnTime;
     }
 
 

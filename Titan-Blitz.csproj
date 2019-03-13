@@ -337,6 +337,7 @@
     <Compile Include="Assets\Scripts\Networking\ServerLog.cs" />
     <Compile Include="Assets\Scripts\Powerups\Powerup.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Scoreboard.cs" />
     <Compile Include="Assets\Unused\_CharacterController.cs" />
     <Compile Include="Assets\Unused\CaptureTheFlagMode.cs" />
     <Compile Include="Assets\Unused\Flag.cs" />

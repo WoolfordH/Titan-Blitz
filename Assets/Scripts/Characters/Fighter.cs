@@ -44,7 +44,7 @@ public class Fighter : Character {
 
 		if (Physics.Raycast (handler.cam.transform.position, handler.cam.transform.forward, out hit, primaryRange))
 		{
-			hit.collider.gameObject.SendMessageUpwards ("Hit", new HitData((int)(primaryDmg.damage * dmgMod), hit.point, hit.normal), SendMessageOptions.DontRequireReceiver);
+			hit.collider.gameObject.SendMessageUpwards ("Hit", new HitData((int)(primaryDmg.damage * dmgMod), hit.point, hit.normal, PlayerConnection.current.connectionID), SendMessageOptions.DontRequireReceiver);
 		}
 
 		//set cooldown
