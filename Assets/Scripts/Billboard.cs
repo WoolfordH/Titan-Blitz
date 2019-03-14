@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Billboard : MonoBehaviour {
+public class Billboard : MonoBehaviour
+{
 
-	public Camera cam;
+	//public Camera cam;
 
     private void Start()
     {
@@ -15,8 +16,10 @@ public class Billboard : MonoBehaviour {
     // Update is called once per frame
     void LateUpdate () 
 	{
+        GameObject cam = PlayerConnection.current.activeCamera;
         if (cam)
         {
+
             transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
         }
 	}

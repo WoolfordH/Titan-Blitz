@@ -334,7 +334,7 @@ public abstract class Character : NetworkBehaviour
         if (hasAuthority)//if this is the clients player 
         {
             GameObject indicator = Instantiate(GameHandler.current.damageIndicator, hitPoint, Quaternion.LookRotation(hitNormal));
-            indicator.GetComponentInChildren<Billboard>().cam = GameHandler.current.playerCam;
+            //indicator.GetComponentInChildren<Billboard>().cam = GameHandler.current.playerCam;
             indicator.GetComponentInChildren<Text>().text = damage.ToString();
         }
     }
@@ -360,6 +360,7 @@ public abstract class Character : NetworkBehaviour
             PlayerConnection.current.StartRespawnTimer();
             handler.cam.gameObject.SetActive(false);
             GameManager.current.lobbyCam.SetActive(true);
+            PlayerConnection.current.activeCamera = GameManager.current.lobbyCam;
         }
     }
 

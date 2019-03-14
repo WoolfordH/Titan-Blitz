@@ -94,8 +94,10 @@ public class CharacterHandler: NetworkBehaviour
         if (tag != "Dummy" && hasAuthority) //if this is the character of this client
         {
             ServerLog.current.LogData("Start Character Handler");
+            
             //enable the camera 
             cam.gameObject.SetActive(true);
+            PlayerConnection.current.activeCamera = cam.gameObject;
 
             //pass the local controller this object
             PlayerConnection.current.playerObject = this.gameObject;

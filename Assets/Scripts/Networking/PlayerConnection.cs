@@ -17,6 +17,8 @@ public class PlayerConnection : NetworkBehaviour
     private float respawnTimer = 0;
     private bool waitingRespawn = false;
 
+    public GameObject activeCamera; //lobby cam to start
+
 	// Use this for initialization
 	void Start ()
     {
