@@ -92,7 +92,7 @@ public class PlayerConnection : NetworkBehaviour
     [Command]
     private void CmdRespawn()
     {
-        this.playerObject.GetComponent<Character>().RpcRespawn();
+        this.playerObject.GetComponent<CharacterHandler>().RpcRespawn();
     }
 
 

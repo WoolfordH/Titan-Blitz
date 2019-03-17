@@ -11,16 +11,14 @@ public class Fighter : Character {
 		handler = GetComponent<CharacterHandler> ();
 
 		primaryDmg = new DAMAGE (2);
-		secondaryDmg = new DAMAGE (0);
 
 		primaryRange = 100f;
-		secondaryRange = 0f;
 
-		abilities [0] = new Ability ("Primary", .5f);
-		abilities [1] = new Ability ("N/A", 0f);
-		abilities [2] = new Ability ("Ability 1", 0f);
-		abilities [3] = new Ability ("Ability 2", 0f);
-		abilities [4] = new Ability ("Ultimate", 0f);
+		//abilities [0] = new Ability ("Primary", .5f);
+		//abilities [1] = new Ability ("N/A", 0f);
+		//abilities [2] = new Ability ("Ability 1", 0f);
+		//abilities [3] = new Ability ("Ability 2", 0f);
+		//abilities [4] = new Ability ("Ultimate", 0f);
 	}
 
 
@@ -50,30 +48,5 @@ public class Fighter : Character {
 		//set cooldown
 		abilities[0].StartTimer();
 	}
-
-
-
-
-	public override void Ability1()
-	{
-		//set cooldown
-		abilities[2].StartTimer();
-	}
-
-	public override void Ability2()
-	{
-		//set cooldown
-		abilities[3].StartTimer();
-	}
-
-	public override void Ultimate()
-	{
-		//set cooldown
-		abilities[4].StartTimer();
-	}
-
-	public override void OnAbilityExpired (int index)
-	{
 		
-	}
 }

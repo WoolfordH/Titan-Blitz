@@ -5,42 +5,25 @@ using UnityEngine.Networking;
 
 public class Tank : Character {
 
-	public GameObject grabberPrefab;
-	public float grabberMaxDist;
-	public float grabberSpeed;
-	public GameObject shieldPrefab;
-	public Vector3 shieldPosition = new Vector3(0f, 1.3f, 1.8f);
-	GameObject shield;
-
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
 		//handler = GetComponent<CharacterHandler> ();
 
 		primaryDmg = new DAMAGE (30);
-		secondaryDmg = new DAMAGE (0);
 
 		primaryRange = 2f;
-		secondaryRange = 0f;
 
-		abilities [0] = new Ability ("Primary", 3f);
-		abilities [1] = new Ability ("N/A", 0f);
-		abilities [2] = new Ability ("Grab", 20f);
-		abilities [3] = new Ability ("Shield", 40f, 15f);
-		abilities [4] = new Ability ("Ultimate", 300f);
+		//abilities [0] = new Ability ("Primary", 3f);
+		//abilities [1] = new Ability ("N/A", 0f);
+		//abilities [2] = new Ability ("Grab", 20f);
+		//abilities [3] = new Ability ("Shield", 40f, 15f);
+		//abilities [4] = new Ability ("Ultimate", 300f);
 	}
 
 	protected override void Update()
 	{
 		base.Update ();
-
-		if (shield)
-		{
-			if (abilities [3].isDurationElapsed())
-			{
-				Destroy (shield);
-			}
-		}
 	}
 
 	public override void PrimaryAttack()
@@ -77,55 +60,5 @@ public class Tank : Character {
 
 
 
-	public override void Ability1() 
-	{
-        //////Grabber\\\\\\
 
-        //Debug.Log (grabberSpeed);
-
-        CmdSpawnGrabber(handler.cam.transform.forward, handler.rb.velocity);
-
-
-        Debug.Log (abilities [2].name + " was Used!");
-
-		//set cooldown
-		abilities[2].StartTimer();
-	}
-
-    [Command]
-    private void CmdSpawnGrabber(Vector3 forward, Vector3 initVel)
-    {
-        GameObject grabber = Instantiate(grabberPrefab, handler.cam.transform.position, handler.cam.transform.rotation);
-        
-
-        NetworkServer.Spawn(grabber);//, connectionToServer);
-        grabber.GetComponent<Grabber>().Init(this, grabberMaxDist, forward, grabberSpeed, initVel);
-    }
-
-	public override void Ability2()
-	{
-		//shield
-		//Instantiate a large see-through wall infront of the tank 
-		//1.3f y, 1.8f z
-
-		shield = Instantiate(shieldPrefab, transform.TransformPoint(shieldPosition), transform.rotation, transform);
-
-		Debug.Log (abilities [3].name + " was Used!");
-
-		//set cooldown
-		abilities[3].StartTimer();
-	}
-
-	public override void Ultimate()
-	{
-		Debug.Log (abilities [4].name + " was Used!");
-
-		//set cooldown
-		abilities[4].StartTimer();
-	}
-
-	public override void OnAbilityExpired (int index)
-	{
-
-	}
 }

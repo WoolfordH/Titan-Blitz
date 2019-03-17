@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public struct Controls
@@ -37,6 +38,24 @@ public class CharacterHandler: NetworkBehaviour
 	public Rigidbody rb;
 	public CapsuleCollider mainCollider;
 
+	public GameObject hitMarker;
+	public Text timerLbl;
+	public Image healthBar;
+	public Image armourBar;
+	public Image ultBar;
+	public Text ammoLbl;
+	public Image abl1Icon;
+	public Image abl2Icon;
+
+	public Character character;
+
+	public RawImage ally1Avatar;
+	public RawImage ally2Avatar;
+
+	//public Material avatarMat;
+	public RenderTexture avatarRT;
+	public Camera avatarCam;
+
     //this is a translation which makes vectors relative to the surface 
 	Quaternion surfaceRotation;
 
@@ -52,7 +71,7 @@ public class CharacterHandler: NetworkBehaviour
 	public float minLookHeight = -60f;
 	public float maxLookHeight = 60f;
 
-	
+	private int lastDamageRecievedFrom = -1;
 
 	public bool grounded;
 
@@ -61,6 +80,8 @@ public class CharacterHandler: NetworkBehaviour
 
     public Camera cam;
     public Transform headPos;
+	public Transform muzzlePos;
+
     public List<Powerup> powerups = new List<Powerup>();
 
     private int teamNum = 0;
@@ -76,7 +97,11 @@ public class CharacterHandler: NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-
+		//AVATAR INIT
+		avatarRT = new RenderTexture(512,512, 16);
+		avatarCam.targetTexture = avatarRT;
+		//avatarMat = new Material (Shader.Find("Unlit/Texture"));
+		//avatarMat.mainTexture = avatarRT;
 	}
 
     private void Initiate()
@@ -117,6 +142,12 @@ public class CharacterHandler: NetworkBehaviour
 
             controls.Ability1 = KeyCode.Alpha1;
             controls.Ability2 = KeyCode.Alpha2;
+
+
+			//ally1Avatar.texture = allies[0].avatarRT;
+			//ally2Avatar.texture = allies[1].avatarRT;
+
+			UpdateUI();
 
 
             Cursor.lockState = CursorLockMode.Locked;            
@@ -182,6 +213,8 @@ public class CharacterHandler: NetworkBehaviour
                 }
             }
         }
+
+
 	}
 
 	void ProcessMovement()
@@ -259,7 +292,19 @@ public class CharacterHandler: NetworkBehaviour
 				rb.velocity = momentumVel + ((transform.TransformDirection (movement) * speed * speedmod) * Time.deltaTime);
 			}
 				
+			avatarCam.Render();
 
+
+			if (cam && tag != "Dummy" && hasAuthority)
+			{
+				//update clock UI
+				int minutes = (int)GameHandler.current.timeRemaining / 60;
+				int seconds = (int)GameHandler.current.timeRemaining % 60;
+
+				timerLbl.text = minutes.ToString ("00") + ":" + seconds.ToString ("00");
+
+				UpdateUI ();
+			}
 		}
 
 		if (!freezeLook)
@@ -399,42 +444,152 @@ public class CharacterHandler: NetworkBehaviour
 	}
 
 
-	//void OnCollisionEnter(Collision other)
-	//{
-	//
-	//	//if object is ground, ground player
-	//	if (GameHandler.current.groundLayer == (GameHandler.current.groundLayer | (1 << other.gameObject.layer)))
-	//	{
-	//		RaycastHit hit;
-	//		if (Physics.Raycast(transform.position + new Vector3(0f, .2f, 0f), Vector3.down, out hit, .3f, GameHandler.current.groundLayer))
-	//		{ 
-	//			if (other.contacts [0].normal.y >= 0.6f)
-	//			{
-	//				grounded = true;
-	//				//rb.useGravity = false;
-	//				rb.isKinematic = true;
-	//				//transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
-	//
-	//				surfaceRotation = Quaternion.FromToRotation (transform.up, hit.normal);
-	//			}
-	//
-	//			//Debug.DrawRay(transform.position, (surfaceRotation * transform.forward) * 100, Color.red);
-	//
-	//		}
-	//	}
-	//}
+	protected IEnumerator HitMarkerFlash()
+	{
+		hitMarker.SetActive (true);
+		yield return new WaitForSeconds (.05f);
+		hitMarker.SetActive (false);
+	}
 
-	//void OnCollisionExit(Collision other)
-	//{
-	//	
-	//	//if object is ground, ground player
-	//	if (GameHandler.current.groundLayer == (GameHandler.current.groundLayer | (1 << other.gameObject.layer)))
-	//	{
-	//		grounded = false;
-	//        rb.useGravity = true;
-	//		rb.isKinematic = false;
-	//    }
-	//}
+	protected void UpdateUI()
+	{
+		healthBar.fillAmount = ((float)character.health/(float)character.maxHealth);
+		armourBar.fillAmount = ((float)character.armour/(float)character.maxArmour);
+		ultBar.fillAmount = (character.abilities[2].cooldown - character.abilities[2].timer)/character.abilities[2].cooldown;
+
+		abl1Icon.fillAmount = (character.abilities[2].cooldown - character.abilities[2].timer)/character.abilities[2].cooldown;
+		abl2Icon.fillAmount = (character.abilities[3].cooldown - character.abilities[3].timer)/character.abilities[3].cooldown;
+	}
+
+
+	public virtual void Hit(DAMAGE dmg)
+	{
+		CmdHit(dmg);
+	}
+
+	[Command]
+	protected virtual void CmdHit(DAMAGE dmg)
+	{
+		if (enabled)
+		{
+			if (dmg.armourPiercing)
+			{
+				character.health -= dmg.damage;
+			}
+			else
+			{
+				if (character.armour > 0)
+				{
+					character.armour -= dmg.damage;
+				}
+				else
+				{
+					character.health -= dmg.damage;
+				}
+			}
+
+			if (character.health <= 0)
+			{
+				Die();
+			}
+			else
+			{
+				RpcUpdateHealth(character.armour,character.health);
+			}
+		}
+	}
+
+	[ClientRpc]
+	protected virtual void RpcUpdateHealth(int a_armour, int a_health)
+	{
+		character.armour = a_armour;
+		character.health = a_health;
+
+		//team ui update
+
+		//enemy ui update
+
+		if(hasAuthority)
+		{
+			//update self ui
+		}
+	}
+
+
+	public virtual void Hit(HitData hit)
+	{
+		if (GameManager.current.GetPlayerObject(hit.senderID).GetComponentInChildren<CharacterHandler>().GetTeam() != GetTeam())
+		{
+			GameObject bloodSpurt = Instantiate(GameHandler.current.bloodSpurt, hit.hitPoint, Quaternion.LookRotation(hit.hitNormal));
+			NetworkServer.Spawn(bloodSpurt);
+
+			if (isServer) //hit should only be called from the server - this is a 
+			{
+				//RpcTellHit(hit.hitPoint, hit.hitNormal, hit.damage.damage);
+				GameManager.current.GetPlayerObject(hit.senderID).GetComponentInChildren<CharacterHandler>().RpcTellHit(hit.hitPoint, hit.hitNormal, hit.damage.damage);
+			}
+			lastDamageRecievedFrom = hit.senderID;
+			Hit(hit.damage);
+		}
+	}
+
+	[ClientRpc]
+	public void RpcTellHit(Vector3 hitPoint, Vector3 hitNormal,int damage)
+	{
+		if (hasAuthority)//if this is the clients player 
+		{
+			GameObject indicator = Instantiate(GameHandler.current.damageIndicator, hitPoint, Quaternion.LookRotation(hitNormal));
+			//indicator.GetComponentInChildren<Billboard>().cam = GameHandler.current.playerCam;
+			indicator.GetComponentInChildren<Text>().text = damage.ToString();
+		}
+	}
+
+
+	public virtual void Die()
+	{
+		//Die
+		Debug.Log(GetType() + " Died!");
+
+
+		RpcDie();
+		//rpc kill - simple disable, if authority enable lobby cam
+		//playerconnection.SetRespawn
+	}
+
+	[ClientRpc]
+	private void RpcDie()
+	{
+		this.gameObject.SetActive(false);
+		if(hasAuthority)//if local player
+		{
+			PlayerConnection.current.StartRespawnTimer();
+			cam.gameObject.SetActive(false);
+			GameManager.current.lobbyCam.SetActive(true);
+			PlayerConnection.current.activeCamera = GameManager.current.lobbyCam;
+		}
+	}
+
+	[ClientRpc]
+	public void RpcRespawn()
+	{
+		rb.velocity = Vector3.zero;
+		character.health = character.maxHealth;
+		character.armour = character.maxArmour;
+
+
+		//reset everything
+		this.gameObject.SetActive(true);
+		if (hasAuthority)//if local player
+		{
+			transform.position = GameManager.current.GetSpawnPos(GetTeam());
+			cam.gameObject.SetActive(true);
+			GameManager.current.lobbyCam.SetActive(false);
+		}
+	}
+
+
+
+
 
 	public void OnTriggerEnter(Collider other)
 	{
