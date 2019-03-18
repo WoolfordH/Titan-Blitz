@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour {
 	public List<Transform> owners = new List<Transform> ();
 	public float speed = 1f;
 	public ParticleSystem[] hitEffects;
+	public GameObject explosion;
     bool playing = false;
     bool destroying = false;
 	public DAMAGE dmg;
@@ -47,6 +48,11 @@ public class Projectile : MonoBehaviour {
             {
                 hitEffect.Play();
             }
+
+			if (explosion)
+			{
+				Instantiate (explosion, transform.position, Quaternion.identity);
+			}
         }
 	}
 

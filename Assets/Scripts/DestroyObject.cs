@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class DestroyObject : MonoBehaviour {
 
-	public void Destroy()
+	public void DestroyRoot()
 	{
 		Destroy (transform.root.gameObject);
+	}
+
+	public void DestroySelf()
+	{
+		Destroy (gameObject);
 	}
 }

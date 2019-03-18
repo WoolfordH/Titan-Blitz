@@ -24,7 +24,7 @@ public class AbilityShield : Ability {
 		//destroys the current shield (if any)
 		if (shield)
 		{
-			DestroyObject.Destroy (shield);
+			GameObject.Destroy (shield);
 		}
 
 		//places new shield
