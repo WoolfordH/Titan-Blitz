@@ -147,7 +147,7 @@ public class CharacterHandler: NetworkBehaviour
 			//ally1Avatar.texture = allies[0].avatarRT;
 			//ally2Avatar.texture = allies[1].avatarRT;
 
-			UpdateUI();
+			//UpdateUI();
 
 
             Cursor.lockState = CursorLockMode.Locked;            
@@ -292,7 +292,7 @@ public class CharacterHandler: NetworkBehaviour
 				rb.velocity = momentumVel + ((transform.TransformDirection (movement) * speed * speedmod) * Time.deltaTime);
 			}
 				
-			avatarCam.Render();
+			//avatarCam.Render();
 
 
 			if (cam && tag != "Dummy" && hasAuthority)
@@ -303,7 +303,7 @@ public class CharacterHandler: NetworkBehaviour
 
 				timerLbl.text = minutes.ToString ("00") + ":" + seconds.ToString ("00");
 
-				UpdateUI ();
+				//UpdateUI ();
 			}
 		}
 

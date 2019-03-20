@@ -921,7 +921,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397254270310452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -209.05591, y: 11.148423, z: 20.161804}
+  m_LocalPosition: {x: -189.07529, y: 10.17, z: 36.63207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4455730131660612}
@@ -1271,6 +1271,19 @@ MonoBehaviour:
   jumpVelMod: 0.01
   rb: {fileID: 54613891414203008}
   mainCollider: {fileID: 136490649429355242}
+  hitMarker: {fileID: 0}
+  timerLbl: {fileID: 114429121479734164}
+  healthBar: {fileID: 114080267876701156}
+  armourBar: {fileID: 114400947656875602}
+  ultBar: {fileID: 114124244411340188}
+  ammoLbl: {fileID: 114712368542153606}
+  abl1Icon: {fileID: 114881197231864914}
+  abl2Icon: {fileID: 114085243899920238}
+  character: {fileID: 114930757354223022}
+  ally1Avatar: {fileID: 0}
+  ally2Avatar: {fileID: 0}
+  avatarRT: {fileID: 0}
+  avatarCam: {fileID: 0}
   lookSpeed: 2
   minLookHeight: -60
   maxLookHeight: 60
@@ -1279,6 +1292,7 @@ MonoBehaviour:
   freezeLook: 0
   cam: {fileID: 20989169904720518}
   headPos: {fileID: 4455730131660612}
+  muzzlePos: {fileID: 0}
   powerups: []
 --- !u!114 &114024050997693282
 MonoBehaviour:
@@ -2343,26 +2357,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   handler: {fileID: 114014361426618524}
-  hitMarker: {fileID: 1053323330491502}
-  timerLbl: {fileID: 114429121479734164}
-  healthBar: {fileID: 114080267876701156}
-  armourBar: {fileID: 114400947656875602}
-  ultBar: {fileID: 114124244411340188}
-  ammoLbl: {fileID: 114712368542153606}
-  abl1Icon: {fileID: 114881197231864914}
-  abl2Icon: {fileID: 114085243899920238}
-  ally1Avatar: {fileID: 114240580076586870}
-  ally2Avatar: {fileID: 114483981758126374}
-  avatarRT: {fileID: 0}
-  avatarCam: {fileID: 20156669381042250}
   maxHealth: 100
   health: 100
+  atkTimer: 0
   maxArmour: 100
   armour: 100
+  primaryProj: {fileID: 0}
+  primaryDelay: 0
   primaryRange: 0
-  secondaryRange: 0
-  XRayEffect: {fileID: 114973376818774398}
-  XRayFadeSpeed: 1
 --- !u!114 &114969973799122666
 MonoBehaviour:
   m_ObjectHideFlags: 1
