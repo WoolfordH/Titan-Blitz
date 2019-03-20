@@ -314,12 +314,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Billboard.cs" />
+    <Compile Include="Assets\Scripts\Characters\Abilities\Ability.cs" />
+    <Compile Include="Assets\Scripts\Characters\Abilities\AbilityDrone.cs" />
+    <Compile Include="Assets\Scripts\Characters\Abilities\AbilityGrapple.cs" />
+    <Compile Include="Assets\Scripts\Characters\Abilities\AbilityShield.cs" />
+    <Compile Include="Assets\Scripts\Characters\Abilities\AbilityXRay.cs" />
     <Compile Include="Assets\Scripts\Characters\Assassin.cs" />
     <Compile Include="Assets\Scripts\Characters\Character.cs" />
     <Compile Include="Assets\Scripts\Characters\CharacterHandler.cs" />
     <Compile Include="Assets\Scripts\Characters\Drone.cs" />
     <Compile Include="Assets\Scripts\Characters\Fighter.cs" />
     <Compile Include="Assets\Scripts\Characters\Grabber.cs" />
+    <Compile Include="Assets\Scripts\Characters\Heavy.cs" />
+    <Compile Include="Assets\Scripts\Characters\Light.cs" />
     <Compile Include="Assets\Scripts\Characters\Tank.cs" />
     <Compile Include="Assets\Scripts\ControlPoint.cs" />
     <Compile Include="Assets\Scripts\CTPManager.cs" />
@@ -428,6 +435,11 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Light.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Templates\Alert.uxml" />
