@@ -59,8 +59,6 @@ public abstract class Character : NetworkBehaviour
 	public int maxHealth;
 	public int health;
 
-	public float atkTimer;
-
 	public int maxArmour;
 	public int armour;
 
@@ -112,7 +110,7 @@ public abstract class Character : NetworkBehaviour
 	{
 		if (Input.GetKeyDown (handler.controls.primaryAtk))
 		{
-			if (atkTimer <= 0)
+			if (primaryTimer <= 0)
 			{
 				PrimaryAttack ();
 			}
