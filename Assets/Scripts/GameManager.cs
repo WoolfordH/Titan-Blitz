@@ -246,8 +246,8 @@ public class GameManager : NetworkBehaviour
         //update ui
     }
 
-    private void OnPlayerDisconnected(NetworkPlayer player)
-    {
-        ServerLog.current.LogData("A player has been disconnected");
-    }
+    //private void OnPlayerDisconnected(NetworkPlayer player)
+    //{
+    //    ServerLog.current.LogData("A player has been disconnected");
+    //}
 }
