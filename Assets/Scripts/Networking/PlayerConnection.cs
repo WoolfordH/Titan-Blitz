@@ -103,10 +103,10 @@ public class PlayerConnection : NetworkBehaviour
             connectionID = ID;
     }
 
-    private void OnDisconnectedFromServer(NetworkDisconnection info)
-    {
-        ServerLog.current.LogData("Disconnected from server");
-    }
+    //private void OnDisconnectedFromServer(NetworkDisconnection info)
+    //{
+    //    ServerLog.current.LogData("Disconnected from server");
+    //}
 
     //lobby buttons
     [Command]

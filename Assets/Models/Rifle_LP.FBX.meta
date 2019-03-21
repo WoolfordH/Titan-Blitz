@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 99ee668b34db39f4684191aa94f4dbea
 ModelImporter:
   serializedVersion: 22
+=======
+guid: 1f38f8de3caa32946ae6ecd3f144d40b
+ModelImporter:
+  serializedVersion: 23
+>>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
   fileIDToRecycleName:
     100000: Barrel
     100002: Clip
@@ -87,6 +93,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+<<<<<<< HEAD
+=======
+    useSRGBMaterialColor: 1
+>>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -104,11 +114,22 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+<<<<<<< HEAD
+=======
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+>>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+<<<<<<< HEAD
+=======
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+>>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -123,7 +144,10 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+<<<<<<< HEAD
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+=======
+>>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

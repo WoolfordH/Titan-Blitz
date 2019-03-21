@@ -12,6 +12,8 @@ namespace UnityEngine.Networking
 		[SerializeField] public int offsetX;
 		[SerializeField] public int offsetY;
 
+        [SerializeField] public string connectionAddress;
+
 		// Runtime variable
 		bool showServer = false;
 
@@ -30,7 +32,11 @@ namespace UnityEngine.Networking
 			{
 				if (Input.GetKeyDown(KeyCode.S))
 				{
-					manager.StartServer();
+                    
+                    manager.StartServer();
+
+                    Debug.Log(manager.networkAddress);
+                    
 				}
 				if (Input.GetKeyDown(KeyCode.H))
 				{
@@ -38,9 +44,14 @@ namespace UnityEngine.Networking
 				}
 				if (Input.GetKeyDown(KeyCode.C))
 				{
+                    manager.networkAddress = connectionAddress;
+
 					manager.StartClient();
+
+
 				}
 			}
+
 			if (NetworkServer.active && NetworkClient.active)
 			{
 				if (Input.GetKeyDown(KeyCode.X))

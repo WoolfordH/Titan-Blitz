@@ -1,6 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titan-Blitz", "Assembly-CSharp-firstpass.csproj", "{BAB3FE8A-3DA5-EDA9-A358-2D728384A888}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titan-Blitz", "Assembly-CSharp.csproj", "{C4272992-C1EA-A351-C1AB-3BC9C3E6F2F4}"
@@ -8,6 +9,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titan-Blitz", "Assembly-CSharp-Editor-firstpass.csproj", "{3A4EC803-1E2E-1742-D77E-5224AD64AC7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Titan-Blitz", "Assembly-CSharp-Editor.csproj", "{2BD2F3B8-2BF3-DC1B-158F-7CBEB3809743}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{BAB3FE8A-3DA5-EDA9-A358-2D728384A888}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{C4272992-C1EA-A351-C1AB-3BC9C3E6F2F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor-firstpass", "Assembly-CSharp-Editor-firstpass.csproj", "{3A4EC803-1E2E-1742-D77E-5224AD64AC7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{2BD2F3B8-2BF3-DC1B-158F-7CBEB3809743}"
+>>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
