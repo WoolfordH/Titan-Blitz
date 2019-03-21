@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owners: []
-  speed: 10
+  speed: 30
   hitEffects:
   - {fileID: 198401192234899542}
   - {fileID: 198753223241890646}

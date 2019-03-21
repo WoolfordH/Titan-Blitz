@@ -102,7 +102,7 @@ public abstract class Character : NetworkBehaviour
 			{
 				HandleAttacks();
 			}
-			//HandleCooldowns();
+			HandleCooldowns();
 		}
 	}
 

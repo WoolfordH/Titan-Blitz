@@ -16,8 +16,8 @@ public class CharacterLight : Character {
 
 		abilities [0] = new AbilityGrapple ();
 		abilities [1] = new AbilityXRay();
-
-	}
+        abilities [2] = new AbilityXRay();
+    }
 
 
 	public override void PrimaryAttack()
@@ -45,5 +45,42 @@ public class CharacterLight : Character {
 		proj.owners.Add(this.transform);
 		proj.dmg = primaryDmg;
 	}
+
+
+
+    protected override void HandleAttacks()
+    {
+        if (Input.GetKey(handler.controls.primaryAtk))
+        {
+            if (primaryTimer <= 0)
+            {
+                PrimaryAttack();
+            }
+        }
+
+        if (Input.GetKeyDown(handler.controls.Ability1))
+        {
+            if (abilities[0].timer <= 0)
+            {
+                UseAbility(0);
+            }
+        }
+
+        if (Input.GetKeyDown(handler.controls.Ability2))
+        {
+            if (abilities[1].timer <= 0)
+            {
+                UseAbility(1);
+            }
+        }
+
+        if (Input.GetKeyDown(handler.controls.ult))
+        {
+            if (abilities[2].timer <= 0)
+            {
+                UseAbility(2);
+            }
+        }
+    }
 
 }
