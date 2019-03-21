@@ -17,6 +17,7 @@ public class CharacterHeavy : Character {
 
 		abilities [0] = new AbilityShield ();
 		abilities [1] = new AbilityDrone();
+		abilities [2] = new AbilityDrone();
 
 	}
 
