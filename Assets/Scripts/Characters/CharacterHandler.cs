@@ -78,7 +78,8 @@ public class CharacterHandler: NetworkBehaviour
 	public bool frozen = false;
 	public bool freezeLook = false;
 
-    public Camera cam;
+    public GameObject camHolder; //the object the camera and things that move with the camera are childed to 
+    public Camera cam; //the camera 
     public Transform headPos;
 	public Transform muzzlePos;
     public Animator gunAnim;
@@ -339,11 +340,11 @@ public class CharacterHandler: NetworkBehaviour
 			//if looking up or down goes over 60 deg in either direction, clamp
 			//cam.transform.Rotate (Vector3.right, (-yRot) * lookSpeed);
 
-			Quaternion camRot = cam.transform.localRotation * Quaternion.Euler (-yRot * lookSpeed, 0f, 0f);
+			Quaternion camRot = camHolder.transform.localRotation * Quaternion.Euler (-yRot * lookSpeed, 0f, 0f);
 
 			camRot = ClampRotationAroundXAxis (camRot);
 
-			cam.transform.localRotation = camRot;
+            camHolder.transform.localRotation = camRot;
 
 		}
 
