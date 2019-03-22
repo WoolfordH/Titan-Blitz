@@ -81,6 +81,7 @@ public class CharacterHandler: NetworkBehaviour
     public Camera cam;
     public Transform headPos;
 	public Transform muzzlePos;
+    public Animator gunAnim;
 
     public List<Powerup> powerups = new List<Powerup>();
 
@@ -273,15 +274,30 @@ public class CharacterHandler: NetworkBehaviour
 
 				//apply movement velocity
 				rb.velocity = ((surfaceRotation * transform.TransformDirection (movement))  * speed * speedmod) * Time.deltaTime;
+                gunAnim.SetFloat("speed", (float)(rb.velocity.magnitude / (speed*Time.deltaTime)));
+                momentumVel = rb.velocity;
 
-				momentumVel = rb.velocity;
-
-				//jump
-				if (Input.GetKeyDown (controls.jump))
-				{
-					//rb.isKinematic = false;
-					rb.velocity = momentumVel + new Vector3 (0f, jumpForce * jumpMod, 0f);
-				}
+                //jump
+                if (Input.GetKeyDown(controls.jump))
+                {
+                    //rb.isKinematic = false;
+                    rb.velocity = momentumVel + new Vector3(0f, jumpForce * jumpMod, 0f);
+                    //gun bob animation
+                    gunAnim.SetBool("moving", false);
+                }
+                else
+                {
+                    if (rb.velocity.magnitude > 0)
+                    {
+                        //gun bob animation
+                        gunAnim.SetBool("moving", true);
+                    }
+                    else
+                    {
+                        //gun bob animation
+                        gunAnim.SetBool("moving", false);
+                    }
+                }
 
 			}
 			else

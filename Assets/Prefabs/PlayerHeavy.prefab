@@ -678,6 +678,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4248153020553746}
+  - component: {fileID: 95832003831521064}
   m_Layer: 0
   m_Name: Rocket_Launcher_LP
   m_TagString: Untagged
@@ -1246,7 +1247,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1888992166903258}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -183.71957, y: 10.17, z: 51.051243}
+  m_LocalPosition: {x: -186.221, y: 10.17, z: 50.390213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4581212001282308}
@@ -1722,6 +1723,24 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062481222281496}
   m_Enabled: 1
+--- !u!95 &95832003831521064
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587833063865924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 89dd117fff9b3d547845538a568bd59f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114016055160926000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2460,8 +2479,7 @@ MonoBehaviour:
   ammoLbl: {fileID: 114893036025620994}
   abl1Icon: {fileID: 114731840925894300}
   abl2Icon: {fileID: 114704234489324262}
-  character: {fileID: 114930757354223022, guid: ad8791482ced3d14c985d26112675470,
-    type: 2}
+  character: {fileID: 114423951637096754}
   ally1Avatar: {fileID: 0}
   ally2Avatar: {fileID: 0}
   avatarRT: {fileID: 0}
@@ -2475,6 +2493,7 @@ MonoBehaviour:
   cam: {fileID: 20649757509402228}
   headPos: {fileID: 4581212001282308}
   muzzlePos: {fileID: 4233539209441144}
+  gunAnim: {fileID: 95832003831521064}
   powerups: []
 --- !u!114 &114550626809457612
 MonoBehaviour:

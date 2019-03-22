@@ -1191,7 +1191,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1689298133716662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -183.0453, y: 10.17, z: 52.971603}
+  m_LocalPosition: {x: -184.71881, y: 10.17, z: 50.49796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4792731249479678}
@@ -2344,8 +2344,7 @@ MonoBehaviour:
   ammoLbl: {fileID: 114894844674844070}
   abl1Icon: {fileID: 114233739095025450}
   abl2Icon: {fileID: 114605148905434090}
-  character: {fileID: 114930757354223022, guid: ad8791482ced3d14c985d26112675470,
-    type: 2}
+  character: {fileID: 114206275144223298}
   ally1Avatar: {fileID: 0}
   ally2Avatar: {fileID: 0}
   avatarRT: {fileID: 0}
@@ -2359,6 +2358,7 @@ MonoBehaviour:
   cam: {fileID: 20324386724857932}
   headPos: {fileID: 4792731249479678}
   muzzlePos: {fileID: 4110052436732448}
+  gunAnim: {fileID: 95279181598048430}
   powerups: []
 --- !u!114 &114408577476281108
 MonoBehaviour:
