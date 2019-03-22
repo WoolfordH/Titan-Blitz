@@ -69,7 +69,7 @@ public class Projectile : MonoBehaviour {
             {
                 Vector3 startPos = transform.position - (transform.forward * 1.3f);
 
-                Debug.DrawRay(startPos, (transform.forward * 3), Color.blue, 10);
+                //Debug.DrawRay(startPos, (transform.forward * 3), Color.blue, 10);
 
                 List<RaycastHit> hits = new List<RaycastHit>(Physics.RaycastAll(startPos, transform.forward, 3f));
 

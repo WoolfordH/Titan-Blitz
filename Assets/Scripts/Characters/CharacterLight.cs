@@ -30,14 +30,25 @@ public class CharacterLight : Character {
 		{
 			dmgMod = handler.powerups.Find (x => x.powerupType.ToString () == "Damage").multiplier;
 		}
-			
 
-		//Gun
+        //position gun to aim at target
+        RaycastHit hit;
+        Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit);
+        Quaternion initRot = handler.gun.transform.rotation;
+
+		//Fire gun
 		if (primaryTimer <= 0f)
 		{
-			Fire ();
-			primaryTimer = primaryDelay;
-		}
+	        Debug.Log("Aim Aligned");
+            handler.gun.transform.LookAt(hit.point);
+            Debug.DrawRay(handler.cam.transform.position, handler.cam.transform.forward * Vector3.Distance(handler.cam.transform.position, hit.point), Color.green, 5f);
+            Debug.DrawRay(handler.muzzlePos.position, handler.muzzlePos.forward * Vector3.Distance(handler.muzzlePos.position, hit.point), Color.red, 5f);
+
+            Fire();
+            primaryTimer = primaryDelay;
+        }
+
+        handler.gun.transform.rotation = initRot;
 	}
 
 	void Fire()

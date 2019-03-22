@@ -82,6 +82,7 @@ public class CharacterHandler: NetworkBehaviour
     public Transform headPos;
 	public Transform muzzlePos;
     public Animator gunAnim;
+    public GameObject gun;
 
     public List<Powerup> powerups = new List<Powerup>();
 
