@@ -1,18 +1,21 @@
+using UnityEngine.UI;
+
 #if ENABLE_UNET
+
 
 namespace UnityEngine.Networking
 {
-	[AddComponentMenu("Network/NetworkManagerHUD")]
+	//[AddComponentMenu("Network/NetworkManagerHUD")]
 	[RequireComponent(typeof(NetworkManager))]
 	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-	public class NetworkManagerHUD : MonoBehaviour
+	public class NetworkingHUD : MonoBehaviour
 	{
 		public NetworkManager manager;
 		[SerializeField] public bool showGUI = true;
 		[SerializeField] public int offsetX;
 		[SerializeField] public int offsetY;
 
-        [SerializeField] public string connectionAddress;
+        [SerializeField] public InputField ipAddressText;
 
 		// Runtime variable
 		bool showServer = false;
@@ -32,23 +35,36 @@ namespace UnityEngine.Networking
 			{
 				if (Input.GetKeyDown(KeyCode.S))
 				{
-                    
+                    //manager.networkPort;
+
+                    manager.networkAddress = Network.player.ipAddress;
+
                     manager.StartServer();
 
+                    ipAddressText.text = manager.networkAddress;
+
+                    Debug.Log(Network.player.ipAddress);
                     Debug.Log(manager.networkAddress);
                     
 				}
 				if (Input.GetKeyDown(KeyCode.H))
 				{
-					manager.StartHost();
-				}
+                    
+
+                    manager.StartHost();
+
+                    manager.networkAddress = Network.player.ipAddress;
+
+                    ipAddressText.text = manager.networkAddress;
+
+                    Debug.Log(Network.player.ipAddress);
+                    Debug.Log(manager.networkAddress);
+                }
 				if (Input.GetKeyDown(KeyCode.C))
 				{
-                    manager.networkAddress = connectionAddress;
+                    manager.networkAddress = ipAddressText.text;
 
 					manager.StartClient();
-
-
 				}
 			}
 

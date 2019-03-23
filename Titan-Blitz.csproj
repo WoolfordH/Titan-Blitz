@@ -308,7 +308,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NetworkManagerHUD.cs" />
+    <Compile Include="Assets\NetworkingHUD.cs" />
     <Compile Include="Assets\Scripts\Billboard.cs" />
     <Compile Include="Assets\Scripts\Characters\Abilities\Ability.cs" />
     <Compile Include="Assets\Scripts\Characters\Abilities\AbilityDrone.cs" />
