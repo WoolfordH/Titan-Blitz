@@ -12,10 +12,12 @@ public class GameHandler : MonoBehaviour {
 
 	public LayerMask groundLayer;
 	public LayerMask playerLayer;
+    public LayerMask projectileLayer;
 
 	public GameObject bloodSpurt;
     public GameObject projectile;
 	public GameObject damageIndicator;
+    public GameObject scorchPrefab;
 
 	public Camera playerCam;
 

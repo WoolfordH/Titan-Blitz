@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour {
     bool playing = false;
     bool destroying = false;
 	public DAMAGE dmg;
+    public float decalSize = 1.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -86,6 +87,13 @@ public class Projectile : MonoBehaviour {
                         transform.position = hits[index].point;
                         point = hits[index].point;
                         normal = hits[index].normal;
+
+                        if (GameHandler.current.groundLayer == (GameHandler.current.groundLayer | (1 << other.gameObject.layer)))
+                        {
+                            GameObject decal = Instantiate(GameHandler.current.scorchPrefab, other.ClosestPoint(transform.position) + normal * 0.01f, Quaternion.LookRotation(-normal));
+                            float randomSize = Random.Range(decalSize - 0.5f, decalSize + 0.5f);
+                            decal.transform.localScale = new Vector3(randomSize, randomSize, randomSize);
+                        }
                     }
                     else
                     {

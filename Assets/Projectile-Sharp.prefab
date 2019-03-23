@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114603241557228750}
   - component: {fileID: 65019236685188474}
   - component: {fileID: 54151889708897246}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Projectile-Sharp
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4861038224201564}
   - component: {fileID: 198842943408561786}
   - component: {fileID: 199401169303354522}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4552941596922408}
   - component: {fileID: 198479942326126482}
   - component: {fileID: 199898592869201724}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4955430964894400}
   - component: {fileID: 96923996918134690}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4290204381379972}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,10 +304,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owners: []
+  senderID: 0
   speed: 50
   hitEffects:
   - {fileID: 198842943408561786}
   - {fileID: 198479942326126482}
+  explosion: {fileID: 0}
+  effectRadius: 0
 --- !u!198 &198191145941697750
 ParticleSystem:
   m_ObjectHideFlags: 1

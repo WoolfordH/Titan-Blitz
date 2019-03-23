@@ -39,16 +39,21 @@ public class CharacterHeavy : Character {
 
         //position gun to aim at target
         RaycastHit hit;
-        Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit);
         Quaternion initRot = handler.gun.transform.rotation;
 
         //Fire gun
         if (primaryTimer <= 0f)
         {
-            Debug.Log("Aim Aligned");
-            handler.gun.transform.LookAt(hit.point);
-            Debug.DrawRay(handler.cam.transform.position, handler.cam.transform.forward * Vector3.Distance(handler.cam.transform.position, hit.point), Color.green, 5f);
-            Debug.DrawRay(handler.muzzlePos.position, handler.muzzlePos.forward * Vector3.Distance(handler.muzzlePos.position, hit.point), Color.red, 5f);
+            if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, ~GameHandler.current.projectileLayer))
+            {
+                Debug.Log("Aim Aligned");
+                handler.gun.transform.LookAt(hit.point);
+            }
+            //Debug.DrawRay(handler.cam.transform.position, handler.cam.transform.forward * Vector3.Distance(handler.cam.transform.position, hit.point), Color.green, 5f);
+            //Debug.DrawRay(handler.muzzlePos.position, handler.muzzlePos.forward * Vector3.Distance(handler.muzzlePos.position, hit.point), Color.red, 5f);
+
+            //animate recoil
+            handler.gunAnim.SetTrigger("fired");
 
             Fire();
             primaryTimer = primaryDelay;

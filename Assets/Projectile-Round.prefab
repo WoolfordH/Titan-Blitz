@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4683423728073936}
   - component: {fileID: 198753223241890646}
   - component: {fileID: 199232494095100650}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114088198666445354}
   - component: {fileID: 65313329221253102}
   - component: {fileID: 54907666096910310}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Projectile-Round
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4231307861910604}
   - component: {fileID: 96899867535456830}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4119282316772402}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4151038821112156}
   - component: {fileID: 198401192234899542}
   - component: {fileID: 199735110342029030}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,6 +320,7 @@ MonoBehaviour:
   - {fileID: 198753223241890646}
   explosion: {fileID: 1887963760891850, guid: 9f697644c61e7b44ebc47451ff377e37, type: 2}
   effectRadius: 2.5
+  decalSize: 4
 --- !u!198 &198392797137661476
 ParticleSystem:
   m_ObjectHideFlags: 1
