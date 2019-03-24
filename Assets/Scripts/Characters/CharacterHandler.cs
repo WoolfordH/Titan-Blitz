@@ -483,12 +483,14 @@ public class CharacterHandler: NetworkBehaviour
 	public virtual void Hit(DAMAGE dmg)
 	{
 		CmdHit(dmg);
+
 	}
 
-	[Command]
+	[Server]
 	protected virtual void CmdHit(DAMAGE dmg)
 	{
-		if (enabled)
+        ServerLog.current.LogData("CmdHit");
+        if (enabled)
 		{
 			if (dmg.armourPiercing)
 			{
@@ -536,7 +538,8 @@ public class CharacterHandler: NetworkBehaviour
 
 	public virtual void Hit(HitData hit)
 	{
-		if (GameManager.current.GetPlayerObject(hit.senderID).GetComponentInChildren<CharacterHandler>().GetTeam() != GetTeam())
+        ServerLog.current.LogData("Hit Received");
+        if (GameManager.current.GetPlayerObject(hit.senderID).GetComponentInChildren<CharacterHandler>().GetTeam() != GetTeam())
 		{
 			GameObject bloodSpurt = Instantiate(GameHandler.current.bloodSpurt, hit.hitPoint, Quaternion.LookRotation(hit.hitNormal));
 			NetworkServer.Spawn(bloodSpurt);
@@ -637,6 +640,11 @@ public class CharacterHandler: NetworkBehaviour
         }
 	}
 
+    [ClientRpc]
+    public void RpcSetID(int iD)
+    {
+        GetComponent<Character>().id = iD;
+    }
     
     [ClientRpc]
     //assigns the character a team - should inform more things

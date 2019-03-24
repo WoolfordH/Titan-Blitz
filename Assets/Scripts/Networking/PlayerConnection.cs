@@ -67,6 +67,7 @@ public class PlayerConnection : NetworkBehaviour
 
         if (player.GetComponent<CharacterHandler>())
         {
+            player.GetComponent<CharacterHandler>().RpcSetID(connectionID);
             player.GetComponent<CharacterHandler>().RpcSetTeam(teamNum);
         }
 
@@ -99,8 +100,7 @@ public class PlayerConnection : NetworkBehaviour
     [ClientRpc]
     public void RpcAssignID(int ID)
     {
-        if (isLocalPlayer)
-            connectionID = ID;
+        connectionID = ID;
     }
 
     //private void OnDisconnectedFromServer(NetworkDisconnection info)
