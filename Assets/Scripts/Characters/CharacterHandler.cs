@@ -38,7 +38,9 @@ public class CharacterHandler: NetworkBehaviour
 	public Rigidbody rb;
 	public CapsuleCollider mainCollider;
 
-	public GameObject hitMarker;
+    public List<int> allies = new List<int>();
+
+    public GameObject hitMarker;
 	public Text timerLbl;
 	public Image healthBar;
 	public Image armourBar;
@@ -146,11 +148,14 @@ public class CharacterHandler: NetworkBehaviour
             controls.Ability1 = KeyCode.Alpha1;
             controls.Ability2 = KeyCode.Alpha2;
 
+            //////////////////////
+            //HARRY: Find allies//
+            //////////////////////
 
 			//ally1Avatar.texture = allies[0].avatarRT;
 			//ally2Avatar.texture = allies[1].avatarRT;
 
-			//UpdateUI();
+			UpdateUI();
 
 
             Cursor.lockState = CursorLockMode.Locked;            
@@ -321,7 +326,7 @@ public class CharacterHandler: NetworkBehaviour
 
 				timerLbl.text = minutes.ToString ("00") + ":" + seconds.ToString ("00");
 
-				//UpdateUI ();
+				UpdateUI();
 			}
 		}
 
@@ -475,8 +480,10 @@ public class CharacterHandler: NetworkBehaviour
 		armourBar.fillAmount = ((float)character.armour/(float)character.maxArmour);
 		ultBar.fillAmount = (character.abilities[2].cooldown - character.abilities[2].timer)/character.abilities[2].cooldown;
 
-		abl1Icon.fillAmount = (character.abilities[2].cooldown - character.abilities[2].timer)/character.abilities[2].cooldown;
-		abl2Icon.fillAmount = (character.abilities[3].cooldown - character.abilities[3].timer)/character.abilities[3].cooldown;
+        //update allies ui
+
+		abl1Icon.fillAmount = (character.abilities[0].cooldown - character.abilities[0].timer)/character.abilities[0].cooldown;
+		abl2Icon.fillAmount = (character.abilities[1].cooldown - character.abilities[1].timer)/character.abilities[1].cooldown;
 	}
 
 
@@ -531,7 +538,7 @@ public class CharacterHandler: NetworkBehaviour
 
 		if(hasAuthority)
 		{
-			//update self ui
+            UpdateUI();
 		}
 	}
 
@@ -596,6 +603,8 @@ public class CharacterHandler: NetworkBehaviour
 		rb.velocity = Vector3.zero;
 		character.health = character.maxHealth;
 		character.armour = character.maxArmour;
+
+        UpdateUI();
 
 
 		//reset everything
