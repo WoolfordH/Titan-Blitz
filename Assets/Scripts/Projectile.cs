@@ -49,6 +49,8 @@ public class Projectile : NetworkBehaviour {
         {
             GetComponent<ParticleSystem>().Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
 
+            GetComponent<Collider>().enabled = false;
+
             destroying = true;
 
             speed = 0f;
@@ -125,6 +127,7 @@ public class Projectile : NetworkBehaviour {
                         //or dont
                         else
                         {
+                            ServerLog.current.LogData("send hit");
                             other.gameObject.SendMessageUpwards("Hit", new HitData(dmg, point, normal, senderID), SendMessageOptions.DontRequireReceiver);//needs changing
                         }
                     }
