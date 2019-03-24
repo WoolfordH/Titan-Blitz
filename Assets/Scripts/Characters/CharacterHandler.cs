@@ -485,7 +485,7 @@ public class CharacterHandler: NetworkBehaviour
 		CmdHit(dmg);
 	}
 
-	[Command]
+	[Server]
 	protected virtual void CmdHit(DAMAGE dmg)
 	{
 		if (enabled)
