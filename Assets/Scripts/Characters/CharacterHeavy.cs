@@ -55,17 +55,19 @@ public class CharacterHeavy : Character {
             //animate recoil
             handler.gunAnim.SetTrigger("fired");
 
-            Fire();
+            CmdFire();
             primaryTimer = primaryDelay;
         }
 
         handler.gun.transform.rotation = initRot;
     }
 
-	void Fire()
+    [Command]
+	void CmdFire()
 	{
 		Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
-		proj.owners.Add(this.transform);
+        NetworkServer.Spawn(proj.gameObject);
+        proj.owners.Add(this.transform);
 		proj.dmg = primaryDmg;
 	}
 

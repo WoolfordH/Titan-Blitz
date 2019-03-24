@@ -308,7 +308,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\NetworkingHUD.cs" />
     <Compile Include="Assets\Scripts\Billboard.cs" />
     <Compile Include="Assets\Scripts\Characters\Abilities\Ability.cs" />
     <Compile Include="Assets\Scripts\Characters\Abilities\AbilityDrone.cs" />
@@ -336,6 +335,7 @@
     <Compile Include="Assets\Scripts\GlowShaderScripts\MainCamXRayEffect.cs" />
     <Compile Include="Assets\Scripts\LobbyMenu.cs" />
     <Compile Include="Assets\Scripts\Networking\Network_Transform.cs" />
+    <Compile Include="Assets\Scripts\Networking\NetworkingHUD.cs" />
     <Compile Include="Assets\Scripts\Networking\PlayerConnection.cs" />
     <Compile Include="Assets\Scripts\Networking\ServerLog.cs" />
     <Compile Include="Assets\Scripts\Powerups\Powerup.cs" />

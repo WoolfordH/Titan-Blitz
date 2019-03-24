@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class CharacterLight : Character {
 
@@ -49,16 +50,19 @@ public class CharacterLight : Character {
             //animate recoil
             handler.gunAnim.SetTrigger("fired");
 
-            Fire();
+            CmdFire();
             primaryTimer = primaryDelay;
         }
 
         handler.gun.transform.rotation = initRot;
     }
 
-	void Fire()
+    //Projectiles should be spawned from the server 
+    [Command]
+	void CmdFire()
 	{
 		Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
+        NetworkServer.Spawn(proj.gameObject);
 		proj.owners.Add(this.transform);
         proj.senderID = id;
 		proj.dmg = primaryDmg;

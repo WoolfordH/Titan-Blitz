@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 114603241557228750}
   - component: {fileID: 65019236685188474}
   - component: {fileID: 54151889708897246}
+  - component: {fileID: 114128652058521058}
+  - component: {fileID: 114837672120395076}
   m_Layer: 11
   m_Name: Projectile-Sharp
   m_TagString: Projectile
@@ -292,6 +294,38 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.2
   m_Autodestruct: 0
+--- !u!114 &114128652058521058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296225432553908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 192
+    i1: 153
+    i2: 173
+    i3: 114
+    i4: 244
+    i5: 54
+    i6: 46
+    i7: 228
+    i8: 89
+    i9: 64
+    i10: 81
+    i11: 246
+    i12: 22
+    i13: 211
+    i14: 247
+    i15: 160
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114603241557228750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,6 +345,20 @@ MonoBehaviour:
   - {fileID: 198479942326126482}
   explosion: {fileID: 0}
   effectRadius: 0
+  decalSize: 1.5
+--- !u!114 &114837672120395076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296225432553908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverControl: 0
+  testcontrol: 0
 --- !u!198 &198191145941697750
 ParticleSystem:
   m_ObjectHideFlags: 1

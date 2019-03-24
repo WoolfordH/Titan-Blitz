@@ -41,6 +41,8 @@ GameObject:
   - component: {fileID: 114088198666445354}
   - component: {fileID: 65313329221253102}
   - component: {fileID: 54907666096910310}
+  - component: {fileID: 114148848685705052}
+  - component: {fileID: 114011230078450084}
   m_Layer: 11
   m_Name: Projectile-Round
   m_TagString: Projectile
@@ -301,6 +303,38 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.2
   m_Autodestruct: 0
+--- !u!114 &114011230078450084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333371331465492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 197
+    i1: 152
+    i2: 173
+    i3: 204
+    i4: 247
+    i5: 8
+    i6: 44
+    i7: 68
+    i8: 41
+    i9: 92
+    i10: 100
+    i11: 192
+    i12: 46
+    i13: 134
+    i14: 138
+    i15: 120
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114088198666445354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -321,6 +355,19 @@ MonoBehaviour:
   explosion: {fileID: 1887963760891850, guid: 9f697644c61e7b44ebc47451ff377e37, type: 2}
   effectRadius: 2.5
   decalSize: 4
+--- !u!114 &114148848685705052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333371331465492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverControl: 0
+  testcontrol: 0
 --- !u!198 &198392797137661476
 ParticleSystem:
   m_ObjectHideFlags: 1
