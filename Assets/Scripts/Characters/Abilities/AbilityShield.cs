@@ -8,7 +8,12 @@ public class AbilityShield : Ability {
 	public Vector3 shieldPosition = new Vector3(0f, 1.3f, 1.8f);
 	GameObject shield;
 
-	public override void Init()
+    public AbilityShield(Character c)
+    {
+        caster = c;
+    }
+
+    public override void Init()
 	{
 		name = "Shield";
 		cooldown = 10f;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -15,13 +16,15 @@ public class CharacterHeavy : Character {
 
 		primaryRange = 2f;
 
-		abilities [0] = new AbilityShield ();
-		abilities [1] = new AbilityDrone();
-		abilities [2] = new AbilityDrone();
+		abilities [0] = new AbilityShield (this);
+		abilities [1] = new AbilityDrone(this);
+		abilities [2] = new AbilityDrone(this);
+
+        InitialiseAbilities();
 
 	}
 
-	protected override void Update()
+    protected override void Update()
 	{
 		base.Update ();
 
@@ -29,11 +32,9 @@ public class CharacterHeavy : Character {
 
 	public override void PrimaryAttack()
 	{
-		float dmgMod = 1f;
-
 		if (handler.powerups.Exists (x => x.powerupType.ToString () == "Damage"))
 		{
-			dmgMod = handler.powerups.Find (x => x.powerupType.ToString () == "Damage").multiplier;
+			dmgMod *= handler.powerups.Find (x => x.powerupType.ToString () == "Damage").multiplier;
 		}
 
 
@@ -48,6 +49,10 @@ public class CharacterHeavy : Character {
             {
                 Debug.Log("Aim Aligned");
                 handler.gun.transform.LookAt(hit.point);
+            }
+            else
+            {
+                handler.gun.transform.LookAt(handler.cam.transform.position + (handler.cam.transform.forward * 1000f));
             }
             //Debug.DrawRay(handler.cam.transform.position, handler.cam.transform.forward * Vector3.Distance(handler.cam.transform.position, hit.point), Color.green, 5f);
             //Debug.DrawRay(handler.muzzlePos.position, handler.muzzlePos.forward * Vector3.Distance(handler.muzzlePos.position, hit.point), Color.red, 5f);
@@ -68,7 +73,7 @@ public class CharacterHeavy : Character {
 		Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
         NetworkServer.Spawn(proj.gameObject);
         proj.owners.Add(this.transform);
-		proj.dmg = primaryDmg;
+		proj.dmg = new DAMAGE((int)(primaryDmg.damage * dmgMod), primaryDmg.armourPiercing);
 	}
 
 }

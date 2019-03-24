@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DestroyObject : MonoBehaviour {
 
+    public float delay;
+
 	public void DestroyRoot()
 	{
 		Destroy (transform.root.gameObject);

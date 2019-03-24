@@ -61,7 +61,8 @@ public abstract class Character : NetworkBehaviour
 	public int armour;
 
 	public DAMAGE primaryDmg;
-	public GameObject primaryProj;
+    protected float dmgMod = 1f;
+    public GameObject primaryProj;
 	protected float primaryTimer;
 	public float primaryDelay;
 	public float primaryRange;
@@ -98,7 +99,7 @@ public abstract class Character : NetworkBehaviour
 		{
 			if (!handler.frozen)
 			{
-				HandleAttacks();
+                 HandleAttacks();
 			}
 			HandleCooldowns();
 		}
@@ -167,8 +168,16 @@ public abstract class Character : NetworkBehaviour
 	}
 
 
+    protected void InitialiseAbilities()
+    {
+        for (int i = 0; i < abilities.Length; i++)
+        {
+            abilities[i].Init();
+        }
+    }
 
-	public abstract void PrimaryAttack ();
+
+    public abstract void PrimaryAttack ();
 
 	public void UseAbility (int index)
 	{

@@ -1286,7 +1286,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1566720088552854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -185.28058, y: 10.17, z: 50.938747}
+  m_LocalPosition: {x: -206.63438, y: 10.17, z: 37.727547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4245247858236956}
@@ -1972,9 +1972,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  allies:
-  - {fileID: 0}
-  - {fileID: 0}
   handler: {fileID: 114718233092882692}
   maxHealth: 100
   health: 100
@@ -2835,6 +2832,7 @@ MonoBehaviour:
   jumpVelMod: 0.01
   rb: {fileID: 54903160632717696}
   mainCollider: {fileID: 136631507826855460}
+  allies: 
   hitMarker: {fileID: 1634492361162180}
   timerLbl: {fileID: 114626844093562584}
   healthBar: {fileID: 114224822043501250}

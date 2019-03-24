@@ -7,7 +7,12 @@ public class AbilityXRay : Ability {
 	public MainCamXRayEffect XRayEffect;
 	public float XRayFadeSpeed = 1f;
 
-	public override void Init()
+    public AbilityXRay(Character c)
+    {
+        caster = c;
+    }
+
+    public override void Init()
 	{
 		name = "XRay";
 		cooldown = 10f;
@@ -16,7 +21,7 @@ public class AbilityXRay : Ability {
 		timer = 0f;
 		active = false;
 
-		XRayEffect = caster.handler.cam.gameObject.AddComponent<MainCamXRayEffect> ();
+		XRayEffect = caster.handler.cam.gameObject.GetComponent<MainCamXRayEffect> ();
 
 	}
 

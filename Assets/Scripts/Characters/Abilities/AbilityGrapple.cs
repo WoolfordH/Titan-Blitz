@@ -9,7 +9,12 @@ public class AbilityGrapple : Ability {
 	public float grabberMaxDist;
 	public float grabberSpeed;
 
-	public override void Init()
+    public AbilityGrapple(Character c)
+    {
+        caster = c;
+    }
+
+    public override void Init()
 	{
 		name = "Grapple";
 		cooldown = 10f;

@@ -536,7 +536,7 @@ public class CharacterHandler: NetworkBehaviour
 
 		//enemy ui update
 
-		if(hasAuthority)
+		if(hasAuthority && tag != "Dummy")
 		{
             UpdateUI();
 		}
@@ -604,14 +604,14 @@ public class CharacterHandler: NetworkBehaviour
 		character.health = character.maxHealth;
 		character.armour = character.maxArmour;
 
-        UpdateUI();
-
 
 		//reset everything
 		this.gameObject.SetActive(true);
-		if (hasAuthority)//if local player
+		if (hasAuthority && tag != "Dummy")//if local player
 		{
-			transform.position = GameManager.current.GetSpawnPos(GetTeam());
+            UpdateUI();
+
+            transform.position = GameManager.current.GetSpawnPos(GetTeam());
 			cam.gameObject.SetActive(true);
 			GameManager.current.lobbyCam.SetActive(false);
 		}
@@ -641,6 +641,10 @@ public class CharacterHandler: NetworkBehaviour
                     //if powerup is not in effect, start effect
                     powerups.Add(powerup);
                 }
+
+                //instantiate explosion
+                GameObject explosion = Instantiate(GameHandler.current.PowerupExplosion, other.transform.position, Quaternion.identity);
+                explosion.GetComponent<Powerup>().colour = powerup.colour;
 
                 //destroy the object on all clients
                 NetworkServer.Destroy(other.gameObject);
