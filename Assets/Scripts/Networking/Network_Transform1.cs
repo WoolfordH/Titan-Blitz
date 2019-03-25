@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Network_Transform : NetworkBehaviour
+public class Network_Transform1 : NetworkBehaviour
 {
     public Transform networkedTransform;
 

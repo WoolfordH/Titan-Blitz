@@ -155,7 +155,7 @@ public class CharacterHandler: NetworkBehaviour
 			//ally1Avatar.texture = allies[0].avatarRT;
 			//ally2Avatar.texture = allies[1].avatarRT;
 
-			UpdateUI();
+			//UpdateUI();
 
 
             Cursor.lockState = CursorLockMode.Locked;            
@@ -220,6 +220,7 @@ public class CharacterHandler: NetworkBehaviour
                     lookSpeed = initLookSpeed;
                 }
             }
+            UpdateUI();
         }
 
 
@@ -326,7 +327,7 @@ public class CharacterHandler: NetworkBehaviour
 
 				timerLbl.text = minutes.ToString ("00") + ":" + seconds.ToString ("00");
 
-				UpdateUI();
+				//UpdateUI();
 			}
 		}
 
@@ -476,7 +477,11 @@ public class CharacterHandler: NetworkBehaviour
 
 	protected void UpdateUI()
 	{
-		healthBar.fillAmount = ((float)character.health/(float)character.maxHealth);
+        //ServerLog.current.LogData("Update UI");
+        //ServerLog.current.LogData(character.id.ToString() + " " + character.health.ToString() + " " + character.armour.ToString());
+        //ServerLog.current.LogData("Update UI");
+
+        healthBar.fillAmount = ((float)character.health/(float)character.maxHealth);
 		armourBar.fillAmount = ((float)character.armour/(float)character.maxArmour);
 		ultBar.fillAmount = (character.abilities[2].cooldown - character.abilities[2].timer)/character.abilities[2].cooldown;
 
@@ -538,7 +543,7 @@ public class CharacterHandler: NetworkBehaviour
 
 		if(hasAuthority && tag != "Dummy")
 		{
-            UpdateUI();
+            //UpdateUI();
 		}
 	}
 
@@ -609,7 +614,7 @@ public class CharacterHandler: NetworkBehaviour
 		this.gameObject.SetActive(true);
 		if (hasAuthority && tag != "Dummy")//if local player
 		{
-            UpdateUI();
+            //UpdateUI();
 
             transform.position = GameManager.current.GetSpawnPos(GetTeam());
 			cam.gameObject.SetActive(true);
