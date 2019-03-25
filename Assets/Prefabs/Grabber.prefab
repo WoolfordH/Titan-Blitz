@@ -115,10 +115,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  maxDist: 0
+  maxDist: 50
   dir: {x: 0, y: 0, z: 0}
-  speed: 0
-  grappleType: 0
+  speed: 2
+  grappleType: 1
   initPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114876397690686912
 MonoBehaviour:

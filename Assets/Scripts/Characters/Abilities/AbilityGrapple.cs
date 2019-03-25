@@ -14,6 +14,12 @@ public class AbilityGrapple : Ability {
         caster = c;
     }
 
+    public AbilityGrapple(Character c, GameObject grabber)
+    {
+        caster = c;
+        grabberPrefab = grabber;
+    }
+
     public override void Init()
 	{
 		name = "Grapple";
@@ -41,7 +47,7 @@ public class AbilityGrapple : Ability {
 
 
 		NetworkServer.Spawn(grabber);//, connectionToServer);
-		grabber.GetComponent<Grabber>().Init(caster, grabberMaxDist, forward, grabberSpeed, initVel);
+		grabber.GetComponent<Grabber>().Init(caster, forward, initVel);
 	}
 
 	public override void AbilityExpired ()

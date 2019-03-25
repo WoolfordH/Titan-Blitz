@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class CharacterLight : Character {
 
+    public GameObject grabberPrefab;
+
     // Use this for initialization
     protected override void Start () {
 
@@ -15,7 +17,7 @@ public class CharacterLight : Character {
 
 		primaryRange = 100f;
 
-		abilities [0] = new AbilityGrapple (this);
+		abilities [0] = new AbilityGrapple (this, grabberPrefab);
 		abilities [1] = new AbilityXRay(this);
 		abilities [2] = new AbilityXRay(this);
 

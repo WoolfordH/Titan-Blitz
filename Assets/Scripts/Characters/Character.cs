@@ -182,7 +182,8 @@ public abstract class Character : NetworkBehaviour
 	public void UseAbility (int index)
 	{
 		abilities [index].UseAbility ();
-	}
+        abilities[index].StartTimer();
+    }
 
 	public void OnAbilityExpired (int index)
 	{

@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 54639691184738556}
   - component: {fileID: 114444785166050088}
   - component: {fileID: 114273111101482220}
+  - component: {fileID: 114693842197349822}
   m_Layer: 10
   m_Name: Dummy
   m_TagString: Dummy
@@ -1393,6 +1394,7 @@ MonoBehaviour:
   jumpVelMod: 0.01
   rb: {fileID: 54639691184738556}
   mainCollider: {fileID: 136700399817371662}
+  allies: 
   hitMarker: {fileID: 0}
   timerLbl: {fileID: 0}
   healthBar: {fileID: 0}
@@ -1412,9 +1414,12 @@ MonoBehaviour:
   grounded: 0
   frozen: 1
   freezeLook: 1
+  camHolder: {fileID: 0}
   cam: {fileID: 20284124293510144}
   headPos: {fileID: 4360506247612714}
   muzzlePos: {fileID: 0}
+  gunAnim: {fileID: 0}
+  gun: {fileID: 0}
   powerups: []
 --- !u!114 &114268208518653178
 MonoBehaviour:
@@ -1460,8 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895f2380c71dcd745bab38236782522e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  allies: []
+  id: 2
   handler: {fileID: 114228954603156994}
   maxHealth: 100
   health: 100
@@ -1470,6 +1474,7 @@ MonoBehaviour:
   primaryProj: {fileID: 0}
   primaryDelay: 2
   primaryRange: 100
+  grabberPrefab: {fileID: 0}
 --- !u!114 &114302225125165736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1896,6 +1901,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114693842197349822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1091020236190704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverControl: 0
+  testcontrol: 0
 --- !u!114 &114717304682420332
 MonoBehaviour:
   m_ObjectHideFlags: 1

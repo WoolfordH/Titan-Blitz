@@ -6,9 +6,10 @@ using UnityEngine.Networking;
 
 public class CharacterHeavy : Character {
 
+    public GameObject shieldPrefab;
 
-	// Use this for initialization
-	protected override void Start () {
+    // Use this for initialization
+    protected override void Start () {
 		base.Start ();
 		//handler = GetComponent<CharacterHandler> ();
 
@@ -16,7 +17,7 @@ public class CharacterHeavy : Character {
 
 		primaryRange = 2f;
 
-		abilities [0] = new AbilityShield (this);
+		abilities [0] = new AbilityShield (this, shieldPrefab);
 		abilities [1] = new AbilityDrone(this);
 		abilities [2] = new AbilityDrone(this);
 

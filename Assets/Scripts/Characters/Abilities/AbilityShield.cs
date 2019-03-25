@@ -13,6 +13,12 @@ public class AbilityShield : Ability {
         caster = c;
     }
 
+    public AbilityShield(Character c, GameObject prefab)
+    {
+        caster = c;
+        shieldPrefab = prefab;
+    }
+
     public override void Init()
 	{
 		name = "Shield";

@@ -28,14 +28,13 @@ public class Grabber : NetworkBehaviour {
 	Transform otherRoot;
     Vector3 previousPosition;
 
-	public void Init (Character a_owner, float a_maxDist, Vector3 a_dir, float a_speed, Vector3 initVelocity) 
+	public void Init (Character a_owner, Vector3 a_dir, Vector3 initVelocity) 
 	{
 		rb = GetComponent<Rigidbody> ();
 
 		owner = a_owner;
-		maxDist = a_maxDist;
 		dir = a_dir;
-		speed = a_speed * owner.handler.speed;
+		speed *= owner.handler.speed;
 
 		initPos = transform.position;
 
@@ -129,8 +128,14 @@ public class Grabber : NetworkBehaviour {
 		{
 			rb.velocity = Vector3.zero;
 
-			//move player
-			Vector3 dirFromPlayer = (transform.position - owner.handler.cam.transform.position).normalized;
+            //jump un petite peux
+            owner.handler.transform.position += new Vector3(0f, .5f, 0f);
+            //gun bob animation
+            owner.handler.gunAnim.SetBool("moving", false);
+            owner.handler.grounded = false;
+
+            //move player
+            Vector3 dirFromPlayer = (transform.position - owner.handler.cam.transform.position).normalized;
 			owner.handler.Freeze (false);
 			owner.handler.rb.useGravity = false;
 			owner.handler.rb.velocity = dirFromPlayer * speed * Time.deltaTime;
