@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114181306142944382}
   - component: {fileID: 20130471176479402}
   - component: {fileID: 114568105299268744}
-  - component: {fileID: 114052795624130066}
+  - component: {fileID: 114365250968686628}
   m_Layer: 0
   m_Name: Spectator
   m_TagString: Untagged
@@ -80,7 +80,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1736500218235190}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -152,27 +152,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1671173688223032}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114052795624130066
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1736500218235190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114181306142944382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,6 +168,20 @@ MonoBehaviour:
   normalMoveSpeed: 10
   slowMoveFactor: 0.25
   fastMoveFactor: 3
+--- !u!114 &114365250968686628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1736500218235190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkedTransform: {fileID: 0}
+  serverControl: 0
+  testcontrol: 0
 --- !u!114 &114568105299268744
 MonoBehaviour:
   m_ObjectHideFlags: 1
