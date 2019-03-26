@@ -16,16 +16,22 @@ enum ControlPointState
     //Neutral
 }
 
+//[ExecuteInEditMode]
 public class ControlPoint : NetworkBehaviour
 {
     private int pointIdentity;
     private ControlPointState controlState = ControlPointState.inactive;
-    private float capturePercent = 0; //positive for team 1, negative for team 2
+    [Range(-100f, 100f)]
+    public float capturePercent = 0; //positive for team 1, negative for team 2
+    [Tooltip("Speed in seconds that it takes to capture the point")]
     public float captureRate;
+    [Tooltip("Increase in capture speed per additional player")]
     public float additionalPlayerMultiplier;
     //gameobject or something for the capture animation stuff
 
     public Collider pointCollider;
+    public ParticleSystem psMain;
+    ParticleSystem[] psAux;
 
     private GameObject[] playersOnPoint = new GameObject[6];
     private int playersOnPointCount = 0;
@@ -33,6 +39,8 @@ public class ControlPoint : NetworkBehaviour
 
     //visualisation 
     public Material mat;
+    Color colour;
+    public Gradient grad;
 
     // Use this for initialization
     void Start ()
@@ -45,6 +53,10 @@ public class ControlPoint : NetworkBehaviour
         {
             throw new Exception("No collider assigned to control point");
         }
+
+        Activate();
+        psMain = GetComponent<ParticleSystem>();
+        CalculateColour();
         //Material mat = this.GetComponent<Material>();
     }
 
@@ -60,23 +72,28 @@ public class ControlPoint : NetworkBehaviour
         {
             if (isServer)
             {
-
-
+        
+        
                 CaptureChange();
-
-                if (capturePercent > 100)
+        
+                if (capturePercent >= 100)
                 {
                     //team 1 capture
                     CTPManager.current.CapturePoint(1, pointIdentity);
                     
                 }
-                else if (capturePercent < -100)
+                else if (capturePercent <= -100)
                 {
                     //team 2 capture
                 }
             }
         }
-        Visualise();
+
+        //if (controlState == ControlPointState.inactive)
+        //{
+        //    Activate();
+        //}
+        CalculateColour();
     }
 
     private void Visualise()
@@ -129,8 +146,9 @@ public class ControlPoint : NetworkBehaviour
 
         }
 
+        newPercent = Mathf.Clamp(newPercent, -100f, 100f);
 
-        if(newPercent != capturePercent)
+        if (newPercent != capturePercent)
         {
             RpcUpdateCapturePercent(newPercent);
         }
@@ -153,13 +171,69 @@ public class ControlPoint : NetworkBehaviour
         playersOnPointCount = 0;
         playersOnPoint = new GameObject[playersOnPoint.Length];
         pointCollider.enabled = true;
+        psMain.Play();
         controlState = ControlPointState.active;
     }
 
     public void Deactivate()
     {
         pointCollider.enabled = false;
+        psMain.Stop();
         controlState = ControlPointState.inactive;
+    }
+
+
+    void CalculateColour()
+    {
+        if (controlState == ControlPointState.active)
+        {
+            colour = grad.Evaluate(((capturePercent / 100f)+1f)/2f);
+        }
+
+        SetColour();
+    }
+
+    void SetColour()
+    { 
+
+        ParticleSystem.MainModule main = psMain.main;
+        main.startColor = new Color(colour.r, colour.g, colour.b, main.startColor.color.a);
+
+        foreach (ParticleSystem ps in psMain.transform.GetComponentsInChildren<ParticleSystem>())
+        {
+            ParticleSystem.MainModule auxMain = ps.main;
+
+            if (ps.gameObject.name == "Rings Inner")
+            {
+                Color col = new Color(colour.r, colour.g, colour.b, auxMain.startColor.color.a);
+
+                float h, s, v;
+                Color.RGBToHSV(col, out h, out s, out v);
+                h -= .05f;
+                s += .3f;
+                v -= .2f;
+                col = Color.HSVToRGB(h, s, v);
+
+                auxMain.startColor = col;
+                //ps.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = col;
+            }
+            else if (ps.gameObject.name == "Energy Wave" || ps.gameObject.name == "Center" || ps.gameObject.name == "Particles" || ps.gameObject.name == "Particles Stretched")
+            {
+                Color col = new Color(colour.r, colour.g, colour.b, auxMain.startColor.color.a);
+
+                Color col1 = new Color(col.r * 2f, col.g * 2f, col.b + .1f, col.a);
+                Color col2 = new Color(col.r, col.g * 2f, col.b + .3f, col.a);
+
+                ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(col1, col2);
+                grad.mode = ParticleSystemGradientMode.TwoColors;
+
+                auxMain.startColor = grad;
+            }
+            else
+            {
+                auxMain.startColor = new Color(colour.r, colour.g, colour.b, auxMain.startColor.color.a);
+            }
+        }
     }
 
 

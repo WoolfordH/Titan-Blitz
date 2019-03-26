@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\GlowShaderScripts\MainCamXRayEffect.cs" />
     <Compile Include="Assets\Scripts\LobbyMenu.cs" />
     <Compile Include="Assets\Scripts\Networking\Network_Transform.cs" />
+    <Compile Include="Assets\Scripts\Networking\Network_Transform1.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkingHUD.cs" />
     <Compile Include="Assets\Scripts\Networking\PlayerConnection.cs" />
     <Compile Include="Assets\Scripts\Networking\ServerLog.cs" />
