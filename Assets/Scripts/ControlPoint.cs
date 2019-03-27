@@ -94,6 +94,8 @@ public class ControlPoint : NetworkBehaviour
         //    Activate();
         //}
         CalculateColour();
+
+
     }
 
     private void Visualise()
@@ -171,7 +173,7 @@ public class ControlPoint : NetworkBehaviour
         playersOnPointCount = 0;
         playersOnPoint = new GameObject[playersOnPoint.Length];
 
-
+        RpcActivate();
     }
 
     [ClientRpc]
