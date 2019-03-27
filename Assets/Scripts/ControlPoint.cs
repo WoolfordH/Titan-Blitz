@@ -170,6 +170,13 @@ public class ControlPoint : NetworkBehaviour
         capturePercent = 0;
         playersOnPointCount = 0;
         playersOnPoint = new GameObject[playersOnPoint.Length];
+
+
+    }
+
+    [ClientRpc]
+    private void RpcActivate()
+    {
         pointCollider.SetActive(true);
         psMain.Play();
         controlState = ControlPointState.active;

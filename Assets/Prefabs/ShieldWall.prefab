@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33335427098821032}
   - component: {fileID: 23245189148785808}
   - component: {fileID: 65814208986473946}
+  - component: {fileID: 114816959571838980}
+  - component: {fileID: 114243373553118958}
   m_Layer: 0
   m_Name: ShieldWall
   m_TagString: Untagged
@@ -96,3 +98,49 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114243373553118958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1951781798440540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkedTransform: {fileID: 0}
+  serverControl: 0
+  testcontrol: 0
+--- !u!114 &114816959571838980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1951781798440540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 35
+    i1: 19
+    i2: 6
+    i3: 85
+    i4: 241
+    i5: 73
+    i6: 201
+    i7: 36
+    i8: 25
+    i9: 60
+    i10: 36
+    i11: 10
+    i12: 124
+    i13: 66
+    i14: 252
+    i15: 231
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

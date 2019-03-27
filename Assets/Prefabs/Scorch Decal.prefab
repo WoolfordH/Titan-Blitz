@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4110868266967852}
   - component: {fileID: 33395562584828120}
   - component: {fileID: 23480086929799428}
+  - component: {fileID: 114901074082486678}
+  - component: {fileID: 114138169316141074}
   m_Layer: 0
   m_Name: Scorch Decal
   m_TagString: Untagged
@@ -83,3 +85,49 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1146539286188952}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114138169316141074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1146539286188952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkedTransform: {fileID: 0}
+  serverControl: 0
+  testcontrol: 0
+--- !u!114 &114901074082486678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1146539286188952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 146
+    i1: 50
+    i2: 165
+    i3: 172
+    i4: 9
+    i5: 150
+    i6: 93
+    i7: 68
+    i8: 249
+    i9: 94
+    i10: 36
+    i11: 252
+    i12: 54
+    i13: 16
+    i14: 210
+    i15: 36
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

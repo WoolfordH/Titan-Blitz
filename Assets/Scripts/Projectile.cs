@@ -102,6 +102,7 @@ public class Projectile : NetworkBehaviour {
                                 if (GameHandler.current.groundLayer == (GameHandler.current.groundLayer | (1 << other.gameObject.layer)))
                                 {
                                     GameObject decal = Instantiate(GameHandler.current.scorchPrefab, other.ClosestPoint(transform.position) + normal * 0.01f, Quaternion.LookRotation(-normal));
+                                    NetworkServer.Spawn(decal);
                                     float randomSize = Random.Range(decalSize - 0.5f, decalSize + 0.5f);
                                     decal.transform.localScale = new Vector3(randomSize, randomSize, randomSize);
                                 }
