@@ -126,7 +126,7 @@ public class Grabber : NetworkBehaviour {
 			rb.velocity = dirBack * speed * Time.deltaTime;
 		}
 		else if (grappleType == GrappleType.Grapple)
-		{
+		{ 
 			rb.velocity = Vector3.zero;
 
             owner.GetComponentInChildren<Network_Transform>().CmdTakeServerControl();
@@ -173,7 +173,7 @@ public class Grabber : NetworkBehaviour {
                         }
                     }
 
-                    Return();
+                    Return(); 
                 }
                 else if (otherChar)
                 {

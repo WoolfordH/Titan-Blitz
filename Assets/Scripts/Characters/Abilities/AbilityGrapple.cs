@@ -9,16 +9,16 @@ public class AbilityGrapple : Ability {
 	public float grabberMaxDist;
 	public float grabberSpeed;
 
-    public AbilityGrapple(Character c)
-    {
-        caster = c;
-    }
-
-    public AbilityGrapple(Character c, GameObject grabber)
-    {
-        caster = c;
-        grabberPrefab = grabber;
-    }
+    //public AbilityGrapple(Character c)
+    //{
+    //    caster = c;
+    //}
+    //
+    //public AbilityGrapple(Character c, GameObject grabber)
+    //{
+    //    caster = c;
+    //    grabberPrefab = grabber;
+    //}
 
     public override void Init()
 	{

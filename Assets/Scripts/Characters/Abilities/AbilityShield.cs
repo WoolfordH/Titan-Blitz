@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class AbilityShield : Ability {
 
@@ -8,16 +9,16 @@ public class AbilityShield : Ability {
 	public Vector3 shieldPosition = new Vector3(0f, 1.3f, 1.8f);
 	GameObject shield;
 
-    public AbilityShield(Character c)
-    {
-        caster = c;
-    }
-
-    public AbilityShield(Character c, GameObject prefab)
-    {
-        caster = c;
-        shieldPrefab = prefab;
-    }
+    //public AbilityShield(Character c)
+    //{
+    //    caster = c;
+    //}
+    //
+    //public AbilityShield(Character c, GameObject prefab)
+    //{
+    //    caster = c;
+    //    shieldPrefab = prefab;
+    //}
 
     public override void Init()
 	{
@@ -35,11 +36,12 @@ public class AbilityShield : Ability {
 		//destroys the current shield (if any)
 		if (shield)
 		{
-			GameObject.Destroy (shield);
+			NetworkServer.Destroy (shield);
 		}
 
 		//places new shield
 		shield = GameObject.Instantiate(shieldPrefab, caster.transform.TransformPoint(shieldPosition), caster.transform.rotation);
+        NetworkServer.Spawn(shield); 
 	}
 
 	public override void AbilityExpired ()

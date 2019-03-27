@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AbilityDrone : Ability {
 
-    public AbilityDrone(Character c)
-    {
-        caster = c;
-    }
+    //public AbilityDrone(Character c)
+    //{
+    //    caster = c;
+    //}
 
 	public override void Init()
 	{

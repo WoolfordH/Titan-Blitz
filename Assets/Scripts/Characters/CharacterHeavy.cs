@@ -17,9 +17,9 @@ public class CharacterHeavy : Character {
 
 		primaryRange = 2f;
 
-		abilities [0] = new AbilityShield (this, shieldPrefab);
-		abilities [1] = new AbilityDrone(this);
-		abilities [2] = new AbilityDrone(this);
+		//abilities [0] = new AbilityShield (this, shieldPrefab);
+		//abilities [1] = new AbilityDrone(this);
+		//abilities [2] = new AbilityDrone(this);
 
         InitialiseAbilities();
 
