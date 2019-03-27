@@ -740,6 +740,8 @@ GameObject:
   - component: {fileID: 114497083194911570}
   - component: {fileID: 114134950994087758}
   - component: {fileID: 114089181516358910}
+  - component: {fileID: 114183384991093434}
+  - component: {fileID: 114299812575256146}
   m_Layer: 10
   m_Name: PlayerLight
   m_TagString: Untagged
@@ -1982,6 +1984,10 @@ MonoBehaviour:
     type: 2}
   primaryDelay: 0.1
   primaryRange: 100
+  abilities:
+  - {fileID: 114183384991093434}
+  - {fileID: 114299812575256146}
+  - {fileID: 114183384991093434}
   grabberPrefab: {fileID: 1587647187849730, guid: eee3839ccbec5924cba05556f8151f38,
     type: 2}
 --- !u!114 &114078345724805418
@@ -2125,6 +2131,27 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &114183384991093434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1566720088552854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e324ee3953653e4682ba127c67198dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caster: {fileID: 114068060228849280}
+  name: Grapple
+  cooldown: 0
+  duration: 0
+  timer: 0
+  active: 0
+  grabberPrefab: {fileID: 1587647187849730, guid: eee3839ccbec5924cba05556f8151f38,
+    type: 2}
+  grabberMaxDist: 50
+  grabberSpeed: 1
 --- !u!114 &114215644067742996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2233,6 +2260,25 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114299812575256146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1566720088552854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9412c618cebc140958301376a0e85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caster: {fileID: 114068060228849280}
+  name: XRay
+  cooldown: 0
+  duration: 0
+  timer: 0
+  active: 0
+  XRayEffect: {fileID: 114029406594782046}
+  XRayFadeSpeed: 1
 --- !u!114 &114326375158568248
 MonoBehaviour:
   m_ObjectHideFlags: 1

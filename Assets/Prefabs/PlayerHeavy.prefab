@@ -41,6 +41,8 @@ GameObject:
   - component: {fileID: 114629616625566534}
   - component: {fileID: 114285126121678648}
   - component: {fileID: 114472526272210198}
+  - component: {fileID: 114154560621555340}
+  - component: {fileID: 114179166191260874}
   m_Layer: 10
   m_Name: PlayerHeavy
   m_TagString: Untagged
@@ -1946,6 +1948,26 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &114154560621555340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023560348404292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3495069ef45d912499eb4b2aab226bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caster: {fileID: 0}
+  name: 
+  cooldown: 0
+  duration: 0
+  timer: 0
+  active: 0
+  shieldPrefab: {fileID: 1951781798440540, guid: 23130655f149c924193c240a7c42fce7,
+    type: 2}
+  shieldPosition: {x: 0, y: 1.3, z: 1.8}
 --- !u!114 &114161130915533834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2000,6 +2022,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114179166191260874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023560348404292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c651d897bb9f6f94595565c7bded7670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caster: {fileID: 0}
+  name: 
+  cooldown: 0
+  duration: 0
+  timer: 0
+  active: 0
 --- !u!114 &114192238101189456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2561,6 +2600,10 @@ MonoBehaviour:
     type: 2}
   primaryDelay: 5
   primaryRange: 100
+  abilities:
+  - {fileID: 114154560621555340}
+  - {fileID: 114179166191260874}
+  - {fileID: 114179166191260874}
   shieldPrefab: {fileID: 1951781798440540, guid: 23130655f149c924193c240a7c42fce7,
     type: 2}
 --- !u!114 &114607263777764552

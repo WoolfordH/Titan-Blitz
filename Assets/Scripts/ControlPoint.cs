@@ -23,7 +23,7 @@ public class ControlPoint : NetworkBehaviour
     private ControlPointState controlState = ControlPointState.inactive;
     [Range(-100f, 100f)]
     public float capturePercent = 0; //positive for team 1, negative for team 2
-    [Tooltip("Speed in seconds that it takes to capture the point")]
+    [Tooltip("Percentage per second to capture the point")]
     public float captureRate;
     [Tooltip("Increase in capture speed per additional player")]
     public float additionalPlayerMultiplier;

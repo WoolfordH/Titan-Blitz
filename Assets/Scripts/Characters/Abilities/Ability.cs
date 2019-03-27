@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public abstract class Ability
+public abstract class Ability : NetworkBehaviour
 {
+    [HideInInspector]
 	public Character caster;
 
-	public string name;
-	public float cooldown;
-	public float duration; //must always be less than cooldown
-	public float timer;
-	public bool active;
+    [HideInInspector]
+    public string name;
+    [HideInInspector]
+    public float cooldown;
+    [HideInInspector]
+    public float duration; //must always be less than cooldown
+    [HideInInspector]
+    public float timer;
+    [HideInInspector]
+    public bool active;
 
 	public void StartTimer()
 	{
@@ -32,7 +39,12 @@ public abstract class Ability
 		active = a_active;
 	}
 
-	public abstract void Init ();
+    private void Start()
+    {
+        caster = GetComponent<Character>();
+    }
+
+    public abstract void Init ();
 
 	public virtual void UseAbility()
 	{

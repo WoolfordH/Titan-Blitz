@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1920632282015302}
+  m_IsPrefabParent: 1
+--- !u!1 &1920632282015302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4911512161447192}
+  - component: {fileID: 114465556060278466}
+  m_Layer: 0
+  m_Name: GameHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4911512161447192
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1920632282015302}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114465556060278466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1920632282015302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1157695b5887914fa13bf6769c063cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeRemaining: 300
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  projectileLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  shootableLayer:
+    serializedVersion: 2
+    m_Bits: 4294960857
+  bloodSpurt: {fileID: 1592258025033380, guid: e604521c5b86bfd4d809c838458de28b, type: 2}
+  projectile: {fileID: 1296225432553908, guid: c099ad72f4362ee4594051f616d3f7a0, type: 2}
+  damageIndicator: {fileID: 1574950968773752, guid: db3b0f09352ca3641b1a574cc1e84a2e,
+    type: 2}
+  scorchPrefab: {fileID: 1146539286188952, guid: 9232a5ac09965d44f95e24fc3610d224,
+    type: 2}
+  PowerupExplosion: {fileID: 1163380099609982, guid: 449348aa03d629446b8a4457a34eba89,
+    type: 2}
+  playerCam: {fileID: 0}

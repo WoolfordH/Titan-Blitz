@@ -6,11 +6,14 @@ public class AbilityXRay : Ability {
 
 	public MainCamXRayEffect XRayEffect;
 	public float XRayFadeSpeed = 1f;
+    bool fading = false;
+    bool fadeIn = false;
+    float fadeTimer;
 
-    public AbilityXRay(Character c)
-    {
-        caster = c;
-    }
+    //public AbilityXRay(Character c)
+    //{
+    //    caster = c;
+    //}
 
     public override void Init()
 	{
@@ -27,16 +30,56 @@ public class AbilityXRay : Ability {
 
 	public override void UseAbility ()
 	{
-		caster.StartCoroutine (FadeXRay(true));
-	}
+        //StartCoroutine (FadeXRay(true));
+        fading = true;
+        fadeIn = true;
+        fadeTimer = 0f;
+    }
 
 	public override void AbilityExpired ()
 	{
-		caster.StartCoroutine (FadeXRay(false));
-	}
+        //StartCoroutine (FadeXRay(false));
+        fading = true;
+        fadeIn = false;
+        fadeTimer = 1f;
+    }
+
+    void Update()
+    {
+        if (fading)
+        {
+            if (fadeIn)
+            {
+                if (fadeTimer < 1f)
+                {
+                    XRayEffect.effectAmount = fadeTimer;
+                    fadeTimer += XRayFadeSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    fadeTimer = 1f;
+                    fading = false;
+                }
+            }
+            else
+            {
+                if (fadeTimer >= 0f)
+                {
+                    XRayEffect.effectAmount = fadeTimer;
+                    fadeTimer -= XRayFadeSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    fadeTimer = 0f;
+                    fading = false;
+                }
+            }
+        }
+
+    }
 
 
-	IEnumerator FadeXRay(bool fadeIn)
+    IEnumerator FadeXRay(bool fadeIn)
 	{
 		if (fadeIn)
 		{
@@ -46,6 +89,8 @@ public class AbilityXRay : Ability {
 			{
 				XRayEffect.effectAmount = timer;
 				timer += XRayFadeSpeed * Time.deltaTime;
+
+                Debug.Log("Fade in: " + timer.ToString());
 
 				yield return new WaitForEndOfFrame();
 			}
@@ -59,7 +104,9 @@ public class AbilityXRay : Ability {
 				XRayEffect.effectAmount = timer;
 				timer -= XRayFadeSpeed * Time.deltaTime;
 
-				yield return new WaitForEndOfFrame();
+                Debug.Log("Fade out: " + timer.ToString());
+
+                yield return new WaitForEndOfFrame();
 			}
 		}
 	}
