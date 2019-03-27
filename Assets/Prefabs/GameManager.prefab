@@ -55,12 +55,12 @@ MonoBehaviour:
   lobbyUI: {fileID: 0}
   characterPrefabs:
   - {fileID: 1736500218235190, guid: 1e8b0d48b42634a40a4a150748e07316, type: 2}
-  - {fileID: 1397254270310452, guid: 33641c5a63183814ab95f857872fd566, type: 2}
-  - {fileID: 1397254270310452, guid: 3c1dd8c320fb5bc45945aa6ab780a9c2, type: 2}
-  - {fileID: 1397254270310452, guid: 36b28708ea5a93e42a812f9265499e19, type: 2}
+  - {fileID: 1566720088552854, guid: 320cb1307c2f21946a6bf8f6991eef2f, type: 2}
+  - {fileID: 1023560348404292, guid: 7a726cfc4f2f11949bb3945e215c6fd6, type: 2}
   lobbyCam: {fileID: 0}
-  team1SpawnPoint: {x: -217.36, y: 11.18, z: 18.37}
-  team2SpawnPoint: {x: -205.11, y: 11.18, z: 23.13}
+  team1SpawnPoint: {x: -202, y: 11.5, z: 55}
+  team2SpawnPoint: {x: -190, y: 11.5, z: 55}
+  respawnTime: 5
 --- !u!114 &114966842317553414
 MonoBehaviour:
   m_ObjectHideFlags: 1
