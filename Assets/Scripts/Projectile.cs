@@ -75,65 +75,68 @@ public class Projectile : NetworkBehaviour {
         {
             if (other.gameObject.tag != "Projectile")
             {
-                if (!owners.Exists(x => x.root == other.transform.root)) //if it hits a collider that is not in the list of owners, dissipate
+                if (GameHandler.current.shootableLayer == (GameHandler.current.shootableLayer | (1 << other.gameObject.layer)))
                 {
-                    Vector3 startPos = transform.position - (transform.forward * 1.3f);
-
-                    //Debug.DrawRay(startPos, (transform.forward * 3), Color.blue, 10);
-
-                    List<RaycastHit> hits = new List<RaycastHit>(Physics.RaycastAll(startPos, transform.forward, 3f));
-
-                    //raycast from adjusted position to the collider and readjust projectile position so that effect does not start inside object
-
-                    if (hits.Count > 0)
+                    if (!owners.Exists(x => x.root == other.transform.root)) //if it hits a collider that is not in the list of owners, dissipate
                     {
-                        Vector3 normal, point;
+                        Vector3 startPos = transform.position - (transform.forward * 1.3f);
 
-                        if (hits.Exists(x => x.collider == other))
+                        //Debug.DrawRay(startPos, (transform.forward * 3), Color.blue, 10);
+
+                        List<RaycastHit> hits = new List<RaycastHit>(Physics.RaycastAll(startPos, transform.forward, 3f));
+
+                        //raycast from adjusted position to the collider and readjust projectile position so that effect does not start inside object
+
+                        if (hits.Count > 0)
                         {
-                            Debug.Log("Projectile Realigned");
-                            int index = hits.FindIndex(x => x.collider == other);
-                            transform.position = hits[index].point;
-                            point = hits[index].point;
-                            normal = hits[index].normal;
+                            Vector3 normal, point;
 
-                            if (GameHandler.current.groundLayer == (GameHandler.current.groundLayer | (1 << other.gameObject.layer)))
+                            if (hits.Exists(x => x.collider == other))
                             {
-                                GameObject decal = Instantiate(GameHandler.current.scorchPrefab, other.ClosestPoint(transform.position) + normal * 0.01f, Quaternion.LookRotation(-normal));
-                                float randomSize = Random.Range(decalSize - 0.5f, decalSize + 0.5f);
-                                decal.transform.localScale = new Vector3(randomSize, randomSize, randomSize);
+                                Debug.Log("Projectile Realigned");
+                                int index = hits.FindIndex(x => x.collider == other);
+                                transform.position = hits[index].point;
+                                point = hits[index].point;
+                                normal = hits[index].normal;
+
+                                if (GameHandler.current.groundLayer == (GameHandler.current.groundLayer | (1 << other.gameObject.layer)))
+                                {
+                                    GameObject decal = Instantiate(GameHandler.current.scorchPrefab, other.ClosestPoint(transform.position) + normal * 0.01f, Quaternion.LookRotation(-normal));
+                                    float randomSize = Random.Range(decalSize - 0.5f, decalSize + 0.5f);
+                                    decal.transform.localScale = new Vector3(randomSize, randomSize, randomSize);
+                                }
+                            }
+                            else
+                            {
+                                point = transform.position;
+                                normal = -transform.forward;
+                            }
+
+                            //apply blast radius
+                            if (effectRadius > 0f)
+                            {
+                                Collider[] targets = Physics.OverlapSphere(transform.position, effectRadius);
+                                foreach (Collider target in targets)
+                                {
+                                    Debug.Log(target.transform.root.name + " was caught in the blast!");
+
+                                    //calculate multiplier based on distance from explosion
+                                    float multiplier = 1 - (Mathf.Clamp(Vector3.Distance(transform.position, target.ClosestPoint(transform.position)), 0f, effectRadius) / effectRadius);
+                                    int finalDmg = (int)(dmg.damage * multiplier);
+                                    target.gameObject.SendMessageUpwards("Hit", new HitData(new DAMAGE(finalDmg, dmg.armourPiercing), point, normal, senderID), SendMessageOptions.DontRequireReceiver);
+                                }
+                            }
+                            //or dont
+                            else
+                            {
+                                ServerLog.current.LogData("send hit");
+                                other.gameObject.SendMessageUpwards("Hit", new HitData(dmg, point, normal, senderID), SendMessageOptions.DontRequireReceiver);//needs changing
                             }
                         }
-                        else
-                        {
-                            point = transform.position;
-                            normal = -transform.forward;
-                        }
 
-                        //apply blast radius
-                        if (effectRadius > 0f)
-                        {
-                            Collider[] targets = Physics.OverlapSphere(transform.position, effectRadius);
-                            foreach (Collider target in targets)
-                            {
-                                Debug.Log(target.transform.root.name + " was caught in the blast!");
-
-                                //calculate multiplier based on distance from explosion
-                                float multiplier = 1 - (Mathf.Clamp(Vector3.Distance(transform.position, target.ClosestPoint(transform.position)), 0f, effectRadius) / effectRadius);
-                                int finalDmg = (int)(dmg.damage * multiplier);
-                                target.gameObject.SendMessageUpwards("Hit", new HitData(new DAMAGE(finalDmg, dmg.armourPiercing), point, normal, senderID), SendMessageOptions.DontRequireReceiver);
-                            }
-                        }
-                        //or dont
-                        else
-                        {
-                            ServerLog.current.LogData("send hit");
-                            other.gameObject.SendMessageUpwards("Hit", new HitData(dmg, point, normal, senderID), SendMessageOptions.DontRequireReceiver);//needs changing
-                        }
+                        //play destroy effect
+                        RpcDissipate();
                     }
-
-                    //play destroy effect
-                    RpcDissipate();
                 }
             }
         }
