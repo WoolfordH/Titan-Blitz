@@ -29,7 +29,7 @@ public class ControlPoint : NetworkBehaviour
     public float additionalPlayerMultiplier;
     //gameobject or something for the capture animation stuff
 
-    public Collider pointCollider;
+    public GameObject pointCollider;
     public ParticleSystem psMain;
     ParticleSystem[] psAux;
 
@@ -47,15 +47,15 @@ public class ControlPoint : NetworkBehaviour
     {
         if(pointCollider)
         {
-            pointCollider.enabled = false;
+            //pointCollider.enabled = false;
         }
         else
         {
             throw new Exception("No collider assigned to control point");
         }
 
-        Activate();
-        psMain = GetComponent<ParticleSystem>();
+        //Activate();
+        //psMain = GetComponent<ParticleSystem>();
         CalculateColour();
         //Material mat = this.GetComponent<Material>();
     }
@@ -170,14 +170,14 @@ public class ControlPoint : NetworkBehaviour
         capturePercent = 0;
         playersOnPointCount = 0;
         playersOnPoint = new GameObject[playersOnPoint.Length];
-        pointCollider.enabled = true;
+        pointCollider.SetActive(true);
         psMain.Play();
         controlState = ControlPointState.active;
     }
 
     public void Deactivate()
     {
-        pointCollider.enabled = false;
+        pointCollider.SetActive(false);
         psMain.Stop();
         controlState = ControlPointState.inactive;
     }
