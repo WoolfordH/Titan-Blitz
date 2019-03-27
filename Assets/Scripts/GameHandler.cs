@@ -13,6 +13,7 @@ public class GameHandler : MonoBehaviour {
 	public LayerMask groundLayer;
 	public LayerMask playerLayer;
     public LayerMask projectileLayer;
+    public LayerMask shootableLayer;
 
 	public GameObject bloodSpurt;
     public GameObject projectile;

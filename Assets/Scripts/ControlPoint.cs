@@ -197,7 +197,16 @@ public class ControlPoint : NetworkBehaviour
     { 
 
         ParticleSystem.MainModule main = psMain.main;
-        main.startColor = new Color(colour.r, colour.g, colour.b, main.startColor.color.a);
+        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[psMain.main.maxParticles];
+        int partCount = psMain.GetParticles(particles);
+
+        for (int i = 0; i < partCount; i++)
+        {
+            particles[i].color = new Color(colour.r, colour.g, colour.b, main.startColor.color.a); ;
+        }
+
+        psMain.SetParticles(particles, partCount);
+        
 
         foreach (ParticleSystem ps in psMain.transform.GetComponentsInChildren<ParticleSystem>())
         {
@@ -214,8 +223,17 @@ public class ControlPoint : NetworkBehaviour
                 v -= .2f;
                 col = Color.HSVToRGB(h, s, v);
 
-                auxMain.startColor = col;
+                //auxMain.startColor = col;
                 //ps.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = col;
+                particles = new ParticleSystem.Particle[ps.main.maxParticles];
+                partCount = ps.GetParticles(particles);
+
+                for (int i = 0; i < partCount; i++)
+                {
+                    particles[i].color = col;
+                }
+
+                ps.SetParticles(particles, partCount);
             }
             else if (ps.gameObject.name == "Energy Wave" || ps.gameObject.name == "Center" || ps.gameObject.name == "Particles" || ps.gameObject.name == "Particles Stretched")
             {
