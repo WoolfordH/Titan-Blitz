@@ -34,13 +34,14 @@ public class Grabber : NetworkBehaviour {
 
 		owner = a_owner;
 		dir = a_dir;
-		speed *= owner.handler.speed;
+        speed = 10; //*= owner.handler.speed;
 
-		initPos = transform.position;
 
-		//maxPos = owner.transform.position + (dir * maxDist);
-		//vecToMax = maxPos - owner.transform.position;
-		rb.velocity = initVelocity + (dir * speed * Time.deltaTime);
+        initPos = transform.position;
+
+        //maxPos = owner.transform.position + (dir * maxDist);
+        //vecToMax = maxPos - owner.transform.position;
+        rb.velocity = initVelocity + dir * speed; //(dir * speed * Time.deltaTime);
 	}
 	
 	// Update is called once per frame
@@ -65,17 +66,16 @@ public class Grabber : NetworkBehaviour {
                 else if (grappleType == GrappleType.Grapple)
                 {
                     //move player
-                    Vector3 dirFromPlayer = (transform.position - owner.handler.cam.transform.position).normalized;
-                    owner.handler.rb.velocity = dirFromPlayer * speed * Time.deltaTime;
-                }
+                    Vector3 dirToGrapple = (transform.position - owner.handler.cam.transform.position).normalized;
+                    owner.transform.position += dirToGrapple * speed * Time.deltaTime;
 
-                if (grappleType == GrappleType.Grapple)
-                {
                     if (owner.handler.grounded)
                     {
                         owner.handler.rb.velocity = Vector3.zero;
                         owner.handler.Unfreeze(); //let go of player
                         owner.handler.rb.useGravity = true;
+                        otherRoot.GetComponentInChildren<Network_Transform>().CmdRemoveServerControl();
+
 
                         NetworkServer.Destroy(transform.root.gameObject);
                     }
@@ -98,6 +98,7 @@ public class Grabber : NetworkBehaviour {
                         owner.handler.rb.velocity = Vector3.zero;
                         owner.handler.Unfreeze(); //let go of player
                         owner.handler.rb.useGravity = true;
+                        otherRoot.GetComponentInChildren<Network_Transform>().CmdRemoveServerControl();
                     }
 
                     NetworkServer.Destroy(transform.root.gameObject);
@@ -128,8 +129,10 @@ public class Grabber : NetworkBehaviour {
 		{
 			rb.velocity = Vector3.zero;
 
+            owner.GetComponentInChildren<Network_Transform>().CmdTakeServerControl();
+
             //jump un petite peux
-            owner.handler.transform.position += new Vector3(0f, .5f, 0f);
+            //owner.handler.transform.position += new Vector3(0f, .5f, 0f);
             //gun bob animation
             owner.handler.gunAnim.SetBool("moving", false);
             owner.handler.grounded = false;
@@ -208,6 +211,7 @@ public class Grabber : NetworkBehaviour {
                         owner.handler.rb.velocity = Vector3.zero;
                         owner.handler.Unfreeze(); //let go of player
                         owner.handler.rb.useGravity = true;
+                        owner.GetComponentInChildren<Network_Transform>().CmdRemoveServerControl(); //give the player back control of their position
                     }
 
                     NetworkServer.Destroy(transform.root.gameObject);

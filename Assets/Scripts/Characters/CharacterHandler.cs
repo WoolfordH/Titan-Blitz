@@ -501,7 +501,7 @@ public class CharacterHandler: NetworkBehaviour
 	[Server]
 	protected virtual void CmdHit(DAMAGE dmg)
 	{
-        ServerLog.current.LogData("CmdHit");
+        //ServerLog.current.LogData("CmdHit");
         if (enabled)
 		{
 			if (dmg.armourPiercing)
@@ -550,7 +550,7 @@ public class CharacterHandler: NetworkBehaviour
 
 	public virtual void Hit(HitData hit)
 	{
-        ServerLog.current.LogData("Hit Received");
+        //ServerLog.current.LogData("Hit Received");
         if (GameManager.current.GetPlayerObject(hit.senderID).GetComponentInChildren<CharacterHandler>().GetTeam() != GetTeam())
 		{
 			GameObject bloodSpurt = Instantiate(GameHandler.current.bloodSpurt, hit.hitPoint, Quaternion.LookRotation(hit.hitNormal));

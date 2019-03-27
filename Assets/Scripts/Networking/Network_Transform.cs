@@ -13,7 +13,7 @@ public class Network_Transform : NetworkBehaviour
     private bool testtest = false;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         if(!networkedTransform)
         {
@@ -28,7 +28,7 @@ public class Network_Transform : NetworkBehaviour
         {
             if (true)//moved enough or other checks
             {
-                ServerLog.current.LogData(networkedTransform.position.ToString());
+                //ServerLog.current.LogData(networkedTransform.position.ToString());
                 CmdUpdatePosition(networkedTransform.position);
                 CmdUpdateRotation(networkedTransform.localRotation);
             }
@@ -64,7 +64,7 @@ public class Network_Transform : NetworkBehaviour
         //if (!((!(hasAuthority && !serverControl)) || (!(isServer && serverControl))))
         if(!((hasAuthority && !serverControl) || (isServer && serverControl)))
         {
-            ServerLog.current.LogData(position.ToString());
+            //ServerLog.current.LogData(position.ToString());
             networkedTransform.position = position;
         }
     }

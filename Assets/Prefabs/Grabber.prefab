@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkedTransform: {fileID: 0}
   serverControl: 0
   testcontrol: 0
 --- !u!135 &135968724404947518

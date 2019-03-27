@@ -28,7 +28,7 @@ public class Network_Transform1 : NetworkBehaviour
         {
             if (true)//moved enough or other checks
             {
-                ServerLog.current.LogData(networkedTransform.position.ToString());
+                //ServerLog.current.LogData(networkedTransform.position.ToString());
                 CmdUpdatePosition(networkedTransform.position);
                 CmdUpdateRotation(networkedTransform.localRotation);
             }
@@ -64,7 +64,7 @@ public class Network_Transform1 : NetworkBehaviour
         //if (!((!(hasAuthority && !serverControl)) || (!(isServer && serverControl))))
         if(!((hasAuthority && !serverControl) || (isServer && serverControl)))
         {
-            ServerLog.current.LogData(position.ToString());
+            //ServerLog.current.LogData(position.ToString());
             networkedTransform.position = position;
         }
     }
