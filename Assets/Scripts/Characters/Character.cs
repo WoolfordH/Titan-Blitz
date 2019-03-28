@@ -60,6 +60,9 @@ public abstract class Character : NetworkBehaviour
 	public int maxArmour;
 	public int armour;
 
+    public float armourRegenSpeed;
+    public float armourRegenDelay;
+
 	public DAMAGE primaryDmg;
     protected float dmgMod = 1f;
     public GameObject primaryProj;
