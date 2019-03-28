@@ -13,7 +13,6 @@ public class CharacterHeavy : Character {
 		base.Start ();
 		//handler = GetComponent<CharacterHandler> ();
 
-		primaryDmg = new DAMAGE (30);
 
 		primaryRange = 2f;
 

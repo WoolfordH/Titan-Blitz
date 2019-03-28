@@ -64,6 +64,7 @@ public abstract class Character : NetworkBehaviour
     public float armourRegenDelay;
 
 	public DAMAGE primaryDmg;
+    public int initDamage;
     protected float dmgMod = 1f;
     public GameObject primaryProj;
 	protected float primaryTimer;
@@ -79,8 +80,8 @@ public abstract class Character : NetworkBehaviour
 	protected virtual void Start ()
     {
 		handler = GetComponent<CharacterHandler> ();
-
-	}
+        primaryDmg = new DAMAGE(initDamage);
+    }
 	
 	// Update is called once per frame
 	protected virtual void Update () 

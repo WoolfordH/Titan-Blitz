@@ -11,9 +11,7 @@ public class CharacterLight : Character {
     protected override void Start () {
 
 		base.Start ();
-		handler = GetComponent<CharacterHandler> ();
-
-		primaryDmg = new DAMAGE (2);
+		//handler = GetComponent<CharacterHandler> ();
 
 		primaryRange = 100f;
 

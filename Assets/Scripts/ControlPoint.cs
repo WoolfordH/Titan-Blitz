@@ -176,6 +176,7 @@ public class ControlPoint : NetworkBehaviour
     private void RpcActivate()
     {
         capturePercent = 0;
+        RpcUpdateCapturePercent(0);
         pointCollider.SetActive(true);
         psMain.Play();
         controlState = ControlPointState.active;
@@ -190,6 +191,7 @@ public class ControlPoint : NetworkBehaviour
     private void RpcDeactivate()
     {
         capturePercent = 0;
+        RpcUpdateCapturePercent(0);
         pointCollider.SetActive(false);
         psMain.Stop();
         controlState = ControlPointState.inactive;

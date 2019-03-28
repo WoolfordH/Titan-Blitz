@@ -1976,12 +1976,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   handler: {fileID: 114718233092882692}
-  maxHealth: 100
-  health: 100
+  maxHealth: 50
+  health: 50
   maxArmour: 100
   armour: 100
   armourRegenSpeed: 1
   armourRegenDelay: 1
+  initDamage: 10
   primaryProj: {fileID: 1296225432553908, guid: c099ad72f4362ee4594051f616d3f7a0,
     type: 2}
   primaryDelay: 0.1
