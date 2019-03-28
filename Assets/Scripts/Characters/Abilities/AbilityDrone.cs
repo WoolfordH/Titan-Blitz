@@ -26,6 +26,12 @@ public class AbilityDrone : Ability {
 
 	public override void UseAbility ()
 	{
+        CmdAbility();
+	}
+
+    [Command]
+    private void CmdAbility()
+    {
         if (drone)
         {
             NetworkServer.Destroy(drone);
@@ -34,7 +40,7 @@ public class AbilityDrone : Ability {
         drone = Instantiate(dronePrefab, caster.handler.cam.transform.position + (caster.handler.cam.transform.forward * 1f), Quaternion.LookRotation(caster.handler.cam.transform.forward, Vector3.up));
         drone.GetComponent<Drone>().owner = caster;
         NetworkServer.Spawn(drone);
-	}
+    }
 
 	public override void AbilityExpired ()
 	{

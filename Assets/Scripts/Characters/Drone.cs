@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Drone : MonoBehaviour {
+public class Drone : NetworkBehaviour {
 
 	public Transform muzzle;
 	public int damage;
@@ -26,16 +27,19 @@ public class Drone : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		CheckForTarget ();
-		UpdateTimer ();
+        if (isServer)
+        {
+            CheckForTarget();
+            UpdateTimer();
 
-		if (hasTarget)
-		{
-			if (readyToFire)
-			{
-				Fire ();
-			}
-		}
+            if (hasTarget)
+            {
+                if (readyToFire)
+                {
+                    Fire();
+                }
+            }
+        }
 	}
 		
 
@@ -127,6 +131,7 @@ public class Drone : MonoBehaviour {
         //}
 
 		Projectile proj = Instantiate(GameHandler.current.projectile, muzzle.position, muzzle.rotation).GetComponent<Projectile>();
+        NetworkServer.Spawn(proj.gameObject);
 		proj.owners.Add(this.transform);
 		proj.owners.Add(owner.transform);
         proj.senderID = owner.id;

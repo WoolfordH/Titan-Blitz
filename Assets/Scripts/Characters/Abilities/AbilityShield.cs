@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class AbilityShield : Ability {
+public class AbilityShield : Ability
+{
 
 	public GameObject shieldPrefab;
 	public Vector3 shieldPosition = new Vector3(0f, 1.3f, 1.8f);
@@ -33,16 +34,21 @@ public class AbilityShield : Ability {
 
 	public override void UseAbility ()
 	{
-		//destroys the current shield (if any)
-		if (shield)
-		{
-			NetworkServer.Destroy (shield);
-		}
+        CmdAbility();
+    }
 
-		//places new shield
-		shield = GameObject.Instantiate(shieldPrefab, caster.transform.TransformPoint(shieldPosition), caster.transform.rotation);
-        NetworkServer.Spawn(shield); 
-	}
+    private void CmdAbility()
+    {
+        //destroys the current shield (if any)
+        if (shield)
+        {
+            NetworkServer.Destroy(shield);
+        }
+
+        //places new shield
+        shield = GameObject.Instantiate(shieldPrefab, caster.transform.TransformPoint(shieldPosition), caster.transform.rotation);
+        NetworkServer.Spawn(shield);
+    }
 
 	public override void AbilityExpired ()
 	{
