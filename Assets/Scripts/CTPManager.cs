@@ -61,6 +61,8 @@ public class CTPManager : NetworkBehaviour
         if (state == CTPManagerState.inactive)
         {
             centrePoint.Activate();
+            team1Point.Deactivate();
+            team1Point.Deactivate();
             state = CTPManagerState.neutral;
         }
         else
@@ -92,40 +94,46 @@ public class CTPManager : NetworkBehaviour
         }
         else if(state == CTPManagerState.team1Advantage)
         {
-            if(pointIdentity == 2)
+            if (pointIdentity == 2) // team 2 point
             {
-                //team 1 victory
-                ServerLog.current.LogData("Team 1 victory");
-            }
-            else if(pointIdentity == 0)
-            {
-                //team2 push back
-                team2Point.Deactivate();
-                centrePoint.Activate();
-                state = CTPManagerState.neutral;
+                if (team == 1)
+                {
+                    //team 1 victory
+                    ServerLog.current.LogData("Team 1 victory");
+                }
+                else //team 2
+                {
+                    //team2 push back
+                    team2Point.Deactivate();
+                    centrePoint.Activate();
+                    state = CTPManagerState.neutral;
+                }
             }
             else
             {
-                throw new Exception("Team 1 point captured when it should be deactivated");
+                throw new Exception("an inactive capture point was just captured");
             }
         }
         else if(state == CTPManagerState.team2Advantage)
         {
-            if (pointIdentity == 1)
+            if (pointIdentity == 1) // team 1 point
             {
-                //team 2 victory
-                ServerLog.current.LogData("Team 2 victory");
-            }
-            else if (pointIdentity == 0)
-            {
-                //team1 push back
-                team2Point.Deactivate();
-                centrePoint.Activate();
-                state = CTPManagerState.neutral;
+                if (team == 2)
+                {
+                    //team 2 victory
+                    ServerLog.current.LogData("Team 2 victory");
+                }
+                else //team 1
+                {
+                    //team2 push back
+                    team1Point.Deactivate();
+                    centrePoint.Activate();
+                    state = CTPManagerState.neutral;
+                }
             }
             else
             {
-                throw new Exception("Team 2 point captured when it should be deactivated");
+                throw new Exception("an inactive capture point was just captured");
             }
         }
         else

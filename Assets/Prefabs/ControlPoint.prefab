@@ -151,8 +151,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979118772938270}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -104.21, y: 11.79, z: 26.49}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -149.49, y: 18.73, z: 40.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4325797463489174}
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capturePercent: 0
-  captureRate: 2
+  captureRate: 20
   additionalPlayerMultiplier: 3
   pointCollider: {fileID: 1357909151372396}
   psMain: {fileID: 198267174607488312}
@@ -22204,7 +22204,7 @@ ParticleSystem:
       type: 0
       properties: 0
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 1
     light: {fileID: 108498574326767530, guid: e7253fef6648ede4988b801546ca518c, type: 2}
     randomDistribution: 1

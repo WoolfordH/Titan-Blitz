@@ -169,17 +169,13 @@ public class ControlPoint : NetworkBehaviour
 
     public void Activate()
     {
-        //enable collider
-        capturePercent = 0;
-        playersOnPointCount = 0;
-        playersOnPoint = new GameObject[playersOnPoint.Length];
-
         RpcActivate();
     }
 
     [ClientRpc]
     private void RpcActivate()
     {
+        capturePercent = 0;
         pointCollider.SetActive(true);
         psMain.Play();
         controlState = ControlPointState.active;
@@ -187,6 +183,13 @@ public class ControlPoint : NetworkBehaviour
 
     public void Deactivate()
     {
+        RpcDeactivate();
+    }
+
+    [ClientRpc]
+    private void RpcDeactivate()
+    {
+        capturePercent = 0;
         pointCollider.SetActive(false);
         psMain.Stop();
         controlState = ControlPointState.inactive;
