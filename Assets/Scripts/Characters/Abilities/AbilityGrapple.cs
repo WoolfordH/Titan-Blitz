@@ -23,8 +23,6 @@ public class AbilityGrapple : Ability {
     public override void Init()
 	{
 		name = "Grapple";
-		cooldown = 10f;
-		duration = 5f;
 
 		timer = 0f;
 		active = false;
@@ -54,4 +52,9 @@ public class AbilityGrapple : Ability {
 	{
 
 	}
+
+    public override void ForceEnd()
+    {
+
+    }
 }

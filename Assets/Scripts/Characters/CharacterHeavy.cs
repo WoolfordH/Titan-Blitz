@@ -64,7 +64,7 @@ public class CharacterHeavy : Character {
         RaycastHit hit;
         Quaternion initRot = handler.gun.transform.rotation;
 
-        if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, ~GameHandler.current.projectileLayer))
+        if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, GameHandler.current.shootableLayer))
         {
             Debug.Log("Aim Aligned");
             handler.gun.transform.LookAt(hit.point);

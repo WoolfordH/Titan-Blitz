@@ -18,8 +18,6 @@ public class AbilityXRay : Ability {
     public override void Init()
 	{
 		name = "XRay";
-		cooldown = 10f;
-		duration = 5f;
 
 		timer = 0f;
 		active = false;
@@ -78,36 +76,13 @@ public class AbilityXRay : Ability {
 
     }
 
+    public override void ForceEnd()
+    {
+        XRayEffect.effectAmount = 0f;
+        fadeTimer = 0f;
+        fading = false;
 
-    IEnumerator FadeXRay(bool fadeIn)
-	{
-		if (fadeIn)
-		{
-			timer = 0;
-
-			while (timer <= 1)
-			{
-				XRayEffect.effectAmount = timer;
-				timer += XRayFadeSpeed * Time.deltaTime;
-
-                Debug.Log("Fade in: " + timer.ToString());
-
-				yield return new WaitForEndOfFrame();
-			}
-		}
-		else
-		{
-			timer = 1;
-
-			while (timer >= 0)
-			{
-				XRayEffect.effectAmount = timer;
-				timer -= XRayFadeSpeed * Time.deltaTime;
-
-                Debug.Log("Fade out: " + timer.ToString());
-
-                yield return new WaitForEndOfFrame();
-			}
-		}
-	}
+        timer = 0f;
+        active = false;
+    }
 }

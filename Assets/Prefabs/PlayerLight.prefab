@@ -2142,8 +2142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caster: {fileID: 114068060228849280}
   name: Grapple
-  cooldown: 0
-  duration: 0
+  cooldown: 10
+  duration: 5
   timer: 0
   active: 0
   grabberPrefab: {fileID: 1587647187849730, guid: eee3839ccbec5924cba05556f8151f38,
@@ -2271,8 +2271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caster: {fileID: 114068060228849280}
   name: XRay
-  cooldown: 0
-  duration: 0
+  cooldown: 20
+  duration: 5
   timer: 0
   active: 0
   XRayEffect: {fileID: 114029406594782046}

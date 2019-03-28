@@ -85,6 +85,7 @@ public class ControlPoint : NetworkBehaviour
                 else if (capturePercent <= -100)
                 {
                     //team 2 capture
+                    CTPManager.current.CapturePoint(2, pointIdentity);
                 }
             }
         }

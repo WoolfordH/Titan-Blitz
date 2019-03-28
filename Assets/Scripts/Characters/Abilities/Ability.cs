@@ -10,9 +10,7 @@ public abstract class Ability : NetworkBehaviour
 
     [HideInInspector]
     public string name;
-    [HideInInspector]
     public float cooldown;
-    [HideInInspector]
     public float duration; //must always be less than cooldown
     [HideInInspector]
     public float timer;
@@ -52,4 +50,6 @@ public abstract class Ability : NetworkBehaviour
 	}
 
 	public abstract void AbilityExpired ();
+
+    public abstract void ForceEnd();
 }

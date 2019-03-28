@@ -592,9 +592,11 @@ public class CharacterHandler: NetworkBehaviour
 	[ClientRpc]
 	private void RpcDie()
 	{
-		this.gameObject.SetActive(false);
+   		this.gameObject.SetActive(false);
 		if(hasAuthority)//if local player
 		{
+            character.ResetAbilities();
+
 			PlayerConnection.current.StartRespawnTimer();
 			cam.gameObject.SetActive(false);
 			GameManager.current.lobbyCam.SetActive(true);

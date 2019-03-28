@@ -24,8 +24,6 @@ public class AbilityShield : Ability
     public override void Init()
 	{
 		name = "Shield";
-		cooldown = 10f;
-		duration = 5f;
 
 		timer = 0f;
 		active = false;
@@ -54,4 +52,14 @@ public class AbilityShield : Ability
 	{
 		
 	}
+
+    public override void ForceEnd()
+    {
+        if (shield)
+        {
+            NetworkServer.Destroy(shield);
+        }
+        timer = 0f;
+        active = false;
+    }
 }

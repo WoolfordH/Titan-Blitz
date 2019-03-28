@@ -58,9 +58,9 @@ MonoBehaviour:
   - {fileID: 1566720088552854, guid: 320cb1307c2f21946a6bf8f6991eef2f, type: 2}
   - {fileID: 1023560348404292, guid: 7a726cfc4f2f11949bb3945e215c6fd6, type: 2}
   lobbyCam: {fileID: 0}
-  team1SpawnPoint: {x: -202, y: 11.5, z: 55}
-  team2SpawnPoint: {x: -190, y: 11.5, z: 55}
-  respawnTime: 5
+  team1SpawnPoint: {fileID: 0}
+  team2SpawnPoint: {fileID: 0}
+  respawnTime: 2
 --- !u!114 &114966842317553414
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -176,6 +176,14 @@ public abstract class Character : NetworkBehaviour
         }
     }
 
+    public void ResetAbilities()
+    {
+        for (int i = 0; i < abilities.Length; i++)
+        {
+            abilities[i].ForceEnd();
+        }
+    }
+
 
     public abstract void PrimaryAttack ();
 

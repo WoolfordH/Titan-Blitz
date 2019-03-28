@@ -16,8 +16,6 @@ public class AbilityDrone : Ability {
 	public override void Init()
 	{
 		name = "Drone";
-		cooldown = 10f;
-		duration = 5f;
 
 		timer = 0f;
 		active = false;
@@ -44,6 +42,20 @@ public class AbilityDrone : Ability {
 
 	public override void AbilityExpired ()
 	{
+        if (drone)
+        {
+            NetworkServer.Destroy(drone);
+        }
+    }
 
-	}
+    public override void ForceEnd()
+    {
+        if (drone)
+        {
+            NetworkServer.Destroy(drone);
+        }
+
+        timer = 0f;
+        active = false;
+    }
 }

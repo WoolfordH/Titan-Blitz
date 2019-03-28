@@ -34,8 +34,8 @@ public class GameManager : NetworkBehaviour
    
     public GameObject lobbyCam;
 
-    public Vector3 team1SpawnPoint;
-    public Vector3 team2SpawnPoint;
+    public Transform team1SpawnPoint;
+    public Transform team2SpawnPoint;
 
     public float respawnTime = 5.0f;
 
@@ -81,20 +81,8 @@ public class GameManager : NetworkBehaviour
                 PlayerConnection connection = players[i].connection;
 
                 int team = players[i].team;
-                Vector3 spawnPos;
-                if(team == 1)
-                {
-                    spawnPos = team1SpawnPoint;
-                }
-                else if(team == 2)
-                {
-                    spawnPos = team2SpawnPoint;
-                }
-                else //team 0 
-                {
-                    spawnPos = lobbyCam.transform.position;
-                }
-
+                Vector3 spawnPos = GetSpawnPos(team);
+               
                 players[i].playerObject = connection.SpawnPlayer(team, spawnPos, characterPrefabs[players[i].characterChoice]);
 
 
@@ -187,25 +175,33 @@ public class GameManager : NetworkBehaviour
 
     public Vector3 GetSpawnPos(int teamNum)
     {
-        Vector3 returnVector;
+        Vector3 spawnPos;
+        float minX, maxX, minZ, maxZ;
 
-        if(teamNum == 1)
+        if (teamNum == 1)
         {
-            returnVector = team1SpawnPoint;
+            minX = team1SpawnPoint.position.x - team1SpawnPoint.GetComponent<Collider>().bounds.extents.x;
+            maxX = team1SpawnPoint.position.x + team1SpawnPoint.GetComponent<Collider>().bounds.extents.x;
+            minZ = team1SpawnPoint.position.z - team1SpawnPoint.GetComponent<Collider>().bounds.extents.x;
+            maxZ = team1SpawnPoint.position.z + team1SpawnPoint.GetComponent<Collider>().bounds.extents.z;
+
+            spawnPos = new Vector3(UnityEngine.Random.Range(minX, maxX), team1SpawnPoint.position.y, UnityEngine.Random.Range(minZ, maxZ));
         }
-        else if(teamNum == 2)
+        else if (teamNum == 2)
         {
-            returnVector = team2SpawnPoint;
+            minX = team2SpawnPoint.position.x - team2SpawnPoint.GetComponent<Collider>().bounds.extents.x;
+            maxX = team2SpawnPoint.position.x + team2SpawnPoint.GetComponent<Collider>().bounds.extents.x;
+            minZ = team2SpawnPoint.position.z - team2SpawnPoint.GetComponent<Collider>().bounds.extents.x;
+            maxZ = team2SpawnPoint.position.z + team2SpawnPoint.GetComponent<Collider>().bounds.extents.z;
+
+            spawnPos = new Vector3(UnityEngine.Random.Range(minX, maxX), team2SpawnPoint.position.y, UnityEngine.Random.Range(minZ, maxZ));
         }
-        else
+        else //team 0 
         {
-            //spectator
-            returnVector = Vector3.zero;
+            spawnPos = lobbyCam.transform.position;
         }
 
-
-
-        return returnVector;
+        return spawnPos;
     }
 
     public float GetSpawnTime()
