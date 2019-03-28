@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class AbilityDrone : Ability {
+
+    public GameObject dronePrefab;
+    GameObject drone;
 
     //public AbilityDrone(Character c)
     //{
@@ -22,7 +26,14 @@ public class AbilityDrone : Ability {
 
 	public override void UseAbility ()
 	{
-		base.UseAbility ();
+        if (drone)
+        {
+            NetworkServer.Destroy(drone);
+        }
+
+        drone = Instantiate(dronePrefab, caster.handler.cam.transform.position + (caster.handler.cam.transform.forward * 1f), Quaternion.LookRotation(caster.handler.cam.transform.forward, Vector3.up));
+        drone.GetComponent<Drone>().owner = caster;
+        NetworkServer.Spawn(drone);
 	}
 
 	public override void AbilityExpired ()

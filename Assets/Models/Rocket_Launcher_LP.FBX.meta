@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 9afb6e30e5dec1f4aac19c6e23bbf72f
 ModelImporter:
   serializedVersion: 22
-=======
-guid: be6cc3e6145a2af43940ff9c8cf8ea1e
-ModelImporter:
-  serializedVersion: 23
->>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
   fileIDToRecycleName:
     100000: Back
     100002: Frame
@@ -47,6 +41,7 @@ ModelImporter:
     4300006: Back
     4300008: Scope
     4300010: Trims
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -81,10 +76,6 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-<<<<<<< HEAD
-=======
-    useSRGBMaterialColor: 1
->>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -102,22 +93,11 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-<<<<<<< HEAD
-=======
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
->>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-<<<<<<< HEAD
-=======
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
-    blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
->>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -132,15 +112,12 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-<<<<<<< HEAD
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
-=======
->>>>>>> 8999e3034d0cff671ba752c264fe2b57fb769c67
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

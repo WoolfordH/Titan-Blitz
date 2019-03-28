@@ -1,0 +1,9 @@
+Font;
+Agency FB
+
+Sizes;
+Current Ammo 48
+Reserve Ammo 30
+Timer        30
+Team Ammo    30
+Map Location 30

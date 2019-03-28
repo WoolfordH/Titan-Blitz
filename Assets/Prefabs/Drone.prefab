@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4461900746396662}
   - component: {fileID: 135888069757037600}
   - component: {fileID: 114960195849797738}
+  - component: {fileID: 114409122529968740}
+  - component: {fileID: 114796719766531570}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -206,6 +208,50 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114409122529968740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1045144852526966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 197
+    i1: 213
+    i2: 97
+    i3: 112
+    i4: 103
+    i5: 41
+    i6: 194
+    i7: 20
+    i8: 248
+    i9: 139
+    i10: 118
+    i11: 215
+    i12: 17
+    i13: 32
+    i14: 209
+    i15: 109
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114796719766531570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1045144852526966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleServerControl: 0
 --- !u!114 &114960195849797738
 MonoBehaviour:
   m_ObjectHideFlags: 1

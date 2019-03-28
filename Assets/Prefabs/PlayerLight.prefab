@@ -2102,8 +2102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverControl: 0
-  testcontrol: 0
+  toggleServerControl: 0
 --- !u!114 &114181787156351106
 MonoBehaviour:
   m_ObjectHideFlags: 1

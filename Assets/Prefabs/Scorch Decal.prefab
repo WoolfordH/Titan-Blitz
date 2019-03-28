@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23480086929799428}
   - component: {fileID: 114901074082486678}
   - component: {fileID: 114138169316141074}
+  - component: {fileID: 114768278950302362}
   m_Layer: 0
   m_Name: Scorch Decal
   m_TagString: Untagged
@@ -96,9 +97,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkedTransform: {fileID: 0}
-  serverControl: 0
-  testcontrol: 0
+  toggleServerControl: 0
+--- !u!114 &114768278950302362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1146539286188952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdfabe84be139b4784ec334b23efabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 2
+  fadeLength: 1
 --- !u!114 &114901074082486678
 MonoBehaviour:
   m_ObjectHideFlags: 1

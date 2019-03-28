@@ -2039,6 +2039,8 @@ MonoBehaviour:
   duration: 0
   timer: 0
   active: 0
+  dronePrefab: {fileID: 1045144852526966, guid: c5d561706729c214f88b76d71120d16d,
+    type: 2}
 --- !u!114 &114192238101189456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2213,8 +2215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverControl: 0
-  testcontrol: 0
+  toggleServerControl: 0
 --- !u!114 &114292874623891400
 MonoBehaviour:
   m_ObjectHideFlags: 1
