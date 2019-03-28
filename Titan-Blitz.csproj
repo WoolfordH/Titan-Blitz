@@ -314,15 +314,12 @@
     <Compile Include="Assets\Scripts\Characters\Abilities\AbilityGrapple.cs" />
     <Compile Include="Assets\Scripts\Characters\Abilities\AbilityShield.cs" />
     <Compile Include="Assets\Scripts\Characters\Abilities\AbilityXRay.cs" />
-    <Compile Include="Assets\Scripts\Characters\Assassin.cs" />
     <Compile Include="Assets\Scripts\Characters\Character.cs" />
     <Compile Include="Assets\Scripts\Characters\CharacterHandler.cs" />
     <Compile Include="Assets\Scripts\Characters\CharacterHeavy.cs" />
     <Compile Include="Assets\Scripts\Characters\CharacterLight.cs" />
     <Compile Include="Assets\Scripts\Characters\Drone.cs" />
-    <Compile Include="Assets\Scripts\Characters\Fighter.cs" />
     <Compile Include="Assets\Scripts\Characters\Grabber.cs" />
-    <Compile Include="Assets\Scripts\Characters\Tank.cs" />
     <Compile Include="Assets\Scripts\ControlPoint.cs" />
     <Compile Include="Assets\Scripts\CTPManager.cs" />
     <Compile Include="Assets\Scripts\DeathSphere.cs" />
@@ -334,8 +331,8 @@
     <Compile Include="Assets\Scripts\GlowShaderScripts\GlowReplacement.cs" />
     <Compile Include="Assets\Scripts\GlowShaderScripts\MainCamXRayEffect.cs" />
     <Compile Include="Assets\Scripts\LobbyMenu.cs" />
+    <Compile Include="Assets\Scripts\Networking\Child_Network_Transform.cs" />
     <Compile Include="Assets\Scripts\Networking\Network_Transform.cs" />
-    <Compile Include="Assets\Scripts\Networking\Network_Transform1.cs" />
     <Compile Include="Assets\Scripts\Networking\NetworkingHUD.cs" />
     <Compile Include="Assets\Scripts\Networking\PlayerConnection.cs" />
     <Compile Include="Assets\Scripts\Networking\ServerLog.cs" />
@@ -343,9 +340,12 @@
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\Scoreboard.cs" />
     <Compile Include="Assets\Unused\_CharacterController.cs" />
+    <Compile Include="Assets\Unused\Assassin.cs" />
     <Compile Include="Assets\Unused\CaptureTheFlagMode.cs" />
+    <Compile Include="Assets\Unused\Fighter.cs" />
     <Compile Include="Assets\Unused\Flag.cs" />
     <Compile Include="Assets\Unused\FlagStand.cs" />
+    <Compile Include="Assets\Unused\Tank.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Materials\Shaders\UIOverlay.shader" />

@@ -5,20 +5,17 @@ using UnityEngine.Networking;
 
 public class Network_Transform : NetworkBehaviour
 {
-    public Transform networkedTransform;
+    private Transform networkedTransform;
 
-    public bool serverControl = false;
+    private bool serverControl = false;
 
-    public bool testcontrol = false;
-    private bool testtest = false;
+    public bool toggleServerControl = false;
+    private bool toggleCheck = false;
 
     // Use this for initialization
     void Awake()
     {
-        if(!networkedTransform)
-        {
-            networkedTransform = this.transform;
-        }
+        networkedTransform = this.transform;
     }
 
     // Update is called once per frame
@@ -36,17 +33,17 @@ public class Network_Transform : NetworkBehaviour
 
 
         //debugging thing, allows server control to be given through inspector
-        if(testcontrol != testtest)
+        if(toggleServerControl != toggleCheck)
         {
-            if(testcontrol)
+            if(toggleServerControl)
             {
                 CmdTakeServerControl();
-                testtest = testcontrol;
+                toggleCheck = toggleServerControl;
             }
             else
             {
                 CmdRemoveServerControl();
-                testtest = testcontrol;
+                toggleCheck = toggleServerControl;
             }
         }
 

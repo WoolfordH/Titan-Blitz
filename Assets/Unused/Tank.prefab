@@ -1271,14 +1271,32 @@ MonoBehaviour:
   jumpVelMod: 0.01
   rb: {fileID: 0}
   mainCollider: {fileID: 136490649429355242}
+  allies: 
+  hitMarker: {fileID: 0}
+  timerLbl: {fileID: 0}
+  healthBar: {fileID: 0}
+  armourBar: {fileID: 0}
+  ultBar: {fileID: 0}
+  ammoLbl: {fileID: 0}
+  abl1Icon: {fileID: 0}
+  abl2Icon: {fileID: 0}
+  character: {fileID: 0}
+  ally1Avatar: {fileID: 0}
+  ally2Avatar: {fileID: 0}
+  avatarRT: {fileID: 0}
+  avatarCam: {fileID: 0}
   lookSpeed: 2
   minLookHeight: -60
   maxLookHeight: 60
   grounded: 0
   frozen: 0
   freezeLook: 0
+  camHolder: {fileID: 0}
   cam: {fileID: 20989169904720518}
   headPos: {fileID: 4455730131660612}
+  muzzlePos: {fileID: 0}
+  gunAnim: {fileID: 0}
+  gun: {fileID: 0}
   powerups: []
 --- !u!114 &114024050997693282
 MonoBehaviour:
@@ -2366,8 +2384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverControl: 0
-  testcontrol: 0
+  toggleServerControl: 0
 --- !u!114 &114969973799122666
 MonoBehaviour:
   m_ObjectHideFlags: 1

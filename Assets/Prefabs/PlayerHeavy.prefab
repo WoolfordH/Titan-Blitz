@@ -39,10 +39,10 @@ GameObject:
   - component: {fileID: 114591383115559794}
   - component: {fileID: 54691206065234778}
   - component: {fileID: 114629616625566534}
-  - component: {fileID: 114285126121678648}
-  - component: {fileID: 114472526272210198}
   - component: {fileID: 114154560621555340}
   - component: {fileID: 114179166191260874}
+  - component: {fileID: 114285126121678648}
+  - component: {fileID: 114882859326571626}
   m_Layer: 10
   m_Name: PlayerHeavy
   m_TagString: Untagged
@@ -2213,7 +2213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkedTransform: {fileID: 4005229591069234}
   serverControl: 0
   testcontrol: 0
 --- !u!114 &114292874623891400
@@ -2385,20 +2384,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114472526272210198
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1023560348404292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a484a0732169bdb448dc4b89bf7bcad3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  networkedTransform: {fileID: 4759950239177504}
-  serverControl: 0
-  testcontrol: 0
 --- !u!114 &114487141114739090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2900,6 +2885,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114882859326571626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023560348404292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a484a0732169bdb448dc4b89bf7bcad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkedTransform: {fileID: 4759950239177504}
+  serverControl: 0
+  testcontrol: 0
 --- !u!114 &114918717222261162
 MonoBehaviour:
   m_ObjectHideFlags: 1

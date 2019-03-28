@@ -738,10 +738,10 @@ GameObject:
   - component: {fileID: 114068060228849280}
   - component: {fileID: 54903160632717696}
   - component: {fileID: 114497083194911570}
-  - component: {fileID: 114134950994087758}
-  - component: {fileID: 114089181516358910}
   - component: {fileID: 114183384991093434}
   - component: {fileID: 114299812575256146}
+  - component: {fileID: 114134950994087758}
+  - component: {fileID: 114089181516358910}
   m_Layer: 10
   m_Name: PlayerLight
   m_TagString: Untagged
@@ -2102,7 +2102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkedTransform: {fileID: 4764759098732650}
   serverControl: 0
   testcontrol: 0
 --- !u!114 &114181787156351106

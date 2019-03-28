@@ -341,7 +341,7 @@ public class CharacterHandler: NetworkBehaviour
 			xRot = Input.GetAxis ("Mouse X");
 			yRot = Input.GetAxis ("Mouse Y");
 
-			transform.Rotate (Vector3.up, xRot * lookSpeed);
+            transform.Rotate(Vector3.up, xRot * lookSpeed);
 
 			//if looking up or down goes over 60 deg in either direction, clamp
 			//cam.transform.Rotate (Vector3.right, (-yRot) * lookSpeed);

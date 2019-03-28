@@ -390,11 +390,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4064333493737416}
   - component: {fileID: 114014361426618524}
+  - component: {fileID: 114930757354223022}
   - component: {fileID: 54613891414203008}
+  - component: {fileID: 114849385975982048}
   - component: {fileID: 114421026857857180}
-  - component: {fileID: 114860959542492806}
   m_Layer: 10
-  m_Name: Fighter
+  m_Name: Assassin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -920,7 +921,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397254270310452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -209.53125, y: 11.148424, z: 21.92699}
+  m_LocalPosition: {x: -189.07529, y: 10.17, z: 36.63207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4455730131660612}
@@ -1134,7 +1135,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 340b4773d983867498847e8d79866049, type: 2}
+  - {fileID: 2100000, guid: 48f0b2d1cb03fa449bea4e91393388f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1270,14 +1271,32 @@ MonoBehaviour:
   jumpVelMod: 0.01
   rb: {fileID: 54613891414203008}
   mainCollider: {fileID: 136490649429355242}
+  allies: 
+  hitMarker: {fileID: 0}
+  timerLbl: {fileID: 114429121479734164}
+  healthBar: {fileID: 114080267876701156}
+  armourBar: {fileID: 114400947656875602}
+  ultBar: {fileID: 114124244411340188}
+  ammoLbl: {fileID: 114712368542153606}
+  abl1Icon: {fileID: 114881197231864914}
+  abl2Icon: {fileID: 114085243899920238}
+  character: {fileID: 0}
+  ally1Avatar: {fileID: 0}
+  ally2Avatar: {fileID: 0}
+  avatarRT: {fileID: 0}
+  avatarCam: {fileID: 0}
   lookSpeed: 2
   minLookHeight: -60
   maxLookHeight: 60
   grounded: 0
   frozen: 0
   freezeLook: 0
+  camHolder: {fileID: 0}
   cam: {fileID: 20989169904720518}
   headPos: {fileID: 4455730131660612}
+  muzzlePos: {fileID: 0}
+  gunAnim: {fileID: 0}
+  gun: {fileID: 0}
   powerups: []
 --- !u!114 &114024050997693282
 MonoBehaviour:
@@ -1797,22 +1816,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 60
-    i1: 29
-    i2: 216
-    i3: 195
-    i4: 32
-    i5: 251
-    i6: 91
-    i7: 196
-    i8: 89
-    i9: 69
-    i10: 170
-    i11: 106
-    i12: 183
-    i13: 128
-    i14: 169
-    i15: 194
+    i0: 109
+    i1: 55
+    i2: 231
+    i3: 135
+    i4: 19
+    i5: 114
+    i6: 219
+    i7: 4
+    i8: 42
+    i9: 86
+    i10: 152
+    i11: 94
+    i12: 172
+    i13: 53
+    i14: 186
+    i15: 63
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114429121479734164
@@ -2232,7 +2251,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114860959542492806
+--- !u!114 &114849385975982048
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2243,8 +2262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverControl: 0
-  testcontrol: 0
+  toggleServerControl: 0
 --- !u!114 &114869571361017460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2326,6 +2344,38 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114930757354223022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397254270310452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4ef18db74f2674390d5ff52eabcc1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SyncVarDirtyBits: 0
+  m_LastSendTime: 0
+  m_SyncVarGuard: 0
+  m_MyView: {fileID: 0}
+  id: 0
+  handler: {fileID: 114014361426618524}
+  maxHealth: 100
+  health: 100
+  maxArmour: 100
+  armour: 100
+  dmgMod: 1
+  primaryProj: {fileID: 0}
+  primaryTimer: 0
+  primaryDelay: 0
+  primaryRange: 0
+  abilities:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  start: 1
+  timer: 0
 --- !u!114 &114969973799122666
 MonoBehaviour:
   m_ObjectHideFlags: 1
