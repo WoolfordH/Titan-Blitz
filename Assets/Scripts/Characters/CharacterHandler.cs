@@ -91,6 +91,8 @@ public class CharacterHandler: NetworkBehaviour
 
     private int teamNum = 0;
 
+    float armourRegenDelayTimer;
+
 
 
 	//temporary
@@ -172,6 +174,7 @@ public class CharacterHandler: NetworkBehaviour
     {
         if (!started)
             Initiate();
+
         if (tag != "Dummy" && hasAuthority) //if this character belongs to this client
         {
             //If has authority and was not started with authority call start again - this fixes a bug on the server
@@ -221,6 +224,21 @@ public class CharacterHandler: NetworkBehaviour
                 }
             }
             UpdateUI();
+        }
+
+
+        if (isServer)
+        {
+            //recharge armour
+            if (armourRegenDelayTimer <= 0f)
+            {
+                //regen armour
+                RechargeArmour();
+            }
+            else
+            {
+                armourRegenDelayTimer -= Time.deltaTime;
+            }
         }
 
 
@@ -510,9 +528,11 @@ public class CharacterHandler: NetworkBehaviour
 			}
 			else
 			{
-				if (character.armour > 0)
+              	if (character.armour > 0)
 				{
+                    int diff = dmg.damage - character.armour;
 					character.armour -= dmg.damage;
+                    character.health -= diff;
 				}
 				else
 				{
@@ -520,7 +540,10 @@ public class CharacterHandler: NetworkBehaviour
 				}
 			}
 
-			if (character.health <= 0)
+            armourRegenDelayTimer = character.armourRegenDelay;
+            
+
+            if (character.health <= 0)
 			{
 				Die();
 			}
@@ -530,6 +553,15 @@ public class CharacterHandler: NetworkBehaviour
 			}
 		}
 	}
+
+    void RechargeArmour()
+    {
+        if (character.armour < character.maxArmour)
+        {
+            character.armour += (int)(character.armourRegenSpeed * Time.deltaTime);
+            character.armour = Mathf.Clamp(character.armour, 0, character.maxArmour);
+        }
+    }
 
 	[ClientRpc]
 	protected virtual void RpcUpdateHealth(int a_armour, int a_health)

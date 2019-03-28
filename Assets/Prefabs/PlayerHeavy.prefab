@@ -2581,7 +2581,9 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   maxArmour: 100
-  armour: 0
+  armour: 100
+  armourRegenSpeed: 1
+  armourRegenDelay: 1
   primaryProj: {fileID: 1333371331465492, guid: c598adccf7082c44295c64c02e868a78,
     type: 2}
   primaryDelay: 5
