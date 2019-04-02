@@ -35,6 +35,7 @@ public class AbilityShield : Ability
         CmdAbility();
     }
 
+    [Command]
     private void CmdAbility()
     {
         //destroys the current shield (if any)
@@ -44,7 +45,7 @@ public class AbilityShield : Ability
         }
 
         //places new shield
-        shield = GameObject.Instantiate(shieldPrefab, caster.transform.TransformPoint(shieldPosition), caster.transform.rotation);
+        shield = Instantiate(shieldPrefab, caster.transform.TransformPoint(shieldPosition), caster.transform.rotation);
         NetworkServer.Spawn(shield);
     }
 

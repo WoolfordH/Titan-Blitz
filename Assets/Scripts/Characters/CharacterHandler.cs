@@ -230,7 +230,7 @@ public class CharacterHandler: NetworkBehaviour
         if (isServer)
         {
             //recharge armour
-            if (armourRegenDelayTimer <= 0f)
+            if (armourRegenDelayTimer < 0f)
             {
                 //regen armour
                 RechargeArmour();
@@ -530,9 +530,18 @@ public class CharacterHandler: NetworkBehaviour
 			{
               	if (character.armour > 0)
 				{
-                    int diff = dmg.damage - character.armour;
-					character.armour -= dmg.damage;
-                    character.health -= diff;
+                    if (dmg.damage > character.armour)
+                    {
+                        float excessDmg = dmg.damage - character.armour;
+                        character.armour = 0;
+                        character.health -= excessDmg;
+                    }
+                    else
+                    {
+                        character.armour -= dmg.damage;
+                    }
+                    
+
 				}
 				else
 				{
@@ -558,13 +567,15 @@ public class CharacterHandler: NetworkBehaviour
     {
         if (character.armour < character.maxArmour)
         {
-            character.armour += (int)(character.armourRegenSpeed * Time.deltaTime);
+            character.armour += character.armourRegenSpeed * Time.deltaTime;
             character.armour = Mathf.Clamp(character.armour, 0, character.maxArmour);
+
+            RpcUpdateHealth(character.armour, character.health);
         }
     }
 
 	[ClientRpc]
-	protected virtual void RpcUpdateHealth(int a_armour, int a_health)
+	protected virtual void RpcUpdateHealth(float a_armour, float a_health)
 	{
 		character.armour = a_armour;
 		character.health = a_health;

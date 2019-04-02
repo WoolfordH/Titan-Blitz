@@ -20,14 +20,16 @@ enum ControlPointState
 public class ControlPoint : NetworkBehaviour
 {
     private int pointIdentity;
+
     private ControlPointState controlState = ControlPointState.inactive;
+
     [Range(-100f, 100f)]
     public float capturePercent = 0; //positive for team 1, negative for team 2
     [Tooltip("Percentage per second to capture the point")]
     public float captureRate;
     [Tooltip("Increase in capture speed per additional player")]
     public float additionalPlayerMultiplier;
-    //gameobject or something for the capture animation stuff
+
 
     public GameObject pointCollider;
     public ParticleSystem psMain;
@@ -275,7 +277,7 @@ public class ControlPoint : NetworkBehaviour
     {
         for(int i = 0; i < playersOnPointCount; i++)
         {
-            if(playersOnPoint[i] = player)
+            if(playersOnPoint[i] == player)
             {
                 return i;
             }

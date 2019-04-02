@@ -55,10 +55,10 @@ public abstract class Character : NetworkBehaviour
 	public CharacterHandler handler;
 
 	public int maxHealth;
-	public int health;
+	public float health;
 
 	public int maxArmour;
-	public int armour;
+	public float armour;
 
     public float armourRegenSpeed;
     public float armourRegenDelay;
