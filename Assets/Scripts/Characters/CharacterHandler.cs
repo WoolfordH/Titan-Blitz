@@ -388,6 +388,15 @@ public class CharacterHandler: NetworkBehaviour
 		}
 	}
 
+    [ClientRpc]
+    public void RpcFreeze(bool a_freezeLook = true)
+    {
+        if(hasAuthority)
+        {
+            Freeze(a_freezeLook);
+        }
+    }
+
 	public void Unfreeze()
 	{
 		if (tag != "Dummy")
@@ -395,7 +404,10 @@ public class CharacterHandler: NetworkBehaviour
 			frozen = false;
 		}
 
-		rb.isKinematic = false;
+        if (hasAuthority)
+        {
+            rb.isKinematic = false;
+        }
 	}
 
 

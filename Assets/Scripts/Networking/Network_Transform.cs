@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class Network_Transform : NetworkBehaviour
 {
     private Transform networkedTransform;
+    private Rigidbody rb;
 
     private bool serverControl = false;
 
@@ -16,6 +17,7 @@ public class Network_Transform : NetworkBehaviour
     void Awake()
     {
         networkedTransform = this.transform;
+        rb.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -94,6 +96,15 @@ public class Network_Transform : NetworkBehaviour
     private void RpcTakeServerControl()
     {
         serverControl = true;
+
+        if(isServer)
+        {
+            rb.isKinematic = false;
+        }
+        else if(hasAuthority)
+        {
+            rb.isKinematic = true;
+        }
     }
 
     [Command]
@@ -106,5 +117,14 @@ public class Network_Transform : NetworkBehaviour
     private void RpcRemoveServerControl()
     {
         serverControl = false;
+
+        if (hasAuthority)
+        {
+            rb.isKinematic = false;
+        }
+        else if (isServer)
+        {
+            rb.isKinematic = true;
+        }
     }
 }
