@@ -17,7 +17,7 @@ public class Network_Transform : NetworkBehaviour
     void Awake()
     {
         networkedTransform = this.transform;
-        rb.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
