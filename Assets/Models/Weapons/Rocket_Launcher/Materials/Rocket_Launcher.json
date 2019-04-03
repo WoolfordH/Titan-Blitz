@@ -1,0 +1,36 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "ao_intensity": 0.75,
+                "emissive_intensity": 1,
+                "height_force": 1,
+                "nbSamples": 16
+            },
+            "shader": "pbr-metal-rough"
+        }
+    },
+    "texturesets": {
+        "Back": {
+            "shader": "Main shader"
+        },
+        "Frame": {
+            "shader": "Main shader"
+        },
+        "Grip1": {
+            "shader": "Main shader"
+        },
+        "Grip2": {
+            "shader": "Main shader"
+        },
+        "Scope": {
+            "shader": "Main shader"
+        },
+        "Trims": {
+            "shader": "Main shader"
+        }
+    }
+}
