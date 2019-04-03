@@ -388,14 +388,14 @@ public class CharacterHandler: NetworkBehaviour
 		}
 	}
 
-    [ClientRpc]
-    public void RpcFreeze(bool a_freezeLook = true)
-    {
-        if(hasAuthority)
-        {
-            Freeze(a_freezeLook);
-        }
-    }
+    //[ClientRpc]
+    //public void RpcFreeze(bool a_freezeLook = true)
+    //{
+    //    if(hasAuthority)
+    //    {
+    //        Freeze(a_freezeLook);
+    //    }
+    //}
 
 	public void Unfreeze()
 	{
