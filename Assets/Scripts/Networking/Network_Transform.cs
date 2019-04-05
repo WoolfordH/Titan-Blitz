@@ -29,8 +29,12 @@ public class Network_Transform : NetworkBehaviour
             {
                 //ServerLog.current.LogData(networkedTransform.position.ToString());
                 CmdUpdatePosition(networkedTransform.position);
-                CmdUpdateRotation(networkedTransform.localRotation);
+                //CmdUpdateRotation(networkedTransform.localRotation);
             }
+        }
+        if(hasAuthority)
+        {
+            CmdUpdateRotation(networkedTransform.localRotation);
         }
 
 
@@ -77,7 +81,8 @@ public class Network_Transform : NetworkBehaviour
     [ClientRpc]
     private void RpcUpdateRotation(Quaternion rotation)
     {
-        if (!((hasAuthority && !serverControl) || (isServer && serverControl)))
+        //if (!((hasAuthority && !serverControl) || (isServer && serverControl)))
+        if(!hasAuthority)
         {
             //ServerLog.current.LogData("Receiving position");
             networkedTransform.localRotation = rotation;
@@ -97,11 +102,7 @@ public class Network_Transform : NetworkBehaviour
     {
         serverControl = true;
 
-        if(isServer)
-        {
-            rb.isKinematic = false;
-        }
-        else if(hasAuthority)
+        if(hasAuthority && !isServer)
         {
             rb.isKinematic = true;
         }
@@ -118,13 +119,9 @@ public class Network_Transform : NetworkBehaviour
     {
         serverControl = false;
 
-        if (hasAuthority)
+        if (hasAuthority && !isServer)
         {
             rb.isKinematic = false;
-        }
-        else if (isServer)
-        {
-            rb.isKinematic = true;
         }
     }
 }
