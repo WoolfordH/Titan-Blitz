@@ -1342,8 +1342,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1566720088552854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -104.43434, y: 11.279514, z: 12.046511}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4245247858236956}
   - {fileID: 4477812610132462}
@@ -2150,8 +2150,9 @@ MonoBehaviour:
   active: 0
   grabberPrefab: {fileID: 1587647187849730, guid: eee3839ccbec5924cba05556f8151f38,
     type: 2}
-  grabberMaxDist: 50
-  grabberSpeed: 1
+  maxDist: 30
+  startSpeed: 20
+  returnSpeed: 20
 --- !u!114 &114215644067742996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2889,10 +2890,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb07a123d6502149a4d8c83ef606f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 350
+  speed: 400
   sprintMultiplier: 1.5
   climbAngleMax: 45
-  jumpForce: 5
+  jumpForce: 6
   jumpVelMod: 0.01
   rb: {fileID: 54903160632717696}
   mainCollider: {fileID: 136631507826855460}

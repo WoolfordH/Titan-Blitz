@@ -54,11 +54,11 @@ public class PlayerConnection : NetworkBehaviour
     //Command scripts - these are only run on the server
 
     //spawns this players game object 
-    public GameObject SpawnPlayer(int teamNum, Vector3 spawnPos, GameObject playerPrefab)
+    public GameObject SpawnPlayer(int teamNum, Vector3 spawnPos, Quaternion spawnRot, GameObject playerPrefab)
     {
         ServerLog.current.LogData("Spawning Player");
         //spawns to server
-        GameObject player = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+        GameObject player = Instantiate(playerPrefab, spawnPos, spawnRot);
 
         //passes to all clients 
         NetworkServer.SpawnWithClientAuthority(player, GetComponent<NetworkIdentity>().clientAuthorityOwner);

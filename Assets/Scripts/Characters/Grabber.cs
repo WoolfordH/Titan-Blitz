@@ -32,8 +32,12 @@ public class Grabber : NetworkBehaviour {
 
     private Vector3 previousPosition;
 
-	public void Init (Character a_owner, Vector3 a_dir, Vector3 initVelocity) 
+	public void Init (Character a_owner, Vector3 a_dir, Vector3 initVelocity, float a_startSpeed, float a_returnSpeed, float a_maxDist) 
 	{
+        startSpeed = a_startSpeed;
+        returnSpeed = a_returnSpeed;
+        maxDist = a_maxDist;
+
 		rb = GetComponent<Rigidbody> ();
 
 		owner = a_owner;
@@ -44,7 +48,7 @@ public class Grabber : NetworkBehaviour {
 
         //maxPos = owner.transform.position + (dir * maxDist);
         //vecToMax = maxPos - owner.transform.position;
-        rb.velocity = initVelocity + dir * startSpeed; //(dir * speed * Time.deltaTime);
+        rb.velocity = dir * startSpeed;// + initVelocity
 	}
 	
 	// Update is called once per frame
@@ -86,7 +90,7 @@ public class Grabber : NetworkBehaviour {
     {
         if (!grappleActive)
         {
-            moverTarget = owner.transform.position;
+            moverTarget = owner.handler.cam.transform.position;//transform.position + new Vector3(0, 1, 0);
         }
         else
         {
@@ -96,7 +100,8 @@ public class Grabber : NetworkBehaviour {
             }
             else //grapple type = grapple
             {
-                moverTarget = this.transform.position;
+                moverTarget = this.transform.position; //player transform is a floor, correct this
+                
             }
         }
     }

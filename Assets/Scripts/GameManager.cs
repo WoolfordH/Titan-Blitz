@@ -81,9 +81,11 @@ public class GameManager : NetworkBehaviour
                 PlayerConnection connection = players[i].connection;
 
                 int team = players[i].team;
-                Vector3 spawnPos = GetSpawnPos(team);
+                Vector3 spawnPos;
+                Quaternion spawnRot;
+                GetSpawnPos(team, out spawnPos, out spawnRot);
                
-                players[i].playerObject = connection.SpawnPlayer(team, spawnPos, characterPrefabs[players[i].characterChoice]);
+                players[i].playerObject = connection.SpawnPlayer(team, spawnPos, spawnRot, characterPrefabs[players[i].characterChoice]);
 
 
             }
@@ -173,9 +175,8 @@ public class GameManager : NetworkBehaviour
         return players[playerID].playerObject;
     }
 
-    public Vector3 GetSpawnPos(int teamNum)
+    public void GetSpawnPos(int teamNum , out Vector3 spawnPos, out Quaternion spawnRot)
     {
-        Vector3 spawnPos;
         float minX, maxX, minZ, maxZ;
 
         if (teamNum == 1)
@@ -186,6 +187,7 @@ public class GameManager : NetworkBehaviour
             maxZ = team1SpawnPoint.position.z + team1SpawnPoint.GetComponent<Collider>().bounds.extents.z;
 
             spawnPos = new Vector3(UnityEngine.Random.Range(minX, maxX), team1SpawnPoint.position.y, UnityEngine.Random.Range(minZ, maxZ));
+            spawnRot = team1SpawnPoint.transform.rotation;
         }
         else if (teamNum == 2)
         {
@@ -195,13 +197,13 @@ public class GameManager : NetworkBehaviour
             maxZ = team2SpawnPoint.position.z + team2SpawnPoint.GetComponent<Collider>().bounds.extents.z;
 
             spawnPos = new Vector3(UnityEngine.Random.Range(minX, maxX), team2SpawnPoint.position.y, UnityEngine.Random.Range(minZ, maxZ));
+            spawnRot = team2SpawnPoint.transform.rotation;
         }
         else //team 0 
         {
             spawnPos = lobbyCam.transform.position;
+            spawnRot = lobbyCam.transform.rotation;
         }
-
-        return spawnPos;
     }
 
     public float GetSpawnTime()

@@ -672,8 +672,12 @@ public class CharacterHandler: NetworkBehaviour
 		if (hasAuthority && tag != "Dummy")//if local player
 		{
             //UpdateUI();
+            Vector3 spawnPos;
+            Quaternion spawnRot;
+            GameManager.current.GetSpawnPos(GetTeam(), out spawnPos, out spawnRot);
+            transform.position = spawnPos;
+            transform.rotation = spawnRot;
 
-            transform.position = GameManager.current.GetSpawnPos(GetTeam());
 			cam.gameObject.SetActive(true);
 			GameManager.current.lobbyCam.SetActive(false);
 		}
