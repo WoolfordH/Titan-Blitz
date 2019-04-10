@@ -17,7 +17,7 @@ public class GameManager : NetworkBehaviour
         lobby,
         playing
     }
-    
+
 
     public static GameManager current;
 
@@ -29,7 +29,7 @@ public class GameManager : NetworkBehaviour
     public GameObject[] characterPrefabs;
 
     private PlayerData[] players = new PlayerData[0];
-   
+
     public GameObject lobbyCam;
 
     public Transform team1SpawnPoint;
@@ -48,13 +48,13 @@ public class GameManager : NetworkBehaviour
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         //Server managment code
         if (isServer)
@@ -62,10 +62,10 @@ public class GameManager : NetworkBehaviour
             //wait in lobby until 
             if (gameState == GameState.lobby)
             {
-                
+
             }
         }
-	}
+    }
 
     //this is called to transition from lobby to gameplay
     [Command]
@@ -77,6 +77,7 @@ public class GameManager : NetworkBehaviour
             //Choose teams
             //initialise players
             ServerLog.current.LogData("Starting game with " + players.Length.ToString() + " players");
+            SendClientsPlayerData();
             for (int i = 0; i < players.Length; i++)//PlayerConnection connection in connections)
             {
                 PlayerConnection connection = players[i].connection;
@@ -85,7 +86,7 @@ public class GameManager : NetworkBehaviour
                 Vector3 spawnPos;
                 Quaternion spawnRot;
                 GetSpawnPos(team, out spawnPos, out spawnRot);
-               
+
                 players[i].playerObject = connection.SpawnPlayer(team, spawnPos, spawnRot, characterPrefabs[players[i].characterChoice]);
 
 
@@ -102,6 +103,40 @@ public class GameManager : NetworkBehaviour
             gameState = GameState.playing;
         }
     }
+
+    private void SendClientsPlayerData()
+    {
+        //initialise player array
+        RpcInitializeClientPlayerData(players.Length);
+        //for each player send player data
+        for (int i = 0; i < players.Length; i++)
+        {
+            RpcGiveClientsPlayerData(i, players[i].characterChoice, players[i].team);
+        }
+    }
+
+    [ClientRpc]
+    private void RpcInitializeClientPlayerData(int arraySize)
+    {
+        if(!isServer)
+        {
+            players = new PlayerData[arraySize];
+        }
+    }
+
+    [ClientRpc]
+    private void RpcGiveClientsPlayerData(int indice, int charChoice, int teamNum)
+    {
+        players[indice].characterChoice = charChoice;
+        players[indice].team = teamNum;
+    }
+        
+
+
+    //public int characterChoice;
+    //public int team;//0 = no team; 1 = team 1; 2 = team 2
+    //public PlayerConnection connection;
+    //public GameObject playerObject;
 
     [Command]
     public void CmdGameEnd(int endCondition)
@@ -191,22 +226,6 @@ public class GameManager : NetworkBehaviour
         connection.GetComponent<PlayerConnection>().RpcAssignID(players.Length - 1);
         //return players.Length-1;
     }
-
-    //[Command]
-    //public void CmdAddNewPlayer(GameObject player)
-    //{
-    //    //duplicate the array
-    //    PlayerData[] tempPlayers = new PlayerData[players.Length + 1];
-    //
-    //    for (int i = 0; i < players.Length; i++)
-    //    {
-    //        tempPlayers[i] = players[i];
-    //    }
-    //    //add new entry
-    //    tempPlayers[tempPlayers.Length - 1].playerObject = player;
-    //
-    //    players = tempPlayers;
-    //}
 
     [ClientRpc]
     private void RpcDisableMainCamera()
