@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+public enum TimerType
+{
+    cooldown,
+    duration
+}
+
 public abstract class Ability : NetworkBehaviour
 {
     [HideInInspector]
@@ -17,18 +23,46 @@ public abstract class Ability : NetworkBehaviour
     [HideInInspector]
     public bool active;
 
-	public void StartTimer()
+	public void StartTimer(TimerType type)
 	{
-		timer = cooldown;
-		SetActive (true);
+        switch (type)
+        {
+            case TimerType.cooldown:
+                timer = cooldown;
+                break;
+
+            case TimerType.duration:
+                timer = duration;
+                SetActive(true);
+                break;
+        }		
 	}
 
-	public bool isDurationElapsed()
+    private void Update()
+    {
+        if (hasAuthority)
+        {
+            if (timer > 0f)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                timer = 0f;
+            }
+        }
+    }
+
+    public bool isDurationElapsed()
 	{
-		if(timer < (cooldown - duration))
-		{
-			return true;
-		}
+        if (active)
+        {
+            if (timer <= 0)
+            {
+                return true;
+            }
+        }
+
 		return false;
 	}
 

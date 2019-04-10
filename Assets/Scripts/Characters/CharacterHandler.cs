@@ -514,11 +514,20 @@ public class CharacterHandler: NetworkBehaviour
         healthBar.fillAmount = ((float)character.health/(float)character.maxHealth);
 		armourBar.fillAmount = ((float)character.armour/(float)character.maxArmour);
 		ultBar.fillAmount = (character.abilities[2].cooldown - character.abilities[2].timer)/character.abilities[2].cooldown;
+        /////////////
 
-        //update allies ui
+        //update allies ui HERE!
 
-		abl1Icon.fillAmount = (character.abilities[0].cooldown - character.abilities[0].timer)/character.abilities[0].cooldown;
-		abl2Icon.fillAmount = (character.abilities[1].cooldown - character.abilities[1].timer)/character.abilities[1].cooldown;
+        ////////////
+
+        if (!character.abilities[0].active)
+        {
+            abl1Icon.fillAmount = (character.abilities[0].cooldown - character.abilities[0].timer) / character.abilities[0].cooldown;
+        }
+        if (!character.abilities[1].active)
+        {
+            abl2Icon.fillAmount = (character.abilities[1].cooldown - character.abilities[1].timer) / character.abilities[1].cooldown;
+        }
 	}
 
 

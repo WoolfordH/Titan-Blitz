@@ -1962,7 +1962,7 @@ MonoBehaviour:
   caster: {fileID: 0}
   name: 
   cooldown: 20
-  duration: 5
+  duration: 0
   timer: 0
   active: 0
   shieldPrefab: {fileID: 1951781798440540, guid: 23130655f149c924193c240a7c42fce7,
@@ -2036,7 +2036,7 @@ MonoBehaviour:
   caster: {fileID: 0}
   name: 
   cooldown: 30
-  duration: 10
+  duration: 20
   timer: 0
   active: 0
   dronePrefab: {fileID: 1045144852526966, guid: c5d561706729c214f88b76d71120d16d,

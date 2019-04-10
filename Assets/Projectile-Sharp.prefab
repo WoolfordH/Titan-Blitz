@@ -339,7 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owners: []
   senderID: 0
-  speed: 50
+  speed: 75
   hitEffects:
   - {fileID: 198842943408561786}
   - {fileID: 198479942326126482}
@@ -357,8 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverControl: 0
-  testcontrol: 0
+  toggleServerControl: 0
 --- !u!198 &198191145941697750
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -93,7 +93,7 @@ public abstract class Character : NetworkBehaviour
             if (hasAuthority)
             {
                 //ult starts uncharged
-                abilities[2].StartTimer();
+                abilities[2].StartTimer(TimerType.cooldown);
                 abilities[2].SetActive(false);
 
             }
@@ -121,7 +121,7 @@ public abstract class Character : NetworkBehaviour
 
 		if (Input.GetKeyDown (handler.controls.Ability1))
 		{
-			if (abilities [0].timer <= 0)
+			if (!abilities[0].active && abilities [0].timer <= 0)
 			{
 				UseAbility (0);
 			}
@@ -129,16 +129,16 @@ public abstract class Character : NetworkBehaviour
 
 		if (Input.GetKeyDown (handler.controls.Ability2))
 		{
-			if (abilities [1].timer <= 0)
-			{
+            if (!abilities[1].active && abilities[1].timer <= 0)
+            {
 				UseAbility (1);
 			}
 		}
 
 		if (Input.GetKeyDown (handler.controls.ult))
 		{
-			if (abilities [2].timer <= 0)
-			{
+            if (!abilities[2].active && abilities[2].timer <= 0)
+            {
 				UseAbility (2);
 			}
 		}
@@ -153,21 +153,15 @@ public abstract class Character : NetworkBehaviour
 
 		for (int i = 0; i < abilities.Length; i++)
 		{
-			if (abilities [i].timer > 0f)
-			{
-				abilities [i].timer -= Time.deltaTime;
-			}
-
-			if (abilities [i].timer <= 0f)
-			{
-				abilities [i].timer = 0f;
-			}
-
-			if (abilities [i].isDurationElapsed () && abilities[i].active)
-			{
-				abilities [i].SetActive (false);
-				OnAbilityExpired (i);
-			}
+            if (abilities[i].active)
+            {
+                if (abilities[i].isDurationElapsed())
+                {
+                    abilities[i].SetActive(false);
+                    abilities[i].StartTimer(TimerType.cooldown);
+                    OnAbilityExpired(i);
+                }
+            }
 		}
 	}
 
@@ -194,7 +188,7 @@ public abstract class Character : NetworkBehaviour
 	public void UseAbility (int index)
 	{
 		abilities [index].UseAbility ();
-        abilities[index].StartTimer();
+        abilities[index].StartTimer(TimerType.duration);
     }
 
 	public void OnAbilityExpired (int index)

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -38,6 +36,9 @@ public class GameManager : NetworkBehaviour
     public Transform team2SpawnPoint;
 
     public float respawnTime = 5.0f;
+
+    public GameObject endScreen;
+    public UnityEngine.UI.Text winLoseText;
 
     private GameState gameState = GameState.lobby;
 
@@ -101,6 +102,58 @@ public class GameManager : NetworkBehaviour
             gameState = GameState.playing;
         }
     }
+
+    [Command]
+    public void CmdGameEnd(int endCondition)
+    {
+        RpcGameEnd(endCondition);
+    }
+
+    [ClientRpc]
+    public void RpcGameEnd(int endCondition)
+    {
+        ServerLog.current.LogData("Victory team " + endCondition.ToString());
+        switch (endCondition)
+        {
+            case 0:
+                //time expired
+                break;
+
+            case 1:
+                //team 1 win
+                if(players[PlayerConnection.current.connectionID].team == 1)
+                {
+                    //you won
+                    winLoseText.text = "VICTORY";
+                }
+                else if(players[PlayerConnection.current.connectionID].team == 2)
+                {
+                    //you lost
+                    winLoseText.text = "DEFEAT";
+                }
+
+                break;
+
+            case 2:
+                //team 2 win
+
+                if (players[PlayerConnection.current.connectionID].team == 1)
+                {
+                    //you lost
+                    winLoseText.text = "DEFEAT";
+                }
+                else if (players[PlayerConnection.current.connectionID].team == 2)
+                {
+                    //you won
+                    winLoseText.text = "VICTORY";
+                }
+
+                break;
+        }
+
+        endScreen.SetActive(true);
+    }
+
 
     //private void CreateServer()
     //{
@@ -233,7 +286,7 @@ public class GameManager : NetworkBehaviour
     [Command]
     public void CmdChooseTeam(int teamChoice, int connectionNum)
     {
-        players[connectionNum].team  = teamChoice;
+        
         RpcChooseTeam(teamChoice, connectionNum);
     }
 
@@ -241,6 +294,7 @@ public class GameManager : NetworkBehaviour
     private void RpcChooseTeam(int teamNum, int connectionNum)
     {
         ServerLog.current.LogData("Player " + connectionNum.ToString() + " chose team " + teamNum.ToString());
+        players[connectionNum].team = teamNum;
         //update ui
     }
 

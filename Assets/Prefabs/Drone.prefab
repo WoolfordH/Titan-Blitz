@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 4115674337184274}
   damage: 3
-  viewRadius: 10
+  viewRadius: 15
   rotationSpeed: 3
   movementSpeed: 2
   owner: {fileID: 0}

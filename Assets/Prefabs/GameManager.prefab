@@ -61,6 +61,8 @@ MonoBehaviour:
   team1SpawnPoint: {fileID: 0}
   team2SpawnPoint: {fileID: 0}
   respawnTime: 2
+  endScreen: {fileID: 0}
+  winLoseText: {fileID: 0}
 --- !u!114 &114966842317553414
 MonoBehaviour:
   m_ObjectHideFlags: 1

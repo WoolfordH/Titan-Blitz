@@ -9,7 +9,8 @@ enum CTPManagerState
     inactive,
     team1Advantage,
     neutral,
-    team2Advantage
+    team2Advantage,
+    gameEnd
 }
 
 public class CTPManager : NetworkBehaviour
@@ -100,6 +101,8 @@ public class CTPManager : NetworkBehaviour
                 {
                     //team 1 victory
                     ServerLog.current.LogData("Team 1 victory");
+                    GameManager.current.CmdGameEnd(1);
+                    state = CTPManagerState.gameEnd;
                 }
                 else //team 2
                 {
@@ -122,6 +125,8 @@ public class CTPManager : NetworkBehaviour
                 {
                     //team 2 victory
                     ServerLog.current.LogData("Team 2 victory");
+                    GameManager.current.CmdGameEnd(2);
+                    state = CTPManagerState.gameEnd;
                 }
                 else //team 1
                 {
@@ -138,7 +143,7 @@ public class CTPManager : NetworkBehaviour
         }
         else
         {
-            throw new Exception("unexpected call in CTPManager CapturePoint()");
+            //throw new Exception("unexpected call in CTPManager CapturePoint()");
         }
     }
 }
