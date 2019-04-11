@@ -65,7 +65,8 @@ public abstract class Character : NetworkBehaviour
 
 	public DAMAGE primaryDmg;
     public int initDamage;
-    protected float dmgMod = 1f;
+    [HideInInspector]
+    public float dmgMod = 1f;
     public GameObject primaryProj;
 	protected float primaryTimer;
 	public float primaryDelay;

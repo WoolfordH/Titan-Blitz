@@ -35,8 +35,7 @@ public class ControlPoint : NetworkBehaviour
     public ParticleSystem psMain;
     ParticleSystem[] psAux;
 
-    private GameObject[] playersOnPoint = new GameObject[6];
-    private int playersOnPointCount = 0;
+    private List<GameObject> playersOnPoint = new List<GameObject>();
     private int teamOnPointDifference = 0; //positive for team 1, negative for team 2
 
     //visualisation 
@@ -74,8 +73,6 @@ public class ControlPoint : NetworkBehaviour
         {
             if (isServer)
             {
-        
-        
                 CaptureChange();
         
                 if (capturePercent >= 100)
@@ -89,7 +86,19 @@ public class ControlPoint : NetworkBehaviour
                     //team 2 capture
                     CTPManager.current.CapturePoint(2, pointIdentity);
                 }
+
+
+                
             }
+        }
+
+
+        //Clear player list at after capture change has been 
+
+        if (isServer)
+        {
+            playersOnPoint.Clear();
+            teamOnPointDifference = 0;
         }
 
         //if (controlState == ControlPointState.inactive)
@@ -196,7 +205,13 @@ public class ControlPoint : NetworkBehaviour
         RpcUpdateCapturePercent(0);
         pointCollider.SetActive(false);
         psMain.Stop();
-        controlState = ControlPointState.inactive;
+
+        foreach (ParticleSystem ps in psMain.transform.GetComponentsInChildren<ParticleSystem>())
+        {
+            ps.Stop();
+        }
+
+            controlState = ControlPointState.inactive;
     }
 
 
@@ -275,7 +290,7 @@ public class ControlPoint : NetworkBehaviour
     //if the player is in the array return its index else return -1
     private int FindPlayerInArray(GameObject player)
     {
-        for(int i = 0; i < playersOnPointCount; i++)
+        for(int i = 0; i < playersOnPoint.Count; i++)
         {
             if(playersOnPoint[i] == player)
             {
@@ -286,62 +301,87 @@ public class ControlPoint : NetworkBehaviour
         return -1;
     }
 
+    //[Server]
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    CharacterHandler character = other.GetComponentInParent<CharacterHandler>();
+    //    if (character) //if it has a character handle - is a player
+    //    {
+    //        if (FindPlayerInArray(character.gameObject) == -1) //if the player is not already in the list
+    //        {
+    //            if (character.GetTeam() == 1)//team 1
+    //            {
+    //                playersOnPoint[playersOnPoint.Count] = character.gameObject;
+    //                //playersOnPointCount++;
+    //                teamOnPointDifference++;
+    //            }
+    //            else if(character.GetTeam() == 2)
+    //            {
+    //                playersOnPoint[playersOnPoint.Count] = character.gameObject;
+    //                //playersOnPointCount++;
+    //                teamOnPointDifference--;
+    //            }
+    //            else
+    //            {
+    //                //team 0
+    //            }
+    //        }
+    //    }
+    //}
+
     [Server]
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         CharacterHandler character = other.GetComponentInParent<CharacterHandler>();
         if (character) //if it has a character handle - is a player
         {
-            if (FindPlayerInArray(character.gameObject) == -1) //if the player is not already in the list
+            if (character.GetTeam() == 1)//team 1
             {
-                if (character.GetTeam() == 1)//team 1
-                {
-                    playersOnPoint[playersOnPointCount] = character.gameObject;
-                    playersOnPointCount++;
-                    teamOnPointDifference++;
-                }
-                else if(character.GetTeam() == 2)
-                {
-                    playersOnPoint[playersOnPointCount] = character.gameObject;
-                    playersOnPointCount++;
-                    teamOnPointDifference--;
-                }
-                else
-                {
-                    //team 0
-                }
+                playersOnPoint.Add(character.gameObject);
+                //playersOnPointCount++;
+                teamOnPointDifference++;
+            }
+            else if (character.GetTeam() == 2)
+            {
+                playersOnPoint.Add(character.gameObject);
+                //playersOnPointCount++;
+                teamOnPointDifference--;
+            }
+            else
+            {
+                //team 0
             }
         }
     }
 
-    [Server]
-    private void OnTriggerExit(Collider other)
-    {
-        CharacterHandler character = other.GetComponentInParent<CharacterHandler>();
-        if (character) //if it has a character handle - is a player
-        {
-            int index = FindPlayerInArray(character.gameObject);
-            if (index != -1)//player was in array
-            {
-                //remove from array
-                for(int i = index;i<playersOnPointCount-1;i++)
-                {
-                    playersOnPoint[i] = playersOnPoint[i + 1];
-                }
-                if(character.GetTeam() == 1)//is team 1
-                {
-                    teamOnPointDifference--;
-                }
-                else if(character.GetTeam() == 2)
-                {
-                    teamOnPointDifference++;
-                }
-
-                playersOnPointCount--;
-
-
-            }
-
-        }
-    }
+    //[Server]
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    CharacterHandler character = other.GetComponentInParent<CharacterHandler>();
+    //    if (character) //if it has a character handle - is a player
+    //    {
+    //        int index = FindPlayerInArray(character.gameObject);
+    //        if (index != -1)//player was in array
+    //        {
+    //            //remove from array
+    //            for(int i = index;i< playersOnPoint.Count - 1;i++)
+    //            {
+    //                playersOnPoint[i] = playersOnPoint[i + 1];
+    //            }
+    //            if(character.GetTeam() == 1)//is team 1
+    //            {
+    //                teamOnPointDifference--;
+    //            }
+    //            else if(character.GetTeam() == 2)
+    //            {
+    //                teamOnPointDifference++;
+    //            }
+    //
+    //            //playersOnPointCount--;
+    //
+    //
+    //        }
+    //
+    //    }
+    //}
 }

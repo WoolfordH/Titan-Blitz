@@ -72,4 +72,16 @@ MonoBehaviour:
     type: 2}
   PowerupExplosion: {fileID: 1163380099609982, guid: 449348aa03d629446b8a4457a34eba89,
     type: 2}
+  powerupSpeedPrefab: {fileID: 1551993266300606, guid: 52c84e394e3b082449ec15d40e165b91,
+    type: 2}
+  powerupDamagePrefab: {fileID: 1843997323443154, guid: 0a42aef6ab6734042ab0203fcf6c5a7b,
+    type: 2}
+  powerupJumpPrefab: {fileID: 1380198848306570, guid: 5bb2174f4ba698845be02ba02397b972,
+    type: 2}
+  powerupCols:
+  - {r: 0.11517811, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.049950123, a: 1}
+  - {r: 0.26864696, g: 1, b: 0, a: 1}
   playerCam: {fileID: 0}
+  team1Mat: {fileID: 2100000, guid: 48f0b2d1cb03fa449bea4e91393388f8, type: 2}
+  team2Mat: {fileID: 2100000, guid: b20b3e7bbcbb2304db75d29d03025d94, type: 2}

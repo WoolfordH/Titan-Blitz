@@ -27,10 +27,7 @@ public class CharacterLight : Character {
 	public override void PrimaryAttack()
 	{
 
-		if (handler.powerups.Exists (x => x.powerupType.ToString () == "Damage"))
-		{
-			dmgMod *= handler.powerups.Find (x => x.powerupType.ToString () == "Damage").multiplier;
-		}
+        Debug.Log("DAMAGE MOD = " + dmgMod);
 
 
         //Fire gun

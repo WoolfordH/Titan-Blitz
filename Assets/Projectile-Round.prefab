@@ -348,12 +348,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owners: []
   senderID: 0
-  speed: 25
+  speed: 40
   hitEffects:
   - {fileID: 198401192234899542}
   - {fileID: 198753223241890646}
   explosion: {fileID: 1887963760891850, guid: 9f697644c61e7b44ebc47451ff377e37, type: 2}
-  effectRadius: 2.5
+  effectRadius: 4
   decalSize: 4
 --- !u!114 &114148848685705052
 MonoBehaviour:

@@ -38,7 +38,7 @@ public abstract class Ability : NetworkBehaviour
         }		
 	}
 
-    private void Update()
+    protected virtual void Update()
     {
         if (hasAuthority)
         {

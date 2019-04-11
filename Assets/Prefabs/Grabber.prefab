@@ -115,8 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  maxDist: 30
-  startSpeed: 10
+  maxDist: 60
+  startSpeed: 30
   returnSpeed: 10
   grappleType: 1
 --- !u!114 &114876397690686912

@@ -20,12 +20,17 @@ public class GameHandler : MonoBehaviour {
 	public GameObject damageIndicator;
     public GameObject scorchPrefab;
     public GameObject PowerupExplosion;
+    public GameObject powerupSpeedPrefab, powerupDamagePrefab, powerupJumpPrefab;
+    public Color[] powerupCols;
 
-	public Camera playerCam;
+
+    public Camera playerCam;
+
+    public Material team1Mat, team2Mat;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		if (GameHandler.current) 
 		{
 			if (GameHandler.current != this) 

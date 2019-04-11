@@ -52,10 +52,16 @@ public class AbilityDrone : Ability {
     {
         if (drone)
         {
-            NetworkServer.Destroy(drone);
+            CmdDestroySelf();
         }
 
         timer = 0f;
         active = false;
+    }
+
+    [Command]
+    private void CmdDestroySelf()
+    {
+        NetworkServer.Destroy(drone);
     }
 }

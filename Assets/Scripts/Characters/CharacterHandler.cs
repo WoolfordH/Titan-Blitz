@@ -40,6 +40,9 @@ public class CharacterHandler: NetworkBehaviour
 
     public List<int> allies = new List<int>();
 
+    public Character character;
+    public Renderer modelRenderer;
+
     public GameObject hitMarker;
 	public Text timerLbl;
 	public Image healthBar;
@@ -49,9 +52,11 @@ public class CharacterHandler: NetworkBehaviour
 	public Image abl1Icon;
 	public Image abl2Icon;
 
-	public Character character;
+    public Image powerupDmgIcon;
+    public Image powerupJumpIcon;
+    public Image powerupSpeedIcon;
 
-	public RawImage ally1Avatar;
+    public RawImage ally1Avatar;
 	public RawImage ally2Avatar;
 
 	//public Material avatarMat;
@@ -87,7 +92,7 @@ public class CharacterHandler: NetworkBehaviour
     public Animator gunAnim;
     public GameObject gun;
 
-    public List<Powerup> powerups = new List<Powerup>();
+    public List<PowerUpData> powerups = new List<PowerUpData>();
 
     private int teamNum = 0;
 
@@ -107,9 +112,13 @@ public class CharacterHandler: NetworkBehaviour
 		//AVATAR INIT
 		avatarRT = new RenderTexture(512,512, 16);
 		avatarCam.targetTexture = avatarRT;
-		//avatarMat = new Material (Shader.Find("Unlit/Texture"));
-		//avatarMat.mainTexture = avatarRT;
-	}
+
+        powerupDmgIcon.enabled = false;
+        powerupJumpIcon.enabled = false;
+        powerupSpeedIcon.enabled = false;
+        //avatarMat = new Material (Shader.Find("Unlit/Texture"));
+        //avatarMat.mainTexture = avatarRT;
+    }
 
     private void Initiate()
     {
@@ -160,7 +169,8 @@ public class CharacterHandler: NetworkBehaviour
 			//UpdateUI();
 
 
-            Cursor.lockState = CursorLockMode.Locked;            
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {
@@ -215,11 +225,13 @@ public class CharacterHandler: NetworkBehaviour
                 if (paused)
                 {
                     Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     lookSpeed = 0f;
                 }
                 else
                 {
                     Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                     lookSpeed = initLookSpeed;
                 }
             }
@@ -264,15 +276,15 @@ public class CharacterHandler: NetworkBehaviour
 
 
 			//speedPowerup
-			if (powerups.Exists (x => x.powerupType.ToString () == "Speed"))
+			if (powerups.Exists (x => x.type.ToString () == "Speed"))
 			{
-				speedmod *= powerups.Find (x => x.powerupType.ToString () == "Speed").multiplier;
+				speedmod *= powerups.Find (x => x.type.ToString () == "Speed").multiplier;
 			}
 
 			//jumpPowerup
-			if (powerups.Exists (x => x.powerupType.ToString () == "Jump"))
+			if (powerups.Exists (x => x.type.ToString () == "Jump"))
 			{
-				jumpMod *= powerups.Find (x => x.powerupType.ToString () == "Jump").multiplier;
+				jumpMod *= powerups.Find (x => x.type.ToString () == "Jump").multiplier;
 			}
 
 				
@@ -464,9 +476,11 @@ public class CharacterHandler: NetworkBehaviour
 	{
 		List<int> toRemove = new List<int> ();
 
+        character.dmgMod = 1f;
+
 		for (int i = 0; i < powerups.Count; i++)
 		{
-			powerups[i].timer -= Time.deltaTime;
+			powerups[i].ReduceTimer(Time.deltaTime);
 
 			//Debug.Log (powerups [i].powerupType.ToString () + ": " + powerups [i].timer);
 
@@ -474,15 +488,35 @@ public class CharacterHandler: NetworkBehaviour
 			{
 				//mark powerup to remove if expired
 				toRemove.Add(i);
-			}
-		}
+
+                switch (powerups[i].type)
+                {
+                    case PowerupType.Damage:
+                        powerupDmgIcon.enabled = false;
+                        break;
+
+                    case PowerupType.Jump:
+                        powerupJumpIcon.enabled = false;
+                        break;
+
+                    case PowerupType.Speed:
+                        powerupSpeedIcon.enabled = false;
+                        break;
+                }
+            }
+        }
 
 		//remove all marked powerups
 		for(int i = 0; i < toRemove.Count; i++)
 		{
 			powerups.RemoveAt (toRemove [i]);
 		}
-	}
+
+        if (powerups.Exists(x => x.type.ToString() == "Damage"))
+        {
+            character.dmgMod *= powerups.Find(x => x.type.ToString() == "Damage").multiplier;
+        }
+    }
 
 
 	private void FOVUp()
@@ -660,6 +694,12 @@ public class CharacterHandler: NetworkBehaviour
 		if(hasAuthority)//if local player
 		{
             character.ResetAbilities();
+            powerups.Clear();
+            powerupDmgIcon.enabled = false;
+            powerupJumpIcon.enabled = false;
+            powerupSpeedIcon.enabled = false;
+
+            transform.position = new Vector3(100, -100, 100);
 
 			PlayerConnection.current.StartRespawnTimer();
 			cam.gameObject.SetActive(false);
@@ -692,42 +732,6 @@ public class CharacterHandler: NetworkBehaviour
 		}
 	}
 
-
-
-
-
-	public void OnTriggerEnter(Collider other)
-	{
-        if (other.GetComponent<Powerup>())
-        {
-            if (hasAuthority)
-            {
-            
-                Powerup powerup = other.GetComponent<Powerup>();
-
-                //check if powerup type is already in effect
-                if (powerups.Exists(x => x.powerupType.ToString() == powerup.powerupType.ToString()))
-                {
-                    //if effect is already in use, just add to timer
-                    powerups.Find(x => x.powerupType.ToString() == powerup.powerupType.ToString()).timer += powerup.timer;
-                }
-                else
-                {
-                    //if powerup is not in effect, start effect
-                    powerups.Add(powerup);
-                }
-
-                //instantiate explosion
-                GameObject explosion = Instantiate(GameHandler.current.PowerupExplosion, other.transform.position, Quaternion.identity);
-                explosion.GetComponent<Powerup>().colour = powerup.colour;
-
-                //destroy the object on all clients
-                NetworkServer.Destroy(other.gameObject);
-                //This can cause an error if 2 clients do this at the same time 
-            }
-        }
-	}
-
     [ClientRpc]
     public void RpcSetID(int iD)
     {
@@ -739,7 +743,15 @@ public class CharacterHandler: NetworkBehaviour
     public void RpcSetTeam(int a_teamNum)
     {
         teamNum = a_teamNum;
-
+        if (teamNum == 1)
+        {
+            modelRenderer.material = GameHandler.current.team1Mat;
+        }
+        else if (teamNum == 2)
+        {
+            modelRenderer.material = GameHandler.current.team2Mat;
+        }
+        
         ServerLog.current.LogData("Team " + teamNum.ToString());
     }
 
@@ -747,4 +759,89 @@ public class CharacterHandler: NetworkBehaviour
     {
         return teamNum;
     }
+
+
+
+
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Powerup>())
+        {
+            if (isServer)
+            {
+                Powerup powerup = other.GetComponent<Powerup>();
+
+                RpcGiveClientPowerUp((int)powerup.powerupType);
+                                
+
+                //instantiate explosion
+                GameObject explosion = Instantiate(GameHandler.current.PowerupExplosion, other.transform.position, Quaternion.identity);
+                NetworkServer.Spawn(explosion);
+                explosion.GetComponent<Powerup>().CmdMakeExplosionsHappenPlz((int)powerup.powerupType);
+
+                //explosion.GetComponent<Powerup>().colour = powerup.colour;
+
+                powerup.spawn.SetSpawned(false);
+
+                //destroy the object on all clients
+                NetworkServer.Destroy(other.gameObject);
+                //This can cause an error if 2 clients do this at the same time
+            }
+        }
+    }
+
+    [ClientRpc]
+    private void RpcGiveClientPowerUp(int powerupNum)
+    {
+        if (hasAuthority)
+        {
+            Powerup powerup = null;
+
+            switch (powerupNum)
+            {
+                case 0:
+                    powerup = GameHandler.current.powerupSpeedPrefab.GetComponent<Powerup>();
+                    break;
+                case 1:
+                    powerup = GameHandler.current.powerupDamagePrefab.GetComponent<Powerup>();
+                    break;
+
+                case 2:
+                    powerup = GameHandler.current.powerupJumpPrefab.GetComponent<Powerup>();
+                    break;                    
+            }
+
+
+            //Powerup powerup = other.GetComponent<Powerup>();
+
+            //check if powerup type is already in effect
+            if (powerups.Exists(x => x.type.ToString() == powerup.powerupType.ToString()))
+            {
+                //if effect is already in use, just add to timer
+                powerups.Find(x => x.type.ToString() == powerup.powerupType.ToString()).SetTimer(powerup.timer);
+            }
+            else
+            {
+                //if powerup is not in effect, start effect
+                powerups.Add(new PowerUpData(powerup.name, powerup.powerupType, powerup.timer, powerup.multiplier));
+
+                switch (powerup.powerupType)
+                {
+                    case PowerupType.Damage:
+                        powerupDmgIcon.enabled = true;
+                        break;
+
+                    case PowerupType.Jump:
+                        powerupJumpIcon.enabled = true;
+                        break;
+
+                    case PowerupType.Speed:
+                        powerupSpeedIcon.enabled = true;
+                        break;
+                }
+            }
+        }
+    }
+
 }

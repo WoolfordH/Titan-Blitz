@@ -339,7 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owners: []
   senderID: 0
-  speed: 75
+  speed: 120
   hitEffects:
   - {fileID: 198842943408561786}
   - {fileID: 198479942326126482}

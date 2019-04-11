@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public enum PowerupType
 {
@@ -9,8 +10,35 @@ public enum PowerupType
 	Jump
 }
 
+public class PowerUpData
+{
+    public string name;
+    public PowerupType type;
+    public float timer;
+    public float multiplier;
+
+    public PowerUpData(string n, PowerupType t, float ti, float m)
+    {
+        name = n;
+        type = t;
+        timer = ti;
+        multiplier = m;
+    }
+
+    public void SetTimer(float t)
+    {
+        timer = t;
+    }
+
+    public void ReduceTimer(float t)
+    {
+        timer -= t;
+        Debug.Log(timer);
+    }
+}
+
 [ExecuteInEditMode]
-public class Powerup : MonoBehaviour {
+public class Powerup : NetworkBehaviour {
 
 	public float multiplier;
 	public PowerupType powerupType;
@@ -19,9 +47,12 @@ public class Powerup : MonoBehaviour {
     ParticleSystem psMain;
     ParticleSystem[] psAux;
 
+    public PowerupSpawn spawn;
+
     void Start()
     {
         psMain = GetComponent<ParticleSystem>();
+        colour = GameHandler.current.powerupCols[(int)powerupType];
         SetColour();
     }
 
@@ -64,10 +95,29 @@ public class Powerup : MonoBehaviour {
 
                 auxMain.startColor = grad;
             }
+            else if (ps.gameObject.name == "Beacon")
+            {
+
+            }
             else
             {
                 auxMain.startColor = new Color(colour.r, colour.g, colour.b, auxMain.startColor.color.a);
             }
         }
+    }
+
+    [Command]
+    public void CmdMakeExplosionsHappenPlz(int powerupNum)
+    {
+        RpcMakeExplosionsHappenPlz(powerupNum);
+    }
+
+
+    [ClientRpc]   
+    private void RpcMakeExplosionsHappenPlz(int powerupNum)
+    {
+        colour = GameHandler.current.powerupCols[powerupNum];
+        SetColour();
+        psMain.Play();
     }
 }
