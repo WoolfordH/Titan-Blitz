@@ -63,7 +63,10 @@ public class Powerup : NetworkBehaviour {
 
     void SetColour()
     {
-       
+
+        if(!psMain)
+            psMain = GetComponent<ParticleSystem>();
+
         ParticleSystem.MainModule main = psMain.main;
         main.startColor = new Color(colour.r, colour.g, colour.b, main.startColor.color.a);
 

@@ -59,6 +59,11 @@ public class Grabber : NetworkBehaviour {
             if(!returning)
             {
                 //it keeps its velocity, do nothing
+                if (Vector3.Distance(this.transform.position, owner.transform.position) > maxDist)//too far away
+                {
+                    mover = this.transform;
+                    Return();
+                }
             }
             else //is returning
             {
@@ -76,13 +81,11 @@ public class Grabber : NetworkBehaviour {
                         //grapple, nothing else needs to happen
                     }                
             }
+
+
         }
 
-        if(Vector3.Distance(this.transform.position,owner.transform.position)>maxDist)//too far away
-        {
-            mover = this.transform;
-            Return();
-        }
+
 
 	}
 
