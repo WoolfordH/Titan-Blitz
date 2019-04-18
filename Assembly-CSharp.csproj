@@ -101,11 +101,13 @@
     <Compile Include="Assets\Unused\Flag.cs" />
     <Compile Include="Assets\Unused\FlagStand.cs" />
     <None Include="Assets\UI\HUD Icons\FontInfo.txt" />
+    <None Include="Assets\Materials\Shaders\CelShading.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowStandard.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\GlowReplacement.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\Glow.shader" />
     <None Include="Assets\Scripts\GlowShaderScripts\XRayImageEffect.shader" />
     <None Include="Assets\Materials\Shaders\UIOverlay.shader" />
+    <None Include="Assets\Materials\Shaders\CelShadingGlow.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>I:/My Documents/Titan-Blitz/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
