@@ -55,7 +55,7 @@ MonoBehaviour:
   lobbyUI: {fileID: 0}
   characterPrefabs:
   - {fileID: 1736500218235190, guid: 1e8b0d48b42634a40a4a150748e07316, type: 2}
-  - {fileID: 1566720088552854, guid: 320cb1307c2f21946a6bf8f6991eef2f, type: 2}
+  - {fileID: 1652255207206564, guid: 8a64b50284ef9f1489fcac739fed1715, type: 2}
   - {fileID: 1023560348404292, guid: 7a726cfc4f2f11949bb3945e215c6fd6, type: 2}
   lobbyCam: {fileID: 0}
   team1SpawnPoint: {fileID: 0}

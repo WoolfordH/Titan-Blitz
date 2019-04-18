@@ -21,6 +21,8 @@ public class CTPManager : NetworkBehaviour
     public ControlPoint team1Point;
     public ControlPoint team2Point;
 
+    public Transform currentObj;
+
     private CTPManagerState state = CTPManagerState.inactive;
 
 
@@ -65,6 +67,7 @@ public class CTPManager : NetworkBehaviour
             team1Point.Deactivate();
             team1Point.Deactivate();
             state = CTPManagerState.neutral;
+            currentObj = centrePoint.transform;
         }
         else
         {
@@ -84,12 +87,14 @@ public class CTPManager : NetworkBehaviour
                     team2Point.Activate();
                     centrePoint.Deactivate();
                     state = CTPManagerState.team1Advantage;
+                    currentObj = team2Point.transform;
                 }
                 else //team 2
                 {
                     centrePoint.Deactivate();
                     team1Point.Activate();
                     state = CTPManagerState.team2Advantage;
+                    currentObj = team1Point.transform;
                 }
             }
         }

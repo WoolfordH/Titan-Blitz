@@ -41,8 +41,10 @@ public class CharacterHandler: NetworkBehaviour
     public List<int> allies = new List<int>();
 
     public Character character;
-    public Renderer modelRenderer;
+    public Renderer[] modelRenderers;
+    public Animator characterAnim;
 
+    public GameObject canvas;
     public GameObject hitMarker;
 	public Text timerLbl;
 	public Image healthBar;
@@ -51,6 +53,9 @@ public class CharacterHandler: NetworkBehaviour
 	public Text ammoLbl;
 	public Image abl1Icon;
 	public Image abl2Icon;
+
+    public RectTransform objMarker;
+    Vector2 objMarkerScreenSize;
 
     public Image powerupDmgIcon;
     public Image powerupJumpIcon;
@@ -86,6 +91,8 @@ public class CharacterHandler: NetworkBehaviour
 	public bool freezeLook = false;
 
     public GameObject camHolder; //the object the camera and things that move with the camera are childed to 
+    public IKControl ikControl;
+    public GameObject characterModel;
     public Camera cam; //the camera 
     public Transform headPos;
 	public Transform muzzlePos;
@@ -118,6 +125,9 @@ public class CharacterHandler: NetworkBehaviour
         powerupSpeedIcon.enabled = false;
         //avatarMat = new Material (Shader.Find("Unlit/Texture"));
         //avatarMat.mainTexture = avatarRT;
+
+
+        objMarkerScreenSize = objMarker.rect.size * canvas.GetComponent<Canvas>().scaleFactor;
     }
 
     private void Initiate()
@@ -135,9 +145,11 @@ public class CharacterHandler: NetworkBehaviour
         if (tag != "Dummy" && hasAuthority) //if this is the character of this client
         {
             ServerLog.current.LogData("Start Character Handler");
-            
-            //enable the camera 
+
+            //enable the camera holder
             cam.gameObject.SetActive(true);
+            //camHolder.SetActive(true);
+            characterModel.SetActive(false);
             PlayerConnection.current.activeCamera = cam.gameObject;
 
             //pass the local controller this object
@@ -198,6 +210,8 @@ public class CharacterHandler: NetworkBehaviour
             rb.useGravity = !grounded;
 
             surfaceRotation = Quaternion.identity;
+
+            characterAnim.SetBool("grounded", grounded);
 
             if (grounded)
             {
@@ -322,6 +336,7 @@ public class CharacterHandler: NetworkBehaviour
                     rb.velocity = momentumVel + new Vector3(0f, jumpForce * jumpMod, 0f);
                     //gun bob animation
                     gunAnim.SetBool("moving", false);
+                    characterAnim.SetTrigger("jump");
                 }
                 else
                 {
@@ -329,11 +344,13 @@ public class CharacterHandler: NetworkBehaviour
                     {
                         //gun bob animation
                         gunAnim.SetBool("moving", true);
+                        characterAnim.SetBool("moving", true);
                     }
                     else
                     {
                         //gun bob animation
                         gunAnim.SetBool("moving", false);
+                        characterAnim.SetBool("moving", false);
                     }
                 }
 
@@ -381,8 +398,10 @@ public class CharacterHandler: NetworkBehaviour
 			camRot = ClampRotationAroundXAxis (camRot);
 
             camHolder.transform.localRotation = camRot;
+            ikControl.spineRotation = Quaternion.Euler(camRot.eulerAngles.z, camRot.eulerAngles.y, -camRot.eulerAngles.x);// * Quaternion.Euler(0f, 0f, 14f);
 
-		}
+
+        }
 
 	}
 
@@ -562,7 +581,69 @@ public class CharacterHandler: NetworkBehaviour
         {
             abl2Icon.fillAmount = (character.abilities[1].cooldown - character.abilities[1].timer) / character.abilities[1].cooldown;
         }
-	}
+
+
+        //Objective marker
+
+        //Get Objective
+        Transform objective = CTPManager.current.currentObj;
+
+        //get direction to objective and place objective marker at screen point intersecting direction
+        Vector3 dirToObj = objective.position - cam.transform.position;
+        Vector3 screenPos = cam.WorldToScreenPoint(objective.position + new Vector3(0f, 5f, 0f));
+
+        //screenPos = new Vector3(Mathf.Clamp(screenPos.x, 0f, cam.pixelWidth), Mathf.Clamp(screenPos.y, 0f, cam.pixelHeight), screenPos.z);
+
+        //use z coordinate to determine if position is infront of or behind cam.
+        if (screenPos.z <= 0f)
+        {
+            //point is behind cam
+
+            if (screenPos.x <= Screen.width * 0.5f)
+            {
+                screenPos.x = Screen.width - (objMarkerScreenSize.x);
+            }
+            else
+            {
+                screenPos.x = objMarkerScreenSize.x;
+            }
+
+            if (screenPos.y <= Screen.height * 0.5f)
+            {
+                screenPos.y = Screen.height - objMarkerScreenSize.y;
+            }
+            else
+            {
+                screenPos.y = objMarkerScreenSize.y;
+            }
+        }
+        else
+        {
+            if (screenPos.x > Screen.width - objMarkerScreenSize.x)
+            {
+                screenPos.x = Screen.width - objMarkerScreenSize.x;
+            }
+            else if(screenPos.x < objMarkerScreenSize.x)
+            {
+                screenPos.x = objMarkerScreenSize.x;
+            }
+
+            if (screenPos.y > Screen.height - objMarkerScreenSize.y)
+            {
+                screenPos.y = Screen.height - objMarkerScreenSize.y;
+            }
+            else if (screenPos.y < objMarkerScreenSize.y)
+            {
+                screenPos.y = objMarkerScreenSize.y;
+            }
+        }
+
+        Vector2 localPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, screenPos, null, out localPos);
+
+        objMarker.localPosition = localPos;
+
+    }
 
 
 	public virtual void Hit(DAMAGE dmg)
@@ -693,6 +774,8 @@ public class CharacterHandler: NetworkBehaviour
    		this.gameObject.SetActive(false);
 		if(hasAuthority)//if local player
 		{
+            
+
             character.ResetAbilities();
             powerups.Clear();
             powerupDmgIcon.enabled = false;
@@ -707,6 +790,15 @@ public class CharacterHandler: NetworkBehaviour
 			PlayerConnection.current.activeCamera = GameManager.current.lobbyCam;
 		}
 	}
+
+    public IEnumerator PlayDeathAnimation()
+    {
+        characterAnim.SetTrigger("dead");
+
+        yield return null;
+
+        RpcDie();
+    }
 
 	[ClientRpc]
 	public void RpcRespawn()
@@ -745,11 +837,17 @@ public class CharacterHandler: NetworkBehaviour
         teamNum = a_teamNum;
         if (teamNum == 1)
         {
-            modelRenderer.material = GameHandler.current.team1Mat;
+            foreach (Renderer r in modelRenderers)
+            {
+                r.material = GameHandler.current.team1Mat;
+            }
         }
         else if (teamNum == 2)
         {
-            modelRenderer.material = GameHandler.current.team2Mat;
+            foreach (Renderer r in modelRenderers)
+            {
+                r.material = GameHandler.current.team2Mat;
+            }
         }
         
         ServerLog.current.LogData("Team " + teamNum.ToString());
