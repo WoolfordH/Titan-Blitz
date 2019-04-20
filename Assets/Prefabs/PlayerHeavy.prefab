@@ -2515,7 +2515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb07a123d6502149a4d8c83ef606f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 400
+  speed: 600
   sprintMultiplier: 1.5
   climbAngleMax: 45
   jumpForce: 6
@@ -2524,7 +2524,9 @@ MonoBehaviour:
   mainCollider: {fileID: 136187144919083990}
   allies: 
   character: {fileID: 114591383115559794}
-  modelRenderer: {fileID: 23122439255461782}
+  modelRenderers: []
+  characterAnim: {fileID: 0}
+  canvas: {fileID: 0}
   hitMarker: {fileID: 1177059250590940}
   timerLbl: {fileID: 114228056988720780}
   healthBar: {fileID: 114346078359015572}
@@ -2533,6 +2535,8 @@ MonoBehaviour:
   ammoLbl: {fileID: 114029906967067076}
   abl1Icon: {fileID: 114167588508537940}
   abl2Icon: {fileID: 114249386056794132}
+  objMarker: {fileID: 0}
+  killFeedUI: {fileID: 0}
   powerupDmgIcon: {fileID: 114557369262328462}
   powerupJumpIcon: {fileID: 114838648364088578}
   powerupSpeedIcon: {fileID: 114280752522774072}
@@ -2547,12 +2551,13 @@ MonoBehaviour:
   frozen: 0
   freezeLook: 0
   camHolder: {fileID: 1516719490188948}
+  ikControl: {fileID: 0}
+  characterModel: {fileID: 0}
   cam: {fileID: 20327148981498640}
   headPos: {fileID: 4875357444534750}
   muzzlePos: {fileID: 4856025657941588}
   gunAnim: {fileID: 95009114813162762}
   gun: {fileID: 1407896258339232}
-  powerups: []
 --- !u!114 &114508872738620816
 MonoBehaviour:
   m_ObjectHideFlags: 1

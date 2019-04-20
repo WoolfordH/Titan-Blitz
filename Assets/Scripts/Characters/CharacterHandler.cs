@@ -57,6 +57,8 @@ public class CharacterHandler: NetworkBehaviour
     public RectTransform objMarker;
     Vector2 objMarkerScreenSize;
 
+    public KillFeed killFeedUI;
+
     public Image powerupDmgIcon;
     public Image powerupJumpIcon;
     public Image powerupSpeedIcon;
@@ -774,7 +776,9 @@ public class CharacterHandler: NetworkBehaviour
    		this.gameObject.SetActive(false);
 		if(hasAuthority)//if local player
 		{
-            
+            //TODO: Figure out how to get player who killed you
+            killFeedUI.SetPlayers("?", "YOU");
+            killFeedUI.ShowBar(KillBarType.Die);
 
             character.ResetAbilities();
             powerups.Clear();
