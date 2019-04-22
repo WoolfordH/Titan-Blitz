@@ -19,10 +19,19 @@ public class Drone : NetworkBehaviour {
 
 	public Vector3 desiredPosition;
 
+    AudioSource audioSource;
+    public AudioClip spawnClip;
+    public AudioClip idleClip;
+    public AudioClip destroyClip;
 
-	// Use this for initialization
-	void Start () {
-	}
+    // Use this for initialization
+    void Start ()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(spawnClip);
+        audioSource.clip = idleClip;
+        audioSource.Play();
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -186,6 +195,10 @@ public class Drone : NetworkBehaviour {
 
 		transform.position = Vector3.Lerp(transform.position, targetPosition, movementSpeed * Time.deltaTime);
 	}
-		
-		
+
+    public void Die()
+    {
+        //audio
+        audioSource.PlayOneShot(destroyClip);
+    }
 }

@@ -32,6 +32,7 @@ public class AbilityDrone : Ability {
     {
         if (drone)
         {
+            drone.GetComponent<Drone>().Die();
             NetworkServer.Destroy(drone);
         }
 

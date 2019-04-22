@@ -1,0 +1,41 @@
+SOUNDS:
+
+---------------PLAYER------------------
+
+Walk
+
+Jump/Land
+
+Player Damage
+
+Player Die
+
+---------------CLASS------------------
+
+Energy Rifle
+- Fire
+- Hit
+
+Rocket
+- Fire
+- Hit
+
+Abilities
+- Xray On
+- XRay Off
+- Shield Up
+- Shield Down
+- Drone Spawn
+- Drone Idle
+- Drone Die
+- Grapple Send
+- Grapple Grab
+- Grapple pull?
+
+---------------GAME------------------
+
+Victory/Defeat?
+
+Capturing Point
+
+Point Captured

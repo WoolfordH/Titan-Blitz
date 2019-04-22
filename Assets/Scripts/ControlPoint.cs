@@ -164,6 +164,12 @@ public class ControlPoint : NetworkBehaviour
 
         if (newPercent != capturePercent)
         {
+            //get all players on point and update their capture bar UI
+            foreach (GameObject c in playersOnPoint)
+            {
+                c.GetComponent<CharacterHandler>().captureBar.fillAmount = newPercent / 100;
+            }
+
             RpcUpdateCapturePercent(newPercent);
         }
     }

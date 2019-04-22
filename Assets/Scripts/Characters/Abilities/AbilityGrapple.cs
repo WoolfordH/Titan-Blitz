@@ -44,8 +44,10 @@ public class AbilityGrapple : Ability {
 	{
 		GameObject grabber = GameObject.Instantiate(grabberPrefab, caster.handler.cam.transform.position, caster.handler.cam.transform.rotation);
 
-        
-		NetworkServer.Spawn(grabber);//, connectionToServer);
+        //audio
+        audioSource.PlayOneShot(enableClip);
+
+        NetworkServer.Spawn(grabber);//, connectionToServer);
         grabber.GetComponent<Grabber>().Init(caster, forward, initVel, startSpeed, returnSpeed, maxDist);
 	}
 

@@ -23,7 +23,11 @@ public abstract class Ability : NetworkBehaviour
     [HideInInspector]
     public bool active;
 
-	public void StartTimer(TimerType type)
+    protected AudioSource audioSource;
+    public AudioClip enableClip;
+    public AudioClip disableClip;
+
+    public void StartTimer(TimerType type)
 	{
         switch (type)
         {

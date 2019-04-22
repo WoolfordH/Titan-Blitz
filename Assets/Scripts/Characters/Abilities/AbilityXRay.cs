@@ -32,6 +32,9 @@ public class AbilityXRay : Ability {
         fading = true;
         fadeIn = true;
         fadeTimer = 0f;
+
+        //audio
+        audioSource.PlayOneShot(enableClip);
     }
 
 	public override void AbilityExpired ()
@@ -40,6 +43,9 @@ public class AbilityXRay : Ability {
         fading = true;
         fadeIn = false;
         fadeTimer = 1f;
+
+        //audio
+        audioSource.PlayOneShot(disableClip);
     }
 
     protected override void Update()

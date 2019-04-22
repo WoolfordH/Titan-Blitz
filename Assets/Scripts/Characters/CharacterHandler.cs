@@ -57,6 +57,9 @@ public class CharacterHandler: NetworkBehaviour
     public RectTransform objMarker;
     Vector2 objMarkerScreenSize;
 
+    public GameObject captureBarHolder;
+    public Image captureBar;
+
     public KillFeed killFeedUI;
 
     public Image powerupDmgIcon;
@@ -70,8 +73,23 @@ public class CharacterHandler: NetworkBehaviour
 	public RenderTexture avatarRT;
 	public Camera avatarCam;
 
+
+    ////////////////SOUNDS////////////////
+    AudioSource audioSource;
+
+    public AudioClip[] walkClips;
+    public AudioClip landClip; //Not yet implemented
+    public AudioClip damageClip;
+    public AudioClip dieClip;
+
+    public float footstepDelay;
+    float footstepTimer;
+
+    //////////////////////////////////////
+
+
     //this is a translation which makes vectors relative to the surface 
-	Quaternion surfaceRotation;
+    Quaternion surfaceRotation;
 
 
 	Vector3 momentumVel = Vector3.zero;
@@ -118,8 +136,12 @@ public class CharacterHandler: NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-		//AVATAR INIT
-		avatarRT = new RenderTexture(512,512, 16);
+        audioSource = GetComponent<AudioSource>();
+
+        captureBarHolder.SetActive(false);
+
+        //AVATAR INIT
+        avatarRT = new RenderTexture(512,512, 16);
 		avatarCam.targetTexture = avatarRT;
 
         powerupDmgIcon.enabled = false;
@@ -270,6 +292,11 @@ public class CharacterHandler: NetworkBehaviour
         }
 
 
+        if (footstepTimer > 0f)
+        {
+            footstepTimer -= Time.deltaTime;
+        }
+
 	}
 
 	void ProcessMovement()
@@ -288,7 +315,7 @@ public class CharacterHandler: NetworkBehaviour
 			float jumpMod = 1;
 
 
-			movement = GetInput (); //Get Directional Input
+			movement = GetInput ().normalized; //Get Directional Input
 
 
 			//speedPowerup
@@ -330,6 +357,20 @@ public class CharacterHandler: NetworkBehaviour
 				rb.velocity = ((surfaceRotation * transform.TransformDirection (movement))  * speed * speedmod) * Time.deltaTime;
                 gunAnim.SetFloat("speed", (float)(rb.velocity.magnitude / (speed*Time.deltaTime)));
                 momentumVel = rb.velocity;
+
+                //Play Footstep Sound
+                if (footstepTimer <= 0f)
+                {
+                    if (rb.velocity.magnitude > 0.2f)
+                    {
+                        audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
+
+                        //normal walk speed = (speed) * deltaTime
+                        footstepTimer = footstepDelay / (rb.velocity.magnitude / (speed * Time.deltaTime));
+                    }
+                    
+                }
+
 
                 //jump
                 if (Input.GetKeyDown(controls.jump))
@@ -696,6 +737,9 @@ public class CharacterHandler: NetworkBehaviour
 			}
 			else
 			{
+                //play hit audio
+                audioSource.PlayOneShot(damageClip);
+
 				RpcUpdateHealth(character.armour,character.health);
 			}
 		}
@@ -779,6 +823,9 @@ public class CharacterHandler: NetworkBehaviour
             //TODO: Figure out how to get player who killed you
             killFeedUI.SetPlayers("?", "YOU");
             killFeedUI.ShowBar(KillBarType.Die);
+
+            //TODO: Play Die clip before respawning
+            audioSource.PlayOneShot(dieClip);
 
             character.ResetAbilities();
             powerups.Clear();
@@ -890,6 +937,19 @@ public class CharacterHandler: NetworkBehaviour
                 NetworkServer.Destroy(other.gameObject);
                 //This can cause an error if 2 clients do this at the same time
             }
+        }
+
+        else if (other.GetComponent<ControlPoint>())
+        {
+            captureBarHolder.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<ControlPoint>())
+        {
+            captureBarHolder.SetActive(false);
         }
     }
 

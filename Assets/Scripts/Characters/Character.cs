@@ -72,7 +72,7 @@ public abstract class Character : NetworkBehaviour
 	public float primaryDelay;
 	public float primaryRange;
 
-	public Ability[] abilities = new Ability[3];
+    public Ability[] abilities = new Ability[3];
 
 	bool start = true;
 

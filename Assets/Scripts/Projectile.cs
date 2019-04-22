@@ -16,9 +16,14 @@ public class Projectile : NetworkBehaviour {
 	public DAMAGE dmg;
     public float decalSize = 1.5f;
 
-	// Use this for initialization
-	void Start () {
-		
+    AudioSource audioSource;
+    public AudioClip fireClip;
+    public AudioClip hitClip;
+
+    // Use this for initialization
+    void Start () {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(fireClip);
 	}
 	
 	// Update is called once per frame
@@ -60,7 +65,10 @@ public class Projectile : NetworkBehaviour {
                 hitEffect.Play();
             }
 
-			if (explosion)
+            //play audio
+            audioSource.PlayOneShot(hitClip);
+
+            if (explosion)
 			{
 				GameObject explosionObj = Instantiate (explosion, transform.position, Quaternion.identity);
 			}

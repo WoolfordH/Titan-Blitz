@@ -46,6 +46,7 @@ public class AbilityShield : Ability
 
         //places new shield
         shield = Instantiate(shieldPrefab, caster.transform.TransformPoint(shieldPosition), caster.transform.rotation);
+
         NetworkServer.Spawn(shield);
     }
 
