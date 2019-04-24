@@ -113,6 +113,8 @@ public class CharacterHandler: NetworkBehaviour
     public GameObject camHolder; //the object the camera and things that move with the camera are childed to 
     public IKControl ikControl;
     public GameObject characterModel;
+    public Renderer teamRenderer;
+    MaterialPropertyBlock propertyBlock;
     public Camera cam; //the camera 
     public Transform headPos;
 	public Transform muzzlePos;
@@ -137,6 +139,8 @@ public class CharacterHandler: NetworkBehaviour
 	void Start ()
     {
         audioSource = GetComponent<AudioSource>();
+
+        propertyBlock = new MaterialPropertyBlock();
 
         captureBarHolder.SetActive(false);
 
@@ -889,17 +893,15 @@ public class CharacterHandler: NetworkBehaviour
         teamNum = a_teamNum;
         if (teamNum == 1)
         {
-            foreach (Renderer r in modelRenderers)
-            {
-                r.material = GameHandler.current.team1Mat;
-            }
+            teamRenderer.GetPropertyBlock(propertyBlock);
+            propertyBlock.SetColor("_Colour", GameHandler.current.team1Col);
+            teamRenderer.SetPropertyBlock(propertyBlock);
         }
         else if (teamNum == 2)
         {
-            foreach (Renderer r in modelRenderers)
-            {
-                r.material = GameHandler.current.team2Mat;
-            }
+            teamRenderer.GetPropertyBlock(propertyBlock);
+            propertyBlock.SetColor("_Colour", GameHandler.current.team2Col);
+            teamRenderer.SetPropertyBlock(propertyBlock);
         }
         
         ServerLog.current.LogData("Team " + teamNum.ToString());
