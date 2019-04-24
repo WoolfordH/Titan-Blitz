@@ -26,7 +26,7 @@ public class GameHandler : MonoBehaviour {
 
     public Camera playerCam;
 
-    public Material team1Mat, team2Mat;
+    public Color team1Col, team2Col;
 
 
     // Use this for initialization
