@@ -817,14 +817,14 @@ public class CharacterHandler: NetworkBehaviour
 	[ClientRpc]
 	private void RpcDie()
 	{
-   		this.gameObject.SetActive(false);
+   		//this.gameObject.SetActive(false);
 		if(hasAuthority)//if local player
 		{
-            //TODO: Figure out how to get player who killed you
-            killFeedUI.SetPlayers("?", "YOU");
+            killFeedUI.SetPlayers("Player " + lastDamageRecievedFrom, "YOU");
             killFeedUI.ShowBar(KillBarType.Die);
 
             //TODO: Play Die clip before respawning
+            characterAnim.SetTrigger("dead");
             audioSource.PlayOneShot(dieClip);
 
             character.ResetAbilities();
@@ -842,11 +842,12 @@ public class CharacterHandler: NetworkBehaviour
 		}
 	}
 
-    public IEnumerator PlayDeathAnimation()
+    public IEnumerator FinishDeath()
     {
-        characterAnim.SetTrigger("dead");
+        //characterAnim.GetCurrentAnimatorStateInfo.
 
-        yield return null;
+        yield return new WaitForSeconds(5);
+
 
         RpcDie();
     }
