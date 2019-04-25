@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\Abilities\Ability.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\CharacterHandler.cs">
     <Files>
       <File FileName="Assets\Scripts\GameHandler.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Characters\CharacterHandler.cs" Line="1" Column="1" />
