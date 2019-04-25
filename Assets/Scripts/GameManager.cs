@@ -224,6 +224,8 @@ public class GameManager : NetworkBehaviour
         }
 
         connection.GetComponent<PlayerConnection>().RpcAssignID(players.Length - 1);
+
+        SendClientsPlayerData();
         //return players.Length-1;
     }
 

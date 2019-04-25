@@ -961,19 +961,22 @@ public class CharacterHandler: NetworkBehaviour
     {
         teamNum = a_teamNum;
 
-        teamRenderer.GetPropertyBlock(propertyBlock);
-
-        if (teamNum == 1)
-        {  
-            propertyBlock.SetColor("_Colour", GameHandler.current.team1Col);
-        }
-        else if (teamNum == 2)
-        { 
-            propertyBlock.SetColor("_Colour", GameHandler.current.team2Col); 
-        }
-
-        propertyBlock.SetFloat("_TintOn", 1f);
-        teamRenderer.SetPropertyBlock(propertyBlock);
+        //if (teamRenderer.gameObject.activeSelf)
+        //{
+        //    teamRenderer.GetPropertyBlock(propertyBlock);
+        //
+        //    if (teamNum == 1)
+        //    {
+        //        propertyBlock.SetColor("_Colour", GameHandler.current.team1Col);
+        //    }
+        //    else if (teamNum == 2)
+        //    {
+        //        propertyBlock.SetColor("_Colour", GameHandler.current.team2Col);
+        //    }
+        //
+        //    propertyBlock.SetFloat("_TintOn", 1f);
+        //    teamRenderer.SetPropertyBlock(propertyBlock);
+        //}
 
         ServerLog.current.LogData("Team " + teamNum.ToString());
     }

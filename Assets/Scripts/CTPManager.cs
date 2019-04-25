@@ -67,12 +67,23 @@ public class CTPManager : NetworkBehaviour
             team1Point.Deactivate();
             team1Point.Deactivate();
             state = CTPManagerState.neutral;
-            currentObj = centrePoint.transform;
+            RpcSetObjective(0);
         }
         else
         {
             throw new System.Exception("Activate called on active CTPManager");
         }
+    }
+
+    [ClientRpc]
+    public void RpcSetObjective(int num)
+    {
+        if (num == 0)
+            currentObj = centrePoint.transform;
+        else if (num == 1)
+            currentObj = team1Point.transform;
+        else if (num == 2)
+            currentObj = team2Point.transform;
     }
 
     public void CapturePoint(int team, int pointIdentity)
@@ -87,14 +98,14 @@ public class CTPManager : NetworkBehaviour
                     team2Point.Activate();
                     centrePoint.Deactivate();
                     state = CTPManagerState.team1Advantage;
-                    currentObj = team2Point.transform;
+                    RpcSetObjective(2);
                 }
                 else //team 2
                 {
                     centrePoint.Deactivate();
                     team1Point.Activate();
                     state = CTPManagerState.team2Advantage;
-                    currentObj = team1Point.transform;
+                    RpcSetObjective(1);
                 }
             }
         }
@@ -115,6 +126,7 @@ public class CTPManager : NetworkBehaviour
                     team2Point.Deactivate();
                     centrePoint.Activate();
                     state = CTPManagerState.neutral;
+                    RpcSetObjective(0);
                 }
             }
             else
@@ -139,6 +151,7 @@ public class CTPManager : NetworkBehaviour
                     team1Point.Deactivate();
                     centrePoint.Activate();
                     state = CTPManagerState.neutral;
+                    RpcSetObjective(0);
                 }
             }
             else

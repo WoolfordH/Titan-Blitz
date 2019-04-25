@@ -18,7 +18,8 @@ public class KillFeed : MonoBehaviour {
     public Text txtP1;
     public Text txtP2;
 
-    public GameObject   killBarNeutral,
+    public GameObject   killBarRed,
+                        killBarBlue,
                         killBarKill,
                         killBarDie;
 
@@ -40,10 +41,15 @@ public class KillFeed : MonoBehaviour {
             {
                 timer -= Time.deltaTime;
 
-                if (killBarNeutral.activeSelf)
+                if (killBarBlue.activeSelf)
                 {
-                    Color col = killBarNeutral.GetComponent<Image>().color;
-                    killBarNeutral.GetComponent<Image>().color = new Color(col.r, col.g, col.b, (timer / screenDuration));
+                    Color col = killBarBlue.GetComponent<Image>().color;
+                    killBarBlue.GetComponent<Image>().color = new Color(col.r, col.g, col.b, (timer / screenDuration));
+                }
+                else if (killBarRed.activeSelf)
+                {
+                    Color col = killBarRed.GetComponent<Image>().color;
+                    killBarRed.GetComponent<Image>().color = new Color(col.r, col.g, col.b, (timer / screenDuration));
                 }
                 else if (killBarKill.activeSelf)
                 {
@@ -97,12 +103,15 @@ public class KillFeed : MonoBehaviour {
         txtP2.text = "";
 
         textHolder.SetActive(false);
-        killBarNeutral.SetActive(false);
+        killBarRed.SetActive(false);
+        killBarBlue.SetActive(false);
         killBarKill.SetActive(false);
         killBarDie.SetActive(false);
 
-        Color col = killBarNeutral.GetComponent<Image>().color;
-        killBarNeutral.GetComponent<Image>().color = new Color(col.r, col.g, col.b, 1f);
+        Color col = killBarRed.GetComponent<Image>().color;
+        killBarRed.GetComponent<Image>().color = new Color(col.r, col.g, col.b, 1f);
+        col = killBarBlue.GetComponent<Image>().color;
+        killBarBlue.GetComponent<Image>().color = new Color(col.r, col.g, col.b, 1f);
         col = killBarKill.GetComponent<Image>().color;
         killBarKill.GetComponent<Image>().color = new Color(col.r, col.g, col.b, 1f);
         col = killBarDie.GetComponent<Image>().color;
