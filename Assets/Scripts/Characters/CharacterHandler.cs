@@ -145,8 +145,6 @@ public class CharacterHandler: NetworkBehaviour
     {
         //audioSource = GetComponent<AudioSource>();
 
-        propertyBlock = new MaterialPropertyBlock();
-
         captureBarHolder.SetActive(false);
 
         //AVATAR INIT
@@ -161,6 +159,11 @@ public class CharacterHandler: NetworkBehaviour
 
 
         objMarkerScreenSize = objMarker.rect.size * canvas.GetComponent<Canvas>().scaleFactor;
+    }
+
+    private void Awake()
+    {
+        propertyBlock = new MaterialPropertyBlock();
     }
 
     private void Initiate()
@@ -345,7 +348,7 @@ public class CharacterHandler: NetworkBehaviour
 				jumpMod *= powerups.Find (x => x.type.ToString () == "Jump").multiplier;
 			}
 
-            Vector3 moveDir = (/*surfaceRotation * */ transform.TransformDirection(movement)) * speed * speedmod;
+            Vector3 moveDir;
 
 
             if ((grounded || groundedLastFrame) && !jumping)
@@ -368,6 +371,8 @@ public class CharacterHandler: NetworkBehaviour
 					}
 				}
 
+
+                moveDir = (/*surfaceRotation * */ transform.TransformDirection(movement)) * speed * speedmod;
 
                 //apply movement velocity
 
@@ -425,7 +430,7 @@ public class CharacterHandler: NetworkBehaviour
 			{
 				speedmod *= jumpVelMod;
 
-                moveDir *= speedmod;
+                moveDir = (/*surfaceRotation * */ transform.TransformDirection(movement)) * speed * speedmod;
                 moveDir += Physics.gravity * Time.deltaTime;
 
                 //apply movement velocity ontop of current momentum
@@ -964,22 +969,22 @@ public class CharacterHandler: NetworkBehaviour
     {
         teamNum = a_teamNum;
 
-        //if (teamRenderer.gameObject.activeSelf)
-        //{
-        //    teamRenderer.GetPropertyBlock(propertyBlock);
-        //
-        //    if (teamNum == 1)
-        //    {
-        //        propertyBlock.SetColor("_Colour", GameHandler.current.team1Col);
-        //    }
-        //    else if (teamNum == 2)
-        //    {
-        //        propertyBlock.SetColor("_Colour", GameHandler.current.team2Col);
-        //    }
-        //
-        //    propertyBlock.SetFloat("_TintOn", 1f);
-        //    teamRenderer.SetPropertyBlock(propertyBlock);
-        //}
+        if (teamRenderer.gameObject.activeSelf)
+        {
+            teamRenderer.GetPropertyBlock(propertyBlock);
+        
+            if (teamNum == 1)
+            {
+                propertyBlock.SetColor("_Colour", GameHandler.current.team1Col);
+            }
+            else if (teamNum == 2)
+            {
+                propertyBlock.SetColor("_Colour", GameHandler.current.team2Col);
+            }
+        
+            propertyBlock.SetFloat("_TintOn", 1f);
+            teamRenderer.SetPropertyBlock(propertyBlock);
+        }
 
         ServerLog.current.LogData("Team " + teamNum.ToString());
     }
