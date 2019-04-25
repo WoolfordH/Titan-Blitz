@@ -75,7 +75,7 @@ public class CharacterHandler: NetworkBehaviour
 
 
     ////////////////SOUNDS////////////////
-    AudioSource audioSource;
+    //AudioSource audioSource;
 
     public AudioClip[] walkClips;
     public AudioClip landClip; //Not yet implemented
@@ -143,7 +143,7 @@ public class CharacterHandler: NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
 
         propertyBlock = new MaterialPropertyBlock();
 
@@ -383,7 +383,7 @@ public class CharacterHandler: NetworkBehaviour
                 {
                     if (rb.velocity.magnitude > 0.2f)
                     {
-                        audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
+                        //audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
 
                         //normal walk speed = (speed) * deltaTime
                         footstepTimer = footstepDelay / (rb.velocity.magnitude / (speed * Time.deltaTime));
@@ -766,7 +766,7 @@ public class CharacterHandler: NetworkBehaviour
 			else
 			{
                 //play hit audio
-                audioSource.PlayOneShot(damageClip);
+                //audioSource.PlayOneShot(damageClip);
 
 				RpcUpdateHealth(character.armour,character.health);
 			}
@@ -854,7 +854,7 @@ public class CharacterHandler: NetworkBehaviour
 
             //TODO: Play Die clip before respawning
             //characterAnim.SetTrigger("dead");
-            audioSource.PlayOneShot(dieClip);
+            //audioSource.PlayOneShot(dieClip);
 
             character.ResetAbilities();
             powerups.Clear();

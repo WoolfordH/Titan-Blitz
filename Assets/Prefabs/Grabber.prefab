@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1587647187849730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.82, z: 1.27}
+  m_LocalPosition: {x: -191.87227, y: 14.186, z: 56.47114}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,6 +119,8 @@ MonoBehaviour:
   startSpeed: 30
   returnSpeed: 10
   grappleType: 1
+  fireClip: {fileID: 0}
+  grabClip: {fileID: 0}
 --- !u!114 &114876397690686912
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,7 +19,7 @@ public class Drone : NetworkBehaviour {
 
 	public Vector3 desiredPosition;
 
-    AudioSource audioSource;
+    //AudioSource audioSource;
     public AudioClip spawnClip;
     public AudioClip idleClip;
     public AudioClip destroyClip;
@@ -27,10 +27,10 @@ public class Drone : NetworkBehaviour {
     // Use this for initialization
     void Start ()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(spawnClip);
-        audioSource.clip = idleClip;
-        audioSource.Play();
+        //audioSource = GetComponent<AudioSource>();
+        //audioSource.PlayOneShot(spawnClip);
+        //audioSource.clip = idleClip;
+        //audioSource.Play();
     }
 	
 	// Update is called once per frame
@@ -199,6 +199,6 @@ public class Drone : NetworkBehaviour {
     public void Die()
     {
         //audio
-        audioSource.PlayOneShot(destroyClip);
+        //audioSource.PlayOneShot(destroyClip);
     }
 }

@@ -32,7 +32,7 @@ public class Grabber : NetworkBehaviour {
 
     private Vector3 previousPosition;
 
-    AudioSource audioSource;
+    //AudioSource audioSource;
     public AudioClip fireClip;
     public AudioClip grabClip;
 
@@ -54,8 +54,8 @@ public class Grabber : NetworkBehaviour {
         //vecToMax = maxPos - owner.transform.position;
         rb.velocity = dir * startSpeed;// + initVelocity
 
-        audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(fireClip);
+        //audioSource = GetComponent<AudioSource>();
+        //audioSource.PlayOneShot(fireClip);
 	}
 	
 	// Update is called once per frame
@@ -135,7 +135,7 @@ public class Grabber : NetworkBehaviour {
                         if (other.gameObject.GetComponentInParent<Character>().handler.GetTeam() != owner.handler.GetTeam()) //if enemy
                         {
                             //audio
-                            audioSource.PlayOneShot(grabClip);
+                            //audioSource.PlayOneShot(grabClip);
 
                             FreezeCharacter(other.gameObject.GetComponentInParent<Character>());
                             otherChar = other.gameObject.GetComponentInParent<Character>();
@@ -156,7 +156,7 @@ public class Grabber : NetworkBehaviour {
                     if (!other.gameObject.GetComponentInParent<Character>())//not a player
                     {
                         //audio
-                        audioSource.PlayOneShot(grabClip);
+                        //audioSource.PlayOneShot(grabClip);
 
                         FreezeCharacter(owner);
                         otherChar = owner;
