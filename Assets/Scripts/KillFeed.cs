@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public enum KillBarType
 {
-    Neutral,
+    RedKill,
+    BlueKill,
     Kill,
     Die
 }
@@ -66,8 +67,12 @@ public class KillFeed : MonoBehaviour {
     {
         switch (type)
         {
-            case KillBarType.Neutral:
-                killBarNeutral.SetActive(true);
+            case KillBarType.RedKill:
+                killBarRed.SetActive(true);
+                break;
+
+            case KillBarType.BlueKill:
+                killBarBlue.SetActive(true);
                 break;
 
             case KillBarType.Kill:

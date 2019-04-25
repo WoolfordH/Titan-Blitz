@@ -813,19 +813,20 @@ public class CharacterHandler: NetworkBehaviour
 		Debug.Log(GetType() + " Died!");
 
 
-		RpcDie();
+		RpcDie(lastDamageRecievedFrom);
 		//rpc kill - simple disable, if authority enable lobby cam
 		//playerconnection.SetRespawn
 	}
 
 	[ClientRpc]
-	private void RpcDie()
+	private void RpcDie(int lastDamageRecieved)
 	{
-   		//this.gameObject.SetActive(false);
-		if(hasAuthority)//if local player
+        PlayerConnection.current.playerObject.GetComponent<CharacterHandler>().UpdateKillFeed(lastDamageRecieved, GetComponent<Character>().id);
+
+        //this.gameObject.SetActive(false);
+        if (hasAuthority)//if local player
 		{
-            killFeedUI.SetPlayers("Player " + lastDamageRecievedFrom, "YOU");
-            killFeedUI.ShowBar(KillBarType.Die);
+            
 
             //TODO: Play Die clip before respawning
             characterAnim.SetTrigger("dead");
@@ -853,10 +854,55 @@ public class CharacterHandler: NetworkBehaviour
         yield return new WaitForSeconds(5);
 
 
-        RpcDie();
+        RpcDie(lastDamageRecievedFrom);
     }
 
-	[ClientRpc]
+    public void UpdateKillFeed(int killer, int killed)
+    {
+        //killFeedUI.SetPlayers("Player " + lastDamageRecievedFrom, "YOU");
+
+        
+        if (killed == character.id)
+        {
+            killFeedUI.ShowBar(KillBarType.Die);
+
+            if (killer == -1)
+            {
+                killFeedUI.SetPlayers("?", "YOU");
+            }
+            else
+            {
+                killFeedUI.SetPlayers("Player " + killer, "YOU");
+            }
+
+        }
+        else if(killer == character.id)
+        {
+            killFeedUI.ShowBar(KillBarType.Kill);
+
+            killFeedUI.SetPlayers("YOU", "Player " + killed);
+        }
+        else
+        {
+            if (GameManager.current.GetPlayerObject(killer).GetComponent<CharacterHandler>().GetTeam() == 1)
+            {
+                killFeedUI.ShowBar(KillBarType.RedKill);
+            }
+            else if (GameManager.current.GetPlayerObject(killer).GetComponent<CharacterHandler>().GetTeam() == 2)
+            {
+                killFeedUI.ShowBar(KillBarType.BlueKill);
+            }
+            else
+            {
+                Debug.Log("Spectator is a murderer!");
+            }
+
+            killFeedUI.SetPlayers("Player " + killer, "Player " + killed);
+        }
+
+    }
+
+    [ClientRpc]
 	public void RpcRespawn()
 	{
 		rb.velocity = Vector3.zero;
