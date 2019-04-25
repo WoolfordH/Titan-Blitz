@@ -3,6 +3,8 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+		[MaterialToggle] [PerRendererData]
+		_TintOn("Tint On", Float) = 0
 		_TintMask ("Tint Mask", 2D) = "white" {}
 		[PerRendererData]
 		_Colour ("Tint Colour", Color) = (1,1,1,1)
@@ -82,6 +84,7 @@
 			}
 
 			sampler2D _TintMask;
+			bool _TintOn;
 
 			sampler2D _Ramp;
 
@@ -136,8 +139,15 @@
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
 
-				fixed4 tintMask = tex2D(_TintMask, i.uv);
-				
+				fixed4 tintMask; 
+				if (_TintOn)
+				{
+					tintMask = tex2D(_TintMask, i.uv);
+				}
+				else
+				{
+					tintMask = fixed4(0.0, 0.0, 0.0, 1.0);
+				}
 
 				return (light + _AmbientColour + specular + rim) * lerp(col, (tintMask * _Colour), tintMask);
 			}

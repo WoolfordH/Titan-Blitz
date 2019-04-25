@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Purple
+  m_Name: KittyEyes
   m_Shader: {fileID: 4800000, guid: 5eb7086f068bf4d4388c4afc43bd9ba9, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

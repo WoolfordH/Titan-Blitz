@@ -93,8 +93,10 @@ public class CharacterHandler: NetworkBehaviour
 
 
 	Vector3 momentumVel = Vector3.zero;
+    public float stickToGroundForce = 3f;
 
-	public float lookSpeed = 2f;
+
+    public float lookSpeed = 2f;
 	float initLookSpeed;
 
 	float initFOV;
@@ -106,8 +108,11 @@ public class CharacterHandler: NetworkBehaviour
 	private int lastDamageRecievedFrom = -1;
 
 	public bool grounded;
+    bool groundedLastFrame;
 
-	public bool frozen = false;
+    bool jumping;
+
+    public bool frozen = false;
 	public bool freezeLook = false;
 
     public GameObject camHolder; //the object the camera and things that move with the camera are childed to 
@@ -233,7 +238,7 @@ public class CharacterHandler: NetworkBehaviour
 
             RaycastHit hit;
 
-            grounded = Physics.SphereCast(transform.position + new Vector3(0f, (mainCollider.radius - .1f) + .1f, 0f), mainCollider.radius - .1f, Vector3.down, out hit, .15f, GameHandler.current.groundLayer);
+            grounded = Physics.SphereCast(transform.position + new Vector3(0f, (mainCollider.radius - .1f) + .1f, 0f), mainCollider.radius - .1f, Vector3.down, out hit, .2f, GameHandler.current.groundLayer);
 
             rb.useGravity = !grounded;
 
@@ -307,6 +312,12 @@ public class CharacterHandler: NetworkBehaviour
 	{
         //animation things here - probably some state management would be helpful
 
+        //if you werent grounded but now are (landing)
+        if (!groundedLastFrame && grounded)
+        {
+            jumping = false;
+        }
+
 
 		momentumVel = rb.velocity; //save current velocity
 
@@ -334,9 +345,10 @@ public class CharacterHandler: NetworkBehaviour
 				jumpMod *= powerups.Find (x => x.type.ToString () == "Jump").multiplier;
 			}
 
-				
+            Vector3 moveDir = (/*surfaceRotation * */ transform.TransformDirection(movement)) * speed * speedmod;
 
-			if (grounded)
+
+            if ((grounded || groundedLastFrame) && !jumping)
 			{
 				//sprint
 
@@ -357,11 +369,15 @@ public class CharacterHandler: NetworkBehaviour
 				}
 
 
-				//apply movement velocity
-				rb.velocity = ((surfaceRotation * transform.TransformDirection (movement))  * speed * speedmod) * Time.deltaTime;
+                //apply movement velocity
+
+                moveDir.y = -stickToGroundForce;
+
+                rb.velocity =  moveDir * Time.deltaTime;
                 gunAnim.SetFloat("speed", (float)(rb.velocity.magnitude / (speed*Time.deltaTime)));
                 momentumVel = rb.velocity;
 
+              
                 //Play Footstep Sound
                 if (footstepTimer <= 0f)
                 {
@@ -375,10 +391,12 @@ public class CharacterHandler: NetworkBehaviour
                     
                 }
 
+                characterAnim.SetFloat("velocity", rb.velocity.magnitude / (speed * Time.deltaTime));
 
                 //jump
                 if (Input.GetKeyDown(controls.jump))
                 {
+                    jumping = true;
                     //rb.isKinematic = false;
                     rb.velocity = momentumVel + new Vector3(0f, jumpForce * jumpMod, 0f);
                     //gun bob animation
@@ -406,14 +424,19 @@ public class CharacterHandler: NetworkBehaviour
 			{
 				speedmod *= jumpVelMod;
 
-				//apply movement velocity ontop of current momentum
-				rb.velocity = momentumVel + ((transform.TransformDirection (movement) * speed * speedmod) * Time.deltaTime);
+                moveDir *= speedmod;
+                moveDir += Physics.gravity * Time.deltaTime;
+
+                //apply movement velocity ontop of current momentum
+                rb.velocity = momentumVel + (moveDir * Time.deltaTime);
 			}
-				
-			//avatarCam.Render();
+
+            groundedLastFrame = grounded;
+
+            //avatarCam.Render();
 
 
-			if (cam && tag != "Dummy" && hasAuthority)
+            if (cam && tag != "Dummy" && hasAuthority)
 			{
 				//update clock UI
 				int minutes = (int)GameHandler.current.timeRemaining / 60;
@@ -891,19 +914,21 @@ public class CharacterHandler: NetworkBehaviour
     public void RpcSetTeam(int a_teamNum)
     {
         teamNum = a_teamNum;
+
+        teamRenderer.GetPropertyBlock(propertyBlock);
+
         if (teamNum == 1)
-        {
-            teamRenderer.GetPropertyBlock(propertyBlock);
+        {  
             propertyBlock.SetColor("_Colour", GameHandler.current.team1Col);
-            teamRenderer.SetPropertyBlock(propertyBlock);
         }
         else if (teamNum == 2)
-        {
-            teamRenderer.GetPropertyBlock(propertyBlock);
-            propertyBlock.SetColor("_Colour", GameHandler.current.team2Col);
-            teamRenderer.SetPropertyBlock(propertyBlock);
+        { 
+            propertyBlock.SetColor("_Colour", GameHandler.current.team2Col); 
         }
-        
+
+        propertyBlock.SetFloat("_TintOn", 1f);
+        teamRenderer.SetPropertyBlock(propertyBlock);
+
         ServerLog.current.LogData("Team " + teamNum.ToString());
     }
 
