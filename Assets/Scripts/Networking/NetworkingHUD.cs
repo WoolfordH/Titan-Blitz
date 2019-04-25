@@ -48,9 +48,7 @@ namespace UnityEngine.Networking
                     
 				}
 				if (Input.GetKeyDown(KeyCode.H))
-				{
-                    
-
+				{                   
                     manager.StartHost();
 
                     manager.networkAddress = Network.player.ipAddress;
@@ -91,13 +89,22 @@ namespace UnityEngine.Networking
 				if (GUI.Button(new Rect(xpos, ypos, 200, 20), "LAN Host(H)"))
 				{
 					manager.StartHost();
-				}
+
+                    manager.networkAddress = Network.player.ipAddress;
+
+                    ipAddressText.text = manager.networkAddress;
+
+                    Debug.Log(Network.player.ipAddress);
+                    Debug.Log(manager.networkAddress);
+                }
 				ypos += spacing;
 
 				if (GUI.Button(new Rect(xpos, ypos, 105, 20), "LAN Client(C)"))
 				{
-					manager.StartClient();
-				}
+                    manager.networkAddress = ipAddressText.text;
+
+                    manager.StartClient();
+                }
 				manager.networkAddress = GUI.TextField(new Rect(xpos + 100, ypos, 95, 20), manager.networkAddress);
 				ypos += spacing;
 
