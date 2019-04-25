@@ -597,7 +597,7 @@ public class CharacterHandler: NetworkBehaviour
 		FOVbumped = false;
 	}
 
-
+    //TODO: When player is hit, call HitMarkerFlash on Attacker's client!
 	protected IEnumerator HitMarkerFlash()
 	{
 		hitMarker.SetActive (true);
@@ -944,7 +944,21 @@ public class CharacterHandler: NetworkBehaviour
 
         else if (other.GetComponent<ControlPoint>())
         {
-            captureBarHolder.SetActive(true);
+            if (other.GetComponent<ControlPoint>().controlState == ControlPointState.active)
+            {
+                captureBarHolder.SetActive(true);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<ControlPoint>())
+        {
+            if (other.GetComponent<ControlPoint>().controlState == ControlPointState.inactive)
+            {
+                captureBarHolder.SetActive(false);
+            }
         }
     }
 

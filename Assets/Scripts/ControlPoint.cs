@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-enum ControlPointState
+public enum ControlPointState
 {
     inactive,
     active
@@ -21,7 +21,7 @@ public class ControlPoint : NetworkBehaviour
 {
     private int pointIdentity;
 
-    private ControlPointState controlState = ControlPointState.inactive;
+    public ControlPointState controlState = ControlPointState.inactive;
 
     [Range(-100f, 100f)]
     public float capturePercent = 0; //positive for team 1, negative for team 2
