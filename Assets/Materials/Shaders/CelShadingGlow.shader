@@ -24,14 +24,16 @@
 	}
 	SubShader
 	{
-
+		Tags
+		{
+			"XRay" = "True"
+		}
 		Pass
 		{
 			Tags
 			{ 
 				"LightMode" = "ForwardBase" 
-				"Pass Flags" = "OnlyDirectional"   
-				"XRay" = "True" 
+				"Pass Flags" = "OnlyDirectional"   				
 			 }
 
 			CGPROGRAM
