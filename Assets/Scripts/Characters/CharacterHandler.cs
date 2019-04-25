@@ -391,7 +391,8 @@ public class CharacterHandler: NetworkBehaviour
                     
                 }
 
-                characterAnim.SetFloat("velocity", rb.velocity.magnitude / (speed * Time.deltaTime));
+                characterAnim.SetFloat("velocity", 1f);
+                //characterAnim.SetFloat("velocity", rb.velocity.magnitude / (speed * Time.deltaTime));
 
                 //jump
                 if (Input.GetKeyDown(controls.jump))
@@ -405,7 +406,7 @@ public class CharacterHandler: NetworkBehaviour
                 }
                 else
                 {
-                    if (rb.velocity.magnitude > 0)
+                    if (movement.magnitude > 0)
                     {
                         //gun bob animation
                         gunAnim.SetBool("moving", true);
@@ -852,7 +853,7 @@ public class CharacterHandler: NetworkBehaviour
             
 
             //TODO: Play Die clip before respawning
-            characterAnim.SetTrigger("dead");
+            //characterAnim.SetTrigger("dead");
             audioSource.PlayOneShot(dieClip);
 
             character.ResetAbilities();
@@ -943,6 +944,8 @@ public class CharacterHandler: NetworkBehaviour
             GameManager.current.GetSpawnPos(GetTeam(), out spawnPos, out spawnRot);
             transform.position = spawnPos;
             transform.rotation = spawnRot;
+
+            characterAnim.SetTrigger("respawn");
 
 			cam.gameObject.SetActive(true);
 			GameManager.current.lobbyCam.SetActive(false);
