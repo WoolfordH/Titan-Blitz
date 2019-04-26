@@ -115,9 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  maxDist: 60
-  startSpeed: 30
-  returnSpeed: 10
+  maxDist: 70
+  startSpeed: 70
+  returnSpeed: 70
   grappleType: 1
   fireClip: {fileID: 0}
   grabClip: {fileID: 0}

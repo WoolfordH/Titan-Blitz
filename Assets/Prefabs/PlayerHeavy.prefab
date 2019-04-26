@@ -2519,7 +2519,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023560348404292}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -197.15, y: 11.33, z: 58.6}
+  m_LocalPosition: {x: -197.29, y: 11.33, z: 51.23}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4875357444534750}
@@ -4651,8 +4651,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caster: {fileID: 0}
   name: 
-  cooldown: 30
-  duration: 20
+  cooldown: 60
+  duration: 50
   timer: 0
   active: 0
   enableClip: {fileID: 0}

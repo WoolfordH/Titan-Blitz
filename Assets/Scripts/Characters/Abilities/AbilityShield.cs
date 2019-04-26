@@ -7,7 +7,7 @@ public class AbilityShield : Ability
 {
 
 	public GameObject shieldPrefab;
-	public Vector3 shieldPosition = new Vector3(0f, 1.3f, 1.8f);
+	public Vector3 shieldPosition = new Vector3(0f, 0f, 1.8f);
 	GameObject shield;
 
     //public AbilityShield(Character c)
