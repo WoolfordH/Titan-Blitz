@@ -178,6 +178,12 @@ public class CharacterHandler: NetworkBehaviour
         if (cam)
             initFOV = cam.fieldOfView;
 
+        Transform XRayCam = transform.Find("CameraHolder/ViewCamera/XRayCam");
+        if (XRayCam != null)
+        {
+            XRayCam.GetComponent<Camera>().fieldOfView = initFOV;
+        }
+
         if (tag != "Dummy" && hasAuthority) //if this is the character of this client
         {
             ServerLog.current.LogData("Start Character Handler");
@@ -617,13 +623,27 @@ public class CharacterHandler: NetworkBehaviour
 	private void FOVUp()
 	{
 		cam.fieldOfView += 10f;
-		FOVbumped = true;
+
+        Transform XRayCam = transform.Find("CameraHolder/ViewCamera/XRayCam");
+        if (XRayCam != null)
+        {
+            XRayCam.GetComponent<Camera>().fieldOfView = cam.fieldOfView;
+        }
+
+        FOVbumped = true;
 	}
 
 	private void ResetFOV()
 	{
 		cam.fieldOfView = initFOV;
-		FOVbumped = false;
+
+        Transform XRayCam = transform.Find("CameraHolder/ViewCamera/XRayCam");
+        if (XRayCam != null)
+        {
+            XRayCam.GetComponent<Camera>().fieldOfView = cam.fieldOfView;
+        }
+
+        FOVbumped = false;
 	}
 
     //TODO: When player is hit, call HitMarkerFlash on Attacker's client!
