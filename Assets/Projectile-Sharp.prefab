@@ -120,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1296225432553908}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -206.25, y: 14.47, z: 8.37}
+  m_LocalPosition: {x: -103.344, y: 16.756, z: 1.506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4290204381379972}
@@ -339,13 +339,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owners: []
   senderID: 0
-  speed: 120
+  speed: 150
   hitEffects:
   - {fileID: 198842943408561786}
   - {fileID: 198479942326126482}
   explosion: {fileID: 0}
   effectRadius: 0
   decalSize: 1.5
+  fireClip: {fileID: 0}
+  hitClip: {fileID: 0}
 --- !u!114 &114837672120395076
 MonoBehaviour:
   m_ObjectHideFlags: 1

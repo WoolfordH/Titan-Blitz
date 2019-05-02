@@ -353,8 +353,10 @@ MonoBehaviour:
   - {fileID: 198401192234899542}
   - {fileID: 198753223241890646}
   explosion: {fileID: 1887963760891850, guid: 9f697644c61e7b44ebc47451ff377e37, type: 2}
-  effectRadius: 4
+  effectRadius: 5
   decalSize: 4
+  fireClip: {fileID: 0}
+  hitClip: {fileID: 0}
 --- !u!114 &114148848685705052
 MonoBehaviour:
   m_ObjectHideFlags: 1

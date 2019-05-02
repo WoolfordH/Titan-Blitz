@@ -3,6 +3,7 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+		_NormalTex("Normal Texture", 2D) = "white" {}
 		[MaterialToggle] [PerRendererData]
 		_TintOn("Tint On", Float) = 0
 		_TintMask ("Tint Mask", 2D) = "white" {}
@@ -90,6 +91,8 @@
 
 			sampler2D _Ramp;
 
+
+			sampler2D _NormalTex;
 			float4 _Colour;
 
 			float4 _AmbientColour;
@@ -105,7 +108,8 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float3 normal = normalize(i.worldNormal);
+				//float3 normal = normalize(i.worldNormal);
+				float normal = normalize(tex2D(_NormalTex, i.uv));
 				float3 viewDir = normalize(i.viewDir);
 
 
