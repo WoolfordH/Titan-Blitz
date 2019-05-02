@@ -27,6 +27,8 @@ public class Grabber : NetworkBehaviour
 	private Vector3 initPos;
 	private Rigidbody rb;
 
+    public LineRenderer lr;
+
 	private bool returning = false;
     private bool grappleActive = false;
 
@@ -66,6 +68,9 @@ public class Grabber : NetworkBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+        lr.SetPosition(0, this.transform.position);
+        lr.SetPosition(1, tipPos);
+
         if(hasAuthority)
         {
             tipPos = tip.position;

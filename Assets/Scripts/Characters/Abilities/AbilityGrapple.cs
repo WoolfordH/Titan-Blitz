@@ -43,7 +43,7 @@ public class AbilityGrapple : Ability {
 	[Command]
 	private void CmdSpawnGrabber(Vector3 forward, Vector3 initVel)
 	{
-		GameObject grabber = GameObject.Instantiate(grabberPrefab, tip.transform.position, tip.transform.rotation);
+		GameObject grabber = GameObject.Instantiate(grabberPrefab, tip.transform.position, caster.handler.cam.transform.rotation);
 
         //audio
         //audioSource.PlayOneShot(enableClip);
