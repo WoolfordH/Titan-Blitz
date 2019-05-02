@@ -10,9 +10,13 @@ public enum GrappleType
 }
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
-public class Grabber : NetworkBehaviour {
-
+public class Grabber : NetworkBehaviour
+{
 	public Character owner;
+    private Transform tip;
+    [SyncVar]
+    private Vector3 tipPos;
+
 	public float maxDist;
 	private Vector3 dir; //world-space
 	public float startSpeed;
@@ -36,7 +40,7 @@ public class Grabber : NetworkBehaviour {
     public AudioClip fireClip;
     public AudioClip grabClip;
 
-	public void Init (Character a_owner, Vector3 a_dir, Vector3 initVelocity, float a_startSpeed, float a_returnSpeed, float a_maxDist) 
+	public void Init (Character a_owner, Transform a_tip, Vector3 a_dir, Vector3 initVelocity, float a_startSpeed, float a_returnSpeed, float a_maxDist) 
 	{
         startSpeed = a_startSpeed;
         returnSpeed = a_returnSpeed;
@@ -45,6 +49,7 @@ public class Grabber : NetworkBehaviour {
 		rb = GetComponent<Rigidbody> ();
 
 		owner = a_owner;
+        tip = a_tip;
 		dir = a_dir;
         //*= owner.handler.speed;
 
@@ -63,6 +68,8 @@ public class Grabber : NetworkBehaviour {
 	{
         if(hasAuthority)
         {
+            tipPos = tip.position;
+
             if(!returning)
             {
                 //it keeps its velocity, do nothing
