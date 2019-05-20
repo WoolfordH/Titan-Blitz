@@ -75,7 +75,7 @@ public class CharacterHandler: NetworkBehaviour
 
 
     ////////////////SOUNDS////////////////
-    //AudioSource audioSource;
+    AudioSource audioSource;
 
     public AudioClip[] walkClips;
     public AudioClip landClip; //Not yet implemented
@@ -143,7 +143,7 @@ public class CharacterHandler: NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        //audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         captureBarHolder.SetActive(false);
 
@@ -394,7 +394,7 @@ public class CharacterHandler: NetworkBehaviour
                 {
                     if (rb.velocity.magnitude > 0.2f)
                     {
-                        //audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
+                        CmdPlaySoundFootStep();
 
                         //normal walk speed = (speed) * deltaTime
                         footstepTimer = footstepDelay / (rb.velocity.magnitude / (speed * Time.deltaTime));
@@ -798,6 +798,18 @@ public class CharacterHandler: NetworkBehaviour
 		}
 	}
 
+    [Command]
+    private void CmdPlaySoundFootStep()
+    {
+        RpcPlaySoundFootStep();
+    }
+
+    [ClientRpc]
+    private void RpcPlaySoundFootStep()
+    {
+        audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
+    }
+
     void RechargeArmour()
     {
         if (character.armour < character.maxArmour)
@@ -1014,6 +1026,58 @@ public class CharacterHandler: NetworkBehaviour
         return teamNum;
     }
 
+    [ClientRpc]
+    private void RpcGiveClientPowerUp(int powerupNum)
+    {
+        if (hasAuthority)
+        {
+            Powerup powerup = null;
+
+            switch (powerupNum)
+            {
+                case 0:
+                    powerup = GameHandler.current.powerupSpeedPrefab.GetComponent<Powerup>();
+                    break;
+                case 1:
+                    powerup = GameHandler.current.powerupDamagePrefab.GetComponent<Powerup>();
+                    break;
+
+                case 2:
+                    powerup = GameHandler.current.powerupJumpPrefab.GetComponent<Powerup>();
+                    break;
+            }
+
+
+            //Powerup powerup = other.GetComponent<Powerup>();
+
+            //check if powerup type is already in effect
+            if (powerups.Exists(x => x.type.ToString() == powerup.powerupType.ToString()))
+            {
+                //if effect is already in use, just add to timer
+                powerups.Find(x => x.type.ToString() == powerup.powerupType.ToString()).SetTimer(powerup.timer);
+            }
+            else
+            {
+                //if powerup is not in effect, start effect
+                powerups.Add(new PowerUpData(powerup.name, powerup.powerupType, powerup.timer, powerup.multiplier));
+
+                switch (powerup.powerupType)
+                {
+                    case PowerupType.Damage:
+                        powerupDmgIcon.enabled = true;
+                        break;
+
+                    case PowerupType.Jump:
+                        powerupJumpIcon.enabled = true;
+                        break;
+
+                    case PowerupType.Speed:
+                        powerupSpeedIcon.enabled = true;
+                        break;
+                }
+            }
+        }
+    }
 
 
 
@@ -1071,58 +1135,4 @@ public class CharacterHandler: NetworkBehaviour
             captureBarHolder.SetActive(false);
         }
     }
-
-    [ClientRpc]
-    private void RpcGiveClientPowerUp(int powerupNum)
-    {
-        if (hasAuthority)
-        {
-            Powerup powerup = null;
-
-            switch (powerupNum)
-            {
-                case 0:
-                    powerup = GameHandler.current.powerupSpeedPrefab.GetComponent<Powerup>();
-                    break;
-                case 1:
-                    powerup = GameHandler.current.powerupDamagePrefab.GetComponent<Powerup>();
-                    break;
-
-                case 2:
-                    powerup = GameHandler.current.powerupJumpPrefab.GetComponent<Powerup>();
-                    break;                    
-            }
-
-
-            //Powerup powerup = other.GetComponent<Powerup>();
-
-            //check if powerup type is already in effect
-            if (powerups.Exists(x => x.type.ToString() == powerup.powerupType.ToString()))
-            {
-                //if effect is already in use, just add to timer
-                powerups.Find(x => x.type.ToString() == powerup.powerupType.ToString()).SetTimer(powerup.timer);
-            }
-            else
-            {
-                //if powerup is not in effect, start effect
-                powerups.Add(new PowerUpData(powerup.name, powerup.powerupType, powerup.timer, powerup.multiplier));
-
-                switch (powerup.powerupType)
-                {
-                    case PowerupType.Damage:
-                        powerupDmgIcon.enabled = true;
-                        break;
-
-                    case PowerupType.Jump:
-                        powerupJumpIcon.enabled = true;
-                        break;
-
-                    case PowerupType.Speed:
-                        powerupSpeedIcon.enabled = true;
-                        break;
-                }
-            }
-        }
-    }
-
 }
