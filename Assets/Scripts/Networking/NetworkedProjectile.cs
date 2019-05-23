@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class NetworkedProjectile : NetworkBehaviour
 {
     private bool initiated = false;
+    private float speed;
 
     private void Awake()
     {
@@ -20,25 +21,34 @@ public class NetworkedProjectile : NetworkBehaviour
             if(hasAuthority)
             {
                 initiated = true;
-                PassProjectilePath(this.transform.position, this.transform.forward, System.DateTime.UtcNow.Millisecond);
+                speed = GetComponent<Projectile>().speed;
+                CmdPassProjectilePath(this.transform.position, this.transform.forward, speed, System.DateTime.UtcNow.Millisecond);
             }
+        }
+        else
+        {
+
         }
 	}
 
 
     [Command]
-    private void PassProjectilePath(Vector3 position, Vector3 forward, int sentUtc)
+    private void CmdPassProjectilePath(Vector3 position, Vector3 forward, float a_speed, int sentUtc)
     {
-        ReceiveProjectilePath(position, forward, sentUtc);
+        RpcReceiveProjectilePath(position, forward, a_speed, sentUtc);
     }
 
     [ClientRpc]
-    private void ReceiveProjectilePath(Vector3 position, Vector3 forward, int sentUtc)
+    private void RpcReceiveProjectilePath(Vector3 position, Vector3 forward, float a_speed, int sentUtc)
     {
         if (!initiated)
         {
             this.transform.forward = forward;
-            this.transform.position = position + forward * (System.DateTime.UtcNow.Millisecond - sentUtc) / 1000;
+            speed = a_speed;
+            this.transform.position = position + forward * speed * (System.DateTime.UtcNow.Millisecond - sentUtc) / 1000;
+
+            initiated = true;
+            ToggleRenderers(true);
         }
     }
 

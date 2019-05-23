@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 114603241557228750}
   - component: {fileID: 65019236685188474}
   - component: {fileID: 54151889708897246}
+  - component: {fileID: 114253057793437508}
   - component: {fileID: 114128652058521058}
-  - component: {fileID: 114837672120395076}
   - component: {fileID: 82263674871606490}
   m_Layer: 11
   m_Name: Projectile-Sharp
@@ -121,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1296225432553908}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -84.835915, y: 14.015023, z: 46.429756}
+  m_LocalPosition: {x: -100.79132, y: 11.279514, z: 15.486628}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4290204381379972}
@@ -422,6 +422,17 @@ MonoBehaviour:
     i15: 160
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114253057793437508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296225432553908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31c33dd04e3da54d96c3948daa3c91c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114603241557228750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,18 +455,6 @@ MonoBehaviour:
   decalSize: 1.5
   fireClip: {fileID: 8300000, guid: 9469a1d593754d64da78317deee94de3, type: 3}
   hitClip: {fileID: 0}
---- !u!114 &114837672120395076
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1296225432553908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggleServerControl: 0
 --- !u!198 &198191145941697750
 ParticleSystem:
   m_ObjectHideFlags: 1
