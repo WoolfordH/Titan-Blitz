@@ -397,7 +397,8 @@ public class CharacterHandler: NetworkBehaviour
                 {
                     if (rb.velocity.magnitude > 0.2f)
                     {
-                        audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
+                        //audio
+                        CmdPlaySoundFootStep();
 
                         //normal walk speed = (speed) * deltaTime
                         footstepTimer = footstepDelay / (rb.velocity.magnitude / (speed * Time.deltaTime));
@@ -794,12 +795,53 @@ public class CharacterHandler: NetworkBehaviour
 			else
 			{
                 //play hit audio
-                audioSource.PlayOneShot(damageClips[Random.Range(0, damageClips.Length)]);
+                CmdPlaySoundDamage();
 
-				RpcUpdateHealth(character.armour,character.health);
+                RpcUpdateHealth(character.armour,character.health);
 			}
 		}
 	}
+
+
+    //=============================AUDIO NETWORKING============================\\
+    [Command]
+    private void CmdPlaySoundFootStep()
+    {
+        RpcPlaySoundFootStep();
+    }
+
+    [ClientRpc]
+    private void RpcPlaySoundFootStep()
+    {
+        audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
+    }
+
+    [Command]
+    private void CmdPlaySoundDamage()
+    {
+        RpcPlaySoundDamage();
+    }
+
+    [ClientRpc]
+    private void RpcPlaySoundDamage()
+    {
+        audioSource.PlayOneShot(damageClips[Random.Range(0, damageClips.Length)]);
+    }
+
+    [Command]
+    private void CmdPlaySoundPowerup()
+    {
+        RpcPlaySoundPowerup();
+    }
+
+    [ClientRpc]
+    private void RpcPlaySoundPowerup()
+    {
+        audioSource.PlayOneShot(powerupClip);
+    }
+
+
+    //=========================================================================\\
 
     void RechargeArmour()
     {
@@ -1017,7 +1059,7 @@ public class CharacterHandler: NetworkBehaviour
         return teamNum;
     }
 
-
+   
 
 
 
@@ -1126,7 +1168,8 @@ public class CharacterHandler: NetworkBehaviour
                 }
             }
 
-            audioSource.PlayOneShot(powerupClip);
+            //audio
+            CmdPlaySoundPowerup();
         }
     }
 
