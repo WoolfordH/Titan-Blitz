@@ -34,7 +34,10 @@ public class AbilityXRay : Ability {
         fadeTimer = 0f;
 
         //audio
-        audioSource.PlayOneShot(enableClip);
+        if (caster.enableClip[1] != null)
+        {
+            caster.CmdPlaySoundEnable(1);
+        }
     }
 
 	public override void AbilityExpired ()
@@ -45,7 +48,10 @@ public class AbilityXRay : Ability {
         fadeTimer = 1f;
 
         //audio
-        audioSource.PlayOneShot(disableClip);
+        if (caster.disableClip[1] != null)
+        {
+            caster.CmdPlaySoundDisable(1);
+        }
     }
 
     protected override void Update()

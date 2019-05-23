@@ -4487,6 +4487,12 @@ MonoBehaviour:
   - {fileID: 114843149913273400}
   - {fileID: 114537682307300992}
   primaryFireClip: {fileID: 0}
+  enableClip:
+  - {fileID: 8300000, guid: 5d79e80fc703c584eb098f567d9d5938, type: 3}
+  - {fileID: 8300000, guid: 1c63c0d044c20f441baeabf094bcdf6e, type: 3}
+  disableClip:
+  - {fileID: 0}
+  - {fileID: 8300000, guid: e448568811f0a8d4f86d399eaab6ef17, type: 3}
   grabberPrefab: {fileID: 1587647187849730, guid: eee3839ccbec5924cba05556f8151f38,
     type: 2}
 --- !u!114 &114200358866302452
@@ -5243,9 +5249,6 @@ MonoBehaviour:
   duration: 5
   timer: 0
   active: 0
-  audioSource: {fileID: 0}
-  enableClip: {fileID: 8300000, guid: 5d79e80fc703c584eb098f567d9d5938, type: 3}
-  disableClip: {fileID: 0}
   grabberPrefab: {fileID: 1587647187849730, guid: eee3839ccbec5924cba05556f8151f38,
     type: 2}
   maxDist: 70
@@ -5773,9 +5776,6 @@ MonoBehaviour:
   duration: 5
   timer: 0
   active: 0
-  audioSource: {fileID: 0}
-  enableClip: {fileID: 8300000, guid: 1c63c0d044c20f441baeabf094bcdf6e, type: 3}
-  disableClip: {fileID: 8300000, guid: e448568811f0a8d4f86d399eaab6ef17, type: 3}
   XRayEffect: {fileID: 114107996409059444}
   XRayFadeSpeed: 1
 --- !u!114 &114848931544610522
@@ -7792,6 +7792,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -0}
+  m_AnchoredPosition: {x: 0, y: -625.56}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
