@@ -383,13 +383,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 4437775215770184}
-  damage: 3
+  damage: 20
   viewRadius: 15
   rotationSpeed: 3
   movementSpeed: 2
   owner: {fileID: 0}
   maxDistFromOwner: 2
-  fireDelay: 1
+  fireDelay: 0.4
   desiredPosition: {x: 1.4, y: 2.6, z: -1.8}
   spawnClip: {fileID: 8300000, guid: 0283788d48543fd498e04f1eea80ad54, type: 3}
   idleClip: {fileID: 8300000, guid: 4c993dbebf3d9714f8dcd0ed455aab1b, type: 3}

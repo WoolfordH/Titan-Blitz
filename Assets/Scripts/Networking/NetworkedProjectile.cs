@@ -27,6 +27,16 @@ public class NetworkedProjectile : NetworkBehaviour
                 CmdPassProjectilePath(this.transform.position, this.transform.forward, speed, System.DateTime.UtcNow.Millisecond);
             }
         }
+        else
+        {
+            if(hasAuthority)
+            {
+                if(speed != GetComponent<Projectile>().speed)
+                {
+
+                }
+            }
+        }
 
 	}
 
@@ -59,5 +69,17 @@ public class NetworkedProjectile : NetworkBehaviour
         {
             renderer.enabled = false;
         }
+    }
+
+    [Command]
+    private void CmdUpdateSpeed(float a_speed)
+    {
+        RpcUpdateSpeed(a_speed);
+    }
+
+    [ClientRpc]
+    private void RpcUpdateSpeed(float a_speed)
+    {
+        speed = a_speed;
     }
 }
