@@ -26,6 +26,10 @@ public class GameManager : NetworkBehaviour
 
     public GameObject lobbyUI;
 
+    AudioSource audioSource;
+    public AudioClip gameWinClip;
+    public AudioClip gameLoseClip;
+
     public GameObject[] characterPrefabs;
 
     private PlayerData[] players = new PlayerData[0];
@@ -45,6 +49,7 @@ public class GameManager : NetworkBehaviour
     private void Awake()
     {
         current = this;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -160,11 +165,13 @@ public class GameManager : NetworkBehaviour
                 {
                     //you won
                     winLoseText.text = "VICTORY";
+                    audioSource.PlayOneShot(gameWinClip);
                 }
                 else if(players[PlayerConnection.current.connectionID].team == 2)
                 {
                     //you lost
                     winLoseText.text = "DEFEAT";
+                    audioSource.PlayOneShot(gameLoseClip);
                 }
 
                 break;

@@ -23,7 +23,8 @@ public abstract class Ability : NetworkBehaviour
     [HideInInspector]
     public bool active;
 
-    protected AudioSource audioSource;
+    [HideInInspector]
+    public AudioSource audioSource;
     public AudioClip enableClip;
     public AudioClip disableClip;
 

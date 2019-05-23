@@ -74,6 +74,8 @@ public abstract class Character : NetworkBehaviour
 
     public Ability[] abilities = new Ability[3];
 
+    public AudioClip primaryFireClip;
+
 	bool start = true;
 
 
@@ -116,6 +118,10 @@ public abstract class Character : NetworkBehaviour
 		{
 			if (primaryTimer <= 0)
 			{
+                if (primaryFireClip != null)
+                {
+                    handler.audioSource.PlayOneShot(primaryFireClip);
+                }
 				PrimaryAttack ();
 			}
 		}
@@ -172,6 +178,7 @@ public abstract class Character : NetworkBehaviour
         for (int i = 0; i < abilities.Length; i++)
         {
             abilities[i].Init();
+            abilities[i].audioSource = handler.audioSource;
         }
     }
 

@@ -75,12 +75,15 @@ public class CharacterHandler: NetworkBehaviour
 
 
     ////////////////SOUNDS////////////////
-    //AudioSource audioSource;
+    [HideInInspector]
+    public AudioSource audioSource;
 
     public AudioClip[] walkClips;
     public AudioClip landClip; //Not yet implemented
-    public AudioClip damageClip;
+    public AudioClip[] damageClips;
     public AudioClip dieClip;
+
+    public AudioClip powerupClip;
 
     public float footstepDelay;
     float footstepTimer;
@@ -143,7 +146,7 @@ public class CharacterHandler: NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        //audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         captureBarHolder.SetActive(false);
 
@@ -394,7 +397,7 @@ public class CharacterHandler: NetworkBehaviour
                 {
                     if (rb.velocity.magnitude > 0.2f)
                     {
-                        //audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
+                        audioSource.PlayOneShot(walkClips[Random.Range(0, walkClips.Length)]);
 
                         //normal walk speed = (speed) * deltaTime
                         footstepTimer = footstepDelay / (rb.velocity.magnitude / (speed * Time.deltaTime));
@@ -791,7 +794,7 @@ public class CharacterHandler: NetworkBehaviour
 			else
 			{
                 //play hit audio
-                //audioSource.PlayOneShot(damageClip);
+                audioSource.PlayOneShot(damageClips[Random.Range(0, damageClips.Length)]);
 
 				RpcUpdateHealth(character.armour,character.health);
 			}
@@ -1122,6 +1125,8 @@ public class CharacterHandler: NetworkBehaviour
                         break;
                 }
             }
+
+            audioSource.PlayOneShot(powerupClip);
         }
     }
 

@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 114882859326571626}
   - component: {fileID: 95810151881295160}
   - component: {fileID: 114933448495067226}
+  - component: {fileID: 82623802739754444}
   m_Layer: 10
   m_Name: PlayerHeavy
   m_TagString: Untagged
@@ -4247,6 +4248,101 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442890694192312}
   m_Enabled: 1
+--- !u!82 &82623802739754444
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023560348404292}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95009114813162762
 Animator:
   serializedVersion: 3
@@ -4606,6 +4702,7 @@ MonoBehaviour:
   duration: 0
   timer: 0
   active: 0
+  audioSource: {fileID: 0}
   enableClip: {fileID: 0}
   disableClip: {fileID: 0}
   shieldPrefab: {fileID: 1951781798440540, guid: 23130655f149c924193c240a7c42fce7,
@@ -4655,6 +4752,7 @@ MonoBehaviour:
   duration: 50
   timer: 0
   active: 0
+  audioSource: {fileID: 0}
   enableClip: {fileID: 0}
   disableClip: {fileID: 0}
   dronePrefab: {fileID: 1045144852526966, guid: c5d561706729c214f88b76d71120d16d,
@@ -5176,6 +5274,7 @@ MonoBehaviour:
   ally2Avatar: {fileID: 0}
   avatarRT: {fileID: 0}
   avatarCam: {fileID: 20709549484709636}
+  audioSource: {fileID: 0}
   walkClips:
   - {fileID: 8300000, guid: 5ec4f96785c328a41b23f57a2eb9a214, type: 3}
   - {fileID: 8300000, guid: 75113b1f4bba90347a07cf02e58e5b2d, type: 3}
@@ -5184,8 +5283,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 66d8c409f11f466439ae87e6a5bd4005, type: 3}
   - {fileID: 8300000, guid: 8ab168aee5daf374e98a5235e0380b3d, type: 3}
   landClip: {fileID: 8300000, guid: 899656a62d10764488b89a5e51b4ccb4, type: 3}
-  damageClip: {fileID: 8300000, guid: 9469a1d593754d64da78317deee94de3, type: 3}
+  damageClips:
+  - {fileID: 8300000, guid: b2ad7606436f0a74e8b2793fe1605777, type: 3}
+  - {fileID: 8300000, guid: 6efa5a128416e704698303281cdf5d89, type: 3}
+  - {fileID: 8300000, guid: f27902ccebc4f7c499a56ed52aebfaf7, type: 3}
+  - {fileID: 8300000, guid: d07243ad01b6c6f488adb80b46a5e437, type: 3}
   dieClip: {fileID: 8300000, guid: 9fd033aa77bb782439d672bd14599771, type: 3}
+  powerupClip: {fileID: 8300000, guid: 01998de1cef2be8449c1e79022dfcc97, type: 3}
   footstepDelay: 0.3
   stickToGroundForce: 3
   lookSpeed: 2
@@ -5495,6 +5599,7 @@ MonoBehaviour:
   - {fileID: 114154560621555340}
   - {fileID: 114179166191260874}
   - {fileID: 114179166191260874}
+  primaryFireClip: {fileID: 8300000, guid: f9115e6a3d4e85743aea18524e1c58fb, type: 3}
   shieldPrefab: {fileID: 1951781798440540, guid: 23130655f149c924193c240a7c42fce7,
     type: 2}
 --- !u!114 &114595726810054640

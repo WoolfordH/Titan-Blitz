@@ -58,14 +58,15 @@ public class CharacterHeavy : Character {
         RaycastHit hit;
         Quaternion initRot = handler.gun.transform.rotation;
 
-        if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, GameHandler.current.shootableLayer))
+        if (Physics.Raycast(handler.muzzlePos.position, handler.muzzlePos.forward, out hit, 1000f, GameHandler.current.shootableLayer))
         {
             Debug.Log("Aim Aligned");
+            Debug.Log("Aiming at: " + hit.collider.gameObject.name);
             handler.gun.transform.LookAt(hit.point);
         }
         else
         {
-            handler.gun.transform.LookAt(handler.cam.transform.position + (handler.cam.transform.forward * 1000f));
+            handler.gun.transform.LookAt(handler.muzzlePos.position + (handler.muzzlePos.forward * 1000f));
         }
 
         Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
