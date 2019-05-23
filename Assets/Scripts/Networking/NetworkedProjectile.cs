@@ -16,6 +16,8 @@ public class NetworkedProjectile : NetworkBehaviour
     // Update is called once per frame
     void Update ()
     {
+        transform.position += transform.forward * speed * Time.deltaTime;
+
         if(!initiated)
         {
             if(hasAuthority)
@@ -25,10 +27,7 @@ public class NetworkedProjectile : NetworkBehaviour
                 CmdPassProjectilePath(this.transform.position, this.transform.forward, speed, System.DateTime.UtcNow.Millisecond);
             }
         }
-        else
-        {
 
-        }
 	}
 
 

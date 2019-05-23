@@ -34,7 +34,7 @@ public class Projectile : NetworkBehaviour {
     {
         if (hasAuthority)
         {
-            transform.position += transform.forward * (speed * Time.deltaTime);
+            //transform.position += transform.forward * (speed * Time.deltaTime);
 
             if (GetComponent<ParticleSystem>().isPlaying)
             {
