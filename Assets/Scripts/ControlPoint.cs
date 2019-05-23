@@ -179,7 +179,8 @@ public class ControlPoint : NetworkBehaviour
     private void RpcUpdateCapturePercent(float percent)
     {
         capturePercent = percent;
-        PlayerConnection.current.playerObject.GetComponent<CharacterHandler>().captureBar.fillAmount = Mathf.Abs(percent) / 100;
+        if(PlayerConnection.current.playerObject.GetComponent<CharacterHandler>())
+            PlayerConnection.current.playerObject.GetComponent<CharacterHandler>().captureBar.fillAmount = Mathf.Abs(percent) / 100;
         //update ui
     }
 

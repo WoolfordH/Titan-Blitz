@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114088198666445354}
   - component: {fileID: 65313329221253102}
   - component: {fileID: 54907666096910310}
-  - component: {fileID: 114148848685705052}
+  - component: {fileID: 114249618247156972}
   - component: {fileID: 114011230078450084}
   - component: {fileID: 82516870056267448}
   m_Layer: 11
@@ -134,7 +134,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1333371331465492}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -208.977, y: 12.641, z: 13.227962}
+  m_LocalPosition: {x: -102.13954, y: 11.279514, z: 17.814938}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4119282316772402}
@@ -453,7 +453,7 @@ MonoBehaviour:
   decalSize: 4
   fireClip: {fileID: 0}
   hitClip: {fileID: 0}
---- !u!114 &114148848685705052
+--- !u!114 &114249618247156972
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -461,10 +461,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1333371331465492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
+  m_Script: {fileID: 11500000, guid: d31c33dd04e3da54d96c3948daa3c91c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleServerControl: 0
 --- !u!198 &198392797137661476
 ParticleSystem:
   m_ObjectHideFlags: 1

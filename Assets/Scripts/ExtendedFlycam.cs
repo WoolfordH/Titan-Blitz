@@ -31,6 +31,8 @@ public class ExtendedFlycam : NetworkBehaviour
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;
 
+    public GameObject cameraHolder;
+
     void Start()
     {
         if (hasAuthority)
@@ -43,7 +45,7 @@ public class ExtendedFlycam : NetworkBehaviour
     {
         if (hasAuthority)
         {
-            this.GetComponent<Camera>().enabled = true;
+            cameraHolder.SetActive(true);
             rotationX += Input.GetAxis("Mouse X") * cameraSensitivity * Time.deltaTime;
             rotationY += Input.GetAxis("Mouse Y") * cameraSensitivity * Time.deltaTime;
             rotationY = Mathf.Clamp(rotationY, -90, 90);
