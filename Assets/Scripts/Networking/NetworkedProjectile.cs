@@ -20,20 +20,20 @@ public class NetworkedProjectile : NetworkBehaviour
             if(hasAuthority)
             {
                 initiated = true;
-                PassProjectilePath(this.transform.position, this.transform.forward, System.DateTime.UtcNow.Millisecond);
+                CmdPassProjectilePath(this.transform.position, this.transform.forward, System.DateTime.UtcNow.Millisecond);
             }
         }
 	}
 
 
     [Command]
-    private void PassProjectilePath(Vector3 position, Vector3 forward, int sentUtc)
+    private void CmdPassProjectilePath(Vector3 position, Vector3 forward, int sentUtc)
     {
-        ReceiveProjectilePath(position, forward, sentUtc);
+        RpcReceiveProjectilePath(position, forward, sentUtc);
     }
 
     [ClientRpc]
-    private void ReceiveProjectilePath(Vector3 position, Vector3 forward, int sentUtc)
+    private void RpcReceiveProjectilePath(Vector3 position, Vector3 forward, int sentUtc)
     {
         if (!initiated)
         {

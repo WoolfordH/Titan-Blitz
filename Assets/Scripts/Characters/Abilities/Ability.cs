@@ -24,9 +24,9 @@ public abstract class Ability : NetworkBehaviour
     public bool active;
 
     [HideInInspector]
-    public AudioSource audioSource;
-    public AudioClip enableClip;
-    public AudioClip disableClip;
+    //public AudioSource audioSource;
+    //public AudioClip[] enableClip;
+    //public AudioClip[] disableClip;
 
     public void StartTimer(TimerType type)
 	{
@@ -91,4 +91,5 @@ public abstract class Ability : NetworkBehaviour
 	public abstract void AbilityExpired ();
 
     public abstract void ForceEnd();
+
 }

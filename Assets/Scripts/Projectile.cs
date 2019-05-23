@@ -27,7 +27,7 @@ public class Projectile : NetworkBehaviour {
         {
             audioSource.PlayOneShot(fireClip);
         }
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -74,6 +74,7 @@ public class Projectile : NetworkBehaviour {
                 audioSource.PlayOneShot(hitClip);
             }
 
+
             if (explosion)
 			{
 				GameObject explosionObj = Instantiate (explosion, transform.position, Quaternion.identity);
@@ -81,9 +82,44 @@ public class Projectile : NetworkBehaviour {
         }
 	}
 
+    //=============================AUDIO NETWORKING============================\\
+    //[Command]
+    //private void CmdPlaySoundExplode()
+    //{
+    //    RpcPlaySoundExplode();
+    //}
+    //
+    //[ClientRpc]
+    //private void RpcPlaySoundExplode()
+    //{
+    //    if (hitClip != null)
+    //    {
+    //        audioSource.PlayOneShot(hitClip);
+    //    }
+    //}
+
+    //[Command]
+    //private void CmdPlaySoundFire()
+    //{
+    //    RpcPlaySoundFire();
+    //}
+    //
+    //[ClientRpc]
+    //private void RpcPlaySoundFire()
+    //{
+    //    if (fireClip != null)
+    //    {
+    //        audioSource.PlayOneShot(fireClip);
+    //    }
+    //}
+
+   
+
+//=========================================================================\\
 
 
-    void OnTriggerEnter(Collider other)
+
+void OnTriggerEnter(Collider other)
     {
         if (hasAuthority)
         {

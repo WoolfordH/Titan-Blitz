@@ -75,6 +75,8 @@ public abstract class Character : NetworkBehaviour
     public Ability[] abilities = new Ability[3];
 
     public AudioClip primaryFireClip;
+    public AudioClip[] enableClip;
+    public AudioClip[] disableClip;
 
 	bool start = true;
 
@@ -118,11 +120,13 @@ public abstract class Character : NetworkBehaviour
 		{
 			if (primaryTimer <= 0)
 			{
+                //audio
                 if (primaryFireClip != null)
                 {
-                    handler.audioSource.PlayOneShot(primaryFireClip);
+                    CmdPlaySoundFire();
                 }
-				PrimaryAttack ();
+
+                PrimaryAttack ();
 			}
 		}
 
@@ -151,7 +155,46 @@ public abstract class Character : NetworkBehaviour
 		}
 	}
 
-	protected virtual void HandleCooldowns()
+    //=============================AUDIO NETWORKING============================\\
+    [Command]
+    private void CmdPlaySoundFire()
+    {
+        RpcPlaySoundFire();
+    }
+
+    [ClientRpc]
+    private void RpcPlaySoundFire()
+    {
+        handler.audioSource.PlayOneShot(primaryFireClip);
+    }
+
+    [Command]
+    public void CmdPlaySoundEnable(int abilityIndex)
+    {
+        RpcPlaySoundEnable(abilityIndex);
+    }
+
+    [ClientRpc]
+    private void RpcPlaySoundEnable(int abilityIndex)
+    {
+        handler.audioSource.PlayOneShot(enableClip[abilityIndex]);
+    }
+
+    [Command]
+    public void CmdPlaySoundDisable(int abilityIndex)
+    {
+        RpcPlaySoundDisable(abilityIndex);
+    }
+
+    [ClientRpc]
+    private void RpcPlaySoundDisable(int abilityIndex)
+    {
+        handler.audioSource.PlayOneShot(disableClip[abilityIndex]);
+    }
+
+    //=========================================================================\\
+
+    protected virtual void HandleCooldowns()
 	{
 		if (primaryTimer > 0f)
 		{
@@ -178,7 +221,7 @@ public abstract class Character : NetworkBehaviour
         for (int i = 0; i < abilities.Length; i++)
         {
             abilities[i].Init();
-            abilities[i].audioSource = handler.audioSource;
+            //abilities[i].audioSource = handler.audioSource;
         }
     }
 

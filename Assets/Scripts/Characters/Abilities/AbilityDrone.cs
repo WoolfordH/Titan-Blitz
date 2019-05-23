@@ -32,8 +32,7 @@ public class AbilityDrone : Ability {
     {
         if (drone)
         {
-            drone.GetComponent<Drone>().Die();
-            NetworkServer.Destroy(drone);
+            CmdDestroySelf();
         }
 
         drone = Instantiate(dronePrefab, caster.handler.cam.transform.position + (caster.handler.cam.transform.forward * 1f), Quaternion.LookRotation(caster.handler.cam.transform.forward, Vector3.up));
@@ -45,7 +44,7 @@ public class AbilityDrone : Ability {
 	{
         if (drone)
         {
-            NetworkServer.Destroy(drone);
+            CmdDestroySelf();
         }
     }
 
@@ -63,6 +62,7 @@ public class AbilityDrone : Ability {
     [Command]
     private void CmdDestroySelf()
     {
+        drone.GetComponent<Drone>().Die();
         NetworkServer.Destroy(drone);
     }
 }

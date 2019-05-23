@@ -147,7 +147,7 @@ public class Grabber : NetworkBehaviour
                         if (other.gameObject.GetComponentInParent<Character>().handler.GetTeam() != owner.handler.GetTeam()) //if enemy
                         {
                             //audio
-                            audioSource.PlayOneShot(grabClip);
+                            CmdPlaySoundGrab();
 
                             FreezeCharacter(other.gameObject.GetComponentInParent<Character>());
                             otherChar = other.gameObject.GetComponentInParent<Character>();
@@ -168,7 +168,7 @@ public class Grabber : NetworkBehaviour
                     if (!other.gameObject.GetComponentInParent<Character>())//not a player
                     {
                         //audio
-                        audioSource.PlayOneShot(grabClip);
+                        CmdPlaySoundGrab();
 
                         FreezeCharacter(owner);
                         otherChar = owner;
@@ -190,6 +190,22 @@ public class Grabber : NetworkBehaviour
             }
         }
 	}
+
+    //=============================AUDIO NETWORKING============================\\
+    [Command]
+    protected void CmdPlaySoundGrab()
+    {
+        RpcPlaySoundGrab();
+    }
+
+    [ClientRpc]
+    private void RpcPlaySoundGrab()
+    {
+        audioSource.PlayOneShot(grabClip);
+    }
+
+    //=========================================================================\\
+
 
     private void FreezeCharacter(Character character)
     {
