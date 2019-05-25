@@ -33,7 +33,7 @@ public class NetworkedProjectile : NetworkBehaviour
             {
                 if(speed != GetComponent<Projectile>().speed)
                 {
-
+                    CmdUpdateSpeed(GetComponent<Projectile>().speed);
                 }
             }
         }

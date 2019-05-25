@@ -250,10 +250,16 @@ public class GameManager : NetworkBehaviour
         players[connectionID].playerObject = player;
     }
 
-    [Server] //this can only be called on the server as only the server knows about other players - this should be fixed
+    [Server] //this can only be called on the server as only the server knows about other players - this should be changed
     public GameObject GetPlayerObject(int playerID)
     {
         return players[playerID].playerObject;
+    }
+
+    [Server]
+    public PlayerConnection GetPlayerConnection(int playerID)
+    {
+        return players[playerID].connection;
     }
 
     public void GetSpawnPos(int teamNum , out Vector3 spawnPos, out Quaternion spawnRot)

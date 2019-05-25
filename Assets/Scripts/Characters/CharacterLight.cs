@@ -67,7 +67,7 @@ public class CharacterLight : Character {
         }
 
         Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
-        NetworkServer.Spawn(proj.gameObject);
+        NetworkServer.SpawnWithClientAuthority(proj.gameObject, GameManager.current.GetPlayerConnection(id).gameObject);
 		proj.owners.Add(this.transform.root);
         proj.senderID = id;
         proj.dmg = new DAMAGE((int)(primaryDmg.damage * dmgMod), primaryDmg.armourPiercing);
