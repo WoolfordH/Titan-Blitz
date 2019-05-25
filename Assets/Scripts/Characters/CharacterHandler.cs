@@ -962,7 +962,7 @@ public class CharacterHandler: NetworkBehaviour
 
             if (killer == -1)
             {
-                killFeedUI.SetPlayers("?", "YOU");
+                killFeedUI.SetPlayers("Sharks", "YOU");
             }
             else
             {
