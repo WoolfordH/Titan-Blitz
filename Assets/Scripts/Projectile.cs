@@ -20,6 +20,8 @@ public class Projectile : NetworkBehaviour {
     public AudioClip fireClip;
     public AudioClip hitClip;
 
+    public int shotTime;
+
     // Use this for initialization
     void Start () {
         audioSource = GetComponent<AudioSource>();
@@ -32,7 +34,7 @@ public class Projectile : NetworkBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (hasAuthority)
+        if (isServer)
         {
             //transform.position += transform.forward * (speed * Time.deltaTime);
 
@@ -121,7 +123,7 @@ public class Projectile : NetworkBehaviour {
 
 void OnTriggerEnter(Collider other)
     {
-        if (hasAuthority)
+        if (isServer)
         {
             if (other.gameObject.tag != "Projectile")
             {

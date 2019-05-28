@@ -41,7 +41,7 @@ public class CharacterLight : Character {
             //animate recoil
             handler.gunAnim.SetTrigger("fired");
 
-            CmdFire();
+            CmdFire(handler.muzzlePos.position, System.DateTime.UtcNow.Millisecond);
             primaryTimer = primaryDelay;
         }
 
@@ -50,7 +50,7 @@ public class CharacterLight : Character {
 
     //Projectiles should be spawned from the server 
     [Command]
-	void CmdFire()
+	void CmdFire(Vector3 firePos, int shotTime)
 	{
         //position gun to aim at target
         RaycastHit hit;
@@ -58,7 +58,7 @@ public class CharacterLight : Character {
 
         if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, GameHandler.current.shootableLayer))
         {
-            Debug.Log("Aim Aligned");
+            //Debug.Log("Aim Aligned");
             handler.gun.transform.LookAt(hit.point);
         }
         else
@@ -66,11 +66,13 @@ public class CharacterLight : Character {
             handler.gun.transform.LookAt(handler.cam.transform.position + (handler.cam.transform.forward * 1000f));
         }
 
-        Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
+        //Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
+        Projectile proj = Instantiate(primaryProj, firePos, handler.muzzlePos.rotation).GetComponent<Projectile>();
         NetworkServer.SpawnWithClientAuthority(proj.gameObject, GameManager.current.GetPlayerConnection(id).gameObject);
 		proj.owners.Add(this.transform.root);
         proj.senderID = id;
         proj.dmg = new DAMAGE((int)(primaryDmg.damage * dmgMod), primaryDmg.armourPiercing);
+        proj.shotTime = shotTime;
 
         handler.gun.transform.rotation = initRot;
     }

@@ -42,7 +42,12 @@ public class Grabber : NetworkBehaviour
     public AudioClip fireClip;
     public AudioClip grabClip;
 
-	public void Init (Character a_owner, Transform a_tip, Vector3 a_dir, Vector3 initVelocity, float a_startSpeed, float a_returnSpeed, float a_maxDist) 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void Init (Character a_owner, Transform a_tip, Vector3 a_dir, Vector3 initVelocity, float a_startSpeed, float a_returnSpeed, float a_maxDist) 
 	{
         startSpeed = a_startSpeed;
         returnSpeed = a_returnSpeed;
@@ -61,7 +66,7 @@ public class Grabber : NetworkBehaviour
         //vecToMax = maxPos - owner.transform.position;
         rb.velocity = dir * startSpeed;// + initVelocity
 
-        audioSource = GetComponent<AudioSource>();
+        
         //audioSource.PlayOneShot(fireClip);
 	}
 	

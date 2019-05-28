@@ -5,19 +5,23 @@ using UnityEngine.Networking;
 
 public class Network_Transform : NetworkBehaviour
 {
-    private Transform networkedTransform;
-    private Rigidbody rb;
+    public Transform networkedTransform;
+    public Rigidbody rb;
 
     private bool serverControl = false;
 
     public bool toggleServerControl = false;
     private bool toggleCheck = false;
 
+    private Vector3 savedPos;
+    private Quaternion savedRotation;
+
     // Use this for initialization
     void Awake()
     {
-        networkedTransform = this.transform;
-        rb = GetComponent<Rigidbody>();
+        if (!networkedTransform)
+            networkedTransform = this.transform;
+        rb = networkedTransform.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -25,16 +29,20 @@ public class Network_Transform : NetworkBehaviour
     {
         if ((hasAuthority && !serverControl) || (isServer && serverControl))
         {
-            if (true)//moved enough or other checks
+            if (Vector3.Distance(savedPos, networkedTransform.position) > 0.01)//moved enough or other checks
             {
-                //ServerLog.current.LogData(networkedTransform.position.ToString());
+                savedPos = networkedTransform.position;
+
                 CmdUpdatePosition(networkedTransform.position);
-                //CmdUpdateRotation(networkedTransform.localRotation);
             }
         }
         if(hasAuthority)
         {
-            CmdUpdateRotation(networkedTransform.localRotation);
+            if (networkedTransform.localRotation != savedRotation)
+            {
+                CmdUpdateRotation(networkedTransform.localRotation);
+                savedRotation = networkedTransform.localRotation;
+            }
         }
 
 
@@ -104,7 +112,8 @@ public class Network_Transform : NetworkBehaviour
 
         if(hasAuthority && !isServer)
         {
-            rb.isKinematic = true;
+            if(rb)
+                rb.isKinematic = true;
         }
     }
 
@@ -121,7 +130,8 @@ public class Network_Transform : NetworkBehaviour
 
         if (hasAuthority && !isServer)
         {
-            rb.isKinematic = false;
+            if(rb)
+                rb.isKinematic = false;
         }
     }
 }

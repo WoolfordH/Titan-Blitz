@@ -22,9 +22,19 @@ public class NetworkedProjectile : NetworkBehaviour
         {
             if(hasAuthority)
             {
+                
+
                 initiated = true;
                 speed = GetComponent<Projectile>().speed;
+                int shotTime = GetComponent<Projectile>().shotTime;
+                float timePassed = (System.DateTime.UtcNow.Millisecond - shotTime) * 0.001f;
+                if (timePassed < 0)
+                    timePassed = 0;
+
+                Vector3 position = this.transform.position + this.transform.forward * speed * timePassed;
                 CmdPassProjectilePath(this.transform.position, this.transform.forward, speed, System.DateTime.UtcNow.Millisecond);
+
+                Debug.Log("Ping: " + timePassed.ToString());
             }
         }
         else

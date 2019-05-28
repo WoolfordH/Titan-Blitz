@@ -44,7 +44,7 @@ public class CharacterHeavy : Character {
             //animate recoil
             handler.gunAnim.SetTrigger("fired");
 
-            CmdFire();
+            CmdFire(handler.muzzlePos.position, System.DateTime.UtcNow.Millisecond);
             primaryTimer = primaryDelay;
         }
 
@@ -52,16 +52,16 @@ public class CharacterHeavy : Character {
     }
 
     [Command]
-	void CmdFire()
-	{
+	void CmdFire(Vector3 firePos, int shotTime)
+    {
         //position gun to aim at target
         RaycastHit hit;
         Quaternion initRot = handler.gun.transform.rotation;
 
         if (Physics.Raycast(handler.muzzlePos.position, handler.muzzlePos.forward, out hit, 1000f, GameHandler.current.shootableLayer))
         {
-            Debug.Log("Aim Aligned");
-            Debug.Log("Aiming at: " + hit.collider.gameObject.name);
+            //Debug.Log("Aim Aligned");
+            //Debug.Log("Aiming at: " + hit.collider.gameObject.name);
             handler.gun.transform.LookAt(hit.point);
         }
         else
@@ -69,11 +69,12 @@ public class CharacterHeavy : Character {
             handler.gun.transform.LookAt(handler.muzzlePos.position + (handler.muzzlePos.forward * 1000f));
         }
 
-        Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
-        NetworkServer.Spawn(proj.gameObject);
+        Projectile proj = Instantiate(primaryProj, firePos, handler.muzzlePos.rotation).GetComponent<Projectile>();
+        NetworkServer.SpawnWithClientAuthority(proj.gameObject, GameManager.current.GetPlayerConnection(id).gameObject);
         proj.owners.Add(this.transform);
         proj.senderID = id;
 		proj.dmg = new DAMAGE((int)(primaryDmg.damage * dmgMod), primaryDmg.armourPiercing);
+        proj.shotTime = shotTime;
 
         handler.gun.transform.rotation = initRot;
     }

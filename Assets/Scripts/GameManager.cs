@@ -256,7 +256,7 @@ public class GameManager : NetworkBehaviour
         return players[playerID].playerObject;
     }
 
-    [Server]
+    
     public PlayerConnection GetPlayerConnection(int playerID)
     {
         return players[playerID].connection;
