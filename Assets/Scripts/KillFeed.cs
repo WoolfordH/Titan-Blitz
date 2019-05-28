@@ -27,6 +27,12 @@ public class KillFeed : MonoBehaviour {
     public float screenDuration = 3f;
     bool active = false;
 
+
+    public Text kdText;
+    private int kills = 0;
+    private int deaths = 0;
+
+
     // Use this for initialization
     void Start ()
     {
@@ -95,6 +101,23 @@ public class KillFeed : MonoBehaviour {
         timer = screenDuration;
 
         active = true;
+    }
+
+    public void AddDeath()
+    {
+        deaths++;
+        UpdateKDText();
+    }
+
+    public void AddKill()
+    {
+        kills++;
+        UpdateKDText();
+    }
+
+    private void UpdateKDText()
+    {
+        kdText.text = "K: " + kills.ToString() + " D: " + deaths.ToString();
     }
 
     void HideBar()

@@ -16,14 +16,80 @@ namespace UnityEngine.Networking
 		[SerializeField] public int offsetY;
 
         [SerializeField] public InputField ipAddressText;
+        [SerializeField] public GameObject networkingUI;
+        [SerializeField] public GameObject lobbyUI;
 
-		// Runtime variable
-		bool showServer = false;
+        // Runtime variable
+        bool showServer = false;
 
 		void Awake()
 		{
 			manager = GetComponent<NetworkManager>();
+
 		}
+
+        private void Start()
+        {
+            EnableUI();
+        }
+
+        public void Host()
+        {
+            manager.StartHost();
+
+            manager.networkAddress = Network.player.ipAddress;
+
+            ipAddressText.text = manager.networkAddress;
+
+            Debug.Log(Network.player.ipAddress);
+            Debug.Log(manager.networkAddress);
+
+            DisableUI();
+        }
+
+        public void LocalHost()
+        {
+            manager.StartHost();
+
+            manager.networkAddress = "localhost";
+
+            ipAddressText.text = manager.networkAddress;
+
+            Debug.Log(Network.player.ipAddress);
+            Debug.Log(manager.networkAddress);
+
+            DisableUI();
+        }
+
+        public void Connect()
+        {
+            manager.networkAddress = ipAddressText.text;
+
+            manager.StartClient();
+
+            DisableUI();
+        }
+
+        public void LocalConnect()
+        {
+            manager.networkAddress = "localhost";
+
+            manager.StartClient();
+
+            DisableUI();
+        }
+
+        public void DisableUI()
+        {
+            networkingUI.SetActive(false);
+            lobbyUI.SetActive(true);
+        }
+
+        public void EnableUI()
+        {
+            networkingUI.SetActive(true);
+            lobbyUI.SetActive(false);
+        }
 
 		void Update()
 		{
@@ -48,21 +114,12 @@ namespace UnityEngine.Networking
                     
 				}
 				if (Input.GetKeyDown(KeyCode.H))
-				{                   
-                    manager.StartHost();
-
-                    manager.networkAddress = Network.player.ipAddress;
-
-                    ipAddressText.text = manager.networkAddress;
-
-                    Debug.Log(Network.player.ipAddress);
-                    Debug.Log(manager.networkAddress);
+				{
+                    Host();
                 }
 				if (Input.GetKeyDown(KeyCode.C))
 				{
-                    manager.networkAddress = ipAddressText.text;
-
-					manager.StartClient();
+                    Connect();
 				}
 			}
 

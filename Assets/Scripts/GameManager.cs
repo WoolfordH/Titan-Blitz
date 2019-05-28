@@ -336,4 +336,10 @@ public class GameManager : NetworkBehaviour
     //{
     //    ServerLog.current.LogData("A player has been disconnected");
     //}
+
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

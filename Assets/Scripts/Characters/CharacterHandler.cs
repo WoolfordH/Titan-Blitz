@@ -969,12 +969,14 @@ public class CharacterHandler: NetworkBehaviour
                 killFeedUI.SetPlayers("Player " + killer, "YOU");
             }
 
+            killFeedUI.AddDeath();
         }
         else if(killer == character.id)
         {
             killFeedUI.ShowBar(KillBarType.Kill);
 
             killFeedUI.SetPlayers("YOU", "Player " + killed);
+            killFeedUI.AddKill();
         }
         else
         {
