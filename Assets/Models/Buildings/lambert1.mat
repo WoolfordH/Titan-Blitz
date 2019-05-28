@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BrickStairs
+  m_Name: lambert1
   m_Shader: {fileID: 4800000, guid: f5c6b7f3935de22488fbe89828e1e91d, type: 3}
-  m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: dfa7683be2a0e5a47ac80e8d578e80c7, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -39,31 +39,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 77d806403becbf642b0000e5b834c233, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: f35d90b72729c4342a65008c1ccd41c2, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 2800000, guid: c104fd4a160b3b94eb89582a5839f272, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: a210835a4c8118b4ba1462b36e53cdec, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 8f2239322014b334daa6ca7dd0977247, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
         m_Texture: {fileID: 2800000, guid: 86ac4ac141d2e5448b7fccc5ef5ebd08, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -78,12 +74,11 @@ Material:
     - _Mode: 0
     - _NormalAmount: 1
     - _OcclusionStrength: 1
-    - _Outline: 0.005
-    - _OutlineThickness: 0.1
+    - _Outline: 0.007
     - _Parallax: 0.02
     - _RimAmount: 0.716
-    - _RimThreshold: 1
-    - _Smoothness: 0.15
+    - _RimThreshold: 0.1
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -91,10 +86,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AmbientColour: {r: 0.4, g: 0.4, b: 0.4, a: 1}
-    - _Color: {r: 0.7607843, g: 0.61960787, b: 0.52156866, a: 1}
-    - _Colour: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Colour: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColour: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColour: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    - _RimColour: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColour: {r: 0.9, g: 0.9, b: 0.9, a: 1}
