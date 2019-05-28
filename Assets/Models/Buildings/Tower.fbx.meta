@@ -1,0 +1,190 @@
+fileFormatVersion: 2
+guid: cd8cc85d679c2d9449c6d8304b604d0d
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Decoration
+    100002: Door2
+    100004: Fence
+    100006: House_1_Door
+    100008: MainBuilding
+    100010: pCube29
+    100012: pCube41
+    100014: pCube43
+    100016: pCube44
+    100018: Roof
+    100020: Stairs
+    100022: Stairs_Small
+    100024: //RootNode
+    100026: Wall
+    100028: Window
+    100030: Window11
+    100032: Window12
+    100034: Window13
+    100036: Window14
+    100038: Window15
+    100040: Window16
+    400000: Decoration
+    400002: Door2
+    400004: Fence
+    400006: House_1_Door
+    400008: MainBuilding
+    400010: pCube29
+    400012: pCube41
+    400014: pCube43
+    400016: pCube44
+    400018: Roof
+    400020: Stairs
+    400022: Stairs_Small
+    400024: //RootNode
+    400026: Wall
+    400028: Window
+    400030: Window11
+    400032: Window12
+    400034: Window13
+    400036: Window14
+    400038: Window15
+    400040: Window16
+    2100000: house_house
+    2100002: house_window
+    2100004: house_door
+    2100006: Glass2
+    2100008: lambert1
+    2300000: Decoration
+    2300002: Door2
+    2300004: Fence
+    2300006: House_1_Door
+    2300008: MainBuilding
+    2300010: pCube29
+    2300012: pCube41
+    2300014: pCube43
+    2300016: pCube44
+    2300018: Roof
+    2300020: Stairs
+    2300022: Stairs_Small
+    2300024: Wall
+    2300026: Window11
+    2300028: Window12
+    2300030: Window13
+    2300032: Window14
+    2300034: Window15
+    2300036: Window16
+    3300000: Decoration
+    3300002: Door2
+    3300004: Fence
+    3300006: House_1_Door
+    3300008: MainBuilding
+    3300010: pCube29
+    3300012: pCube41
+    3300014: pCube43
+    3300016: pCube44
+    3300018: Roof
+    3300020: Stairs
+    3300022: Stairs_Small
+    3300024: Wall
+    3300026: Window11
+    3300028: Window12
+    3300030: Window13
+    3300032: Window14
+    3300034: Window15
+    3300036: Window16
+    4300000: Stairs_Small
+    4300002: Wall
+    4300004: MainBuilding
+    4300006: House_1_Door
+    4300008: Door2
+    4300010: Fence
+    4300012: Window11
+    4300014: Window12
+    4300016: Window13
+    4300018: Window14
+    4300020: Window15
+    4300022: Window16
+    4300024: Roof
+    4300026: Stairs
+    4300028: Decoration
+    4300030: pCube41
+    4300032: pCube43
+    4300034: pCube29
+    4300036: pCube44
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 65
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

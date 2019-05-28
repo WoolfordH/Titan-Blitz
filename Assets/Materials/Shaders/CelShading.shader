@@ -5,6 +5,9 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_Colour ("Tint Colour", Color) = (1,1,1,1)
 
+		_NormalTex("Normal Map", 2D) = "white" {}
+		_NormalAmount("Normal Amount", Range(0, 1)) = 1.0
+
 		_Ramp ("Lighting Ramp", 2D) = "white"{}
 
 		[HDR]
@@ -28,6 +31,8 @@
 
 		Pass
 		{
+			Name "CelShading"
+
 			Tags
 			{ 
 				"LightMode" = "ForwardBase" 
@@ -49,6 +54,7 @@
 			{
 				float4 vertex : POSITION;
 				float2 uv : TEXCOORD0;
+				float2 normalUV : TEXCOORD1;
                 float3 normal : NORMAL;
 			};
 
@@ -57,15 +63,18 @@
 				float4 pos : SV_POSITION;
                 float3 worldNormal : NORMAL;
 				float2 uv : TEXCOORD0;
-				float3 viewDir : TEXCOORD1;
+				float2 normalUV : TEXCOORD1;
+				float3 viewDir : TEXCOORD2;
 
-				SHADOW_COORDS(2)
+				SHADOW_COORDS(3)
 
 				//UNITY_FOG_COORDS(1)
 			};
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+			sampler2D _NormalTex;
+			float4 _NormalTex_ST;
 
 			v2f vert (appdata v)
 			{
@@ -74,12 +83,15 @@
 				o.worldNormal = UnityObjectToWorldNormal(v.normal);
 				o.viewDir = WorldSpaceViewDir(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				o.normalUV = TRANSFORM_TEX(v.normalUV, _NormalTex);
 
 				TRANSFER_SHADOW(o)
 				return o;
 			}
 
 			sampler2D _Ramp;
+
+			float _NormalAmount;
 
 			float4 _Colour;
 
@@ -103,6 +115,7 @@
 				float3 normal = normalize(i.worldNormal);
 				float3 viewDir = normalize(i.viewDir);
 
+				float3 normalMap = normalize(UnityObjectToWorldNormal(tex2D(_NormalTex, i.normalUV))) * _NormalAmount;
 
 				float NdotL = dot(_WorldSpaceLightPos0, normal);
 
@@ -112,7 +125,7 @@
 				float shadow = SHADOW_ATTENUATION(i);
 
 
-				float lightIntensity = smoothstep(0, 0.01, NdotL * shadow);
+				float lightIntensity = tex2D(_Ramp, rampUV).z; //smoothstep(0, 0.01, NdotL * shadow);
 
 				float4 light = lightIntensity * _LightColor0;
 
@@ -142,6 +155,7 @@
 				
 
 				return (light + _AmbientColour + specular + rim) * _Colour * col;
+				//return float4(normal.xyz, 1.0);
 			}
 			ENDCG
 		}
