@@ -32,7 +32,7 @@ public class CharacterHeavy : Character {
 
 	public override void PrimaryAttack()
 	{
-        Debug.Log("DAMAGE MOD = " + dmgMod);
+        //Debug.Log("DAMAGE MOD = " + dmgMod);
 
         //Fire gun
         if (primaryTimer <= 0f)

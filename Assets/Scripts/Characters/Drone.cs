@@ -92,7 +92,7 @@ public class Drone : NetworkBehaviour {
 						RaycastHit hit;
 						if(Physics.Raycast(transform.position, pos - transform.position, out hit, viewRadius, GameHandler.current.playerLayer))
 						{
-							Debug.DrawRay (transform.position, (pos - transform.position) * viewRadius, Color.red);
+							//Debug.DrawRay (transform.position, (pos - transform.position) * viewRadius, Color.red);
 
 							//if we hit the same object add the position to the list of enemy positions
 							if (hit.collider.transform.root == col.transform.root)
@@ -120,7 +120,7 @@ public class Drone : NetworkBehaviour {
         transform.rotation = Quaternion.RotateTowards (transform.rotation, Quaternion.LookRotation (Vector3.ProjectOnPlane(target - transform.position, Vector3.up)), (rotationSpeed * 100) * Time.deltaTime);
 
 		Vector3 newPos = new Vector3 (transform.position.x, target.y, transform.position.z);
-		Debug.DrawLine (transform.position, newPos, Color.green);
+		//Debug.DrawLine (transform.position, newPos, Color.green);
 
 		//Move Drone as close to desired location as possible
 		MoveToDesiredLocation (target.y);

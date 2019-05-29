@@ -145,7 +145,7 @@ void OnTriggerEnter(Collider other)
 
                             if (hits.Exists(x => x.collider == other))
                             {
-                                Debug.Log("Projectile Realigned");
+                                //Debug.Log("Projectile Realigned");
                                 int index = hits.FindIndex(x => x.collider == other);
                                 transform.position = hits[index].point;
                                 point = hits[index].point;

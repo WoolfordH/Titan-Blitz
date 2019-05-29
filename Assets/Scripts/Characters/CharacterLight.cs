@@ -27,7 +27,7 @@ public class CharacterLight : Character {
 	public override void PrimaryAttack()
 	{
 
-        Debug.Log("DAMAGE MOD = " + dmgMod);
+        //Debug.Log("DAMAGE MOD = " + dmgMod);
 
 
         //Fire gun

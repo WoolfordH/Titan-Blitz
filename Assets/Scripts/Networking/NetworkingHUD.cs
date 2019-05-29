@@ -56,7 +56,7 @@ namespace UnityEngine.Networking
             ipAddressText.text = manager.networkAddress;
 
             Debug.Log(Network.player.ipAddress);
-            Debug.Log(manager.networkAddress);
+            //Debug.Log(manager.networkAddress);
 
             DisableUI();
         }
@@ -110,7 +110,7 @@ namespace UnityEngine.Networking
                     ipAddressText.text = manager.networkAddress;
 
                     Debug.Log(Network.player.ipAddress);
-                    Debug.Log(manager.networkAddress);
+                    //Debug.Log(manager.networkAddress);
                     
 				}
 				if (Input.GetKeyDown(KeyCode.H))
@@ -152,7 +152,7 @@ namespace UnityEngine.Networking
                     ipAddressText.text = manager.networkAddress;
 
                     Debug.Log(Network.player.ipAddress);
-                    Debug.Log(manager.networkAddress);
+                    //Debug.Log(manager.networkAddress);
                 }
 				ypos += spacing;
 
