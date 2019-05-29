@@ -41,7 +41,7 @@ namespace UnityEngine.Networking
 
             ipAddressText.text = manager.networkAddress;
 
-            Debug.Log(Network.player.ipAddress);
+            ServerLog.current.LogData("Server created with address: " + manager.networkAddress);
             Debug.Log(manager.networkAddress);
 
             DisableUI();

@@ -92773,17 +92773,17 @@ Prefab:
     - target: {fileID: 224038807077680584, guid: 5daab3ab4e725e64797e7e9ee19bdb67,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.00015696436
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224038807077680584, guid: 5daab3ab4e725e64797e7e9ee19bdb67,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -380.80008
+      value: -380.8
       objectReference: {fileID: 0}
     - target: {fileID: 224038807077680584, guid: 5daab3ab4e725e64797e7e9ee19bdb67,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -17.888117
+      value: -13.6
       objectReference: {fileID: 0}
     - target: {fileID: 224143190497389304, guid: 5daab3ab4e725e64797e7e9ee19bdb67,
         type: 2}
