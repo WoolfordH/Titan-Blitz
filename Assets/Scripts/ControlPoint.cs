@@ -35,6 +35,10 @@ public class ControlPoint : NetworkBehaviour
     public ParticleSystem psMain;
     ParticleSystem[] psAux;
 
+    public GameObject captureInstance;
+    public ParticleSystem ps2Main;
+    ParticleSystem[] ps2Aux;
+
     private List<GameObject> playersOnPoint = new List<GameObject>();
     private int teamOnPointDifference = 0; //positive for team 1, negative for team 2
 
@@ -196,6 +200,7 @@ public class ControlPoint : NetworkBehaviour
     {
         capturePercent = 0;
         RpcUpdateCapturePercent(0);
+        captureInstance.SetActive(false);
         pointCollider.SetActive(true);
         psMain.Play();
         controlState = ControlPointState.active;
@@ -213,6 +218,8 @@ public class ControlPoint : NetworkBehaviour
         RpcUpdateCapturePercent(0);
         pointCollider.SetActive(false);
         psMain.Stop();
+        SetColour(true);
+        captureInstance.SetActive(true);
 
         foreach (ParticleSystem ps in psMain.transform.GetComponentsInChildren<ParticleSystem>())
         {
@@ -233,22 +240,54 @@ public class ControlPoint : NetworkBehaviour
         SetColour();
     }
 
-    void SetColour()
-    { 
+    void SetColour(bool secondary = false)
+    {
+        ParticleSystem.MainModule main;
+        ParticleSystem.Particle[] particles;
+        int partCount;
 
-        ParticleSystem.MainModule main = psMain.main;
-        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[psMain.main.maxParticles];
-        int partCount = psMain.GetParticles(particles);
+        if (secondary)
+        {
+            main = ps2Main.main;
+            particles = new ParticleSystem.Particle[ps2Main.main.maxParticles];
+            partCount = ps2Main.GetParticles(particles);
+        }
+        else
+        {
+            main = psMain.main;
+            particles = new ParticleSystem.Particle[psMain.main.maxParticles];
+            partCount = psMain.GetParticles(particles);
+        }
+
+        
 
         for (int i = 0; i < partCount; i++)
         {
             particles[i].color = new Color(colour.r, colour.g, colour.b, main.startColor.color.a); ;
         }
 
-        psMain.SetParticles(particles, partCount);
-        
 
-        foreach (ParticleSystem ps in psMain.transform.GetComponentsInChildren<ParticleSystem>())
+        if (secondary)
+        {
+            ps2Main.SetParticles(particles, partCount);
+        }
+        else
+        {
+            psMain.SetParticles(particles, partCount);
+        }
+
+        ParticleSystem[] systems;
+
+        if (secondary)
+        {
+             systems = ps2Main.transform.GetComponentsInChildren<ParticleSystem>();
+        }
+        else
+        {
+            systems = psMain.transform.GetComponentsInChildren<ParticleSystem>();
+        }
+
+        foreach (ParticleSystem ps in systems)
         {
             ParticleSystem.MainModule auxMain = ps.main;
 
@@ -289,7 +328,7 @@ public class ControlPoint : NetworkBehaviour
             }
             else
             {
-                auxMain.startColor = new Color(colour.r, colour.g, colour.b, auxMain.startColor.color.a);
+                //auxMain.startColor = new Color(colour.r, colour.g, colour.b, auxMain.startColor.color.a);
             }
         }
     }

@@ -169,7 +169,7 @@
 				if (_TintOn)
 				{
 					tintMask = tex2D(_TintMask, i.uv);
-					outline = outlineIntensity * tintMask;
+					outline = outlineIntensity * _Colour;
 				}
 				else
 				{
