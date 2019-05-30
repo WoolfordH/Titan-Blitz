@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 struct PlayerData
 {
@@ -43,7 +44,10 @@ public class GameManager : NetworkBehaviour
     public float respawnTime = 5.0f;
 
     public GameObject endScreen;
-    public UnityEngine.UI.Text winLoseText;
+    public Text winLoseText;
+
+    public GameObject respawnCam;
+    public Text respawnText;
 
     private GameState gameState = GameState.lobby;
 
@@ -337,6 +341,19 @@ public class GameManager : NetworkBehaviour
         lobbyMenu.UpdateMenuData(connectionNum, -1, teamNum);
     }
 
+    public void ResetGame()
+    {
+        // reset player connection
+        PlayerConnection.current.ResetGame();
+        lobbyCam.SetActive(true);
+        lobbyUI.SetActive(true);
+        PlayerConnection.current.activeCamera = lobbyCam;
+        // reset objectives
+        endScreen.SetActive(false);
+
+        gameState = GameState.lobby;
+        // enable lobby screen
+    }
 
 
     //private void OnPlayerDisconnected(NetworkPlayer player)

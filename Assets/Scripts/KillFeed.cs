@@ -37,6 +37,7 @@ public class KillFeed : MonoBehaviour {
     void Start ()
     {
         HideBar();
+        UpdateKDText();
     }
 
     private void Update()

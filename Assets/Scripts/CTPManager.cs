@@ -25,6 +25,8 @@ public class CTPManager : NetworkBehaviour
 
     private CTPManagerState state = CTPManagerState.inactive;
 
+    public float postVictoryLength = 10;
+    private float postVictoryCountdown;
 
     private void Awake()
     {
@@ -55,7 +57,18 @@ public class CTPManager : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
+        if (state == CTPManagerState.gameEnd)
+        {
+            if (isServer)
+            {
+                postVictoryCountdown -= Time.deltaTime;
+                if (postVictoryCountdown < 0)
+                {
+                    state = CTPManagerState.inactive;
+                    RpcResetGame();
+                }
+            }
+        }
 	}
 
     [Command]
@@ -118,7 +131,10 @@ public class CTPManager : NetworkBehaviour
                     //team 1 victory
                     ServerLog.current.LogData("Team 1 victory");
                     GameManager.current.CmdGameEnd(1);
+
+                    postVictoryCountdown = postVictoryLength;
                     state = CTPManagerState.gameEnd;
+
                 }
                 else //team 2
                 {
@@ -143,6 +159,8 @@ public class CTPManager : NetworkBehaviour
                     //team 2 victory
                     ServerLog.current.LogData("Team 2 victory");
                     GameManager.current.CmdGameEnd(2);
+
+                    postVictoryCountdown = postVictoryLength;
                     state = CTPManagerState.gameEnd;
                 }
                 else //team 1
@@ -163,5 +181,19 @@ public class CTPManager : NetworkBehaviour
         {
             //throw new Exception("unexpected call in CTPManager CapturePoint()");
         }
+    }
+
+    [ClientRpc]
+    private void RpcResetGame()
+    {
+        state = CTPManagerState.inactive;
+        if (isServer)
+        {
+            centrePoint.Deactivate();
+            team1Point.Deactivate();
+            team2Point.Deactivate();
+        }
+
+        GameManager.current.ResetGame();
     }
 }

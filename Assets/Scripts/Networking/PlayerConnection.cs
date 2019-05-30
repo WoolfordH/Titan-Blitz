@@ -19,8 +19,6 @@ public class PlayerConnection : NetworkBehaviour
 
     public GameObject activeCamera; //lobby cam to start
 
-    public LobbyMenu LobbyMenu;
-
 	// Use this for initialization
 	void Start ()
     {
@@ -42,11 +40,16 @@ public class PlayerConnection : NetworkBehaviour
         {
             if(waitingRespawn)//if the respawn timer is active
             {
+                GameManager.current.respawnCam.SetActive(true);
+
                 respawnTimer -= Time.deltaTime;
-                if(respawnTimer<0)
+                GameManager.current.respawnText.text = respawnTimer.ToString("F1");
+
+                if (respawnTimer<0)
                 {
-                    CmdRespawn();
                     waitingRespawn = false;
+                    CmdRespawn();
+                    GameManager.current.respawnCam.SetActive(false);
                 }
             }
         }
@@ -129,5 +132,16 @@ public class PlayerConnection : NetworkBehaviour
     public void CmdStartGame()
     {
         GameManager.current.CmdStartGame();
+    }
+
+
+    public void ResetGame()
+    {
+        NetworkServer.Destroy(playerObject);
+        waitingRespawn = false;
+        respawnTimer = 0;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
