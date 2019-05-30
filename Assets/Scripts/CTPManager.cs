@@ -65,7 +65,7 @@ public class CTPManager : NetworkBehaviour
         {
             centrePoint.Activate();
             team1Point.Deactivate();
-            team1Point.Deactivate();
+            team2Point.Deactivate();
             state = CTPManagerState.neutral;
             RpcSetObjective(0);
         }

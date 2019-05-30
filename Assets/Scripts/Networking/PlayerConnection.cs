@@ -9,7 +9,7 @@ public class PlayerConnection : NetworkBehaviour
     public static PlayerConnection current;
 
     //the number assigned to this client
-    public int connectionID;
+    public int connectionID = -1;
     public NetworkConnection clientIdentity;
 
     public GameObject playerObject;
@@ -18,6 +18,8 @@ public class PlayerConnection : NetworkBehaviour
     private bool waitingRespawn = false;
 
     public GameObject activeCamera; //lobby cam to start
+
+    public LobbyMenu LobbyMenu;
 
 	// Use this for initialization
 	void Start ()
@@ -101,6 +103,8 @@ public class PlayerConnection : NetworkBehaviour
     public void RpcAssignID(int ID)
     {
         connectionID = ID;
+        if(hasAuthority)
+            GameManager.current.lobbyMenu.SetSelf(ID);
     }
 
     //private void OnDisconnectedFromServer(NetworkDisconnection info)

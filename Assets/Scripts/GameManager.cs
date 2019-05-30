@@ -18,7 +18,6 @@ public class GameManager : NetworkBehaviour
         playing
     }
 
-
     public static GameManager current;
 
     //public NetworkManager network;
@@ -35,6 +34,8 @@ public class GameManager : NetworkBehaviour
     private PlayerData[] players = new PlayerData[0];
 
     public GameObject lobbyCam;
+
+    public LobbyMenu lobbyMenu;
 
     public Transform team1SpawnPoint;
     public Transform team2SpawnPoint;
@@ -116,7 +117,7 @@ public class GameManager : NetworkBehaviour
         //for each player send player data
         for (int i = 0; i < players.Length; i++)
         {
-            RpcGiveClientsPlayerData(i, players[i].characterChoice, players[i].team);
+            RpcPassClientsPlayerData(i, players[i].characterChoice, players[i].team);
         }
     }
 
@@ -130,10 +131,13 @@ public class GameManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void RpcGiveClientsPlayerData(int indice, int charChoice, int teamNum)
+    private void RpcPassClientsPlayerData(int indice, int charChoice, int teamNum)
     {
         players[indice].characterChoice = charChoice;
         players[indice].team = teamNum;
+
+        //visualise
+        lobbyMenu.UpdateMenuData(indice, charChoice, teamNum);
     }
         
 
@@ -228,9 +232,9 @@ public class GameManager : NetworkBehaviour
         if(gameState == GameState.playing)
         {
             throw new NotImplementedException("Player connected mid game no handler implemented");
-        }
-
+        }        
         connection.GetComponent<PlayerConnection>().RpcAssignID(players.Length - 1);
+
 
         SendClientsPlayerData();
         //return players.Length-1;
@@ -315,12 +319,12 @@ public class GameManager : NetworkBehaviour
     {
         ServerLog.current.LogData("Player " + connectionNum.ToString() + " chose character " + characterChoice.ToString());
         //update ui
+        lobbyMenu.UpdateMenuData(connectionNum, characterChoice, -1);
     }
 
     [Command]
     public void CmdChooseTeam(int teamChoice, int connectionNum)
-    {
-        
+    {       
         RpcChooseTeam(teamChoice, connectionNum);
     }
 
@@ -330,7 +334,10 @@ public class GameManager : NetworkBehaviour
         ServerLog.current.LogData("Player " + connectionNum.ToString() + " chose team " + teamNum.ToString());
         players[connectionNum].team = teamNum;
         //update ui
+        lobbyMenu.UpdateMenuData(connectionNum, -1, teamNum);
     }
+
+
 
     //private void OnPlayerDisconnected(NetworkPlayer player)
     //{

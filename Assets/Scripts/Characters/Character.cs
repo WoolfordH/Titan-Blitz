@@ -71,6 +71,10 @@ public abstract class Character : NetworkBehaviour
 	protected float primaryTimer;
 	public float primaryDelay;
 	public float primaryRange;
+    public float timeToMaxSpread;
+    public float crosshairResetSpeed;
+    protected float firingTimer = 0f;
+    protected bool firedThisFrame;
 
     public Ability[] abilities = new Ability[3];
 
@@ -114,23 +118,63 @@ public abstract class Character : NetworkBehaviour
 		}
 	}
 
-	protected virtual void HandleAttacks()
+	protected virtual void HandleAttacks(bool automatic = false)
 	{
-		if (Input.GetKeyDown (handler.controls.primaryAtk))
-		{
-			if (primaryTimer <= 0)
-			{
-                //audio
-                if (primaryFireClip != null)
+ 
+        if (automatic)
+        {
+            if (Input.GetKey(handler.controls.primaryAtk))
+            {
+                if (primaryTimer <= 0)
                 {
-                    CmdPlaySoundFire();
+                    //audio
+                    if (primaryFireClip != null)
+                    {
+                        CmdPlaySoundFire();
+                    }
+
+                    PrimaryAttack();
                 }
+            }
+            else
+            {
+                firedThisFrame = false;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(handler.controls.primaryAtk))
+            {
+                if (primaryTimer <= 0)
+                {
+                    //audio
+                    if (primaryFireClip != null)
+                    {
+                        CmdPlaySoundFire();
+                    }
 
-                PrimaryAttack ();
-			}
-		}
+                    PrimaryAttack();
+                }
+            }
+            else
+            {
+                firedThisFrame = false;
+            }
+        }
 
-		if (Input.GetKeyDown (handler.controls.Ability1))
+        if (firingTimer >= 0f)
+        {
+            if (!firedThisFrame)
+            {
+                firingTimer -= Time.deltaTime;
+            }
+            handler.crosshair.Play("Crosshair", 0, firingTimer / timeToMaxSpread);
+            handler.crosshair.speed = 0f;
+        }
+
+        Debug.Log("firing timer: " + firingTimer);
+
+        if (Input.GetKeyDown (handler.controls.Ability1))
 		{
 			if (!abilities[0].active && abilities [0].timer <= 0)
 			{

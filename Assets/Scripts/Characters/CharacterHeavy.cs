@@ -32,11 +32,18 @@ public class CharacterHeavy : Character {
 
 	public override void PrimaryAttack()
 	{
-        Debug.Log("DAMAGE MOD = " + dmgMod);
+        //Debug.Log("DAMAGE MOD = " + dmgMod);
 
         //Fire gun
         if (primaryTimer <= 0f)
         {
+
+            firedThisFrame = true;
+
+            if (firingTimer < timeToMaxSpread)
+            {
+                firingTimer = primaryDelay; //Time.deltaTime;
+            }
 
             //Debug.DrawRay(handler.cam.transform.position, handler.cam.transform.forward * Vector3.Distance(handler.cam.transform.position, hit.point), Color.green, 5f);
             //Debug.DrawRay(handler.muzzlePos.position, handler.muzzlePos.forward * Vector3.Distance(handler.muzzlePos.position, hit.point), Color.red, 5f);

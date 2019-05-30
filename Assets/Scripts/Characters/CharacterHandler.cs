@@ -46,6 +46,7 @@ public class CharacterHandler: NetworkBehaviour
 
     public GameObject canvas;
     public GameObject hitMarker;
+    public Animator crosshair;
 	public Text timerLbl;
 	public Image healthBar;
 	public Image armourBar;

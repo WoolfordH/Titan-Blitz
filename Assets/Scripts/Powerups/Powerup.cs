@@ -33,7 +33,7 @@ public class PowerUpData
     public void ReduceTimer(float t)
     {
         timer -= t;
-        Debug.Log(timer);
+        //Debug.Log(timer);
     }
 }
 
