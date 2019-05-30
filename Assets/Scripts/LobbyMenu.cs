@@ -20,17 +20,25 @@ public class LobbyMenu : NetworkBehaviour
         }
     }
 
+    public NetworkManager manager;
+
     private Players[] players = new Players[8];
     private int self = -1;
 
     public LobbyMenuPlayerBar[] team1Holders;
     public LobbyMenuPlayerBar[] team2Holders;
 
+    public UnityEngine.UI.Text ipBar;
+    public UnityEngine.UI.Button[] NonSpectatorBtns;
+    public Animator spectatorAnim;
+
 	// Use this for initialization
 	void Start ()
     {
         for(int i = 0; i<players.Length; i++)
             players[i].intiate();
+
+        ipBar.text = manager.networkAddress;
         UpdateDisplay();
     }
 	
@@ -46,6 +54,42 @@ public class LobbyMenu : NetworkBehaviour
     public void ChooseCharacter(int characterChoice)
     {
         PlayerConnection.current.CmdChooseCharacter(characterChoice, PlayerConnection.current.connectionID);
+    }
+
+    public void SwitchTeam()
+    {
+        if (players[self].team == 1)
+        {
+            ChooseTeam(2);
+        }
+        else if (players[self].team == 2)
+        {
+            ChooseTeam(1);
+        }
+    }
+
+    public void ToggleSpectator()
+    {
+        if (players[self].team == 0)
+        {
+            ChooseTeam(1);
+            ChooseCharacter(1);
+            spectatorAnim.Play("Blink", 0, 0f);
+            foreach (UnityEngine.UI.Button btn in NonSpectatorBtns)
+            {
+                btn.interactable = true;
+            }
+        }
+        else
+        {
+            ChooseTeam(0);
+            ChooseCharacter(0);
+            spectatorAnim.Play("Blink", 0, 1f);
+            foreach (UnityEngine.UI.Button btn in NonSpectatorBtns)
+            {
+                btn.interactable = false;
+            }
+        }  
     }
 
     public void ChooseTeam(int teamChoice)

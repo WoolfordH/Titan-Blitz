@@ -1,4 +1,4 @@
-﻿using System;
+﻿//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -65,18 +65,26 @@ public class CharacterHeavy : Character {
         RaycastHit hit;
         Quaternion initRot = handler.gun.transform.rotation;
 
-        if (Physics.Raycast(handler.muzzlePos.position, handler.muzzlePos.forward, out hit, 1000f, GameHandler.current.shootableLayer))
+        Vector3 aimPoint;
+
+        if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, GameHandler.current.shootableLayer))
         {
             //Debug.Log("Aim Aligned");
-            //Debug.Log("Aiming at: " + hit.collider.gameObject.name);
-            handler.gun.transform.LookAt(hit.point);
+            aimPoint = hit.point;
         }
         else
         {
-            handler.gun.transform.LookAt(handler.muzzlePos.position + (handler.muzzlePos.forward * 1000f));
+            aimPoint = handler.cam.transform.position + (handler.cam.transform.forward * 1000f);
         }
 
-        Projectile proj = Instantiate(primaryProj, firePos, handler.muzzlePos.rotation).GetComponent<Projectile>();
+        //float maxCurrentSpread = maxSpread * (firingTimer / timeToMaxSpread);
+        //aimPoint = handler.cam.transform.TransformPoint(new Vector3(Random.Range(-maxCurrentSpread, maxCurrentSpread), Random.Range(-maxCurrentSpread, maxCurrentSpread), handler.cam.transform.InverseTransformPoint(aimPoint).z));
+        //handler.gun.transform.LookAt(aimPoint);
+
+        Debug.DrawLine(firePos, aimPoint, Color.red);
+
+        //Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
+        Projectile proj = Instantiate(primaryProj, firePos, Quaternion.LookRotation(aimPoint - firePos, handler.gun.transform.up)).GetComponent<Projectile>();
         NetworkServer.SpawnWithClientAuthority(proj.gameObject, GameManager.current.GetPlayerConnection(id).gameObject);
         proj.owners.Add(this.transform);
         proj.senderID = id;
