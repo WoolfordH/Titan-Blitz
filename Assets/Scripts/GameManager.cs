@@ -191,11 +191,13 @@ public class GameManager : NetworkBehaviour
                 {
                     //you lost
                     winLoseText.text = "DEFEAT";
+                    audioSource.PlayOneShot(gameLoseClip);
                 }
                 else if (players[PlayerConnection.current.connectionID].team == 2)
                 {
                     //you won
                     winLoseText.text = "VICTORY";
+                    audioSource.PlayOneShot(gameWinClip);
                 }
 
                 break;

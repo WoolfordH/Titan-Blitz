@@ -58,6 +58,8 @@ public class CharacterHandler: NetworkBehaviour
     public RectTransform objMarker;
     Vector2 objMarkerScreenSize;
 
+    public Image minimap;
+
     public GameObject captureBarHolder;
     public Image captureBar;
 
@@ -744,6 +746,23 @@ public class CharacterHandler: NetworkBehaviour
 
         objMarker.localPosition = localPos;
 
+
+        //MINIMAP
+
+        //get player's forward vector in world space
+        Vector2 playerForward = new Vector2(transform.forward.x, transform.forward.z).normalized;
+        Vector2 worldForward = new Vector2(0f, 1f);
+        //get angle between player's forward and world forward
+        float angle = Angle(playerForward, worldForward);
+        //rotate minimap by angle
+        minimap.rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
+        minimap.rectTransform.localPosition = transform.position;
+    }
+
+    float Angle(Vector2 v1, Vector2 v2)
+    {
+        float sign = Mathf.Sign(v1.x * v2.y - v1.y * v2.x);
+        return Vector2.Angle(v1, v2) * sign;
     }
 
 
