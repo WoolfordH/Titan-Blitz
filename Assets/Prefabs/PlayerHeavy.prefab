@@ -5088,6 +5088,7 @@ MonoBehaviour:
   abl2Icon: {fileID: 114434182519382468}
   objMarker: {fileID: 224002691863868290}
   minimap: {fileID: 114924555551473648}
+  minimapCenter: {fileID: 224605341903187522}
   captureBarHolder: {fileID: 1580685884338330}
   captureBar: {fileID: 114572050917084028}
   killFeedUI: {fileID: 114717526975087006}

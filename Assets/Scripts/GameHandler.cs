@@ -23,6 +23,8 @@ public class GameHandler : MonoBehaviour {
     public GameObject powerupSpeedPrefab, powerupDamagePrefab, powerupJumpPrefab;
     public Color[] powerupCols;
 
+    public float minimapScale = 1f;
+
 
     public Camera playerCam;
 
