@@ -1,64 +1,79 @@
 fileFormatVersion: 2
-guid: 4d33571dacbb889449379991490ec562
+guid: a4d2ba16cd739524b97aa01763a4553a
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: pCylinder1
-    100002: top
-    100004: //RootNode
-    100006: Window
-    100008: Window24
-    100010: Window25
-    100012: Window26
-    100014: Window27
-    100016: Window28
-    100018: Window29
-    100020: Window30
-    400000: pCylinder1
-    400002: top
-    400004: //RootNode
-    400006: Window
-    400008: Window24
-    400010: Window25
-    400012: Window26
-    400014: Window27
-    400016: Window28
-    400018: Window29
-    400020: Window30
-    2100000: Dome_top1
-    2100002: house_house
-    2100004: Glass2
-    2100006: house_window
-    2300000: pCylinder1
-    2300002: top
-    2300004: Window
-    2300006: Window24
-    2300008: Window25
-    2300010: Window26
-    2300012: Window27
-    2300014: Window28
-    2300016: Window29
-    2300018: Window30
-    3300000: pCylinder1
-    3300002: top
-    3300004: Window
-    3300006: Window24
-    3300008: Window25
-    3300010: Window26
-    3300012: Window27
-    3300014: Window28
-    3300016: Window29
-    3300018: Window30
-    4300000: top
-    4300002: pCylinder1
-    4300004: Window
-    4300006: Window24
-    4300008: Window25
-    4300010: Window26
-    4300012: Window27
-    4300014: Window28
-    4300016: Window29
-    4300018: Window30
+    100000: Door3
+    100002: Door4
+    100004: fence4
+    100006: //RootNode
+    100008: House3 1
+    100010: House3_Window
+    100012: Stairs1
+    100014: Window17
+    100016: Window18
+    100018: Window19
+    100020: Window20
+    100022: Window21
+    100024: Window22
+    100026: Window23
+    400000: Door3
+    400002: Door4
+    400004: fence4
+    400006: //RootNode
+    400008: House3 1
+    400010: House3_Window
+    400012: Stairs1
+    400014: Window17
+    400016: Window18
+    400018: Window19
+    400020: Window20
+    400022: Window21
+    400024: Window22
+    400026: Window23
+    2100000: house_window
+    2100002: Glass2
+    2100004: house_door
+    2100006: house_house
+    2300000: Door3
+    2300002: Door4
+    2300004: fence4
+    2300006: House3 1
+    2300008: House3_Window
+    2300010: Stairs1
+    2300012: Window17
+    2300014: Window18
+    2300016: Window19
+    2300018: Window20
+    2300020: Window21
+    2300022: Window22
+    2300024: Window23
+    3300000: Door3
+    3300002: Door4
+    3300004: fence4
+    3300006: House3 1
+    3300008: House3_Window
+    3300010: Stairs1
+    3300012: Window17
+    3300014: Window18
+    3300016: Window19
+    3300018: Window20
+    3300020: Window21
+    3300022: Window22
+    3300024: Window23
+    4300000: Window18
+    4300002: Window19
+    4300004: Window20
+    4300006: Window21
+    4300008: Window22
+    4300010: Window23
+    4300012: Door3
+    4300014: Window17
+    4300016: Door4
+    4300018: House3
+    4300020: House3_Window
+    4300022: Stairs1
+    4300024: fence4
   externalObjects: {}
   materials:
     importMaterials: 1
