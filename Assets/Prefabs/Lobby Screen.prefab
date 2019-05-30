@@ -968,6 +968,8 @@ GameObject:
   - component: {fileID: 114680997086946632}
   - component: {fileID: 114676653761046570}
   - component: {fileID: 114945035127535512}
+  - component: {fileID: 114095116786573432}
+  - component: {fileID: 114522751532006254}
   m_Layer: 5
   m_Name: Lobby
   m_TagString: Untagged
@@ -2089,6 +2091,7 @@ GameObject:
   - component: {fileID: 114164398080750266}
   - component: {fileID: 114547428302107738}
   - component: {fileID: 114436150522551674}
+  - component: {fileID: 114967579207290646}
   m_Layer: 5
   m_Name: BtnFighter
   m_TagString: Untagged
@@ -2913,6 +2916,7 @@ GameObject:
   - component: {fileID: 114867337033191938}
   - component: {fileID: 114529125314512824}
   - component: {fileID: 114157539378610610}
+  - component: {fileID: 114328101322406734}
   m_Layer: 5
   m_Name: BtnTank
   m_TagString: Untagged
@@ -7007,6 +7011,34 @@ MonoBehaviour:
   lightIcon: {fileID: 1320187358082250}
   heavyIcon: {fileID: 1869290724497534}
   selfIcon: {fileID: 1402989564653032}
+--- !u!114 &114095116786573432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244505337167430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6a88cfa4f9eb345856593391b685c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  team1Holders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  team2Holders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ipBar: {fileID: 114954408561135008}
+  NonSpectatorBtns:
+  - {fileID: 114547428302107738}
+  - {fileID: 114529125314512824}
+  - {fileID: 114423718687068288}
+  spectatorAnim: {fileID: 95277727458874496}
 --- !u!114 &114095604765986706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7254,7 +7286,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114493132602604730, guid: b496171e0a1876d49ae404a377a82ccf,
+          type: 2}
         m_MethodName: LocalConnect
         m_Mode: 1
         m_Arguments:
@@ -7591,6 +7624,19 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Player Name
+--- !u!114 &114328101322406734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1753747589923896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff53888c6618e1749ace2842cecb42d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turntableObj: {fileID: 4792161662905344}
+  anglePerSec: 30
 --- !u!114 &114330278656519178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7630,7 +7676,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114676653761046570}
+      - m_Target: {fileID: 114095116786573432}
         m_MethodName: ChooseTeam
         m_Mode: 3
         m_Arguments:
@@ -7769,7 +7815,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114493132602604730, guid: b496171e0a1876d49ae404a377a82ccf,
+          type: 2}
         m_MethodName: LocalHost
         m_Mode: 1
         m_Arguments:
@@ -8058,8 +8105,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114676653761046570}
-        m_MethodName: SwitchTeam
+      - m_Target: {fileID: 114095116786573432}
+        m_MethodName: ChooseTeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8251,6 +8298,38 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114522751532006254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244505337167430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 93
+    i1: 170
+    i2: 179
+    i3: 171
+    i4: 78
+    i5: 114
+    i6: 94
+    i7: 100
+    i8: 121
+    i9: 126
+    i10: 126
+    i11: 158
+    i12: 225
+    i13: 155
+    i14: 219
+    i15: 103
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114529125314512824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8290,7 +8369,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114676653761046570}
+      - m_Target: {fileID: 114095116786573432}
         m_MethodName: ChooseCharacter
         m_Mode: 3
         m_Arguments:
@@ -8384,7 +8463,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114676653761046570}
+      - m_Target: {fileID: 114095116786573432}
         m_MethodName: ChooseCharacter
         m_Mode: 3
         m_Arguments:
@@ -8873,8 +8952,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114676653761046570}
-        m_MethodName: ToggleSpectator
+      - m_Target: {fileID: 114095116786573432}
+        m_MethodName: ChooseCharacter
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9058,7 +9137,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114676653761046570}
+      - m_Target: {fileID: 114095116786573432}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -9511,6 +9590,19 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Player Name
+--- !u!114 &114967579207290646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530858535445096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff53888c6618e1749ace2842cecb42d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turntableObj: {fileID: 4181462801440672}
+  anglePerSec: 30
 --- !u!137 &137028167695685104
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -12356,19 +12448,19 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1016248065389298}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.09935184, w: 0.9950524}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00016016977}
   m_LocalScale: {x: 0.34191418, y: 0.34191424, z: 0.34191424}
   m_Children:
   - {fileID: 224274102137076090}
   - {fileID: 224808612699311428}
   m_Father: {fileID: 224583256448661852}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.404}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -323.58997, y: 69.04999}
-  m_SizeDelta: {x: -1083.83, y: -623.45}
+  m_AnchoredPosition: {x: -222, y: 88.49982}
+  m_SizeDelta: {x: -1119.3002, y: -623.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224619429719546336
 RectTransform:
@@ -12564,19 +12656,19 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1130979602244656}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.0993545, w: 0.99505216}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00016016977}
   m_LocalScale: {x: 0.34675008, y: 0.34675005, z: 0.34675005}
   m_Children:
   - {fileID: 224604771418476778}
   - {fileID: 224155668127105052}
   m_Father: {fileID: 224583256448661852}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.404}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -246.69995, y: 83.70001}
-  m_SizeDelta: {x: -984.94, y: -586.2}
+  m_AnchoredPosition: {x: -321, y: 68.299805}
+  m_SizeDelta: {x: -1139.45, y: -586.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224785933997800832
 RectTransform:
