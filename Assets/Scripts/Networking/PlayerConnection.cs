@@ -137,6 +137,10 @@ public class PlayerConnection : NetworkBehaviour
 
     public void ResetGame()
     {
+        if (playerObject.GetComponent<Character>())
+        {
+            playerObject.GetComponent<Character>().ResetAbilities();
+        }
         NetworkServer.Destroy(playerObject);
         waitingRespawn = false;
         respawnTimer = 0;

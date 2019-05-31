@@ -140,7 +140,7 @@ public class Drone : NetworkBehaviour {
         //}
 
 		Projectile proj = Instantiate(GameHandler.current.projectile, muzzle.position, muzzle.rotation).GetComponent<Projectile>();
-        NetworkServer.Spawn(proj.gameObject);
+        NetworkServer.SpawnWithClientAuthority(proj.gameObject, PlayerConnection.current.gameObject);
 		proj.owners.Add(this.transform);
 		proj.owners.Add(owner.transform);
         proj.senderID = owner.id;

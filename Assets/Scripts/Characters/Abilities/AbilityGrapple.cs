@@ -10,6 +10,7 @@ public class AbilityGrapple : Ability {
 	public float startSpeed;
     public float returnSpeed;
     public Transform tip;
+    GameObject activeGrabber;
 
     //public AbilityGrapple(Character c)
     //{
@@ -43,7 +44,7 @@ public class AbilityGrapple : Ability {
 	[Command]
 	private void CmdSpawnGrabber(Vector3 forward, Vector3 initVel)
 	{
-		GameObject grabber = GameObject.Instantiate(grabberPrefab, tip.transform.position, caster.handler.cam.transform.rotation);
+		activeGrabber = GameObject.Instantiate(grabberPrefab, tip.transform.position, caster.handler.cam.transform.rotation);
 
         //audio
         if (caster.enableClip[0] != null)
@@ -51,8 +52,8 @@ public class AbilityGrapple : Ability {
             caster.CmdPlaySoundEnable(0);
         }
 
-        NetworkServer.Spawn(grabber);//, connectionToServer);
-        grabber.GetComponent<Grabber>().Init(caster, tip, forward, initVel, startSpeed, returnSpeed, maxDist);
+        NetworkServer.Spawn(activeGrabber);//, connectionToServer);
+        activeGrabber.GetComponent<Grabber>().Init(caster, tip, forward, initVel, startSpeed, returnSpeed, maxDist);
 	}
 
 	public override void AbilityExpired ()
@@ -62,6 +63,20 @@ public class AbilityGrapple : Ability {
 
     public override void ForceEnd()
     {
+        CmdDestroySelf();
 
+
+        timer = 0f;
+        active = false;
+    }
+
+    [Command]
+    private void CmdDestroySelf()
+    {
+        if (activeGrabber)
+        {
+            activeGrabber.GetComponent<Grabber>().GrabberDestroy();
+            NetworkServer.Destroy(activeGrabber);
+        }
     }
 }

@@ -944,7 +944,10 @@ public class CharacterHandler: NetworkBehaviour
 	[ClientRpc]
 	private void RpcDie(int lastDamageRecieved)
 	{
-        PlayerConnection.current.playerObject.GetComponent<CharacterHandler>().UpdateKillFeed(lastDamageRecieved, GetComponent<Character>().id);
+        if (PlayerConnection.current && PlayerConnection.current.playerObject && PlayerConnection.current.playerObject.GetComponent<CharacterHandler>())
+        {
+            PlayerConnection.current.playerObject.GetComponent<CharacterHandler>().UpdateKillFeed(lastDamageRecieved, GetComponent<Character>().id);
+        }
 
         //this.gameObject.SetActive(false);
         if (hasAuthority)//if local player

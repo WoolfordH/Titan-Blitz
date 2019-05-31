@@ -358,7 +358,7 @@ MonoBehaviour:
     i14: 209
     i15: 109
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114796719766531570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,6 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703575799ba3ab94f86dd15af6934924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkedTransform: {fileID: 0}
+  rb: {fileID: 0}
   toggleServerControl: 0
 --- !u!114 &114960195849797738
 MonoBehaviour:

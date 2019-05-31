@@ -231,7 +231,7 @@ public class Grabber : NetworkBehaviour
         this.rb.isKinematic = true;
     }
 
-    private void GrabberDestroy()
+    public void GrabberDestroy()
     {
         if (otherChar)
         {

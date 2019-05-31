@@ -3304,7 +3304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1652255207206564}
   m_LocalRotation: {x: -0, y: -0.78584373, z: -0, w: 0.61842525}
-  m_LocalPosition: {x: -108.33823, y: 11.279514, z: 31.347548}
+  m_LocalPosition: {x: -89.9, y: 11.279514, z: 34.12}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4032173901044814}
@@ -4376,7 +4376,7 @@ MonoBehaviour:
   health: 50
   maxArmour: 100
   armour: 100
-  armourRegenSpeed: 1
+  armourRegenSpeed: 10
   armourRegenDelay: 1
   initDamage: 20
   dmgMod: 1
@@ -4891,7 +4891,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1859026697809444}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -5658,7 +5658,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1542826086019830}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -5695,7 +5695,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.26250285
+  m_Radius: 0.42
   m_Height: 1.8888669
   m_Direction: 1
   m_Center: {x: 0, y: -0.061400652, z: 0}

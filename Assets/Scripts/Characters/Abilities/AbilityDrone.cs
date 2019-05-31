@@ -37,7 +37,7 @@ public class AbilityDrone : Ability {
 
         drone = Instantiate(dronePrefab, caster.handler.cam.transform.position + (caster.handler.cam.transform.forward * 1f), Quaternion.LookRotation(caster.handler.cam.transform.forward, Vector3.up));
         drone.GetComponent<Drone>().owner = caster;
-        NetworkServer.Spawn(drone);
+        NetworkServer.SpawnWithClientAuthority(drone, PlayerConnection.current.gameObject);
     }
 
 	public override void AbilityExpired ()
@@ -50,10 +50,9 @@ public class AbilityDrone : Ability {
 
     public override void ForceEnd()
     {
-        if (drone)
-        {
-            CmdDestroySelf();
-        }
+
+        CmdDestroySelf();
+        
 
         timer = 0f;
         active = false;
@@ -62,7 +61,10 @@ public class AbilityDrone : Ability {
     [Command]
     private void CmdDestroySelf()
     {
-        drone.GetComponent<Drone>().Die();
-        NetworkServer.Destroy(drone);
+        if (drone)
+        {
+            drone.GetComponent<Drone>().Die();
+            NetworkServer.Destroy(drone);
+        }
     }
 }

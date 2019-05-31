@@ -182,5 +182,6 @@
 		}
 
 		UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
+		UsePass "Toon/Basic Outline/OUTLINE"
 	}
 }
