@@ -43,6 +43,7 @@ public class GameManager : NetworkBehaviour
 
     public float respawnTime = 5.0f;
 
+    public GameObject pauseMenu;
     public GameObject endScreen;
     public Text winLoseText;
 
@@ -112,6 +113,20 @@ public class GameManager : NetworkBehaviour
 
             gameState = GameState.playing;
         }
+    }
+
+    public void PauseGame(bool pause)
+    {
+        if (pause)
+        {
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+        }
+
+        PlayerConnection.current.playerObject.GetComponent<CharacterHandler>().Pause(pause);
     }
 
     private void SendClientsPlayerData()

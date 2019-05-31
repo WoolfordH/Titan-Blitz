@@ -122,6 +122,8 @@ public class CharacterHandler: NetworkBehaviour
     public bool frozen = false;
 	public bool freezeLook = false;
 
+    
+
     public GameObject camHolder; //the object the camera and things that move with the camera are childed to 
     public IKControl ikControl;
     public GameObject characterModel;
@@ -139,10 +141,8 @@ public class CharacterHandler: NetworkBehaviour
 
     float armourRegenDelayTimer;
 
-
-
-	//temporary
-	bool paused = false;
+    [HideInInspector]
+	public bool paused = false;
 
     private bool started = false;
 
@@ -272,31 +272,19 @@ public class CharacterHandler: NetworkBehaviour
             }
 
 
-
             CheckPowerups();
 
-            //movement
-            ProcessMovement();
-
-
+            if (!paused)
+            {
+                //movement
+                ProcessMovement();
+            }
 
             //unlock cursor
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 paused = !paused;
-
-                if (paused)
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                    lookSpeed = 0f;
-                }
-                else
-                {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                    lookSpeed = initLookSpeed;
-                }
+                GameManager.current.PauseGame(paused);
             }
             UpdateUI();
         }
@@ -324,7 +312,27 @@ public class CharacterHandler: NetworkBehaviour
 
 	}
 
-	void ProcessMovement()
+    public void Pause(bool pause)
+    {
+        paused = pause;
+
+        if (pause)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            lookSpeed = 0f;
+            crosshair.gameObject.SetActive(false);
+        }
+        else
+        { 
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            lookSpeed = initLookSpeed;
+            crosshair.gameObject.SetActive(true);
+        }
+    }
+
+    void ProcessMovement()
 	{
         //animation things here - probably some state management would be helpful
 
@@ -670,7 +678,7 @@ public class CharacterHandler: NetworkBehaviour
 
         healthBar.fillAmount = ((float)character.health/(float)character.maxHealth);
 		armourBar.fillAmount = ((float)character.armour/(float)character.maxArmour);
-		ultBar.fillAmount = (character.abilities[2].cooldown - character.abilities[2].timer)/character.abilities[2].cooldown;
+		ultBar.fillAmount = (character.abilities[1].cooldown - character.abilities[1].timer)/character.abilities[1].cooldown;
         /////////////
 
         //update allies ui HERE!

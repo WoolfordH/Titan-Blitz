@@ -76,7 +76,7 @@ public abstract class Character : NetworkBehaviour
     protected float firingTimer = 0f;
     protected bool firedThisFrame;
 
-    public Ability[] abilities = new Ability[3];
+    public Ability[] abilities = new Ability[2];
 
     public AudioClip primaryFireClip;
     public AudioClip[] enableClip;
@@ -102,19 +102,34 @@ public abstract class Character : NetworkBehaviour
             if (hasAuthority)
             {
                 //ult starts uncharged
-                abilities[2].StartTimer(TimerType.cooldown);
-                abilities[2].SetActive(false);
+                abilities[1].StartTimer(TimerType.cooldown);
+                abilities[1].SetActive(false);
 
             }
 		}
 
 		if (hasAuthority && tag != "Dummy")
 		{
-			if (!handler.frozen)
-			{
-                 HandleAttacks();
-			}
-			HandleCooldowns();
+            if (!handler.frozen && !handler.paused)
+            {
+                HandleAttacks();
+            }
+            else
+            {
+                firedThisFrame = false;
+            }
+
+            if (firingTimer >= 0f)
+            {
+                if (!firedThisFrame)
+                {
+                    firingTimer -= Time.deltaTime;
+                }
+                handler.crosshair.Play("Crosshair", 0, firingTimer / timeToMaxSpread);
+                handler.crosshair.speed = 0f;
+            }
+
+            HandleCooldowns();
 		}
 	}
 
@@ -162,17 +177,9 @@ public abstract class Character : NetworkBehaviour
             }
         }
 
-        if (firingTimer >= 0f)
-        {
-            if (!firedThisFrame)
-            {
-                firingTimer -= Time.deltaTime;
-            }
-            handler.crosshair.Play("Crosshair", 0, firingTimer / timeToMaxSpread);
-            handler.crosshair.speed = 0f;
-        }
+        
 
-        Debug.Log("firing timer: " + firingTimer);
+        //Debug.Log("firing timer: " + firingTimer);
 
         if (Input.GetKeyDown (handler.controls.Ability1))
 		{
@@ -182,19 +189,19 @@ public abstract class Character : NetworkBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown (handler.controls.Ability2))
+		//if (Input.GetKeyDown (handler.controls.Ability2))
+		//{
+        //    if (!abilities[1].active && abilities[1].timer <= 0)
+        //    {
+		//		UseAbility (1);
+		//	}
+		//}
+
+		if (Input.GetKeyDown (handler.controls.ult))
 		{
             if (!abilities[1].active && abilities[1].timer <= 0)
             {
 				UseAbility (1);
-			}
-		}
-
-		if (Input.GetKeyDown (handler.controls.ult))
-		{
-            if (!abilities[2].active && abilities[2].timer <= 0)
-            {
-				UseAbility (2);
 			}
 		}
 	}

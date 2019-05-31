@@ -64,7 +64,7 @@ public class CharacterLight : Character {
 
         Vector3 aimPoint;
 
-        if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, GameHandler.current.shootableLayer))
+        if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, GameHandler.current.shootableLayer) && hit.collider.transform.root != transform.root)
         {
             //Debug.Log("Aim Aligned");
             aimPoint = hit.point;

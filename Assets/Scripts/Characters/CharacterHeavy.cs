@@ -67,10 +67,11 @@ public class CharacterHeavy : Character {
 
         Vector3 aimPoint;
 
-        if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, GameHandler.current.shootableLayer))
+        if (Physics.Raycast(handler.cam.transform.position, handler.cam.transform.forward, out hit, 1000f, GameHandler.current.shootableLayer) && hit.collider.transform.root != transform.root)
         {
-            //Debug.Log("Aim Aligned");
-            aimPoint = hit.point;
+                //Debug.Log("Aim Aligned");
+                aimPoint = hit.point;
+                Debug.Log(hit.collider.transform.root.name);
         }
         else
         {
@@ -81,12 +82,12 @@ public class CharacterHeavy : Character {
         //aimPoint = handler.cam.transform.TransformPoint(new Vector3(Random.Range(-maxCurrentSpread, maxCurrentSpread), Random.Range(-maxCurrentSpread, maxCurrentSpread), handler.cam.transform.InverseTransformPoint(aimPoint).z));
         //handler.gun.transform.LookAt(aimPoint);
 
-        Debug.DrawLine(firePos, aimPoint, Color.red);
+        Debug.DrawLine(firePos, aimPoint, Color.red, 1f);
 
         //Projectile proj = Instantiate(primaryProj, handler.muzzlePos.position, handler.muzzlePos.rotation).GetComponent<Projectile>();
         Projectile proj = Instantiate(primaryProj, firePos, Quaternion.LookRotation(aimPoint - firePos, handler.gun.transform.up)).GetComponent<Projectile>();
         NetworkServer.SpawnWithClientAuthority(proj.gameObject, GameManager.current.GetPlayerConnection(id).gameObject);
-        proj.owners.Add(this.transform);
+        proj.owners.Add(this.transform.root);
         proj.senderID = id;
 		proj.dmg = new DAMAGE((int)(primaryDmg.damage * dmgMod), primaryDmg.armourPiercing);
         proj.shotTime = shotTime;

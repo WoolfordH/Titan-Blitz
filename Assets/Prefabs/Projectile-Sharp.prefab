@@ -453,7 +453,7 @@ MonoBehaviour:
   explosion: {fileID: 0}
   effectRadius: 0
   decalSize: 1.5
-  fireClip: {fileID: 8300000, guid: 9469a1d593754d64da78317deee94de3, type: 3}
+  fireClip: {fileID: 8300000, guid: 9fcccd6a3b7171744a86b97dd747bd62, type: 3}
   hitClip: {fileID: 0}
   shotTime: 0
 --- !u!198 &198191145941697750

@@ -39,6 +39,8 @@ public class ControlPoint : NetworkBehaviour
     public ParticleSystem ps2Main;
     ParticleSystem[] ps2Aux;
 
+    public AudioSource audioSource;
+
     private List<GameObject> playersOnPoint = new List<GameObject>();
     private int teamOnPointDifference = 0; //positive for team 1, negative for team 2
 
@@ -204,6 +206,7 @@ public class ControlPoint : NetworkBehaviour
         pointCollider.SetActive(true);
         psMain.Play();
         controlState = ControlPointState.active;
+        audioSource.Play();
     }
 
     public void Deactivate()
@@ -220,6 +223,8 @@ public class ControlPoint : NetworkBehaviour
         psMain.Stop();
         SetColour(true);
         captureInstance.SetActive(true);
+
+        audioSource.Stop();
 
         foreach (ParticleSystem ps in psMain.transform.GetComponentsInChildren<ParticleSystem>())
         {
