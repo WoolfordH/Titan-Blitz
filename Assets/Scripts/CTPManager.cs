@@ -28,6 +28,7 @@ public class CTPManager : NetworkBehaviour
     public float postVictoryLength = 10;
     private float postVictoryCountdown;
 
+
     private void Awake()
     {
         current = this;
@@ -101,11 +102,12 @@ public class CTPManager : NetworkBehaviour
 
     public void CapturePoint(int team, int pointIdentity)
     {
-        if(state == CTPManagerState.neutral)
+
+        if (state == CTPManagerState.neutral)
         {
-            if(pointIdentity == 0)//error check - only point 0 should be capture-able when neutral
+            if (pointIdentity == 0)//error check - only point 0 should be capture-able when neutral
             {
-                if(team == 1)
+                if (team == 1)
                 {
                     //centre point only cap-able by team 2
                     team2Point.Activate();
@@ -122,7 +124,7 @@ public class CTPManager : NetworkBehaviour
                 }
             }
         }
-        else if(state == CTPManagerState.team1Advantage)
+        else if (state == CTPManagerState.team1Advantage)
         {
             if (pointIdentity == 2) // team 2 point
             {
@@ -130,7 +132,7 @@ public class CTPManager : NetworkBehaviour
                 {
                     //team 1 victory
                     ServerLog.current.LogData("Team 1 victory");
-                    GameManager.current.CmdGameEnd(1);
+                    PlayerConnection.current.EndGame(1);
 
                     postVictoryCountdown = postVictoryLength;
                     state = CTPManagerState.gameEnd;
@@ -149,8 +151,9 @@ public class CTPManager : NetworkBehaviour
             {
                 throw new Exception("an inactive capture point was just captured");
             }
+
         }
-        else if(state == CTPManagerState.team2Advantage)
+        else if (state == CTPManagerState.team2Advantage)
         {
             if (pointIdentity == 1) // team 1 point
             {
@@ -158,7 +161,7 @@ public class CTPManager : NetworkBehaviour
                 {
                     //team 2 victory
                     ServerLog.current.LogData("Team 2 victory");
-                    GameManager.current.CmdGameEnd(2);
+                    PlayerConnection.current.EndGame(2);
 
                     postVictoryCountdown = postVictoryLength;
                     state = CTPManagerState.gameEnd;
@@ -197,8 +200,26 @@ public class CTPManager : NetworkBehaviour
         GameManager.current.ResetGame();
     }
 
-    public void Timeout()
+    [ClientRpc]
+    public void RpcTimeout()
     {
-
+        if (state != CTPManagerState.gameEnd)
+        {
+            //if center point
+            if (state == CTPManagerState.neutral)
+            {
+                PlayerConnection.current.EndGame(0);
+            }
+            else if (state == CTPManagerState.team1Advantage)
+            {
+                PlayerConnection.current.EndGame(1);
+            }
+            else if (state == CTPManagerState.team2Advantage)
+            {
+                PlayerConnection.current.EndGame(2);
+            }
+            postVictoryCountdown = postVictoryLength;
+            state = CTPManagerState.gameEnd;
+        }
     }
 }

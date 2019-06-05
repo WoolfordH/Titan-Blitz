@@ -48,6 +48,7 @@ public class CharacterHandler: NetworkBehaviour
     public GameObject hitMarker;
     public Animator crosshair;
 	public Text timerLbl;
+    public Animator timerAnim;
 	public Image healthBar;
 	public Image armourBar;
 	public Image ultBar;
@@ -147,6 +148,7 @@ public class CharacterHandler: NetworkBehaviour
     private bool started = false;
 
 
+
 	// Use this for initialization
 	void Start ()
     {
@@ -156,7 +158,7 @@ public class CharacterHandler: NetworkBehaviour
 
         //AVATAR INIT
         avatarRT = new RenderTexture(512,512, 16);
-		avatarCam.targetTexture = avatarRT;
+		//avatarCam.targetTexture = avatarRT;
 
         powerupDmgIcon.enabled = false;
         powerupJumpIcon.enabled = false;
@@ -466,12 +468,28 @@ public class CharacterHandler: NetworkBehaviour
 
             if (cam && tag != "Dummy" && hasAuthority)
 			{
-				//update clock UI
-				int minutes = (int)GameManager.current.gameTimer / 60;
-				int seconds = (int)GameManager.current.gameTimer % 60;
+                if (GameManager.current.gameTimer < 100000)
+                {
+                    //update clock UI
+                    int minutes = (int)GameManager.current.gameTimer / 60;
+                    int seconds = (int)GameManager.current.gameTimer % 60;
 
-				timerLbl.text = minutes.ToString ("00") + ":" + seconds.ToString ("00");
-			}
+
+                    timerLbl.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+                }
+                else
+                {
+                    timerLbl.text = "00:00";
+                }
+                if(GameManager.current.gameTimer < 30)
+                {
+                    if (!timerAnim.GetBool("TimerFlash"))
+                    {
+                        timerAnim.SetBool("TimerFlash", true);
+                    }
+                }
+
+            }
 		}
 
 		if (!freezeLook)

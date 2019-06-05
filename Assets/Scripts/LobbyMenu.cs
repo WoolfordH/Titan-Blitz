@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
 public class LobbyMenu : NetworkBehaviour 
 {
     struct Players
@@ -32,6 +33,9 @@ public class LobbyMenu : NetworkBehaviour
     public UnityEngine.UI.Button[] NonSpectatorBtns;
     public Animator spectatorAnim;
 
+    public GameObject timeChoice;
+    public UnityEngine.UI.Button startGameButton;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -40,6 +44,17 @@ public class LobbyMenu : NetworkBehaviour
             players[i].team = 0;
             players[i].character = 0;
             players[i].name = "Player " + (i+1).ToString();
+        }
+
+        if (isServer)
+        {
+            timeChoice.SetActive(true);
+            startGameButton.interactable = true;
+        }
+        else
+        {
+            timeChoice.SetActive(false);
+            startGameButton.interactable = false;
         }
 
         ipBar.text = manager.networkAddress;

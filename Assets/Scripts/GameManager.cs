@@ -50,7 +50,9 @@ public class GameManager : NetworkBehaviour
     public GameObject respawnCam;
     public Text respawnText;
 
-    public float gameTimer;
+    public float gameTimer = 9999999;
+    public Text gameLengthChoice;
+
 
     private GameState gameState = GameState.lobby;
 
@@ -78,13 +80,14 @@ public class GameManager : NetworkBehaviour
 
             }
         }
-
+        gameTimer -= Time.deltaTime;
         if (gameState == GameState.playing)
         {
-            gameTimer -= Time.deltaTime;
+            
             if(isServer && gameTimer<0)
             {
-                CTPManager.current.Timeout();
+                CTPManager.current.RpcTimeout();
+                gameTimer = 9999999;
             }
         }
     }
@@ -121,7 +124,14 @@ public class GameManager : NetworkBehaviour
 
             //Disable the main camera  
             RpcDisableMainCamera();
-            RpcStartTimer(gameTimer);
+
+            string timeString = gameLengthChoice.text;
+
+            timeString = timeString.Remove(timeString.IndexOf(' '));
+
+            float time = float.Parse(timeString);
+            RpcStartTimer(time*60);
+
 
             gameState = GameState.playing;
         }
@@ -198,6 +208,7 @@ public class GameManager : NetworkBehaviour
         {
             case 0:
                 //time expired
+                winLoseText.text = "DRAW";
                 break;
 
             case 1:

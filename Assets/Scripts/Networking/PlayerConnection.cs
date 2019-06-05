@@ -141,11 +141,25 @@ public class PlayerConnection : NetworkBehaviour
         {
             playerObject.GetComponent<Character>().ResetAbilities();
         }
-        NetworkServer.Destroy(playerObject);
+        CmdDestroyPlayerObject();
         waitingRespawn = false;
         respawnTimer = 0;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    [Command]
+    private void CmdDestroyPlayerObject()
+    {
+        NetworkServer.Destroy(playerObject);
+    }
+
+    public void EndGame(int i){ CmdEndGame(i); }
+
+    [Command]
+    private void CmdEndGame(int i)
+    {
+        GameManager.current.CmdGameEnd(i);
     }
 }

@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4296214142904718}
   - component: {fileID: 198732301312669012}
   - component: {fileID: 199593156121499944}
-  - component: {fileID: 114902326208341200}
   m_Layer: 12
   m_Name: ControlPoint
   m_TagString: Untagged
@@ -73,7 +72,6 @@ GameObject:
   - component: {fileID: 4325797463489174}
   - component: {fileID: 198267174607488312}
   - component: {fileID: 199704730136821710}
-  - component: {fileID: 114592625109626958}
   - component: {fileID: 82986118702509388}
   m_Layer: 12
   m_Name: ControlPoint Captured
@@ -639,38 +637,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114592625109626958
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1357909151372396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 160
-    i1: 43
-    i2: 220
-    i3: 131
-    i4: 222
-    i5: 48
-    i6: 185
-    i7: 228
-    i8: 74
-    i9: 148
-    i10: 115
-    i11: 182
-    i12: 77
-    i13: 231
-    i14: 49
-    i15: 109
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114780161960985918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -753,38 +719,6 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
---- !u!114 &114902326208341200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1021518345319880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 160
-    i1: 43
-    i2: 220
-    i3: 131
-    i4: 222
-    i5: 48
-    i6: 185
-    i7: 228
-    i8: 74
-    i9: 148
-    i10: 115
-    i11: 182
-    i12: 77
-    i13: 231
-    i14: 49
-    i15: 109
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!136 &136364204650736054
 CapsuleCollider:
   m_ObjectHideFlags: 1

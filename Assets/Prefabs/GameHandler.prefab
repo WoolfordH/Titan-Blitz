@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1157695b5887914fa13bf6769c063cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 300
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -82,6 +81,7 @@ MonoBehaviour:
   - {r: 0.11517811, g: 0, b: 1, a: 1}
   - {r: 1, g: 0, b: 0.049950123, a: 1}
   - {r: 0.26864696, g: 1, b: 0, a: 1}
+  minimapScale: 1
   playerCam: {fileID: 0}
-  team1Mat: {fileID: 2100000, guid: 48f0b2d1cb03fa449bea4e91393388f8, type: 2}
-  team2Mat: {fileID: 2100000, guid: b20b3e7bbcbb2304db75d29d03025d94, type: 2}
+  team1Col: {r: 0, g: 0.050980397, b: 1, a: 1}
+  team2Col: {r: 1, g: 0.039215688, b: 0, a: 1}
