@@ -50,6 +50,8 @@ public class GameManager : NetworkBehaviour
     public GameObject respawnCam;
     public Text respawnText;
 
+    public float gameTimer;
+
     private GameState gameState = GameState.lobby;
 
     private void Awake()
@@ -74,6 +76,15 @@ public class GameManager : NetworkBehaviour
             if (gameState == GameState.lobby)
             {
 
+            }
+        }
+
+        if (gameState == GameState.playing)
+        {
+            gameTimer -= Time.deltaTime;
+            if(isServer && gameTimer<0)
+            {
+                CTPManager.current.Timeout();
             }
         }
     }
@@ -110,9 +121,16 @@ public class GameManager : NetworkBehaviour
 
             //Disable the main camera  
             RpcDisableMainCamera();
+            RpcStartTimer(gameTimer);
 
             gameState = GameState.playing;
         }
+    }
+
+    [ClientRpc]
+    private void RpcStartTimer(float gameLength)
+    {
+        gameTimer = gameLength;
     }
 
     public void PauseGame(bool pause)

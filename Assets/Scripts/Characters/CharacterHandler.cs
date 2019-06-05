@@ -467,12 +467,10 @@ public class CharacterHandler: NetworkBehaviour
             if (cam && tag != "Dummy" && hasAuthority)
 			{
 				//update clock UI
-				int minutes = (int)GameHandler.current.timeRemaining / 60;
-				int seconds = (int)GameHandler.current.timeRemaining % 60;
+				int minutes = (int)GameManager.current.gameTimer / 60;
+				int seconds = (int)GameManager.current.gameTimer % 60;
 
 				timerLbl.text = minutes.ToString ("00") + ":" + seconds.ToString ("00");
-
-				//UpdateUI();
 			}
 		}
 

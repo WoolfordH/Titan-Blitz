@@ -196,4 +196,9 @@ public class CTPManager : NetworkBehaviour
 
         GameManager.current.ResetGame();
     }
+
+    public void Timeout()
+    {
+
+    }
 }

@@ -8,8 +8,6 @@ public class GameHandler : MonoBehaviour {
 
 	public Character[,] characters;
 
-	public float timeRemaining;
-
 	public LayerMask groundLayer;
 	public LayerMask playerLayer;
     public LayerMask projectileLayer;
@@ -45,7 +43,8 @@ public class GameHandler : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		timeRemaining -= Time.deltaTime;
+	void Update ()
+    {
+		
 	}
 }

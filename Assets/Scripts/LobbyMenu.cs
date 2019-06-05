@@ -12,11 +12,11 @@ public class LobbyMenu : NetworkBehaviour
         public int character;
         public string name;
 
-        public void intiate()
+        public void intiate(int i)
         {
             team = 0;
             character = 0;
-            name = "PlayerName";
+            name = "Player" + i.ToString();
         }
     }
 
@@ -35,8 +35,12 @@ public class LobbyMenu : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        for(int i = 0; i<players.Length; i++)
-            players[i].intiate();
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].team = 0;
+            players[i].character = 0;
+            players[i].name = "Player " + (i+1).ToString();
+        }
 
         ipBar.text = manager.networkAddress;
         UpdateDisplay();
@@ -128,15 +132,14 @@ public class LobbyMenu : NetworkBehaviour
 
         for (int i = 0; i < players.Length; i++)
         {
-            Players player = players[i];
-            if (player.team == 1)
+            if (players[i].team == 1)
             {
-                team1Holders[team1Count].ActivateBar(player.name, player.character, (i == self));
+                team1Holders[team1Count].ActivateBar(players[i].name, players[i].character, (i == self));
                 team1Count++;
             }
-            else if(player.team == 2)
+            else if(players[i].team == 2)
             {
-                team2Holders[team2Count].ActivateBar(player.name, player.character, (i == self));
+                team2Holders[team2Count].ActivateBar(players[i].name, players[i].character, (i == self));
                 team2Count++;
             }
             else //team 0 - spectator
